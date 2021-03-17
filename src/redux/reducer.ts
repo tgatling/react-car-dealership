@@ -3,9 +3,9 @@ import {DealershipState} from './store';
 import {User} from '../user/user';
 
 export const initialState: DealershipState = {
-    user: new User,
-    loginUser: new User,
-    registerUser: new User,
+    user: new User(),
+    loginUser: new User(),
+    registerUser: new User(),
 }
 
 const reducer = (state: DealershipState = initialState, action: Actions.AppAction): DealershipState => {

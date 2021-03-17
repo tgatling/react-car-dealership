@@ -1,16 +1,16 @@
 import axios from 'axios';
-import {User} from './user';
+import { User } from './user';
 
-class UserService{
+class UserService {
     private URI: string;
-    constructor(){
-        this.URI = 'http://localhost:3000/users';
+    constructor() {
+        this.URI = process.env.REACT_APP_SERVER_URI + 'users';
     }
 
-    getLogin(): Promise<User>{
-        return axios.get(this.URI, {withCredentials: true}).then((result) => {
+    getLogin(): Promise<User> {
+        return axios.get(this.URI, { withCredentials: true }).then((result) => {
             return result.data;
-        }).catch((error) => error);
+        });
     }
 
     login(user: User): Promise<User>{

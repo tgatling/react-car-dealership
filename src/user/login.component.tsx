@@ -1,5 +1,5 @@
 import React, { SyntheticEvent } from 'react';
-import {Row, Col} from 'react-bootstrap';
+import {Row} from 'react-bootstrap';
 import userService from './user.service';
 import { useHistory } from 'react-router-dom';
 import { UserState } from '../redux/store';
@@ -27,6 +27,7 @@ function LoginComponent(){
             dispatch(getUser(returnUser));
             history.push('/');
         }).catch((err) => {
+            console.log('error');
             alert('Incorrect Login.  Please Try Again.');
         });
     }

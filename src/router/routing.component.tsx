@@ -2,8 +2,6 @@ import React from 'react';
 import {
     Route,
     BrowserRouter,
-    Redirect,
-    Link,
 } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 // REDUX
