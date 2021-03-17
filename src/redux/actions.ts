@@ -12,7 +12,7 @@ export interface AppAction{
     payload: any;
 }
 
-export interface UserAction <User> extends AppAction{
+export interface UserAction <User> extends AppAction {
     type: UserActions;
     payload: User;
 }
