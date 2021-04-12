@@ -16,7 +16,7 @@ export interface CarState{
     cars: Car[];
 }
 
-export interface DealershipState extends UserState{}
+export interface DealershipState extends UserState, CarState{}
 
 const store: Store <DealershipState, AppAction> = createStore(reducer, applyMiddleware(thunk));
 export default store;

@@ -14,7 +14,7 @@ export interface CarAction <Car> extends AppAction {
 
 export function getAllCars(cars: Car[]): CarAction<Car[]> {
     const action: CarAction<Car[]> = {
-        type: CarActions.GetCar,
+        type: CarActions.GetAllCars,
         payload: cars
     }
     return action;
@@ -30,7 +30,7 @@ export function changeCar(car: Car[]): CarAction<Car> {
 
 export function getCar(car: Car): CarAction<Car> {
     const action: CarAction<Car> = {
-        type: CarActions.GetAllCars,
+        type: CarActions.GetCar,
         payload: car
     }
     return action;

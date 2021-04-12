@@ -15,18 +15,6 @@ function HomeComponent(){
     return(
         <div>
             <br></br>
-            {viewUserCars===false &&(
-            <button className='btn btn-outline-info tab' onClick={()=>{changeView(true)}}>View Your Cars</button>
-            )}
-
-            {viewUserCars===true &&(
-                <div>
-                    <button className='btn btn-outline-info tab' onClick={()=>{changeView(false)}}>Hide Your Cars</button>
-                    <TableComponent owner={user.username}/>
-                </div>
-            )}
-            <br></br>
-            <br></br>
             <p className='tab'>Our Car Lot</p>
             <TableComponent owner={'Dealer'} />
             
