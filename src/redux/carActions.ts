@@ -5,6 +5,7 @@ export enum CarActions{
     GetCar = 'GET_CAR',
     ChangeCar = 'CHANGE_CAR',
     GetAllCars = 'GET_ALL_CARS',
+    ChangeAllCars = 'CHANGE_ALL_CARS',
 }
 
 export interface CarAction <Car> extends AppAction {
@@ -20,10 +21,10 @@ export function getAllCars(cars: Car[]): CarAction<Car[]> {
     return action;
 }
 
-export function changeCar(car: Car[]): CarAction<Car> {
-    const action: CarAction<Car> = {
-        type: CarActions.ChangeCar,
-        payload: car
+export function changeAllCars(cars: Car[]): CarAction<Car[]> {
+    const action: CarAction<Car[]> = {
+        type: CarActions.ChangeAllCars,
+        payload: cars
     }
     return action;
 }
@@ -31,6 +32,14 @@ export function changeCar(car: Car[]): CarAction<Car> {
 export function getCar(car: Car): CarAction<Car> {
     const action: CarAction<Car> = {
         type: CarActions.GetCar,
+        payload: car
+    }
+    return action;
+}
+
+export function changeCar(car: Car): CarAction<Car> {
+    const action: CarAction<Car> = {
+        type: CarActions.ChangeCar,
         payload: car
     }
     return action;

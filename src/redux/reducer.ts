@@ -32,6 +32,9 @@ const reducer = (state: DealershipState = initialState, action: Actions.AppActio
         case CarActions.CarActions.GetAllCars:
             newState.cars = action.payload as Car[];
             return newState;
+        case CarActions.CarActions.ChangeAllCars:
+            newState.cars = action.payload as Car[];
+            return newState;
         case CarActions.CarActions.GetCar:
             newState.car = action.payload as Car;
             return newState;
