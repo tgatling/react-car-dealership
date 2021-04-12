@@ -1,37 +1,39 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Car } from './car';
-import RowComponent from './row.component';
 import {CarState} from '../redux/store'
-import { thunkGetCars } from '../redux/thunk';
+import CarComponent from './car.component';
+import carService from './car.service';
+import {getAllCars} from '../redux/carActions';
 
-function groupIntoThrees(cars: Car[]): Car[][] {
-    let arr: Car[][] = [];
-    for (let i = 0; i < cars.length / 3; i++) {
-        arr.push(cars.slice(i * 3, (i + 1) * 3));
-    }
-
-    return arr;
+interface tableProp{
+    owner: string
 }
-export default function TableComponent() {
+
+export default function TableComponent(prop: tableProp) {
     const carSelector = (state: CarState) => state.cars;
     const cars = useSelector(carSelector);
     const dispatch = useDispatch();
+    let carArray: Car[] = [];
 
     useEffect(() => {
-        dispatch(thunkGetCars('Dealer'))
+        console.log('Use Effect in Table Component');
+        carService.getCars(prop.owner).then((returnedCars) => {
+            console.log(returnedCars);
+            dispatch(getAllCars(returnedCars));
+        });
+        console.log(cars);
     }, [dispatch]);
 
+    console.log(cars);
+    
     return (
         <section className='cars container' id='cars'>
-            {groupIntoThrees(cars).map((value, index: number) => {
-                return (
-                    <RowComponent
-                        key={'car-row-' + index}
-                        cars={value}
-                    ></RowComponent>
-                );
-            })}
+            {prop.owner==='' &&(
+                <p>You must be logged in to view your cars.</p>
+            )}
+            {cars?.map((car: Car, index: number) => 
+                <CarComponent key = {'car-'+index} data = {car}></CarComponent>)}
         </section>
     );
 }
