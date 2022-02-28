@@ -1,13 +1,22 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import {Car} from '../../models/car';
 
 import { DUMMY_CARS } from '../../models/dummyCars';
 import CarItem from './CarItem';
 import styles from './CarTable.module.css';
 
 const CarTable = () => {
+    const [carList, setCarList] = useState<Car[]>([]);
+
+    useEffect(()=>{
+        setCarList(DUMMY_CARS);
+        console.log('useEffect');
+    },[]);
+
+
   return (
     <div className={styles.table}>
-      {DUMMY_CARS.map((car) => {
+      {carList.map((car) => {
         return (
           <CarItem
             key={car.carId}
