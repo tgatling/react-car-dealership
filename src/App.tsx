@@ -1,15 +1,15 @@
 import React, { Fragment } from 'react';
-import InfoBar from './components/layout/InfoBar';
+import Footer from './components/layout/Footer';
+import Header from './components/layout/Header';
 
-import NavigationBar from './components/layout/NavigationBar';
 import Routing from './components/layout/Routing';
 
 function App() {
   return (
     <Fragment>
-      <InfoBar />
-      <NavigationBar />
+      <Header />
       <Routing />
+      <Footer/>
     </Fragment>
   );
 }

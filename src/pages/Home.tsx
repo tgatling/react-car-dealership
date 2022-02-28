@@ -1,9 +1,12 @@
 import React from 'react';
 
+import CarTable from '../components/car/CarTable';
+
 const Home = () => {
+
     return (
         <div>
-            Home Page
+            <CarTable/>
         </div>
     );
 };
