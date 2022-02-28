@@ -1,25 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import reportWebVitals from './reportWebVitals';
-import {createStore, applyMiddleware, Store} from 'redux';
-import { Provider } from 'react-redux';
-import thunk from 'redux-thunk';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import reducer from './redux/reducer';
-import {DealershipState} from './redux/store';
-import{AppAction} from './redux/actions';
-import * as dotenv from 'dotenv';
 import './index.css';
 import App from './App';
-
-dotenv.config();
-
-const store: Store<DealershipState, AppAction> = createStore(reducer, applyMiddleware(thunk));
+import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-  <Provider store={store}>
+  <React.StrictMode>
     <App />
-  </Provider>,
+  </React.StrictMode>,
   document.getElementById('root')
 );
 
