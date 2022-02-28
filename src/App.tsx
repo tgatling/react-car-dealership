@@ -1,14 +1,16 @@
-import React from 'react';
-import {Route, Switch, Redirect} from 'react-router-dom';
-import Home from './pages/Home';
+import React, { Fragment } from 'react';
+import InfoBar from './components/layout/InfoBar';
+
+import NavigationBar from './components/layout/NavigationBar';
+import Routing from './components/layout/Routing';
 
 function App() {
   return (
-    <Switch>
-      <Route path='/' exact>
-        <Home/>
-      </Route>
-    </Switch>
+    <Fragment>
+      <InfoBar />
+      <NavigationBar />
+      <Routing />
+    </Fragment>
   );
 }
 
