@@ -8,8 +8,8 @@ class CarService {
         this.URI = `${process.env.REACT_APP_SERVER_URI}cars.json`;
     }
 
-    getCars(owner: string): Promise<Car []> {
-        return axios.get(this.URI+'/owner/'+owner).then(result => result.data);
+    getCars() {
+        return axios.get(this.URI).then(result => result.data);
     }
     getCar(id: string): Promise<Car> {
         return axios.get(this.URI+'/'+id).then(result=>result.data);

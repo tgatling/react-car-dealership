@@ -15,6 +15,9 @@ const carSlice = createSlice({
         editCar(){
 
         },
+        getCars(){
+            
+        }
     }
 });
 

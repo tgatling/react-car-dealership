@@ -1,22 +1,17 @@
-import React, {useEffect, useState} from 'react';
-import {Car} from '../../models/car';
+import React from 'react';
+import { Car } from '../../models/car';
 
-import { DUMMY_CARS } from '../../models/dummyCars';
 import CarItem from './CarItem';
 import styles from './CarTable.module.css';
 
-const CarTable = () => {
-    const [carList, setCarList] = useState<Car[]>([]);
+interface tableProps {
+  cars: Car[];
+}
 
-    useEffect(()=>{
-        setCarList(DUMMY_CARS);
-        console.log('useEffect');
-    },[]);
-
-
+const CarTable = (props: tableProps) => {
   return (
     <div className={styles.table}>
-      {carList.map((car) => {
+      {props.cars.map((car) => {
         return (
           <CarItem
             key={car.carId}
