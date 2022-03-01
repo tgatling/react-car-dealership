@@ -3,12 +3,18 @@ import { User } from '../../models/user';
 
 import userService from '../../services/user.service';
 import styles from './AuthForm.module.css';
+import {useDispatch} from 'react-redux';
+import {userActions} from '../../store/user-slice';
+import {useHistory} from 'react-router-dom';
 
 const AuthForm = () => {
   const [isLoginForm, setIsLoginForm] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [httpError, setHttpError] = useState(null);
+
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   let user: User;
 
@@ -27,11 +33,19 @@ const AuthForm = () => {
     if (isLoginForm) {
       userService
         .login(user)
-        .then((result) => console.log(result))
+        .then((result) => {
+            dispatch(userActions.login({token: result.idToken, expirationTime: result.expiresIn}));
+        })
         .catch((error) => setHttpError(error.message));
+        console.log(httpError);
+        return;
     } else {
-      userService.register(user).then((result) => console.log(result));
+      userService.register(user).then((result) => {
+          dispatch(userActions.login({token: result.idToken, expirationTime: result.expiresIn}))
+      });
     }
+
+    history.push('/');
   };
 
   return (

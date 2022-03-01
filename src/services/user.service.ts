@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 import { User } from '../models/user';
 
 class UserService {
@@ -7,13 +8,7 @@ class UserService {
     this.URI = `${process.env.REACT_APP_SERVER_URI}`;
   }
 
-  getLogin(): Promise<User> {
-    return axios.get(this.URI, { withCredentials: true }).then((result) => {
-      return result.data;
-    });
-  }
-
-  login(user: User): Promise<User> {
+  login(user: User) {
     return axios
       .post(
         `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.REACT_APP_API_KEY}`,
@@ -27,7 +22,7 @@ class UserService {
       .then((result) => result.data);
   }
 
-  register(user: User): Promise<User> {
+  register(user: User) {
     return axios
       .post(
         `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.REACT_APP_API_KEY}`,
@@ -41,29 +36,66 @@ class UserService {
       .then((result) => result.data);
   }
 
-  getUserByName(username: string): Promise<User> {
+  changeEmail(token: string, email: string){
     return axios
-      .get(this.URI + '/' + username, { withCredentials: true })
-      .then((result) => result.data)
+    .post(
+      `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${process.env.REACT_APP_API_KEY}`,
+      JSON.stringify({
+        token,
+        email,
+        returnSecureToken: true,
+      }),
+      { headers: { 'Content-Type': 'application/json' } }
+    )
+    .then((result) => result.data);
+  }
+  
+  changePassword(token: string, password: string){
+    return axios
+    .post(
+      `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${process.env.REACT_APP_API_KEY}`,
+      JSON.stringify({
+        token,
+        password,
+        returnSecureToken: true,
+      }),
+      { headers: { 'Content-Type': 'application/json' } }
+    )
+    .then((result) => result.data);
   }
 
-  updateUser(user: User): Promise<null> {
+  getUserData(token: string) {
     return axios
-      .put(this.URI, user, { withCredentials: true })
-      .then((result) => null);
+      .post(
+        `https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${process.env.REACT_APP_API_KEY}`,
+        JSON.stringify({
+          token,
+        }),
+        { headers: { 'Content-Type': 'application/json' } }
+      )
+      .then((result) => result.data);
+  }
+
+  updateUser(user: User, token: string) {
+    return axios
+      .post(
+        `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${process.env.REACT_APP_API_KEY}`,
+        JSON.stringify({}),
+        { headers: { 'Content-Type': 'application/json' } }
+      )
+      .then((result) => result);
   }
 
   deleteUser(username: string): Promise<null> {
     return axios
-      .delete(this.URI + '/' + username, { withCredentials: true })
+      .post(
+        `https://identitytoolkit.googleapis.com/v1/accounts:delete?key=${process.env.REACT_APP_API_KEY}`,
+        JSON.stringify({}),
+        { headers: { 'Content-Type': 'application/json' } }
+      )
       .then((result) => null);
   }
 
-  logout(): Promise<null> {
-    return axios
-      .delete(this.URI, { withCredentials: true })
-      .then((result) => null);
-  }
 }
 
 export default new UserService();
