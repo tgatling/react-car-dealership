@@ -8,6 +8,7 @@ const AuthForm = () => {
   const [isLoginForm, setIsLoginForm] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [httpError, setHttpError] = useState(null);
 
   let user: User;
 
@@ -24,13 +25,13 @@ const AuthForm = () => {
     };
 
     if (isLoginForm) {
-      userService.login(user);
+      userService
+        .login(user)
+        .then((result) => console.log(result))
+        .catch((error) => setHttpError(error.message));
     } else {
-      userService.register(user);
+      userService.register(user).then((result) => console.log(result));
     }
-
-    console.log(user);
-    //userService.login(user);
   };
 
   return (
@@ -53,6 +54,7 @@ const AuthForm = () => {
         />
         <button>Submit</button>
       </form>
+      {httpError && <p>Login unsuccessful. Please try again.</p>}
       {isLoginForm ? (
         <div>
           <p>New user?</p>

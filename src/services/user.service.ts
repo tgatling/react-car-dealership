@@ -17,10 +17,14 @@ class UserService {
     return axios
       .post(
         `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.REACT_APP_API_KEY}`,
-        user
+        JSON.stringify({
+          email: user.email,
+          password: user.password,
+          returnSecureToken: true,
+        }),
+        { headers: { 'Content-Type': 'application/json' } }
       )
-      .then((result) => result.data)
-      .catch((error) => error);
+      .then((result) => result.data);
   }
 
   register(user: User): Promise<User> {
@@ -28,20 +32,19 @@ class UserService {
       .post(
         `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.REACT_APP_API_KEY}`,
         JSON.stringify({
-            email: user.email,
-            password: user.password,
-            returnSecureToken: true,
-        }),{ headers: {'Content-Type': 'application/json'}}
+          email: user.email,
+          password: user.password,
+          returnSecureToken: true,
+        }),
+        { headers: { 'Content-Type': 'application/json' } }
       )
-      .then((result) => result.data)
-      .catch((error) => console.log(error.message));
+      .then((result) => result.data);
   }
 
   getUserByName(username: string): Promise<User> {
     return axios
       .get(this.URI + '/' + username, { withCredentials: true })
       .then((result) => result.data)
-      .catch((error) => error);
   }
 
   updateUser(user: User): Promise<null> {
