@@ -3,15 +3,16 @@ import { User } from '../../models/user';
 
 import userService from '../../services/user.service';
 import styles from './AuthForm.module.css';
-import {useDispatch} from 'react-redux';
-import {userActions} from '../../store/user-slice';
-import {useHistory} from 'react-router-dom';
+import {useDispatch, useSelector, RootStateOrAny} from 'react-redux';
+import { userActions } from '../../store/user-slice';
+import { useHistory } from 'react-router-dom';
 
 const AuthForm = () => {
   const [isLoginForm, setIsLoginForm] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [httpError, setHttpError] = useState(null);
+  const [httpError, setHttpError] = useState({});
+  const currentUser = useSelector((state: RootStateOrAny) => state.user.currentUser);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -34,15 +35,46 @@ const AuthForm = () => {
       userService
         .login(user)
         .then((result) => {
-            dispatch(userActions.login({token: result.idToken, expirationTime: result.expiresIn}));
+          dispatch(
+            userActions.login({
+              token: result.idToken,
+              expirationTime: result.expiresIn,
+              currentUser: {
+                userId: result.localId,
+                email: result.email,
+                userRole: '',
+              },
+            })
+          );
         })
-        .catch((error) => setHttpError(error.message));
-        console.log(httpError);
-        return;
+        .catch((error) => {
+          setHttpError({ type: 'LOGIN', error: error.message });
+          console.log(httpError);
+          return;
+        });
     } else {
-      userService.register(user).then((result) => {
-          dispatch(userActions.login({token: result.idToken, expirationTime: result.expiresIn}))
-      });
+      userService
+        .register(user)
+        .then((result) => {
+          dispatch(
+            userActions.login({
+              token: result.idToken,
+              expirationTime: result.expiresIn,
+              currentUser: {
+                userId: result.localId,
+                email: result.email,
+                userRole: 'CUSTOMER',
+              },
+            })
+          );
+        })
+        .catch((error) => {
+          setHttpError({ type: 'REGISTER', error: error.message });
+          console.log(httpError);
+          return;
+        });
+
+        console.log(currentUser);
     }
 
     history.push('/');
@@ -61,8 +93,8 @@ const AuthForm = () => {
         />
         <label>Password:</label>
         <input
-          type='text'
-          id='text'
+          type='password'
+          id='password'
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />

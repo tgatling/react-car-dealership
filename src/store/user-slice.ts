@@ -3,26 +3,35 @@ import { createSlice } from '@reduxjs/toolkit';
 const userSlice = createSlice({
   name: 'user',
   initialState: {
-    isLoggedIn: localStorage.getItem('isLoggedIn') ? true: false,
     token: localStorage.getItem('token'),
+    isLoggedIn: localStorage.getItem('isLoggedIn') ? true: false,
     expirationTime: localStorage.getItem('expirationTime'),
-    userType: '',
+    currentUser: localStorage.getItem('currentUser')
   },
   reducers: {
     logout(state) {
       state.token = '';
       state.isLoggedIn = false;
+      state.expirationTime = '';
+      state.currentUser = '';
       localStorage.clear();
     },
     login(state, action) {
       state.token = action.payload.token;
-      if (state.token) {
-        localStorage.setItem('token', state.token);
-      }
+      state.expirationTime = action.payload.expirationTime;
+      state.currentUser = JSON.stringify(action.payload.currentUser);
       state.isLoggedIn = true;
       localStorage.setItem('isLoggedIn', 'LOGGED_IN');
 
-      localStorage.setItem('expirationTime', action.payload.expirationTime);
+      if (state.token) {
+        localStorage.setItem('token', state.token);
+      }
+      
+      if(state.expirationTime){
+        localStorage.setItem('expirationTime', state.expirationTime);
+      }
+
+      localStorage.setItem('user', state.currentUser);
     },
   },
 });

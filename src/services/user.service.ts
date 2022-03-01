@@ -8,8 +8,8 @@ class UserService {
     this.URI = `${process.env.REACT_APP_SERVER_URI}`;
   }
 
-  login(user: User) {
-    return axios
+  async login(user: User) {
+    return await axios
       .post(
         `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.REACT_APP_API_KEY}`,
         JSON.stringify({
@@ -22,8 +22,8 @@ class UserService {
       .then((result) => result.data);
   }
 
-  register(user: User) {
-    return axios
+  async register(user: User) {
+    return await axios
       .post(
         `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.REACT_APP_API_KEY}`,
         JSON.stringify({
@@ -36,40 +36,48 @@ class UserService {
       .then((result) => result.data);
   }
 
-  changeEmail(token: string, email: string){
-    return axios
-    .post(
-      `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${process.env.REACT_APP_API_KEY}`,
-      JSON.stringify({
-        token,
-        email,
-        returnSecureToken: true,
-      }),
-      { headers: { 'Content-Type': 'application/json' } }
-    )
-    .then((result) => result.data);
-  }
-  
-  changePassword(token: string, password: string){
-    return axios
-    .post(
-      `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${process.env.REACT_APP_API_KEY}`,
-      JSON.stringify({
-        token,
-        password,
-        returnSecureToken: true,
-      }),
-      { headers: { 'Content-Type': 'application/json' } }
-    )
-    .then((result) => result.data);
-  }
-
   getUserData(token: string) {
     return axios
       .post(
         `https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${process.env.REACT_APP_API_KEY}`,
         JSON.stringify({
           token,
+        }),
+        { headers: { 'Content-Type': 'application/json' } }
+      )
+      .then((result) => result.data);
+  }
+
+  addUserRole(user: User) {
+    return axios
+      .post(`${this.URI}/users.json`, user)
+      .then((result) => result.data);
+  }
+
+  getUserRole(user: User) {}
+
+  changeEmail(token: string, email: string) {
+    return axios
+      .post(
+        `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${process.env.REACT_APP_API_KEY}`,
+        JSON.stringify({
+          token,
+          email,
+          returnSecureToken: true,
+        }),
+        { headers: { 'Content-Type': 'application/json' } }
+      )
+      .then((result) => result.data);
+  }
+
+  changePassword(token: string, password: string) {
+    return axios
+      .post(
+        `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${process.env.REACT_APP_API_KEY}`,
+        JSON.stringify({
+          token,
+          password,
+          returnSecureToken: true,
         }),
         { headers: { 'Content-Type': 'application/json' } }
       )
@@ -95,7 +103,6 @@ class UserService {
       )
       .then((result) => null);
   }
-
 }
 
 export default new UserService();
