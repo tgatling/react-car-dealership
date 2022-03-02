@@ -36,6 +36,11 @@
   }
 }
 
+.contentContainer {
+  display: flex;
+  flex-direction: row;
+}
+
 .form {
   margin-top: 0;
   justify-content: space-between;
@@ -45,11 +50,6 @@
   display: flex;
   justify-content: flex-start;
   padding: 10px;
-}
-
-.form label {
-  font-size: 25px;
-  margin-right: 20px;
 }
 
 .form input {
@@ -68,30 +68,16 @@
   width: 400px;
 }
 
+.buttonContainer {
+  float: right;
+}
+
 .button {
   background-color: #7fffd4;
   border-radius: 15px;
   border-style: offset;
   font-size: 16px;
   padding: 15px 32px;
-}
-
-.formChangeContainer {
-  display: flex;
-  flex-direction: row;
-  margin-left: 10px;
-}
-
-.formChangeButton {
-  border-style: none;
-  background-color: white;
-  font-size: 16px;
-  text-decoration: underline;
-  margin-top: 3px;
-}
-
-.text {
-  font-size: 16px;
 }
 
 .errorText {
@@ -101,4 +87,31 @@
   margin-left: 10px;
   position: absolute;
   font-weight: bold;
+}
+
+.sidePanel {
+  display: flex;
+  text-align: left;
+  margin-left: 20px;
+  border-color: #c0bbbb;
+  border-style: none none none dotted;
+  border-width: 0.5px;
+}
+
+.formChangeContainer {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+}
+
+.formChangeButton {
+  border-style: none;
+  background-color: white;
+  font-size: 18px;
+  text-decoration: underline;
+  margin-left: -6px;
+}
+
+.text {
+  font-size: 18px;
 }

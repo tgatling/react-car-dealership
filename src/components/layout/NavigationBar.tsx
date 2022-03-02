@@ -4,6 +4,7 @@ import {NavLink, useHistory} from 'react-router-dom';
 import styles from './NavigationBar.module.css';
 import {useSelector, RootStateOrAny, useDispatch} from 'react-redux';
 import {userActions} from '../../store/user-slice';
+import familyCar from '../../images/family-car.png';
 
 const NavigationBar = () => {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ const NavigationBar = () => {
   return (
     <header className={styles.header}>
       <div className={styles.logo}>
+        <img className={styles.logoImage} src={familyCar} alt=''/>
         <NavLink to='/'>FAMILY DEALERSHIP</NavLink>
       </div>
       <nav className={styles.nav}>
