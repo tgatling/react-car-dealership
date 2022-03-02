@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { User } from '../../models/user';
-
-import userService from '../../services/user.service';
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
-import { userActions } from '../../store/user-slice';
 import { useHistory } from 'react-router-dom';
+
+import { User } from '../../models/user';
+import { CUSTOMER_ROLE } from '../../models/constants';
+import userService from '../../services/user.service';
+import { userActions } from '../../store/user-slice';
 import styles from './AuthForm.module.css';
 
 const AuthForm = () => {
@@ -70,7 +71,7 @@ const AuthForm = () => {
               currentUser: {
                 userId: result.localId,
                 email: result.email,
-                userRole: 'CUSTOMER',
+                userRole: CUSTOMER_ROLE,
               },
             })
           );
@@ -79,7 +80,7 @@ const AuthForm = () => {
             .addUserRole({
               userId: result.localId,
               email: result.email,
-              userRole: 'CUSTOMER',
+              userRole: CUSTOMER_ROLE,
             })
             .then((result) => console.log(result))
             .catch((error) => console.log(error));

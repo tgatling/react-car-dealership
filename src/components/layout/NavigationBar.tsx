@@ -1,17 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {NavLink, useHistory} from 'react-router-dom';
-
-import styles from './NavigationBar.module.css';
 import {useSelector, RootStateOrAny, useDispatch} from 'react-redux';
+
 import {userActions} from '../../store/user-slice';
+import { CUSTOMER_ROLE, DEALER_ROLE } from '../../models/constants';
 import familyCar from '../../images/family-car.png';
+import styles from './NavigationBar.module.css';
+
+
 
 const NavigationBar = () => {
+  const [userRole, setUserRole] = useState(CUSTOMER_ROLE);
+
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const loggedIn = useSelector(
-    (state: RootStateOrAny) => state.user.isLoggedIn
+  const userState = useSelector(
+    (state: RootStateOrAny) => state.user
   );
 
   const logoutHandler = () =>{
@@ -30,17 +35,27 @@ const NavigationBar = () => {
           <li>
             <NavLink to={'/'}>Our Cars</NavLink>
           </li>
-          {loggedIn && (
+          {userState.isLoggedIn && userRole === DEALER_ROLE && (
             <li>
-              <NavLink to={'/my-cars'}>View Your Cars</NavLink>
+              <NavLink to={'/edit-dealers-cars'}>Edit Our Lot</NavLink>
             </li>
           )}
-          {!loggedIn && (
+          {userState.isLoggedIn && userRole === DEALER_ROLE && (
+            <li>
+              <NavLink to={'/customer-offers'}>Customer Offers</NavLink>
+            </li>
+          )}
+          {userState.isLoggedIn && userRole === DEALER_ROLE && (
+            <li>
+              <NavLink to={'/customer-payments'}>Customer Payments</NavLink>
+            </li>
+          )}
+          {!userState.isLoggedIn && (
             <li>
               <NavLink to='/login'>Login / Register</NavLink>
             </li>
           )}
-          {loggedIn && (
+          {userState.isLoggedIn && (
             <li>
               <button onClick={logoutHandler}>Logout</button>
             </li>
