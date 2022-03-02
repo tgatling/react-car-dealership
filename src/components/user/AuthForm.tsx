@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { User } from '../../models/user';
 
 import userService from '../../services/user.service';
-import styles from './AuthForm.module.css';
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
 import { userActions } from '../../store/user-slice';
 import { useHistory } from 'react-router-dom';
+import styles from './AuthForm.module.css';
 
 const AuthForm = () => {
   const [isLoginForm, setIsLoginForm] = useState(true);
@@ -20,6 +20,8 @@ const AuthForm = () => {
   const history = useHistory();
 
   let user: User;
+
+  useEffect(() => {}, [currentUser]);
 
   const changeForm = () => {
     setHttpError('');
@@ -53,16 +55,15 @@ const AuthForm = () => {
           history.push('/');
         })
         .catch((error) => {
-          setHttpError('LOGIN');
-          console.log(httpError);
+          setHttpError(error);
           return;
         });
     } else {
       setHttpError('');
       userService
         .register(user)
-        .then((result) => {
-          dispatch(
+        .then(async (result) => {
+          await dispatch(
             userActions.login({
               token: result.idToken,
               expirationTime: result.expiresIn,
@@ -74,15 +75,21 @@ const AuthForm = () => {
             })
           );
 
+          userService
+            .addUserRole({
+              userId: result.localId,
+              email: result.email,
+              userRole: 'CUSTOMER',
+            })
+            .then((result) => console.log(result))
+            .catch((error) => console.log(error));
+
           history.push('/');
         })
         .catch((error) => {
-          setHttpError('REGISTER');
-          console.log(httpError);
+          setHttpError(error);
           return;
         });
-
-      console.log(currentUser);
     }
   };
 

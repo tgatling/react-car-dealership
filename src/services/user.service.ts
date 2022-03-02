@@ -36,8 +36,8 @@ class UserService {
       .then((result) => result.data);
   }
 
-  getUserData(token: string) {
-    return axios
+  async getUserData(token: string) {
+    return await axios
       .post(
         `https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${process.env.REACT_APP_API_KEY}`,
         JSON.stringify({
@@ -48,16 +48,16 @@ class UserService {
       .then((result) => result.data);
   }
 
-  addUserRole(user: User) {
-    return axios
+  async addUserRole(user: User) {
+    return await axios
       .post(`${this.URI}/users.json`, user)
       .then((result) => result.data);
   }
 
   getUserRole(user: User) {}
 
-  changeEmail(token: string, email: string) {
-    return axios
+ async changeEmail(token: string, email: string) {
+    return await axios
       .post(
         `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${process.env.REACT_APP_API_KEY}`,
         JSON.stringify({
@@ -70,8 +70,8 @@ class UserService {
       .then((result) => result.data);
   }
 
-  changePassword(token: string, password: string) {
-    return axios
+  async changePassword(token: string, password: string) {
+    return await axios
       .post(
         `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${process.env.REACT_APP_API_KEY}`,
         JSON.stringify({
@@ -84,8 +84,8 @@ class UserService {
       .then((result) => result.data);
   }
 
-  updateUser(user: User, token: string) {
-    return axios
+  async updateUser(user: User, token: string) {
+    return await axios
       .post(
         `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${process.env.REACT_APP_API_KEY}`,
         JSON.stringify({}),
@@ -94,8 +94,8 @@ class UserService {
       .then((result) => result);
   }
 
-  deleteUser(username: string): Promise<null> {
-    return axios
+ async deleteUser(username: string): Promise<null> {
+    return await axios
       .post(
         `https://identitytoolkit.googleapis.com/v1/accounts:delete?key=${process.env.REACT_APP_API_KEY}`,
         JSON.stringify({}),

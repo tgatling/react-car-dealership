@@ -37,7 +37,7 @@ const NavigationBar = () => {
           )}
           {!loggedIn && (
             <li>
-              <NavLink to='/login'>Login</NavLink>
+              <NavLink to='/login'>Login / Register</NavLink>
             </li>
           )}
           {loggedIn && (
