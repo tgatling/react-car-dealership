@@ -1,0 +1,35 @@
+.header {
+  width: 100;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #000080;
+}
+
+.motto {
+  margin-left: 24px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.address {
+  font-size: 16px;
+  color: #ffffff;
+}
+
+
+.info ul {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  margin-right: 24px;
+  color: #ffffff;
+}
+
+.info li {
+  margin-left: 24px;
+  font-size: 16px;
+}

@@ -1,0 +1,7 @@
+.table {
+    display: flex;
+    margin: 160px 160px 0 160px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
