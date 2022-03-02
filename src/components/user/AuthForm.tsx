@@ -11,7 +11,7 @@ const AuthForm = () => {
   const [isLoginForm, setIsLoginForm] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [httpError, setHttpError] = useState({});
+  const [httpError, setHttpError] = useState('');
   const currentUser = useSelector(
     (state: RootStateOrAny) => state.user.currentUser
   );
@@ -34,6 +34,7 @@ const AuthForm = () => {
     };
 
     if (isLoginForm) {
+      setHttpError('');
       userService
         .login(user)
         .then((result) => {
@@ -48,13 +49,15 @@ const AuthForm = () => {
               },
             })
           );
+          history.push('/');
         })
         .catch((error) => {
-          setHttpError({ type: 'LOGIN', error: error.message });
+          setHttpError('LOGIN');
           console.log(httpError);
           return;
         });
     } else {
+      setHttpError('');
       userService
         .register(user)
         .then((result) => {
@@ -69,53 +72,63 @@ const AuthForm = () => {
               },
             })
           );
+
+          history.push('/');
         })
         .catch((error) => {
-          setHttpError({ type: 'REGISTER', error: error.message });
+          setHttpError('REGISTER');
           console.log(httpError);
           return;
         });
 
       console.log(currentUser);
     }
-
-    history.push('/');
   };
 
   return (
     <section className={styles.section}>
       <div className={styles.card}>
-        <h1>{isLoginForm ? 'Login' : 'Register'}</h1>
+        <h1>{isLoginForm ? 'LOGIN' : 'REGISTER'}</h1>
+            {httpError && <p className={styles.errorText}>Login unsuccessful. Please try again.</p>}
         <form onSubmit={submitHandler} className={styles.form}>
           <div>
-            <label>Email:</label>
+            {/* <label>Email: </label> */}
             <input
+              className={styles.emailInput}
               type='text'
               id='text'
               value={email}
+              placeholder='Email'
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div>
-            <label>Password:</label>
+            {/* <label>Password:</label> */}
             <input
+              className={styles.passwordInput}
               type='password'
               id='password'
               value={password}
+              placeholder='Password'
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <button className={styles.button}>Submit</button>
-        </form>
-        {httpError && <p>Login unsuccessful. Please try again.</p>}
-        {isLoginForm ? (
-          <div>
-            <p>New user?</p>
+          <div className={styles.buttonContainer}>
+            <button className={styles.button}>Submit</button>
           </div>
-        ) : (
-          <p>Login with existing account</p>
-        )}
-        <button onClick={changeForm}>Register Now</button>
+        </form>
+        <div className={styles.formChangeContainer}>
+          {isLoginForm ? (
+            <div>
+              <p className={styles.text}>New user?</p>
+            </div>
+          ) : (
+            <p>Login with existing account</p>
+          )}
+          <button onClick={changeForm} className={styles.formChangeButton}>
+            Register Now
+          </button>
+        </div>
       </div>
     </section>
   );

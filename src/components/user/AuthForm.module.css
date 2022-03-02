@@ -1,35 +1,104 @@
 .section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: url('https://wallpaperaccess.com/full/33110.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  background-position: center;
+}
+
+.section h1 {
+  font-size: 50px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  margin-top: 0px;
+  margin-left: 10px;
 }
 
 .card {
-    margin-top: 80px;
-    border-style: solid;
-    border-color: #000000;
-    border-width: 1px;
-    padding: 50px;
-    width: 700px;
-    height: 350px;
-    @media (max-width: 600px){
-        border-style: none;
-        border-color: #ffffff;
-        text-align: center
-    }
+  margin-top: 80px;
+  background-color: #ffffff;
+  border-style: solid;
+  border-color: #000000;
+  opacity: 100%;
+  border-width: 1px;
+  padding: 25px;
+  width: 700px;
+  height: 350px;
+  @media (max-width: 600px) {
+    border-style: none;
+    border-color: #ffffff;
+    text-align: center;
+  }
 }
 
-.form{
-    justify-content: space-between;
+.form {
+  margin-top: 0;
+  justify-content: space-between;
 }
 
-.form div{
-    display: flex;
-    padding: 10px;
+.form div {
+  display: flex;
+  justify-content: flex-start;
+  padding: 10px;
+}
+
+.form label {
+  font-size: 25px;
+  margin-right: 20px;
+}
+
+.form input {
+  font-size: 25px;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  outline: none;
+}
+
+.emailInput {
+  width: 400px;
+}
+
+.passwordInput {
+  width: 400px;
 }
 
 .button {
-    background-color: #7fffd4;
-    font-size: 16px;
+  background-color: #7fffd4;
+  border-radius: 15px;
+  border-style: offset;
+  font-size: 16px;
+  padding: 15px 32px;
+}
+
+.formChangeContainer {
+  display: flex;
+  flex-direction: row;
+  margin-left: 10px;
+}
+
+.formChangeButton {
+  border-style: none;
+  background-color: white;
+  font-size: 16px;
+  text-decoration: underline;
+  margin-top: 3px;
+}
+
+.text {
+  font-size: 16px;
+}
+
+.errorText {
+  font-size: 16px;
+  color: #8b0000;
+  margin-top: -35px;
+  margin-left: 10px;
+  position: absolute;
+  font-weight: bold;
 }
