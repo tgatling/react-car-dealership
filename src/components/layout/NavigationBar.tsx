@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {NavLink, useHistory} from 'react-router-dom';
 import {useSelector, RootStateOrAny, useDispatch} from 'react-redux';
 
@@ -18,6 +18,16 @@ const NavigationBar = () => {
   const userState = useSelector(
     (state: RootStateOrAny) => state.user
   );
+
+  useEffect(()=>  {
+    if(userState.currentUser){
+      let currentUser = JSON.parse(userState.currentUser);
+      console.log(currentUser);
+      setUserRole(currentUser.userRole);
+    }
+    console.log(userRole);
+    
+  }, [userState.currentUser, userRole]);
 
   const logoutHandler = () =>{
     dispatch(userActions.logout());

@@ -4,7 +4,11 @@ import { Car } from '../models/car';
 import CarTable from '../components/car/CarTable';
 import carService from '../services/car.service';
 
-const Home = () => {
+interface homeProps {
+  editMode: boolean;
+}
+
+const Home = ({editMode}: homeProps) => {
   const [cars, setCars] = useState<Car[]>([]);
   console.log('Home');
 
@@ -18,6 +22,7 @@ const Home = () => {
           loadedCars.push({
             carId: key,
             owner: result[key].owner,
+            year: result[key].year,
             make: result[key].make,
             model: result[key].model,
             price: result[key].price,
@@ -33,7 +38,7 @@ const Home = () => {
 
   return (
     <div>
-      <CarTable cars={cars} />
+      <CarTable editMode={editMode} cars={cars} />
     </div>
   );
 };
