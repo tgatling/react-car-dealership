@@ -3,7 +3,7 @@ import { User } from '../../models/user';
 
 import userService from '../../services/user.service';
 import styles from './AuthForm.module.css';
-import {useDispatch, useSelector, RootStateOrAny} from 'react-redux';
+import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
 import { userActions } from '../../store/user-slice';
 import { useHistory } from 'react-router-dom';
 
@@ -12,7 +12,9 @@ const AuthForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [httpError, setHttpError] = useState({});
-  const currentUser = useSelector((state: RootStateOrAny) => state.user.currentUser);
+  const currentUser = useSelector(
+    (state: RootStateOrAny) => state.user.currentUser
+  );
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -74,7 +76,7 @@ const AuthForm = () => {
           return;
         });
 
-        console.log(currentUser);
+      console.log(currentUser);
     }
 
     history.push('/');
@@ -82,33 +84,39 @@ const AuthForm = () => {
 
   return (
     <section className={styles.section}>
-      <h1>{isLoginForm ? 'Login' : 'Register'}</h1>
-      <form onSubmit={submitHandler}>
-        <label>Email:</label>
-        <input
-          type='text'
-          id='text'
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <label>Password:</label>
-        <input
-          type='password'
-          id='password'
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button>Submit</button>
-      </form>
-      {httpError && <p>Login unsuccessful. Please try again.</p>}
-      {isLoginForm ? (
-        <div>
-          <p>New user?</p>
-        </div>
-      ) : (
-        <p>Login with existing account</p>
-      )}
-      <button onClick={changeForm}>Register Now</button>
+      <div className={styles.card}>
+        <h1>{isLoginForm ? 'Login' : 'Register'}</h1>
+        <form onSubmit={submitHandler} className={styles.form}>
+          <div>
+            <label>Email:</label>
+            <input
+              type='text'
+              id='text'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div>
+            <label>Password:</label>
+            <input
+              type='password'
+              id='password'
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <button className={styles.button}>Submit</button>
+        </form>
+        {httpError && <p>Login unsuccessful. Please try again.</p>}
+        {isLoginForm ? (
+          <div>
+            <p>New user?</p>
+          </div>
+        ) : (
+          <p>Login with existing account</p>
+        )}
+        <button onClick={changeForm}>Register Now</button>
+      </div>
     </section>
   );
 };
