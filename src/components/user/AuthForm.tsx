@@ -40,19 +40,40 @@ const AuthForm = () => {
     if (isLoginForm) {
       setHttpError('');
       userService
-        .login(user)
-        .then((result) => {
-          dispatch(
-            userActions.login({
-              token: result.idToken,
-              expirationTime: result.expiresIn,
-              currentUser: {
-                userId: result.localId,
-                email: result.email,
-                userRole: '',
-              },
-            })
+      .login(user)
+      .then((result) => {
+        userService
+          .getUserRoles()
+          .then((response) => {
+            let loadedUsers: User[] = [];
+            for (const key in result) {
+              loadedUsers.push({
+                userId: result[key].userId,
+                userRole: result[key].userRole,
+                email: result[key].email,
+              });
+            }
+            console.log(loadedUsers);
+
+            let loadedUser = loadedUsers.find((userId) => userId === result.localId );
+  
+            console.log(loadedUser);
+          })
+          .catch((error) => console.log(error));
+
+        dispatch(
+          userActions.login({
+            token: result.idToken,
+            expirationTime: result.expiresIn,
+            currentUser: {
+              userId: result.localId,
+              email: result.email,
+              userRole: '',
+            },
+          })
           );
+          
+
           history.push('/');
         })
         .catch((error) => {
@@ -82,7 +103,7 @@ const AuthForm = () => {
               email: result.email,
               userRole: CUSTOMER_ROLE,
             })
-            .then((result) => console.log(result))
+            .then((response) => console.log(response))
             .catch((error) => console.log(error));
 
           history.push('/');
