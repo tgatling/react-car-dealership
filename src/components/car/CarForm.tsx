@@ -31,10 +31,8 @@ const CarForm = () => {
         carId: '',
       })
       .then((response) => {
-        if (response) {
-          console.log(response[0]);
-        }
-      })
+          setCarId(response.name);
+    })
       .catch((error) => console.log(error));
 
     setCarAdded(true);
@@ -141,7 +139,7 @@ const CarForm = () => {
               </div>
               <div className={styles.message}>
                 <h1>Car Successfully Added to the Lot!</h1>
-                <p>{`We have now added the ${make} ${model} to our inventory under the id of ${carId}.  It will be displayed on the home page as shown here.  The details and image of this vehicle can be edited by returning to the \'Edit Our Lot\' page.`}</p>
+                <p>{`We have now added the ${make} ${model} to our inventory under the id of ${carId}.  It will be displayed on the home page as shown here.  The details and image of this vehicle can be edited by returning to the 'Edit Our Lot' page.`}</p>
               </div>
             </div>
           </div>
