@@ -1,5 +1,5 @@
 import React from 'react';
-import {useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import { Car } from '../../models/car';
 import CarItem from './CarItem';
@@ -10,17 +10,21 @@ interface tableProps {
   cars: Car[];
 }
 
-const CarTable = ({editMode, cars}: tableProps) => {
+const CarTable = ({ editMode, cars }: tableProps) => {
   const history = useHistory();
 
   const addCarHandler = () => {
-    history.push('/add-to-dealers-cars')
-  }
+    history.push('/add-to-dealers-cars');
+  };
 
   return (
     <div className={styles.tableContainer}>
       <div>
-        {editMode && <button className={styles.addButton} onClick={addCarHandler}>Add Car</button>}
+        {editMode && (
+          <button className={styles.addButton} onClick={addCarHandler}>
+            Add Car
+          </button>
+        )}
       </div>
       <div className={styles.table}>
         {cars.map((car) => {

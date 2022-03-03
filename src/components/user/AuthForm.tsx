@@ -135,8 +135,8 @@ const AuthForm = () => {
                 <input
                   required
                   className={styles.emailInput}
-                  type='e-mail'
-                  id='e-mail'
+                  type='email'
+                  id='email'
                   value={email}
                   placeholder='Email'
                   onChange={(e) => setEmail(e.target.value)}
