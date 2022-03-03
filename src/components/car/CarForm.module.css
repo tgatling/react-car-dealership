@@ -24,16 +24,11 @@
   background-color: #ffffff;
   border-style: solid;
   border-color: #000000;
-  opacity: 100%;
+  opacity: 95%;
   border-width: 1px;
   padding: 25px;
   width: 1000px;
   height: 500px;
-  @media (max-width: 600px) {
-    border-style: none;
-    border-color: #ffffff;
-    text-align: center;
-  }
 }
 
 .contentContainer {
@@ -48,13 +43,12 @@
 
 .form div {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   padding: 10px;
 }
 
 .form label {
   font-size: 25px;
-  margin-right: 20px;
 }
 
 .form input {
@@ -65,24 +59,30 @@
   outline: none;
 }
 
-.emailInput {
-  width: 400px;
-}
-
-.passwordInput {
-  width: 400px;
-}
-
-.buttonContainer {
-  float: right;
-}
-
-.button {
+.form button {
+  display: flex;
+  align-items: center;
+  margin: 75px 40px;
   background-color: #7fffd4;
   border-radius: 15px;
-  border-style: offset;
-  font-size: 16px;
+  font-size: 25px;
   padding: 15px 32px;
+  height: 50px;
+}
+
+.photoURL {
+  width: 825px;
+}
+
+.urlImageContainer {
+  width: 250px;
+  margin-top: 40px;
+}
+
+.urlImageContainer img {
+  width: 250px;
+  height: 140px;
+  display: block;
 }
 
 .errorText {
@@ -94,29 +94,74 @@
   font-weight: bold;
 }
 
-.sidePanel {
-  display: flex;
-  text-align: left;
-  margin-left: 20px;
-  border-color: #c0bbbb;
-  border-style: none none none dotted;
-  border-width: 0.5px;
-}
-
-.formChangeContainer {
-  display: flex;
-  flex-direction: column;
-  margin-left: 20px;
-}
-
-.formChangeButton {
-  border-style: none;
-  background-color: white;
-  font-size: 18px;
-  text-decoration: underline;
-  margin-left: -6px;
-}
-
 .text {
   font-size: 18px;
+}
+
+.resultCard {
+  display: flex;
+  flex-direction: row;
+}
+
+.resultContainer {
+  width: 380px;
+  height: 400px;
+  margin-right: 25px;
+}
+
+.message {
+  display: block;
+  flex-direction: column;
+  align-items: center;
+}
+
+.message h1 {
+  margin-top: 50px;
+}
+
+.message p {
+  font-size: 20px;
+}
+
+.closeResults {
+  border-style: solid;
+  border-radius: 5px;
+  background-color: #000080;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  float: right;
+  padding: 5px;
+}
+
+/* MOBILE VIEW */
+
+@media (max-width: 800px) {
+  .section {
+    display: flex;
+    background-image: none;
+    background-color: #ffffff;
+  }
+
+  .section h1 {
+    font-size: 30px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+      'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin-top: 0px;
+    margin-left: 10px;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 80px;
+    border-style: none;
+  }
+
+  .form div {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+  }
 }

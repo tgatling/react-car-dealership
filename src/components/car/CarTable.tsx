@@ -29,17 +29,19 @@ const CarTable = ({ editMode, cars }: tableProps) => {
       <div className={styles.table}>
         {cars.map((car) => {
           return (
+            <div className={styles.itemContainer}>
             <CarItem
-              key={car.carId}
-              carId={car.carId}
-              year={car.year}
-              make={car.make}
-              model={car.model}
-              price={car.price}
-              url={car.url}
+            key={car.carId}
+            carId={car.carId}
+            year={car.year}
+            make={car.make}
+            model={car.model}
+            price={car.price}
+            url={car.url}
             />
-          );
-        })}
+            </div>
+            );
+          })}
       </div>
     </div>
   );

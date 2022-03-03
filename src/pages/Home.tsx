@@ -10,7 +10,6 @@ interface homeProps {
 
 const Home = ({editMode}: homeProps) => {
   const [cars, setCars] = useState<Car[]>([]);
-  console.log('Home');
 
   useEffect(() => {
     carService

@@ -15,7 +15,7 @@ class CarService {
         return axios.get(this.URI+'/'+id).then(result=>result.data);
     }
     addCar(car: Car): Promise<null> {
-        return axios.post(this.URI, car).then(result => null);
+        return axios.post(this.URI, car).then(result => result.data);
     }
     updateCar(car: Car, id: string): Promise<null> {
         return axios.put(this.URI+'/'+id, car).then(result => null);

@@ -6,7 +6,7 @@ const userSlice = createSlice({
     token: localStorage.getItem('token'),
     isLoggedIn: localStorage.getItem('isLoggedIn') ? true: false,
     expirationTime: localStorage.getItem('expirationTime'),
-    currentUser: localStorage.getItem('currentUser')
+    currentUser: localStorage.getItem('user')
   },
   reducers: {
     logout(state) {
