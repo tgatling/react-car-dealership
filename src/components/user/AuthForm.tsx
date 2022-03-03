@@ -40,39 +40,39 @@ const AuthForm = () => {
     if (isLoginForm) {
       setHttpError('');
       userService
-      .login(user)
-      .then((result) => {
-        userService
-          .getUserRoles()
-          .then((response) => {
-            let loadedUsers: User[] = [];
-            for (const key in result) {
-              loadedUsers.push({
-                userId: result[key].userId,
-                userRole: result[key].userRole,
-                email: result[key].email,
-              });
-            }
-            console.log(loadedUsers);
+        .login(user)
+        .then((result) => {
+          userService
+            .getUserRoles()
+            .then((response) => {
+              let loadedUsers: User[] = [];
+              for (const key in response) {
+                console.log(response[key].username);
+                loadedUsers.push({
+                  email: response[key].email,
+                  userId: response[key].userId,
+                  userRole: response[key].userRole,
+                  username: response[key].username,
+                });
+              }
+              let loadedUser = loadedUsers.find(
+                (user) => user.userId === result.localId
+              );
 
-            let loadedUser = loadedUsers.find((userId) => userId === result.localId );
-  
-            console.log(loadedUser);
-          })
-          .catch((error) => console.log(error));
-
-        dispatch(
-          userActions.login({
-            token: result.idToken,
-            expirationTime: result.expiresIn,
-            currentUser: {
-              userId: result.localId,
-              email: result.email,
-              userRole: '',
-            },
-          })
-          );
-          
+              dispatch(
+                userActions.login({
+                  token: result.idToken,
+                  expirationTime: result.expiresIn,
+                  currentUser: {
+                    userId: result.localId,
+                    email: result.email,
+                    userRole: loadedUser?.userRole,
+                    username: loadedUser?.username,
+                  },
+                })
+              );
+            })
+            .catch((error) => console.log(error));
 
           history.push('/');
         })

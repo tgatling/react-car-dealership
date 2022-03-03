@@ -1,9 +1,5 @@
-.tableContainer {
-    /* table container */
-}
-
 .addButton {
-    margin: 15px 0 0 15px;
+    margin: 25px 0 0 45px;
     background-color: #7fffd4;
     border-radius: 15px;
     border-style: offset;
@@ -13,7 +9,7 @@
 
 .table {
     display: flex;
-    margin: 160px 160px 0 160px;
+    margin: 50px 160px 0 160px;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;

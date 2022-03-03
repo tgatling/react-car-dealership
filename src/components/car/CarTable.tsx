@@ -20,7 +20,7 @@ const CarTable = ({editMode, cars}: tableProps) => {
   return (
     <div className={styles.tableContainer}>
       <div>
-        <button className={styles.addButton} onClick={addCarHandler}>Add Car</button>
+        {editMode && <button className={styles.addButton} onClick={addCarHandler}>Add Car</button>}
       </div>
       <div className={styles.table}>
         {cars.map((car) => {

@@ -24,9 +24,7 @@ const NavigationBar = () => {
       let currentUser = JSON.parse(userState.currentUser);
       console.log(currentUser);
       setUserRole(currentUser.userRole);
-    }
-    console.log(userRole);
-    
+    }    
   }, [userState.currentUser, userRole]);
 
   const logoutHandler = () =>{
