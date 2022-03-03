@@ -103,8 +103,8 @@ const AuthForm = () => {
               email: result.email,
               userRole: CUSTOMER_ROLE,
             })
-            .then((response) => console.log(response))
-            .catch((error) => console.log(error));
+            .then((response) => response)
+            .catch((error) => error);
 
           history.push('/');
         })

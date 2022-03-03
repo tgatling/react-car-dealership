@@ -5,6 +5,7 @@ import Header from './components/layout/Header';
 import Routing from './components/layout/Routing';
 
 function App() {
+  console.log('App');
   return (
     <Fragment>
       <Header />
