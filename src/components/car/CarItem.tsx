@@ -1,4 +1,5 @@
 import React from 'react';
+import {useHistory} from 'react-router-dom';
 
 import image from '../../images/no-car-photo.png';
 import styles from './CarItem.module.css';
@@ -13,20 +14,54 @@ interface carProps {
   editMode: boolean;
 }
 
-const CarItem = ({ carId, year, make, model, price, url, editMode }: carProps) => {
+const CarItem = ({
+  carId,
+  year,
+  make,
+  model,
+  price,
+  url,
+  editMode,
+}: carProps) => {
   let heading = `${year} ${make.toUpperCase()}`;
+  let history = useHistory();
+
+  const viewCarHandler = () => {
+    // send to page where user can view individual car and make and offer or make payment
+  };
+
+  const editDetailsHandler = () => {
+    history.push(`/edit-dealers-cars/${carId}`)
+  };
+
+  const deleteCarHandler = () => {
+    // the dealer should confirm that they want to delete the car and if so delete request sent
+  };
+
   return (
     <div className={styles.itemContainer}>
-      <button className={styles.deleteButton}>x</button>
+      {editMode && (
+        <button className={styles.deleteButton} onClick={deleteCarHandler}>
+          x
+        </button>
+      )}
       <h1>{heading}</h1>
       <div className={styles.imageContainer}>
         {url ? <img src={url} alt='' /> : <img src={image} alt='' />}
       </div>
       <div className={styles.infoBox}>
-      <p>{`${model.toUpperCase()}`}</p>
-      <p className={styles.price}>${price}</p>
+        <p>{`${model.toUpperCase()}`}</p>
+        <p className={styles.price}>${price}</p>
       </div>
-      <button className={styles.viewButton}>View</button>
+      {editMode ? (
+        <button className={styles.viewButton} onClick={editDetailsHandler}>
+          Edit Details
+        </button>
+      ) : (
+        <button className={styles.viewButton} onClick={viewCarHandler}>
+          View
+        </button>
+      )}
     </div>
   );
 };

@@ -7,6 +7,7 @@ import UserCars from '../../pages/UserCars';
 import { RootStateOrAny, useSelector } from 'react-redux';
 import NotFound from '../../pages/NotFound';
 import AddCar from '../../pages/AddCar';
+import EditCar from '../../pages/EditCar';
 
 const Routing = () => {
   const loggedIn: boolean = useSelector(
@@ -24,8 +25,13 @@ const Routing = () => {
         </Route>
       )}
       {loggedIn && (
-        <Route path='/edit-dealers-cars'>
+        <Route path='/edit-dealers-cars' exact>
           <Home editMode={true} />
+        </Route>
+      )}
+      {loggedIn && (
+        <Route path='/edit-dealers-cars/:carId'>
+          <EditCar />
         </Route>
       )}
       {loggedIn && (

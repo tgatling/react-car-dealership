@@ -6,7 +6,11 @@ import carService from '../../services/car.service';
 import styles from './CarForm.module.css';
 import CarItem from './CarItem';
 
-const CarForm = () => {
+interface carFormProps {
+  addCarForm: boolean;
+}
+
+const CarForm = ({ addCarForm }: carFormProps) => {
   const [carAdded, setCarAdded] = useState(false);
   const [year, setYear] = useState<number | string>('');
   const [make, setMake] = useState('');
@@ -31,8 +35,8 @@ const CarForm = () => {
         carId: '',
       })
       .then((response) => {
-          setCarId(response.name);
-    })
+        setCarId(response.name);
+      })
       .catch((error) => console.log(error));
 
     setCarAdded(true);
