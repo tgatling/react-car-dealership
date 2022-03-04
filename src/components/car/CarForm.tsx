@@ -70,6 +70,7 @@ const CarForm = ({ addCarForm }: carFormProps) => {
             setMake(chosenCar.make);
             setModel(chosenCar.model);
             setPrice(chosenCar.price);
+            setCarId(chosenCar.carId);
             if (chosenCar.url) {
               setURL(chosenCar.url);
             }
@@ -107,17 +108,16 @@ const CarForm = ({ addCarForm }: carFormProps) => {
           setCarId(response.name);
         })
         .catch((error) => console.log(error));
-
-      setCarAdded(true);
     } else {
       console.log(`
-      make: ${make}
-      model: ${model}
-      year: ${year}
-      price: $${price}
-      url: ${url}
-      `);
+        make: ${make}
+        model: ${model}
+        year: ${year}
+        price: $${price}
+        url: ${url}
+        `);
     }
+    setCarAdded(true);
   };
 
   const returnToEdit = () => {
@@ -223,8 +223,18 @@ const CarForm = ({ addCarForm }: carFormProps) => {
                 />
               </div>
               <div className={styles.message}>
-                <h1>Car Successfully Added to the Lot!</h1>
-                <p>{`We have now added the ${make} ${model} to our inventory under the id of ${carId}.  It will be displayed on the home page as shown here.  The details and image of this vehicle can be edited by returning to the 'Edit Our Lot' page.`}</p>
+                {addCarForm ? (
+                  <div>
+                    <h1>Car Successfully Added to the Lot!</h1>
+                    <p>{`You have now added the ${make} ${model} to our inventory under the id of ${carId}.`}</p>
+                  </div>
+                ) : (
+                  <div>
+                    <h1>This Car is Now Updated!</h1>
+                    <p>{`You have successfully updated the ${make} ${model} under the id of ${carId}.`}</p>
+                  </div>
+                )}
+                <p>Click the 'x' in the top right corner to return to the "Edit Our Lot" page.  Click on the view button to see other vehicle options.</p>
               </div>
             </div>
           </div>
