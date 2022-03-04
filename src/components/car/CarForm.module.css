@@ -59,7 +59,7 @@
   outline: none;
 }
 
-.form button {
+.buttons {
   display: flex;
   align-items: center;
   margin: 75px 40px;
@@ -69,6 +69,22 @@
   padding: 15px 32px;
   height: 50px;
 }
+
+.resetEditContainer {
+  display: flex;
+  flex-direction: column;
+  margin-top: -10px;
+}
+
+.resetButton {
+  display: flex;
+  align-items: center;
+  margin: -40px 40px;
+  background-color: #7fffd4;
+  border-radius: 15px;
+  font-size: 25px;
+  padding: 15px 32px;
+  height: 50px;}
 
 .photoURL {
   width: 825px;

@@ -204,12 +204,17 @@ const CarForm = ({ addCarForm }: carFormProps) => {
                 <div className={styles.urlImageContainer}>
                   <img src={url} alt='' />
                 </div>
-                <button>
+                <button className={styles.buttons}>
                   {addCarForm ? 'Add Car to Lot' : 'Submit Details'}
                 </button>
-                <button type='button' onClick={returnToEdit}>
+                <div className={styles.resetEditContainer}>
+                <button className={styles.buttons} type='button' onClick={returnToEdit}>
                   Return to Edit Page
                 </button>
+                <button className={styles.resetButton} type='button' onClick={resetHandler}>
+                  Reset
+                </button>
+                </div>
               </div>
             </form>
           </div>

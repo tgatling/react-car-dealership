@@ -1,7 +1,8 @@
-import React from 'react';
-import {useHistory} from 'react-router-dom';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import image from '../../images/no-car-photo.png';
+import carService from '../../services/car.service';
 import styles from './CarItem.module.css';
 
 interface carProps {
@@ -23,6 +24,7 @@ const CarItem = ({
   url,
   editMode,
 }: carProps) => {
+  const [deleteConfirmed, setDeleteConfirmed] = useState(false);
   let heading = `${year} ${make.toUpperCase()}`;
   let history = useHistory();
 
@@ -31,17 +33,38 @@ const CarItem = ({
   };
 
   const editDetailsHandler = () => {
-    history.push(`/edit-dealers-cars/${carId}`)
+    history.push(`/edit-dealers-cars/${carId}`);
   };
 
+  const deleteConfirmation = () =>{
+    // Are you sure you would like to delete this vehicle? Y / N
+  
+    if (!deleteConfirmed) {
+      return;
+    }
+
+    deleteCarHandler();
+
+  }
+
   const deleteCarHandler = () => {
-    // the dealer should confirm that they want to delete the car and if so delete request sent
+
+    // delete vehicle
+    carService
+      .deleteCar(carId)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => console.log(error));
+
+    // confirmation of deletion
+    setDeleteConfirmed(false);
   };
 
   return (
     <div className={styles.itemContainer}>
       {editMode && (
-        <button className={styles.deleteButton} onClick={deleteCarHandler}>
+        <button className={styles.deleteButton} onClick={deleteConfirmation}>
           x
         </button>
       )}
