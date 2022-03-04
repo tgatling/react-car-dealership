@@ -1,5 +1,6 @@
 .addButton {
-    margin: 25px 0 0 45px;
+    position: absolute;
+    margin: -25px 0 0 40px;
     background-color: #7fffd4;
     border-radius: 15px;
     border-style: offset;

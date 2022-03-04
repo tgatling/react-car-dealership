@@ -135,6 +135,7 @@ const CarForm = () => {
                   model={model}
                   url={url}
                   price={+price}
+                  editMode={false}
                 />
               </div>
               <div className={styles.message}>

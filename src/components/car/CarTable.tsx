@@ -38,6 +38,7 @@ const CarTable = ({ editMode, cars }: tableProps) => {
             model={car.model}
             price={car.price}
             url={car.url}
+            editMode={editMode}
             />
             </div>
             );
