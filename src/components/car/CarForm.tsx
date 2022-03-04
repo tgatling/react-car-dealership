@@ -80,15 +80,15 @@ const CarForm = ({ addCarForm }: carFormProps) => {
     }
   }, [addCarForm, params.carId]);
 
-  // const resetHandler = () => {
-  //   setYear(originalDetails.year);
-  //   setMake(originalDetails.make);
-  //   setModel(originalDetails.model);
-  //   setPrice(originalDetails.price);
-  //   if (originalDetails.url) {
-  //     setURL(originalDetails.url);
-  //   }
-  // }
+  const resetHandler = () => {
+    setYear(originalDetails.year);
+    setMake(originalDetails.make);
+    setModel(originalDetails.model);
+    setPrice(originalDetails.price);
+    if (originalDetails.url) {
+      setURL(originalDetails.url);
+    }
+  }
 
   const carDetailsHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -106,18 +106,26 @@ const CarForm = ({ addCarForm }: carFormProps) => {
         })
         .then((response) => {
           setCarId(response.name);
+          setCarAdded(true);
         })
         .catch((error) => console.log(error));
-    } else {
-      console.log(`
-        make: ${make}
-        model: ${model}
-        year: ${year}
-        price: $${price}
-        url: ${url}
-        `);
+      } else {
+        carService
+          .updateCar({
+            owner: DEALER_ROLE,
+            year: +year,
+            make,
+            model,
+            url,
+            price: +price,
+            carId,
+          }, carId)
+          .then((response) => {
+            console.log(response);
+            setCarAdded(true);
+          })
+          .catch((error) => console.log(error));
     }
-    setCarAdded(true);
   };
 
   const returnToEdit = () => {
