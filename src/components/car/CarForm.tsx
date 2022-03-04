@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
+import { Car } from '../../models/car';
 
 import { DEALER_ROLE } from '../../models/constants';
 import carService from '../../services/car.service';
@@ -18,28 +19,105 @@ const CarForm = ({ addCarForm }: carFormProps) => {
   const [url, setURL] = useState('');
   const [price, setPrice] = useState<number | string>('');
   const [carId, setCarId] = useState('');
+  const [originalDetails, setOriginalDetails] = useState<Car>({
+    carId: '',
+    owner: '',
+    year: 0,
+    make: '',
+    model: '',
+    price: 0,
+    url: '',
+  });
 
   const history = useHistory();
+  const params = useParams<{ carId: string }>();
 
-  const addCarHandler = (event: React.FormEvent<HTMLFormElement>) => {
+  useEffect(() => {
+    if (!addCarForm) {
+      carService
+        .getCars()
+        .then((result) => {
+          let loadedCars: Car[] = [];
+
+          for (const key in result) {
+            loadedCars.push({
+              carId: key,
+              owner: result[key].owner,
+              year: result[key].year,
+              make: result[key].make,
+              model: result[key].model,
+              price: result[key].price,
+              url: result[key].url,
+            });
+          }
+
+          let chosenCar = loadedCars.find((car) => car.carId === params.carId);
+
+          console.log(chosenCar);
+
+          if (chosenCar) {
+            setOriginalDetails({
+              carId: chosenCar.carId,
+              owner: chosenCar.owner,
+              year: chosenCar.year,
+              make: chosenCar.make,
+              model: chosenCar.model,
+              price: chosenCar.price,
+              url: chosenCar.url,
+            });
+
+            setYear(chosenCar.year);
+            setMake(chosenCar.make);
+            setModel(chosenCar.model);
+            setPrice(chosenCar.price);
+            if (chosenCar.url) {
+              setURL(chosenCar.url);
+            }
+          }
+        })
+        .catch((error) => error);
+    }
+  }, [addCarForm, params.carId]);
+
+  // const resetHandler = () => {
+  //   setYear(originalDetails.year);
+  //   setMake(originalDetails.make);
+  //   setModel(originalDetails.model);
+  //   setPrice(originalDetails.price);
+  //   if (originalDetails.url) {
+  //     setURL(originalDetails.url);
+  //   }
+  // }
+
+  const carDetailsHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    carService
-      .addCar({
-        owner: DEALER_ROLE,
-        year: +year,
-        make,
-        model,
-        url,
-        price: +price,
-        carId: '',
-      })
-      .then((response) => {
-        setCarId(response.name);
-      })
-      .catch((error) => console.log(error));
+    if (addCarForm) {
+      carService
+        .addCar({
+          owner: DEALER_ROLE,
+          year: +year,
+          make,
+          model,
+          url,
+          price: +price,
+          carId: '',
+        })
+        .then((response) => {
+          setCarId(response.name);
+        })
+        .catch((error) => console.log(error));
 
-    setCarAdded(true);
+      setCarAdded(true);
+    } else {
+      console.log(`
+      make: ${make}
+      model: ${model}
+      year: ${year}
+      price: $${price}
+      url: ${url}
+      `);
+    }
   };
 
   const returnToEdit = () => {
@@ -54,7 +132,7 @@ const CarForm = ({ addCarForm }: carFormProps) => {
             <h1>
               Please enter the details about the vehicle being added to the lot.
             </h1>
-            <form className={styles.form} onSubmit={addCarHandler}>
+            <form className={styles.form} onSubmit={carDetailsHandler}>
               <div>
                 <label>Make:</label>
                 <input
@@ -118,7 +196,9 @@ const CarForm = ({ addCarForm }: carFormProps) => {
                 <div className={styles.urlImageContainer}>
                   <img src={url} alt='' />
                 </div>
-                <button>Add Car to Lot</button>
+                <button>
+                  {addCarForm ? 'Add Car to Lot' : 'Submit Details'}
+                </button>
                 <button type='button' onClick={returnToEdit}>
                   Return to Edit Page
                 </button>
