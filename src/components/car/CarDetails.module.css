@@ -1,0 +1,12 @@
+.section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url('https://wallpaperaccess.com/full/33110.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    background-position: center;
+  }
