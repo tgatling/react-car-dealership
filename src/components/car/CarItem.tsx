@@ -29,7 +29,7 @@ const CarItem = ({
   let history = useHistory();
 
   const viewCarHandler = () => {
-    // send to page where user can view individual car and make and offer or make payment
+    history.push(`./car/${carId}`);
   };
 
   const editDetailsHandler = () => {

@@ -35,48 +35,30 @@ const CarForm = ({ addCarForm }: carFormProps) => {
   useEffect(() => {
     if (!addCarForm) {
       carService
-        .getCars()
+        .getCar(params.carId)
         .then((result) => {
-          let loadedCars: Car[] = [];
+          setOriginalDetails({
+            carId: result.carId,
+            owner: result.owner,
+            year: result.year,
+            make: result.make,
+            model: result.model,
+            price: result.price,
+            url: result.url,
+          });
 
-          for (const key in result) {
-            loadedCars.push({
-              carId: key,
-              owner: result[key].owner,
-              year: result[key].year,
-              make: result[key].make,
-              model: result[key].model,
-              price: result[key].price,
-              url: result[key].url,
-            });
-          }
-
-          let chosenCar = loadedCars.find((car) => car.carId === params.carId);
-
-          console.log(chosenCar);
-
-          if (chosenCar) {
-            setOriginalDetails({
-              carId: chosenCar.carId,
-              owner: chosenCar.owner,
-              year: chosenCar.year,
-              make: chosenCar.make,
-              model: chosenCar.model,
-              price: chosenCar.price,
-              url: chosenCar.url,
-            });
-
-            setYear(chosenCar.year);
-            setMake(chosenCar.make);
-            setModel(chosenCar.model);
-            setPrice(chosenCar.price);
-            setCarId(chosenCar.carId);
-            if (chosenCar.url) {
-              setURL(chosenCar.url);
-            }
+          setYear(result.year);
+          setMake(result.make);
+          setModel(result.model);
+          setPrice(result.price);
+          setCarId(result.carId);
+          if (result.url) {
+            setURL(result.url);
           }
         })
-        .catch((error) => error);
+        .catch((error) => {
+          console.log(`Error: ${error}`);
+        });
     }
   }, [addCarForm, params.carId]);
 
@@ -88,7 +70,7 @@ const CarForm = ({ addCarForm }: carFormProps) => {
     if (originalDetails.url) {
       setURL(originalDetails.url);
     }
-  }
+  };
 
   const carDetailsHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -109,9 +91,10 @@ const CarForm = ({ addCarForm }: carFormProps) => {
           setCarAdded(true);
         })
         .catch((error) => console.log(error));
-      } else {
-        carService
-          .updateCar({
+    } else {
+      carService
+        .updateCar(
+          {
             owner: DEALER_ROLE,
             year: +year,
             make,
@@ -119,12 +102,14 @@ const CarForm = ({ addCarForm }: carFormProps) => {
             url,
             price: +price,
             carId,
-          }, carId)
-          .then((response) => {
-            console.log(response);
-            setCarAdded(true);
-          })
-          .catch((error) => console.log(error));
+          },
+          carId
+        )
+        .then((response) => {
+          console.log(response);
+          setCarAdded(true);
+        })
+        .catch((error) => console.log(error));
     }
   };
 
@@ -208,12 +193,20 @@ const CarForm = ({ addCarForm }: carFormProps) => {
                   {addCarForm ? 'Add Car to Lot' : 'Submit Details'}
                 </button>
                 <div className={styles.resetEditContainer}>
-                <button className={styles.buttons} type='button' onClick={returnToEdit}>
-                  Return to Edit Page
-                </button>
-                <button className={styles.resetButton} type='button' onClick={resetHandler}>
-                  Reset
-                </button>
+                  <button
+                    className={styles.buttons}
+                    type='button'
+                    onClick={returnToEdit}
+                  >
+                    Return to Edit Page
+                  </button>
+                  <button
+                    className={styles.resetButton}
+                    type='button'
+                    onClick={resetHandler}
+                  >
+                    Reset
+                  </button>
                 </div>
               </div>
             </form>
@@ -247,7 +240,11 @@ const CarForm = ({ addCarForm }: carFormProps) => {
                     <p>{`You have successfully updated the ${make} ${model} under the id of ${carId}.`}</p>
                   </div>
                 )}
-                <p>Click the 'x' in the top right corner to return to the "Edit Our Lot" page.  Click on the view button to see other vehicle options.</p>
+                <p>
+                  Click the 'x' in the top right corner to return to the "Edit
+                  Our Lot" page. Click on the view button to see other vehicle
+                  options.
+                </p>
               </div>
             </div>
           </div>

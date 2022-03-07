@@ -12,7 +12,7 @@ class CarService {
         return axios.get(`${this.URI}cars.json`).then(result => result.data);
     }
     getCar(id: string): Promise<Car> {
-        return axios.get(this.URI+'/'+id).then(result=>result.data);
+        return axios.get(`${this.URI}cars/${id}.json`).then(result=>result.data);
     }
     addCar(car: Car): Promise<{name: string}> {
         return axios.post(this.URI, car).then(result => result.data);

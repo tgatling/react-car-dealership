@@ -1,6 +1,12 @@
 import React from 'react';
 
-const CarDetails = () => {
+interface detailsProp {
+    carId: string,
+    price: number,
+    owner: string,
+}
+
+const CarDetails = ({carId, price, owner}: detailsProp) => {
     return (
         <div>
             
