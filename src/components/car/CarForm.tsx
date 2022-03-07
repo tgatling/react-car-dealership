@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { Car } from '../../models/car';
 
 import { DEALER_ROLE } from '../../models/constants';
 import carService from '../../services/car.service';
+import { carActions } from '../../store/car-slice';
 import styles from './CarForm.module.css';
 import CarItem from './CarItem';
 
@@ -30,6 +32,7 @@ const CarForm = ({ addCarForm }: carFormProps) => {
   });
 
   const history = useHistory();
+  const dispatch = useDispatch();
   const params = useParams<{ carId: string }>();
 
   useEffect(() => {
@@ -87,6 +90,19 @@ const CarForm = ({ addCarForm }: carFormProps) => {
           carId: '',
         })
         .then((response) => {
+          dispatch(
+            carActions.addCarToDealership({
+              car: {
+                owner: DEALER_ROLE,
+                year: +year,
+                make,
+                model,
+                url,
+                price: +price,
+                carId: response.name,
+              },
+            })
+          );
           setCarId(response.name);
           setCarAdded(true);
         })

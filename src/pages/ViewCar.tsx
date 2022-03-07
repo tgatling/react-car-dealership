@@ -4,9 +4,11 @@ import {useParams} from 'react-router-dom';
 import { Car } from '../models/car';
 import CarDetails from '../components/car/CarDetails';
 import carService from '../services/car.service';
+import {DEALER_ROLE, CUSTOMER_ROLE} from '../models/constants';
 
 const ViewCar = () => {
     const params = useParams<{ carId: string }>();
+    const [ownerRole, setOwnerRole] = useState<string>('');
     const [carInfo, setCarInfo] = useState<Car>({
         carId: params.carId,
         owner: '',
@@ -18,61 +20,31 @@ const ViewCar = () => {
     });
 
     useEffect(() => {
-        carService.getCar(carInfo.carId).then(result => {
-            console.log(result);
+        carService.getCar(params.carId).then(result => {
+            setCarInfo({
+                carId: result.carId,
+                owner: result.owner,
+                year: result.year,
+                make: result.make,
+                model: result.model,
+                price: result.price,
+                url: result.url,
+            });
+
+            if(result.owner === DEALER_ROLE){
+                setOwnerRole(DEALER_ROLE);
+            } else {
+                setOwnerRole(CUSTOMER_ROLE)
+            }
+
         }).catch(error => {
             console.log(`Error: ${error}`);
-        })
+        });
 
-        // if (!addCarForm) {
-        //   carService
-        //     .getCars()
-        //     .then((result) => {
-        //       let loadedCars: Car[] = [];
-    
-        //       for (const key in result) {
-        //         loadedCars.push({
-        //           carId: key,
-        //           owner: result[key].owner,
-        //           year: result[key].year,
-        //           make: result[key].make,
-        //           model: result[key].model,
-        //           price: result[key].price,
-        //           url: result[key].url,
-        //         });
-        //       }
-    
-        //       let chosenCar = loadedCars.find((car) => car.carId === params.carId);
-    
-        //       console.log(chosenCar);
-    
-        //       if (chosenCar) {
-        //         setOriginalDetails({
-        //           carId: chosenCar.carId,
-        //           owner: chosenCar.owner,
-        //           year: chosenCar.year,
-        //           make: chosenCar.make,
-        //           model: chosenCar.model,
-        //           price: chosenCar.price,
-        //           url: chosenCar.url,
-        //         });
-    
-        //         setYear(chosenCar.year);
-        //         setMake(chosenCar.make);
-        //         setModel(chosenCar.model);
-        //         setPrice(chosenCar.price);
-        //         setCarId(chosenCar.carId);
-        //         if (chosenCar.url) {
-        //           setURL(chosenCar.url);
-        //         }
-        //       }
-        //     })
-        //     .catch((error) => error);
-        //}
-      }, [carInfo.carId]);
+      }, [params.carId]);
 
     return (
-        <CarDetails carId={carInfo.carId} price={0} owner={''} />
+        <CarDetails car={carInfo} ownerRole={ownerRole} />
     );
 };
 

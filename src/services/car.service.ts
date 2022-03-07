@@ -8,22 +8,22 @@ class CarService {
         this.URI = `${process.env.REACT_APP_SERVER_URI}`;
     }
 
-    getCars() {
-        return axios.get(`${this.URI}cars.json`).then(result => result.data);
+    async getCars() {
+        return await axios.get(`${this.URI}cars.json`).then(result => result.data);
     }
-    getCar(id: string): Promise<Car> {
-        return axios.get(`${this.URI}cars/${id}.json`).then(result=>result.data);
+    async getCar(id: string): Promise<Car> {
+        return await axios.get(`${this.URI}cars/${id}.json`).then(result=>result.data);
     }
-    addCar(car: Car): Promise<{name: string}> {
-        return axios.post(this.URI, car).then(result => result.data);
+    async addCar(car: Car): Promise<{name: string}> {
+        return await axios.post(`${this.URI}cars.json`, car).then(result => result.data);
     }
-    updateCar(car: Car, id: string): Promise<{}> {
-        return axios.put(`${this.URI}cars/${id}.json`, car).then(result => result.data);
+    async updateCar(car: Car, id: string): Promise<{}> {
+        return await axios.put(`${this.URI}cars/${id}.json`, car).then(result => result.data);
     }
 
-    deleteCar(id: string): Promise<null> {
+    async deleteCar(id: string): Promise<null> {
         console.log(id);
-        return axios.delete(`${this.URI}cars/${id}.json`).then(result => result.data);
+        return await axios.delete(`${this.URI}cars/${id}.json`).then(result => result.data);
     }
 }
 
