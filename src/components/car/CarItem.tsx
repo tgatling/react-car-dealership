@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 
 import image from '../../images/no-car-photo.png';
 import carService from '../../services/car.service';
 import styles from './CarItem.module.css';
+import {useDispatch} from 'react-redux';
+import {carActions} from '../../store/car-slice';
 
 interface carProps {
   carId: string;
@@ -24,9 +26,9 @@ const CarItem = ({
   url,
   editMode,
 }: carProps) => {
-  const [deleteConfirmed, setDeleteConfirmed] = useState(false);
   let heading = `${year} ${make.toUpperCase()}`;
   let history = useHistory();
+  let dispatch = useDispatch();
 
   const viewCarHandler = () => {
     history.push(`./car/${carId}`);
@@ -36,19 +38,7 @@ const CarItem = ({
     history.push(`/edit-dealers-cars/${carId}`);
   };
 
-  const deleteConfirmation = () =>{
-    // Are you sure you would like to delete this vehicle? Y / N
-  
-    if (!deleteConfirmed) {
-      return;
-    }
-
-    deleteCarHandler();
-
-  }
-
   const deleteCarHandler = () => {
-
     // delete vehicle
     carService
       .deleteCar(carId)
@@ -57,14 +47,13 @@ const CarItem = ({
       })
       .catch((error) => console.log(error));
 
-    // confirmation of deletion
-    setDeleteConfirmed(false);
+      dispatch(carActions.removeCarFromDealership({carId}))
   };
 
   return (
     <div className={styles.itemContainer}>
       {editMode && (
-        <button className={styles.deleteButton} onClick={deleteConfirmation}>
+        <button className={styles.deleteButton} onClick={deleteCarHandler}>
           x
         </button>
       )}
