@@ -28,11 +28,6 @@ const Routing = () => {
         {loggedIn ? <UserCars /> : <Redirect to='/login' />}
       </Route>
       {loggedIn && (
-        <Route path='/my-cars'>
-          <UserCars />
-        </Route>
-      )}
-      {loggedIn && (
         <Route path='/edit-dealers-cars' exact>
           <Home editMode={true} />
         </Route>

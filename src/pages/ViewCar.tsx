@@ -20,6 +20,7 @@ const ViewCar = () => {
     });
 
     useEffect(() => {
+        // get the information regarding a specific car
         carService.getCar(params.carId).then(result => {
             setCarInfo({
                 carId: result.carId,
@@ -31,15 +32,14 @@ const ViewCar = () => {
                 url: result.url,
             });
 
+            // set role to determine what the page will display - make an offer or payment page
             if(result.owner === DEALER_ROLE){
                 setOwnerRole(DEALER_ROLE);
             } else {
                 setOwnerRole(CUSTOMER_ROLE)
             }
 
-        }).catch(error => {
-            console.log(`Error: ${error}`);
-        });
+        }).catch(error => error);
 
       }, [params.carId]);
 

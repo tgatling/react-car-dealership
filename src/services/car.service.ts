@@ -8,7 +8,7 @@ class CarService {
         this.URI = `${process.env.REACT_APP_SERVER_URI}`;
     }
 
-    async getCars() {
+    async getAllCars() {
         return await axios.get(`${this.URI}cars.json`).then(result => result.data);
     }
     async getCar(id: string): Promise<Car> {

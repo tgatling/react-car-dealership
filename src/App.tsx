@@ -14,7 +14,7 @@ function App() {
 
   useEffect(() => {
     carService
-      .getCars()
+      .getAllCars()
       .then((result) => {
         // convert results to format of car array
         let loadedCars: Car[] = [];

@@ -16,6 +16,7 @@ const NavigationBar = () => {
   const userState = useSelector((state: RootStateOrAny) => state.user);
 
   useEffect(() => {
+    // determine user role to display proper page links
     if (userState.currentUser) {
       let currentUser = JSON.parse(userState.currentUser);
       setUserRole(currentUser.userRole);
