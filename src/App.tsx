@@ -29,12 +29,11 @@ function App() {
             url: result[key].url,
           });
         }
-        console.log(loadedCars);
+
+        // store all cars in redux car state
         dispatch(carActions.setCars({cars: loadedCars}));
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => error);
   }, [dispatch, carState]);
 
   return (

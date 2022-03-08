@@ -22,7 +22,6 @@ class CarService {
     }
 
     async deleteCar(id: string): Promise<null> {
-        console.log(id);
         return await axios.delete(`${this.URI}cars/${id}.json`).then(result => result.data);
     }
 }

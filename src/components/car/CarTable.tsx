@@ -14,13 +14,14 @@ interface tableProps {
 
 const CarTable = ({ editMode, cars, owner }: tableProps) => {
   const history = useHistory();
-  console.log(`Car Table Cars: ${cars}`);
   let filteredCars: Car[] = [];
 
+  // filter cars to display dealer or customer's cars
   if (cars) {
     filteredCars = cars.filter((car) => car.owner === owner);
   }
 
+  // dealer can add car in edit mode
   const addCarHandler = () => {
     history.push('/add-to-dealers-cars');
   };

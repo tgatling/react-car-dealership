@@ -150,6 +150,16 @@
   padding: 5px;
 }
 
+.errorText {
+  font-size: 16px;
+  color: #8b0000;
+  margin-top: -20px;
+  margin-left: 10px;
+  position: absolute;
+  font-size: 18px;
+  font-weight: bold;
+}
+
 /* MOBILE VIEW */
 
 @media (max-width: 800px) {

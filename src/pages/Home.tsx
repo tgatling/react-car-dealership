@@ -10,7 +10,6 @@ interface homeProps {
 
 const Home = ({editMode}: homeProps) => {
   const carState = useSelector((state: RootStateOrAny) => state.car);
-  console.log(carState);
 
   useEffect(()=>{},[carState]);
 

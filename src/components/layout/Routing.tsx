@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import Auth from '../../pages/Auth';
 
 import Home from '../../pages/Home';
@@ -20,11 +20,13 @@ const Routing = () => {
       <Route path='/' exact>
         <Home editMode={false} />
       </Route>
-      {loggedIn && (
-        <Route path='/car/:carId' exact>
-          <ViewCar />
-        </Route>
-      )}
+
+      <Route path='/car/:carId' exact>
+        {loggedIn ? <ViewCar /> : <Redirect to='/login' />}
+      </Route>
+      <Route path='/my-cars'>
+        {loggedIn ? <UserCars /> : <Redirect to='/login' />}
+      </Route>
       {loggedIn && (
         <Route path='/my-cars'>
           <UserCars />

@@ -15,12 +15,17 @@ interface carFormProps {
 
 const CarForm = ({ addCarForm }: carFormProps) => {
   const [carAdded, setCarAdded] = useState(false);
+  const [httpError, setHttpError] = useState(null);
+
+  // store user inputs
   const [year, setYear] = useState<number | string>('');
   const [make, setMake] = useState('');
   const [model, setModel] = useState('');
   const [url, setURL] = useState('');
   const [price, setPrice] = useState<number | string>('');
   const [carId, setCarId] = useState('');
+
+  // details for resetting form
   const [originalDetails, setOriginalDetails] = useState<Car>({
     carId: '',
     owner: '',
@@ -36,10 +41,12 @@ const CarForm = ({ addCarForm }: carFormProps) => {
   const params = useParams<{ carId: string }>();
 
   useEffect(() => {
+    // get the car info that will auto populate the form
     if (!addCarForm) {
       carService
         .getCar(params.carId)
         .then((result) => {
+          // save original details to reset form
           setOriginalDetails({
             carId: result.carId,
             owner: result.owner,
@@ -50,6 +57,7 @@ const CarForm = ({ addCarForm }: carFormProps) => {
             url: result.url,
           });
 
+          // set values to populate form
           setYear(result.year);
           setMake(result.make);
           setModel(result.model);
@@ -59,9 +67,7 @@ const CarForm = ({ addCarForm }: carFormProps) => {
             setURL(result.url);
           }
         })
-        .catch((error) => {
-          console.log(`Error: ${error}`);
-        });
+        .catch((error) => error);
     }
   }, [addCarForm, params.carId]);
 
@@ -77,8 +83,10 @@ const CarForm = ({ addCarForm }: carFormProps) => {
 
   const carDetailsHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setHttpError(null);
 
     if (addCarForm) {
+      // add car to firebase realtime database
       carService
         .addCar({
           owner: DEALER_ROLE,
@@ -90,6 +98,7 @@ const CarForm = ({ addCarForm }: carFormProps) => {
           carId: '',
         })
         .then((response) => {
+          // add car to redux car state
           dispatch(
             carActions.addCarToDealership({
               car: {
@@ -103,11 +112,14 @@ const CarForm = ({ addCarForm }: carFormProps) => {
               },
             })
           );
+
+          // display confirmation after adding car
           setCarId(response.name);
           setCarAdded(true);
         })
-        .catch((error) => console.log(error));
+        .catch((error) => setHttpError(error));
     } else {
+      // update existing car information
       carService
         .updateCar(
           {
@@ -122,10 +134,9 @@ const CarForm = ({ addCarForm }: carFormProps) => {
           carId
         )
         .then((response) => {
-          console.log(response);
           setCarAdded(true);
         })
-        .catch((error) => console.log(error));
+        .catch((error) => setHttpError(error));
     }
   };
 
@@ -139,8 +150,9 @@ const CarForm = ({ addCarForm }: carFormProps) => {
         {!carAdded ? (
           <div>
             <h1>
-              Please enter the details about the vehicle being added to the lot.
+              Please enter the vehicle details below.
             </h1>
+            {httpError && <p className={styles.errorText}>Something went wrong. Please try again.</p>}
             <form className={styles.form} onSubmit={carDetailsHandler}>
               <div>
                 <label>Make:</label>
