@@ -61,33 +61,44 @@ const CarItem = ({
   let displayImage = url ? url : image;
   return (
     <div>
-      {showConfirmation &&
-        <ConfirmDelete title={deleteTitle} body={deleteBody} image={displayImage} onDelete={deleteCarHandler} onClose={toggleDeleteConfirmation} />
-      }
-      {!showConfirmation && <div className={styles.itemContainer}>
-        {editMode && (
-          <button className={styles.deleteButton} onClick={toggleDeleteConfirmation} >
-            x
-          </button>
-        )}
-        <h1>{heading}</h1>
-        <div className={styles.imageContainer}>
-          <img src={displayImage} alt='' />
+      {showConfirmation && (
+        <ConfirmDelete
+          title={deleteTitle}
+          body={deleteBody}
+          image={displayImage}
+          onDelete={deleteCarHandler}
+          onClose={toggleDeleteConfirmation}
+        />
+      )}
+      {!showConfirmation && (
+        <div className={styles.itemContainer}>
+          {editMode && (
+            <button
+              className={styles.deleteButton}
+              onClick={toggleDeleteConfirmation}
+            >
+              x
+            </button>
+          )}
+          <h1>{heading}</h1>
+          <div className={styles.imageContainer}>
+            <img src={displayImage} alt='' />
+          </div>
+          <div className={styles.infoBox}>
+            <p>{`${model.toUpperCase()}`}</p>
+            <p className={styles.price}>${price}</p>
+          </div>
+          {editMode ? (
+            <button className={styles.viewButton} onClick={editDetailsHandler}>
+              Edit Details
+            </button>
+          ) : (
+            <button className={styles.viewButton} onClick={viewCarHandler}>
+              View
+            </button>
+          )}
         </div>
-        <div className={styles.infoBox}>
-          <p>{`${model.toUpperCase()}`}</p>
-          <p className={styles.price}>${price}</p>
-        </div>
-        {editMode ? (
-          <button className={styles.viewButton} onClick={editDetailsHandler}>
-            Edit Details
-          </button>
-        ) : (
-          <button className={styles.viewButton} onClick={viewCarHandler}>
-            View
-          </button>
-        )}
-      </div>}
+      )}
     </div>
   );
 };
