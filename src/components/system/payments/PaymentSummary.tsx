@@ -7,6 +7,7 @@ interface summaryProps {
   equalPayments: boolean;
   numberOfPayments: number;
   paymentCalculations: { payment: number; amount: number; status: string }[];
+  header: boolean;
 }
 
 const PaymentSummary = ({
@@ -14,10 +15,11 @@ const PaymentSummary = ({
   equalPayments,
   numberOfPayments,
   paymentCalculations,
+  header,
 }: summaryProps) => {
   return (
     <div className={styles.summaryContainer}>
-      <h3>Payment Summary</h3>
+      {header && <h3>Payment Summary</h3>}
       {equalPayments && (
         <div>
           <p>{`${numberOfPayments} payments of $${paymentCalculations[0].amount.toFixed(

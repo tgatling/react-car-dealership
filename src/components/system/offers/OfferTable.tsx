@@ -46,6 +46,7 @@ const OfferTable = ({
         equalPayments={equalPayments}
         numberOfPayments={numberOfPayments}
         paymentCalculations={paymentCalculations}
+        header={true}
       />
       {viewFullTable && (
         <div>

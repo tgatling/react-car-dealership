@@ -4,6 +4,7 @@ import PaymentItem from './PaymentItem';
 import { calculateRemainingPayments } from '../Calculations';
 import styles from './PaymentTable.module.css';
 import PaymentInfo from './PaymentInfo';
+import PaymentSummary from './PaymentSummary';
 
 interface paymentTableProps {
   carId: string;
@@ -17,12 +18,29 @@ const PaymentTable = (payments: paymentTableProps) => {
   const [viewFullTable, setViewFullTable] = useState(false);
   let { paymentCalculations } = calculateRemainingPayments(payments);
 
+  let equalPayments: boolean;
+
+  if (paymentCalculations.length > 1) {
+    equalPayments =
+      paymentCalculations[0].amount === paymentCalculations[1].amount
+        ? true
+        : false;
+  } else {
+    equalPayments = true;
+  }
+
+  const toggleViewTable = () => {
+    setViewFullTable(!viewFullTable);
+  };
+
   return (
     <div className={styles.card}>
-      <PaymentInfo
-        totalAmount={payments.totalAmount}
-        downPayment={payments.downPayment}
+      <PaymentSummary
+        onToggle={toggleViewTable}
+        equalPayments={false}
         numberOfPayments={payments.numberOfPayments}
+        paymentCalculations={paymentCalculations}
+        header={false}
       />
       {viewFullTable && <div>
         {paymentCalculations.map((payment) => {
