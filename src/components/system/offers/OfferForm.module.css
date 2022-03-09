@@ -31,13 +31,13 @@
   outline: none;
 }
 
-.buttons {
+.form button {
   display: flex;
   align-items: center;
-  margin: 75px 40px;
+  margin: 30px;
   background-color: #7fffd4;
   border-radius: 15px;
   font-size: 25px;
   padding: 15px 32px;
-  height: 50px;
+  width: 150px;
 }

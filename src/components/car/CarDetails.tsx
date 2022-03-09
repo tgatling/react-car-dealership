@@ -1,15 +1,26 @@
 import React from 'react';
 
-import OfferForm from '../system/OfferForm';
-import PaymentTable from '../system/PaymentTable';
+import PaymentTable from '../system/payments/PaymentTable';
 import { Car } from '../../models/car';
 import { CUSTOMER_ROLE } from '../../models/constants';
 import styles from './CarDetails.module.css';
+import { Payments } from '../../models/payments';
+import OfferDetails from '../system/offers/OfferDetails';
 
 interface detailsProp {
   car: Car;
   ownerRole: string;
 }
+
+// TODO: REMOVE HARDCODED PAYMENT INFORMATION
+
+const DUMMY_PAYMENTS: Payments = {
+  carId: '-MwlR-FOe4z_HTtcCI2e',
+  totalAmount: 11300,
+  downPayment: 3300,
+  numberOfPayments: 15,
+  paymentsMade: 3,
+};
 
 const CarDetails = ({ car, ownerRole }: detailsProp) => {
   let carName = `${car.year} ${car.make} ${car.model}`.toUpperCase();
@@ -21,12 +32,18 @@ const CarDetails = ({ car, ownerRole }: detailsProp) => {
         {ownerRole === CUSTOMER_ROLE ? (
           <div>
             <h1>{`MAKE A PAYMENT ON YOUR ${carName}`}</h1>
-            <PaymentTable/>
+            <PaymentTable
+              carId={DUMMY_PAYMENTS.carId}
+              totalAmount={DUMMY_PAYMENTS.totalAmount}
+              downPayment={DUMMY_PAYMENTS.downPayment}
+              numberOfPayments={DUMMY_PAYMENTS.numberOfPayments}
+              paymentsMade={DUMMY_PAYMENTS.paymentsMade}
+            />
           </div>
         ) : (
           <div>
             <h1>{`MAKE AN OFFER ON OUR ${carName} TODAY!`}</h1>
-            <OfferForm />
+            <OfferDetails carTotal={car.price} />
           </div>
         )}
       </div>

@@ -47,14 +47,14 @@ const calculateIndividualPayments = (
   };
 };
 
-export const calculatePaymentsFromOffer = (offer: Offer) => {
+export const calculatePaymentsFromOffer = (totalAmount: number, downPayment: number, numberOfPayments: number) => {
   let paymentCalculations = [];
 
   let { numberOfEqualPayments, unequalPaymentAmount, paymentAmount } =
     calculateIndividualPayments(
-      offer.carTotal,
-      offer.downPayment,
-      offer.numberOfPayments
+      totalAmount,
+      downPayment,
+      numberOfPayments
     );
 
   let startingPoint = 0;
