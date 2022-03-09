@@ -15,13 +15,13 @@ const UserBar = ({ username }: userProps) => {
       <nav className={styles.nav}>
         <ul>
           <li>
-            <NavLink to={VIEW_YOUR_CARS}>View Your Cars</NavLink>
+            <NavLink to={VIEW_YOUR_CARS} activeClassName={styles.active}>View Your Cars</NavLink>
           </li>
           <li>
-            <NavLink to={PAYMENT_HISTORY}>Payment History</NavLink>
+            <NavLink to={PAYMENT_HISTORY} activeClassName={styles.active}>Payment History</NavLink>
           </li>
           <li>
-            <NavLink to={CURRENT_OFFERS}>Current Offers</NavLink>
+            <NavLink to={CURRENT_OFFERS} activeClassName={styles.active}>Current Offers</NavLink>
           </li>
         </ul>
       </nav>

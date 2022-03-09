@@ -1,36 +1,39 @@
 .addButton {
-    position: absolute;
-    margin: -25px 0 0 40px;
-    background-color: #7fffd4;
-    border-radius: 15px;
-    border-style: offset;
-    font-size: 16px;
-    padding: 15px 32px;
+  position: absolute;
+  margin: -25px 0 0 40px;
+  background-color: #7fffd4;
+  border-radius: 15px;
+  border-style: offset;
+  font-size: 16px;
+  padding: 15px 32px;
+}
+
+.addButton:hover {
+  background-color: #d7fff2;
 }
 
 .table {
-    display: flex;
-    margin: 50px 160px 0 160px;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-evenly;
+  display: flex;
+  margin: 50px 160px 0 160px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
 .message {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 80px;
 }
 
-.message img{
-    width: 180px;
-    height: 180px;
+.message img {
+  width: 180px;
+  height: 180px;
 }
 
 .message p {
-    color: #000080;
-    font-size: 40px;
-    font-weight: bold;
-
+  color: #000080;
+  font-size: 40px;
+  font-weight: bold;
 }

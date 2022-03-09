@@ -1,57 +1,65 @@
 .itemContainer {
-    display: flex;
-    flex-direction: column;
-    background-color: #ffffff;
-    justify-content: space-evenly;
-    margin: 40px;
-    padding: 20px;
-    border-style: groove;
-    position: relative;
-    width: 250px;
-    height: 400px;
-  }
-  
-  .imageContainer {
-    width: 250px;
-    height: 200px;
-  }
-  
-  .itemContainer img {
-    width: 250px;
-    height: 140px;
-    display: block;
-  }
-  
-  .itemContainer h1 {
-    display: flex;
-    justify-content: center;
-    font-size: 25px;
-    inline-size: 240px;
-  }
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  justify-content: space-evenly;
+  margin: 40px;
+  padding: 20px;
+  border-style: groove;
+  position: relative;
+  width: 250px;
+  height: 400px;
+}
 
-  .itemContainer p {
-      margin-top: -40px;
-      font-weight: bold;
-  }
+.imageContainer {
+  width: 250px;
+  height: 200px;
+}
 
-  .buttonContainer {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-evenly;
-  }
+.itemContainer img {
+  width: 250px;
+  height: 140px;
+  display: block;
+}
 
-  .cancelButton {
-    background-color: #7fffd4;
-    border-radius: 15px;
-    border-style: offset;
-    font-size: 16px;
-    padding: 15px 25px;
-  }
+.itemContainer h1 {
+  display: flex;
+  justify-content: center;
+  font-size: 25px;
+  inline-size: 240px;
+}
 
-  .deleteButton {
-    background-color: #ff0000;
-    border-radius: 15px;
-    border-style: offset;
-    font-size: 16px;
-    padding: 15px 25px;
-  }
+.itemContainer p {
+  margin-top: -40px;
+  font-weight: bold;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.cancelButton {
+  background-color: #7fffd4;
+  border-radius: 15px;
+  border-style: offset;
+  font-size: 16px;
+  padding: 15px 25px;
+}
+
+.cancelButton:hover {
+  background-color: #d7fff2;
+}
+
+.deleteButton {
+  background-color: #ff0000;
+  border-radius: 15px;
+  border-style: offset;
+  font-size: 16px;
+  padding: 15px 25px;
+}
+
+.deleteButton:hover {
+  background-color: #f89292;
+}

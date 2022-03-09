@@ -6,30 +6,36 @@ interface infoProps {
   totalAmount: number;
   downPayment: number;
   numberOfPayments: number;
-  onReturn?: (previewMode: boolean) => void;
+  previewMode?: (previewMode: boolean) => void;
+  showHeading?: (showingHeading: boolean)=> void;
 }
 
 const PaymentInfo = ({
   totalAmount,
   downPayment,
   numberOfPayments,
-  onReturn,
+  previewMode,
+  showHeading,
 }: infoProps) => {
   const todaysDate = new Date();
   console.log(todaysDate);
   // TODO: CALCULATE THE DATE THAT PAYMENTS WILL BE COMPLETED.
 
   const returnToOfferFormHandler = () => {
-    if (onReturn) {
-      onReturn(false);
+    if (previewMode) {
+      previewMode(false);
+    }
+    if(showHeading){
+        showHeading(true);
     }
   };
 
   return (
     <div className={styles.infoContainer}>
       <div className={styles.buttonContainer}>
-        <button onClick={returnToOfferFormHandler}>Return to Offer Form</button>
+        <button onClick={returnToOfferFormHandler}>Exit Preview</button>
       </div>
+      <h3>Offer Preview</h3>
       <p>{`Total Price: $${totalAmount}`}</p>
       <p>{`Down Payment Amount: $${downPayment}`}</p>
       <p>{`Amount Remaining After Down Payment: $${

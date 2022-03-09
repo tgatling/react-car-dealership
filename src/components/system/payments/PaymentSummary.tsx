@@ -17,7 +17,7 @@ const PaymentSummary = ({
 }: summaryProps) => {
   return (
     <div className={styles.summaryContainer}>
-      <h3>Payment Summary: </h3>
+      <h3>Payment Summary</h3>
       {equalPayments && (
         <div>
           <p>{`${numberOfPayments} payments of $${paymentCalculations[0].amount.toFixed(

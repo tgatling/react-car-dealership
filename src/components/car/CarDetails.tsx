@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import PaymentTable from '../system/payments/PaymentTable';
 import { Car } from '../../models/car';
@@ -23,6 +23,7 @@ const DUMMY_PAYMENTS: Payments = {
 };
 
 const CarDetails = ({ car, ownerRole }: detailsProp) => {
+  const [showHeading, setShowHeading] = useState(true);
   let carName = `${car.year} ${car.make} ${car.model}`.toUpperCase();
 
   return (
@@ -42,8 +43,8 @@ const CarDetails = ({ car, ownerRole }: detailsProp) => {
           </div>
         ) : (
           <div>
-            <h1>{`MAKE AN OFFER ON OUR ${carName} TODAY!`}</h1>
-            <OfferDetails carTotal={car.price} />
+            {showHeading && <h1>{`MAKE AN OFFER ON OUR ${carName} TODAY!`}</h1>}
+            <OfferDetails carTotal={car.price} showHeading={setShowHeading} />
           </div>
         )}
       </div>

@@ -1,6 +1,6 @@
 .header {
   width: 100;
-  height: 40px;
+  height: 50px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -13,7 +13,6 @@
   font-weight: bold;
   color: #ffffff;
 }
-
 
 .nav ul {
   list-style: none;
@@ -31,6 +30,17 @@
 .nav a {
   text-decoration: none;
   color: #ffffff;
+}
+
+.nav a:hover{
+  text-decoration: underline;
+}
+
+.nav a.active {
+  color: #000080;
+  padding: 5px;
+  background-color: #7fffd4;
+  border-radius: 10px;
 }
 
 .nav button {

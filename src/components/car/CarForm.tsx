@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { Car } from '../../models/car';
 
-import {DEALER_ROLE, EDIT_OUR_LOT} from '../../models/constants';
+import { DEALER_ROLE, EDIT_OUR_LOT } from '../../models/constants';
 import carService from '../../services/car.service';
 import { carActions } from '../../store/car-slice';
 import styles from './CarForm.module.css';
@@ -149,10 +149,12 @@ const CarForm = ({ addCarForm }: carFormProps) => {
       <div className={styles.card}>
         {!carAdded ? (
           <div>
-            <h1>
-              Please enter the vehicle details below.
-            </h1>
-            {httpError && <p className={styles.errorText}>Something went wrong. Please try again.</p>}
+            <h1>Please enter the vehicle details below.</h1>
+            {httpError && (
+              <p className={styles.errorText}>
+                Something went wrong. Please try again.
+              </p>
+            )}
             <form className={styles.form} onSubmit={carDetailsHandler}>
               <div>
                 <label>Make:</label>
@@ -220,24 +222,24 @@ const CarForm = ({ addCarForm }: carFormProps) => {
                 <button className={styles.buttons}>
                   {addCarForm ? 'Add Car to Lot' : 'Submit Details'}
                 </button>
-                <div className={styles.resetEditContainer}>
-                  <button
-                    className={styles.buttons}
-                    type='button'
-                    onClick={returnToEdit}
-                  >
-                    Return to Edit Page
-                  </button>
-                  <button
-                    className={styles.resetButton}
-                    type='button'
-                    onClick={resetHandler}
-                  >
-                    Reset
-                  </button>
-                </div>
+                <button
+                  className={styles.buttons}
+                  type='button'
+                  onClick={returnToEdit}
+                >
+                  Return to Edit Page
+                </button>
               </div>
             </form>
+            <div className={styles.resetButtonContainer}>
+              <button
+                className={styles.resetButton}
+                type='button'
+                onClick={resetHandler}
+              >
+                Reset Form
+              </button>
+            </div>
           </div>
         ) : (
           <div>

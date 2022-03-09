@@ -31,6 +31,17 @@
   outline: none;
 }
 
+.form button:hover {
+  display: flex;
+  align-items: center;
+  margin: 30px;
+  background-color: #d7fff2;
+  border-radius: 15px;
+  font-size: 25px;
+  padding: 15px 32px;
+  width: 150px;
+}
+
 .form button {
   display: flex;
   align-items: center;

@@ -11,9 +11,10 @@ import PaymentInfo from '../payments/PaymentInfo';
 
 interface offerFormProps {
   carTotal: number;
+  showHeading: (showHeading: boolean)=>void;
 }
 
-const OfferDetails = ({ carTotal }: offerFormProps) => {
+const OfferDetails = ({ carTotal, showHeading }: offerFormProps) => {
   const [previewMode, setPreviewMode] = useState(false);
   const [downPayment, setDownPayment] = useState<number | string>('');
   const [numberOfPayments, setNumberOfPayments] = useState<number | string>('');
@@ -35,6 +36,7 @@ const OfferDetails = ({ carTotal }: offerFormProps) => {
     event?.preventDefault();
     customerOffer.downPayment = +downPayment;
     setPreviewMode(true);
+    showHeading(false);
   };
 
   return (
@@ -58,7 +60,8 @@ const OfferDetails = ({ carTotal }: offerFormProps) => {
             totalAmount={customerOffer.carTotal}
             downPayment={customerOffer.downPayment}
             numberOfPayments={customerOffer.numberOfPayments}
-            onReturn={setPreviewMode}
+            previewMode={setPreviewMode}
+            showHeading={showHeading}
           />
           <OfferTable
             totalAmount={customerOffer.carTotal}

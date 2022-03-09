@@ -52,6 +52,10 @@
   padding: 15px 32px;
 }
 
+.viewButton:hover {
+  background-color: #d7fff2;
+}
+
 .deleteButton {
   display: flex;
   align-items: center;
@@ -65,4 +69,9 @@
   width: 25px;
   height: 25px;
   margin: -395px -10px 0 0;
+}
+
+.deleteButton:hover{
+  background-color: #f89292;
+
 }

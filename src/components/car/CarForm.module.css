@@ -69,22 +69,30 @@
   padding: 15px 32px;
   height: 50px;
 }
+.buttons:hover {
+  background-color: #d7fff2;
+}
 
-.resetEditContainer {
+.resetButtonContainer {
   display: flex;
-  flex-direction: column;
+  justify-content: flex-end;
   margin-top: -10px;
 }
 
 .resetButton {
   display: flex;
   align-items: center;
-  margin: -40px 40px;
-  background-color: #7fffd4;
+  margin: -40px 50px;
+  background-color: #ffffff;
   border-radius: 15px;
   font-size: 25px;
   padding: 15px 32px;
-  height: 50px;}
+  height: 50px;
+}
+
+.resetButton:hover {
+  background-color: #7fffd4;
+}
 
 .photoURL {
   width: 825px;
