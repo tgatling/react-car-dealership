@@ -24,10 +24,16 @@ const OfferTable = ({
     numberOfPayments
   );
 
-  let equalPayments =
-    paymentCalculations[0].amount === paymentCalculations[1].amount
-      ? true
-      : false;
+  let equalPayments: boolean;
+
+  if (paymentCalculations.length > 1) {
+    equalPayments =
+      paymentCalculations[0].amount === paymentCalculations[1].amount
+        ? true
+        : false;
+  } else {
+    equalPayments = true;
+  }
 
   const toggleViewTable = () => {
     setViewFullTable(!viewFullTable);
