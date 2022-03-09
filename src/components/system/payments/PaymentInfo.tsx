@@ -1,8 +1,6 @@
 import React from 'react';
-import { useHistory, useParams } from 'react-router-dom';
 
 import styles from './PaymentInfo.module.css';
-import { HOME_PAGE } from '../../../models/constants';
 
 interface infoProps {
   totalAmount: number;
@@ -17,8 +15,6 @@ const PaymentInfo = ({
   numberOfPayments,
   onReturn,
 }: infoProps) => {
-  const history = useHistory();
-  const params = useParams<{ carId: string }>();
   const todaysDate = new Date();
   console.log(todaysDate);
   // TODO: CALCULATE THE DATE THAT PAYMENTS WILL BE COMPLETED.
