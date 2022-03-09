@@ -12,9 +12,9 @@ export const CUSTOMER_PAYMENTS = '/customer-payments';
 export const LOGIN_REGISTER = '/login';
 
 // User Navigation Bar
-export const VIEW_YOUR_CARS = 'my-cars';
-export const PAYMENT_HISTORY = 'payment-history';
-export const CURRENT_OFFERS = 'current-offers';
+export const VIEW_YOUR_CARS = '/my-cars';
+export const PAYMENT_HISTORY = '/payment-history';
+export const CURRENT_OFFERS = '/current-offers';
 
 // Other Routing
 export const VIEW_SPECIFIC_CAR = '/car/:carId';

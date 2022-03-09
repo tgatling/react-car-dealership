@@ -1,7 +1,43 @@
 .formContainer {
-    width: 1000px;
+  width: 1000px;
 }
 
 .formContainer p {
-    font-size: 18px;
+  font-size: 23px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0;
+}
+
+.form div {
+  display: flex;
+  margin-top: 23px;
+}
+
+.form label {
+  margin-right: 15px;
+  font-size: 23px;
+}
+
+.form input {
+  margin-right: 50px;
+  font-size: 25px;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  outline: none;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  margin: 75px 40px;
+  background-color: #7fffd4;
+  border-radius: 15px;
+  font-size: 25px;
+  padding: 15px 32px;
+  height: 50px;
 }

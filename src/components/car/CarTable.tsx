@@ -5,7 +5,7 @@ import { Car } from '../../models/car';
 import CarItem from './CarItem';
 import logo from '../../images/family-car.png';
 import styles from './CarTable.module.css';
-import {ADD_DEALER_CAR} from '../../models/constants';
+import { ADD_DEALER_CAR, DEALER_ROLE } from '../../models/constants';
 
 interface tableProps {
   editMode: boolean;
@@ -27,11 +27,19 @@ const CarTable = ({ editMode, cars, owner }: tableProps) => {
     history.push(ADD_DEALER_CAR);
   };
 
+  let noCarsMessage =
+    owner === DEALER_ROLE
+      ? 'There are currently no cars on our lot.  Sorry for the incovenience.'
+      : 'Click on "Our Cars" and select a vehicle to make an offer today!';
+
   return (
     <div>
-      {!cars && (<div className={styles.message}>
-        <img src={logo} alt=''/>
-        <p>There are currently no cars on the lot.</p></div>)}
+      {filteredCars.length === 0 && (
+        <div className={styles.message}>
+          <img src={logo} alt='' />
+          <p>{noCarsMessage}</p>
+        </div>
+      )}
       {filteredCars && (
         <div className={styles.tableContainer}>
           <div>
