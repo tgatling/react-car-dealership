@@ -9,6 +9,15 @@ import NotFound from '../../pages/NotFound';
 import AddCar from '../../pages/AddCar';
 import EditCar from '../../pages/EditCar';
 import ViewCar from '../../pages/ViewCar';
+import {
+  ADD_DEALER_CAR,
+  EDIT_OUR_LOT,
+  VIEW_YOUR_CARS,
+  HOME_PAGE,
+  LOGIN_REGISTER,
+  EDIT_SPECIFIC_CAR,
+  VIEW_SPECIFIC_CAR,
+} from '../../models/constants';
 
 const Routing = () => {
   const loggedIn: boolean = useSelector(
@@ -17,33 +26,33 @@ const Routing = () => {
 
   return (
     <Switch>
-      <Route path='/' exact>
+      <Route path={HOME_PAGE} exact>
         <Home editMode={false} />
       </Route>
 
-      <Route path='/car/:carId' exact>
-        {loggedIn ? <ViewCar /> : <Redirect to='/login' />}
+      <Route path={VIEW_SPECIFIC_CAR} exact>
+        {loggedIn ? <ViewCar /> : <Redirect to={LOGIN_REGISTER} />}
       </Route>
-      <Route path='/my-cars'>
-        {loggedIn ? <UserCars /> : <Redirect to='/login' />}
+      <Route path={VIEW_YOUR_CARS}>
+        {loggedIn ? <UserCars /> : <Redirect to={LOGIN_REGISTER} />}
       </Route>
       {loggedIn && (
-        <Route path='/edit-dealers-cars' exact>
+        <Route path={EDIT_OUR_LOT} exact>
           <Home editMode={true} />
         </Route>
       )}
       {loggedIn && (
-        <Route path='/edit-dealers-cars/:carId'>
+        <Route path={EDIT_SPECIFIC_CAR}>
           <EditCar />
         </Route>
       )}
       {loggedIn && (
-        <Route path='/add-to-dealers-cars'>
+        <Route path={ADD_DEALER_CAR}>
           <AddCar />
         </Route>
       )}
       {!loggedIn && (
-        <Route path='/login'>
+        <Route path={LOGIN_REGISTER}>
           <Auth />
         </Route>
       )}

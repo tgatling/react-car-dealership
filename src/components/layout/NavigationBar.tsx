@@ -3,7 +3,15 @@ import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector, RootStateOrAny, useDispatch } from 'react-redux';
 
 import { userActions } from '../../store/user-slice';
-import { CUSTOMER_ROLE, DEALER_ROLE } from '../../models/constants';
+import {
+  CUSTOMER_ROLE,
+  DEALER_ROLE,
+  HOME_PAGE,
+  EDIT_OUR_LOT,
+  CUSTOMER_OFFERS,
+  CUSTOMER_PAYMENTS,
+  LOGIN_REGISTER,
+} from '../../models/constants';
 import familyCar from '../../images/family-car.png';
 import styles from './NavigationBar.module.css';
 
@@ -31,34 +39,34 @@ const NavigationBar = () => {
   return (
     <header className={styles.header}>
       <div className={styles.logo}>
-        <NavLink to='/'>
+        <NavLink to={HOME_PAGE}>
           <img className={styles.logoImage} src={familyCar} alt='' />
         </NavLink>
-        <NavLink to='/'>FAMILY DEALERSHIP</NavLink>
+        <NavLink to={HOME_PAGE}>FAMILY DEALERSHIP</NavLink>
       </div>
       <nav className={styles.nav}>
         <ul>
           <li>
-            <NavLink to={'/'}>Our Cars</NavLink>
+            <NavLink to={HOME_PAGE}>Our Cars</NavLink>
           </li>
           {userState.isLoggedIn && userRole === DEALER_ROLE && (
             <li>
-              <NavLink to={'/edit-dealers-cars'}>Edit Our Lot</NavLink>
+              <NavLink to={EDIT_OUR_LOT}>Edit Our Lot</NavLink>
             </li>
           )}
           {userState.isLoggedIn && userRole === DEALER_ROLE && (
             <li>
-              <NavLink to={'/customer-offers'}>Customer Offers</NavLink>
+              <NavLink to={CUSTOMER_OFFERS}>Customer Offers</NavLink>
             </li>
           )}
           {userState.isLoggedIn && userRole === DEALER_ROLE && (
             <li>
-              <NavLink to={'/customer-payments'}>Customer Payments</NavLink>
+              <NavLink to={CUSTOMER_PAYMENTS}>Customer Payments</NavLink>
             </li>
           )}
           {!userState.isLoggedIn && (
             <li>
-              <NavLink to='/login'>Login / Register</NavLink>
+              <NavLink to={LOGIN_REGISTER}>Login / Register</NavLink>
             </li>
           )}
           {userState.isLoggedIn && (

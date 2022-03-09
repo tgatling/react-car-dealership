@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
+import {CURRENT_OFFERS, PAYMENT_HISTORY, VIEW_YOUR_CARS} from '../../models/constants';
 import styles from './UserBar.module.css';
 
 interface userProps {
@@ -14,13 +15,13 @@ const UserBar = ({ username }: userProps) => {
       <nav className={styles.nav}>
         <ul>
           <li>
-            <NavLink to={'/my-cars'}>View Your Cars</NavLink>
+            <NavLink to={VIEW_YOUR_CARS}>View Your Cars</NavLink>
           </li>
           <li>
-            <NavLink to={'/my-payments'}>Payment History</NavLink>
+            <NavLink to={PAYMENT_HISTORY}>Payment History</NavLink>
           </li>
           <li>
-            <NavLink to={'/my-offers'}>Current Offers</NavLink>
+            <NavLink to={CURRENT_OFFERS}>Current Offers</NavLink>
           </li>
         </ul>
       </nav>

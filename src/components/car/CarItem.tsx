@@ -7,6 +7,7 @@ import styles from './CarItem.module.css';
 import { useDispatch } from 'react-redux';
 import { carActions } from '../../store/car-slice';
 import ConfirmDelete from '../UI/ConfirmDelete';
+import {EDIT_OUR_LOT} from '../../models/constants';
 
 interface carProps {
   carId: string;
@@ -37,7 +38,7 @@ const CarItem = ({
   };
 
   const editDetailsHandler = () => {
-    history.push(`/edit-dealers-cars/${carId}`);
+    history.push(`${EDIT_OUR_LOT}/${carId}`);
   };
 
   const toggleDeleteConfirmation = () => {

@@ -3,7 +3,7 @@ import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import { User } from '../../models/user';
-import { CUSTOMER_ROLE } from '../../models/constants';
+import {CUSTOMER_ROLE, HOME_PAGE} from '../../models/constants';
 import userService from '../../services/user.service';
 import { userActions } from '../../store/user-slice';
 import styles from './AuthForm.module.css';
@@ -53,7 +53,6 @@ const AuthForm = () => {
             .then((response) => {
               let loadedUsers: User[] = [];
               for (const key in response) {
-                console.log(response[key].username);
                 loadedUsers.push({
                   email: response[key].email,
                   userId: response[key].userId,
@@ -81,7 +80,7 @@ const AuthForm = () => {
             })
             .catch((error) => console.log(error));
 
-          history.push('/');
+          history.push(HOME_PAGE);
         })
         .catch((error) => {
           setHttpError(error);

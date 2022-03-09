@@ -13,7 +13,7 @@ const PaymentItem = ({payment, amount, status}: paymentProps) => {
         <div className={styles.card}>
             <div>{`Payment Number: ${payment}`}</div>
             <div>${amount}</div>
-            <div>{status}</div>
+            {status && <div>{status}</div>}
         </div>
     );
 };

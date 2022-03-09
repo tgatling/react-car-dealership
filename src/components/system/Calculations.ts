@@ -8,46 +8,66 @@ export const rejectAllOtherOffers = (carId: string, offerId: string) => {};
 
 // PAYMENTS
 
-export const calculatePaymentsFromOffer = (offer: Offer) => {
-  let paymentCalculations = [];
+const calculateIndividualPayments = (
+  totalPrice: number,
+  downPayment: number,
+  numOfPayments: number
+) => {
   let numberOfEqualPayments: number;
   let unequalPaymentAmount: number;
 
-  let totalAfterDownPayment: number = offer.carTotal - offer.downPayment;
+  let totalAfterDownPayment: number = totalPrice - downPayment;
 
   let paymentAmount = +(
-    Math.round((totalAfterDownPayment / offer.numberOfPayments) * 100) / 100
+    Math.round((totalAfterDownPayment / numOfPayments) * 100) / 100
   ).toFixed(2);
-  let calculatedTotal = paymentAmount * offer.numberOfPayments;
+  let calculatedTotal = paymentAmount * numOfPayments;
 
   if (calculatedTotal === totalAfterDownPayment) {
-    numberOfEqualPayments = offer.numberOfPayments;
+    numberOfEqualPayments = numOfPayments;
     unequalPaymentAmount = 0;
   } else if (calculatedTotal > totalAfterDownPayment) {
     let difference = calculatedTotal - totalAfterDownPayment;
     unequalPaymentAmount = +(
       Math.round((paymentAmount - difference) * 100) / 100
     ).toFixed(2);
-    numberOfEqualPayments = offer.numberOfPayments - 1;
+    numberOfEqualPayments = numOfPayments - 1;
   } else {
     let difference = totalAfterDownPayment - calculatedTotal;
     unequalPaymentAmount = +(
       Math.round((paymentAmount + difference) * 100) / 100
     ).toFixed(2);
-    numberOfEqualPayments = offer.numberOfPayments - 1;
+    numberOfEqualPayments = numOfPayments - 1;
   }
+
+  return {
+    numberOfEqualPayments,
+    unequalPaymentAmount,
+    paymentAmount,
+  };
+};
+
+export const calculatePaymentsFromOffer = (offer: Offer) => {
+  let paymentCalculations = [];
+
+  let { numberOfEqualPayments, unequalPaymentAmount, paymentAmount } =
+    calculateIndividualPayments(
+      offer.carTotal,
+      offer.downPayment,
+      offer.numberOfPayments
+    );
 
   let startingPoint = 0;
   let stoppingPoint = numberOfEqualPayments;
 
   if (unequalPaymentAmount !== 0) {
-    paymentCalculations.push({ payment: 1, amount: unequalPaymentAmount });
+    paymentCalculations.push({ payment: 1, amount: unequalPaymentAmount, status: '' });
     startingPoint = 1;
     stoppingPoint++;
   }
 
   for (let i = startingPoint; i < stoppingPoint; i++) {
-    paymentCalculations.push({ payment: i + 1, amount: paymentAmount });
+    paymentCalculations.push({ payment: i + 1, amount: paymentAmount, status: '' });
   }
 
   return {
@@ -57,37 +77,18 @@ export const calculatePaymentsFromOffer = (offer: Offer) => {
 
 export const calculateRemainingPayments = (payments: Payments) => {
   let paymentCalculations = [];
-  let numberOfEqualPayments: number;
-  let unequalPaymentAmount: number;
 
-  let totalAfterDownPayment: number =
-    payments.totalAmount - payments.downPayment;
-
-  let paymentAmount = +(
-    Math.round((totalAfterDownPayment / payments.numberOfPayments) * 100) / 100
-  ).toFixed(2);
-  let calculatedTotal = paymentAmount * payments.numberOfPayments;
-
-  if (calculatedTotal === totalAfterDownPayment) {
-    numberOfEqualPayments = payments.numberOfPayments;
-    unequalPaymentAmount = 0;
-  } else if (calculatedTotal > totalAfterDownPayment) {
-    let difference = calculatedTotal - totalAfterDownPayment;
-    unequalPaymentAmount = +(
-      Math.round((paymentAmount - difference) * 100) / 100
-    ).toFixed(2);
-    numberOfEqualPayments = payments.numberOfPayments - 1;
-  } else {
-    let difference = totalAfterDownPayment - calculatedTotal;
-    unequalPaymentAmount = +(
-      Math.round((paymentAmount + difference) * 100) / 100
-    ).toFixed(2);
-    numberOfEqualPayments = payments.numberOfPayments - 1;
-  }
+  let { numberOfEqualPayments, unequalPaymentAmount, paymentAmount } =
+    calculateIndividualPayments(
+      payments.totalAmount,
+      payments.downPayment,
+      payments.numberOfPayments
+    );
 
   let startingPoint = 0;
   let stoppingPoint = numberOfEqualPayments;
 
+  // handling unequal payment status
   if (unequalPaymentAmount !== 0) {
     if (payments.paymentsMade === 0) {
       paymentCalculations.push({
@@ -106,8 +107,7 @@ export const calculateRemainingPayments = (payments: Payments) => {
     stoppingPoint++;
   }
 
-  // TODO: FIX PAYMENT STATUS
-
+  // handling equal payment statuses
   for (let i = startingPoint; i < stoppingPoint; i++) {
     if (i < payments.paymentsMade) {
       paymentCalculations.push({

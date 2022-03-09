@@ -5,6 +5,7 @@ import { Car } from '../../models/car';
 import CarItem from './CarItem';
 import logo from '../../images/family-car.png';
 import styles from './CarTable.module.css';
+import {ADD_DEALER_CAR} from '../../models/constants';
 
 interface tableProps {
   editMode: boolean;
@@ -23,7 +24,7 @@ const CarTable = ({ editMode, cars, owner }: tableProps) => {
 
   // dealer can add car in edit mode
   const addCarHandler = () => {
-    history.push('/add-to-dealers-cars');
+    history.push(ADD_DEALER_CAR);
   };
 
   return (
