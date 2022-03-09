@@ -7,6 +7,7 @@ import OfferTable from './OfferTable';
 import { Offer } from '../../../models/offer';
 import { MAKING_AN_OFFER_INSTRUCTIONS } from '../../../models/constants';
 import styles from './OfferForm.module.css';
+import PaymentInfo from '../payments/PaymentInfo';
 
 interface offerFormProps {
   carTotal: number;
@@ -27,9 +28,11 @@ const OfferDetails = ({ carTotal }: offerFormProps) => {
   customerOffer.carId = params.carId;
   customerOffer.offerId = `${user.userId}${params.carId}`;
   customerOffer.carTotal = carTotal;
+  customerOffer.downPayment = +downPayment;
   customerOffer.numberOfPayments = +numberOfPayments;
 
-  const previewHandler = () => {
+  const previewHandler = (event: React.FormEvent<HTMLFormElement>) => {
+    event?.preventDefault();
     customerOffer.downPayment = +downPayment;
     setPreviewMode(true);
   };
@@ -51,6 +54,12 @@ const OfferDetails = ({ carTotal }: offerFormProps) => {
       )}
       {previewMode && (
         <div>
+          <PaymentInfo
+            totalAmount={customerOffer.carTotal}
+            downPayment={customerOffer.downPayment}
+            numberOfPayments={customerOffer.numberOfPayments}
+            onReturn={setPreviewMode}
+          />
           <OfferTable
             totalAmount={customerOffer.carTotal}
             downPayment={customerOffer.downPayment}

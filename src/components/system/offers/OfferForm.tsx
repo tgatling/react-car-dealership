@@ -7,7 +7,7 @@ interface offerFormProps {
   customerOffer: Offer;
   downPayment: number | string;
   numberOfPayments: number | string;
-  onPreview: () => void;
+  onPreview: (event: React.FormEvent<HTMLFormElement>) => void;
   onDownPaymentChange: (downPayment: number | string) => void;
   onNumPaymentChange: (numberOfPayments: number | string) => void;
 }

@@ -12,7 +12,7 @@ const PaymentItem = ({payment, amount, status}: paymentProps) => {
     return (
         <div className={styles.card}>
             <div>{`Payment Number: ${payment}`}</div>
-            <div>${amount}</div>
+            <div>${amount.toFixed(2)}</div>
             {status && <div>{status}</div>}
         </div>
     );

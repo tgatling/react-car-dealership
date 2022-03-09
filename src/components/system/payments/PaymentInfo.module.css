@@ -1,0 +1,18 @@
+.infoContainer p {
+  font-size: 23px;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .infoContainer button {
+      display: flex;
+      align-items: center;
+      margin-bottom: 25px;
+      background-color: #7fffd4;
+      border-radius: 15px;
+      font-size: 25px;
+      padding: 15px 32px;
+    }

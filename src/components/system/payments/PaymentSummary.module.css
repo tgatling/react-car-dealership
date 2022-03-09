@@ -1,0 +1,23 @@
+.summaryContainer h3 {
+  font-size: 25px;
+}
+
+.summaryContainer p {
+  font-size: 23px;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.summaryContainer button {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+    background-color: #7fffd4;
+    border-radius: 15px;
+    font-size: 25px;
+    padding: 15px 32px;
+  }
+  

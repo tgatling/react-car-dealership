@@ -17,9 +17,9 @@ export const PAYMENT_HISTORY = '/payment-history';
 export const CURRENT_OFFERS = '/current-offers';
 
 // Other Routing
-export const VIEW_SPECIFIC_CAR = '/car/:carId';
 export const EDIT_SPECIFIC_CAR = `${EDIT_OUR_LOT}/:carId`;
 export const ADD_DEALER_CAR = '/add-to-dealers-cars';
+export const VIEW_SPECIFIC_CAR = '/car/:carId';
 
 // DEALERSHIP INFORMATION
 export const MOTTO = 'GENERATIONS OF SERVING OUR COMMUNITY';
