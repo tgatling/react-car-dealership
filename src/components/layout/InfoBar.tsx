@@ -1,17 +1,24 @@
 import React from 'react';
 
+import {
+  MOTTO,
+  ADDRESS,
+  SALES_NUMBER,
+  SERVICE_NUMBER,
+  PARTS_NUMBER,
+} from '../../models/constants';
 import styles from './InfoBar.module.css';
 
 const InfoBar = () => {
   return (
     <header className={styles.header}>
-      <div className={styles.motto}>GENERATIONS OF SERVING OUR COMMUNITY</div>
-      <div className={styles.address}>2300 Generational Ave, Raleigh, NC 27613</div>
+      <div className={styles.motto}>{MOTTO}</div>
+      <div className={styles.address}>{ADDRESS}</div>
       <div className={styles.info}>
         <ul>
-          <li>Sales: 555-555-4444</li>
-          <li>Service: 555-555-5555</li>
-          <li>Parts: 555-555-6666</li>
+          <li>{`Sales: ${SALES_NUMBER}`}</li>
+          <li>{`Service: ${SERVICE_NUMBER}`}</li>
+          <li>{`Parts: ${PARTS_NUMBER}`}</li>
         </ul>
       </div>
     </header>

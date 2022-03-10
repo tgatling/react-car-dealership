@@ -3,16 +3,20 @@ import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import { User } from '../../models/user';
-import { CUSTOMER_ROLE } from '../../models/constants';
+import {CUSTOMER_ROLE, HOME_PAGE} from '../../models/constants';
 import userService from '../../services/user.service';
 import { userActions } from '../../store/user-slice';
 import styles from './AuthForm.module.css';
 
 const AuthForm = () => {
   const [isLoginForm, setIsLoginForm] = useState(true);
+
+  // store user input
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
   const [httpError, setHttpError] = useState('');
+
   const currentUser = useSelector(
     (state: RootStateOrAny) => state.user.currentUser
   );
@@ -38,22 +42,45 @@ const AuthForm = () => {
     };
 
     if (isLoginForm) {
+      // login using firebase authentication
       setHttpError('');
       userService
         .login(user)
         .then((result) => {
-          dispatch(
-            userActions.login({
-              token: result.idToken,
-              expirationTime: result.expiresIn,
-              currentUser: {
-                userId: result.localId,
-                email: result.email,
-                userRole: '',
-              },
+          // determine user role - dealer or customer
+          userService
+            .getUserRoles()
+            .then((response) => {
+              let loadedUsers: User[] = [];
+              for (const key in response) {
+                loadedUsers.push({
+                  email: response[key].email,
+                  userId: response[key].userId,
+                  userRole: response[key].userRole,
+                  username: response[key].username,
+                });
+              }
+              let loadedUser = loadedUsers.find(
+                (user) => user.userId === result.localId
+              );
+
+              // store current user info after successful login in redux state
+              dispatch(
+                userActions.login({
+                  token: result.idToken,
+                  expirationTime: result.expiresIn,
+                  currentUser: {
+                    userId: result.localId,
+                    email: result.email,
+                    userRole: loadedUser?.userRole,
+                    username: loadedUser?.username,
+                  },
+                })
+              );
             })
-          );
-          history.push('/');
+            .catch((error) => console.log(error));
+
+          history.push(HOME_PAGE);
         })
         .catch((error) => {
           setHttpError(error);
@@ -61,6 +88,7 @@ const AuthForm = () => {
         });
     } else {
       setHttpError('');
+      // register using firebase authentication
       userService
         .register(user)
         .then(async (result) => {
@@ -76,14 +104,15 @@ const AuthForm = () => {
             })
           );
 
+          // after registering, add user role to firebase realtime database
           userService
             .addUserRole({
               userId: result.localId,
               email: result.email,
               userRole: CUSTOMER_ROLE,
             })
-            .then((result) => console.log(result))
-            .catch((error) => console.log(error));
+            .then((response) => response)
+            .catch((error) => error);
 
           history.push('/');
         })
@@ -114,8 +143,8 @@ const AuthForm = () => {
                 <input
                   required
                   className={styles.emailInput}
-                  type='e-mail'
-                  id='e-mail'
+                  type='email'
+                  id='email'
                   value={email}
                   placeholder='Email'
                   onChange={(e) => setEmail(e.target.value)}

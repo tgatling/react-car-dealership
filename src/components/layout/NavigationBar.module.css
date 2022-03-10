@@ -9,10 +9,11 @@
 
 .logo {
   display: flex;
-    align-items: center;
-    margin-left: 24px;
-    font-size: 50px;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  align-items: center;
+  margin-left: 24px;
+  font-size: 50px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .logo a {
@@ -44,9 +45,30 @@
   color: #000080;
 }
 
+.nav a:hover {
+  text-decoration: underline;
+}
+
+.nav a.active {
+  border-style: solid;
+  border-radius: 15px;
+  border-color: #000080;
+  padding: 10px 20px;
+  border-width: 2px;
+}
+
 .nav button {
   background-color: #000080;
   color: #ffffff;
+  border-style: solid;
+  border-radius: 15px;
+  font-size: 20px;
+  padding: 10px 20px;
+}
+
+.nav button:hover {
+  background-color: #7fffd4;
+  color: #000080;
   border-radius: 15px;
   border-style: solid;
   font-size: 20px;

@@ -54,7 +54,12 @@ class UserService {
       .then((result) => result.data);
   }
 
-  getUserRole(user: User) {}
+  async getUserRoles() {
+    return await axios
+      .get(`${this.URI}/users.json`)
+      .then((result) => result.data);
+  }
+
 
  async changeEmail(token: string, email: string) {
     return await axios

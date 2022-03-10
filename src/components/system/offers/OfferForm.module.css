@@ -1,0 +1,84 @@
+.formContainer {
+  width: 1000px;
+}
+
+.formContainer p {
+  font-size: 23px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0;
+}
+
+.form div {
+  display: flex;
+  margin-top: 23px;
+}
+
+.form label {
+  margin-right: 15px;
+  font-size: 23px;
+}
+
+.form input {
+  margin-right: 50px;
+  font-size: 25px;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  outline: none;
+}
+
+.numberPaymentsInput {
+  text-align: center;
+  width: 55px;
+}
+
+.lowerContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.leftContainer {
+  margin-right: 50px;
+}
+
+.butttonContainer {
+  display: flex;
+}
+
+.form button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 30px;
+  background-color: #7fffd4;
+  border-radius: 15px;
+  font-size: 25px;
+  padding: 15px 32px;
+  width: 150px;
+}
+
+.form button:hover {
+  background-color: #d7fff2;
+}
+
+.errorText {
+  font-size: 16px;
+  color: #8b0000;
+  margin-top: -120px;
+  margin-left: 30px;
+  position: absolute;
+  font-weight: bold;
+}
+
+.errorDirections {
+  font-size: 16px;
+  color: #8b0000;
+  margin-top: -90px;
+  margin-left: 30px;
+  position: absolute;
+  font-weight: bold;
+}

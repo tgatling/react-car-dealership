@@ -1,39 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
-import { Car } from '../models/car';
 import CarTable from '../components/car/CarTable';
-import carService from '../services/car.service';
+import {DEALER_ROLE} from '../models/constants';
+import {useSelector, RootStateOrAny} from 'react-redux';
 
-const Home = () => {
-  const [cars, setCars] = useState<Car[]>([]);
-  console.log('Home');
+interface homeProps {
+  editMode: boolean;
+}
 
-  useEffect(() => {
-    carService
-      .getCars()
-      .then((result) => {
-        // convert results to format of car array
-        let loadedCars: Car[] = [];
-        for (const key in result) {
-          loadedCars.push({
-            carId: key,
-            owner: result[key].owner,
-            make: result[key].make,
-            model: result[key].model,
-            price: result[key].price,
-            url: result[key].url,
-          });
-        }
-        setCars(loadedCars);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+const Home = ({editMode}: homeProps) => {
+  const carState = useSelector((state: RootStateOrAny) => state.car);
+
+  useEffect(()=>{},[carState]);
 
   return (
     <div>
-      <CarTable cars={cars} />
+      <CarTable editMode={editMode} cars={carState.cars} owner={DEALER_ROLE}/>
     </div>
   );
 };
