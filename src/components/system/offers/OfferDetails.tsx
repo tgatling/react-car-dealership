@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useSelector, RootStateOrAny } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 import OfferForm from './OfferForm';
 import OfferTable from './OfferTable';
 import { Offer } from '../../../models/offer';
-import { MAKING_AN_OFFER_INSTRUCTIONS } from '../../../models/constants';
+import {MAKING_AN_OFFER_INSTRUCTIONS, CURRENT_OFFERS} from '../../../models/constants';
 import styles from './OfferForm.module.css';
 import PaymentInfo from '../payments/PaymentInfo';
 import offerService from '../../../services/offer.service';
@@ -16,12 +16,17 @@ interface offerFormProps {
 }
 
 const OfferDetails = ({ carTotal, showHeading }: offerFormProps) => {
+  const [offerInSystem, setOfferInSystem] = useState(false);
   const [previewMode, setPreviewMode] = useState(false);
   const [downPayment, setDownPayment] = useState<number | string>('');
   const [numberOfPayments, setNumberOfPayments] = useState<number | string>('');
   const [httpError, setHttpError] = useState(null);
+
   const params = useParams<{ carId: string }>();
+  const history = useHistory();
+
   let customerOffer = new Offer();
+
   const currentUser = useSelector(
     (state: RootStateOrAny) => state.user.currentUser
   );
@@ -41,23 +46,42 @@ const OfferDetails = ({ carTotal, showHeading }: offerFormProps) => {
   };
 
   const submitOfferHandler = () => {
-    console.log(`
-    ${JSON.stringify(customerOffer)}
-    `);
-
+    setOfferInSystem(false);
+    if (!downPayment || !numberOfPayments) {
+      return;
+    }
     offerService
-      .addOffer(customerOffer)
+      .getAllOffers()
       .then((response) => {
-        customerOffer.offerId = response.name;
-        offerService
-          .updateOffer(customerOffer, response.name)
-          .then((result) => {
-            console.log(result);
-          })
-          .catch((error) => setHttpError(error));
-          
+        for (const key in response) {
+          if (
+            response[key].carId === customerOffer.carId &&
+            response[key].userId === customerOffer.userId
+          ) {
+            setOfferInSystem(true);
+          }
+        }
       })
-      .catch((error) => setHttpError(error));
+      .catch((error) => error);
+
+    console.log(offerInSystem);
+
+    if (!offerInSystem) {
+      offerService
+        .addOffer(customerOffer)
+        .then((response) => {
+          customerOffer.offerId = response.name;
+          offerService
+            .updateOffer(customerOffer, response.name)
+            .then((result) => {
+              console.log(result);
+            })
+            .catch((error) => setHttpError(error));
+        })
+        .catch((error) => setHttpError(error));
+
+        history.push(CURRENT_OFFERS);
+    }
   };
 
   return (

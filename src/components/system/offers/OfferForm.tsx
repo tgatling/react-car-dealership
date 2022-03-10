@@ -54,6 +54,7 @@ const OfferForm = ({
         <input
           required
           type='number'
+          min={1}
           max={120}
           value={numberOfPayments}
           onChange={(e) => onNumPaymentChange(e.target.value)}
