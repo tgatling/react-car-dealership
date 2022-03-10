@@ -3,33 +3,40 @@ import { Offer } from '../../../models/offer';
 import OfferItem from './OfferItem';
 
 interface displayProps {
-  heading?: string;
-  targetOffer?: Offer;
+  mainHeader?: string;
+  targetHeader?: string;
+  offersHeader?: string;
+  targetOffers?: Offer[];
   offers: Offer[];
 }
 
 const OfferDisplay = ({
-  heading,
-  targetOffer,
+  mainHeader,
+  targetHeader,
+  offersHeader,
+  targetOffers,
   offers,
 }: displayProps) => {
   return (
     <div>
-      <h1>{heading}</h1>
-      {targetOffer && (
+      <h1>{mainHeader}</h1>
+      {targetOffers && (
         <div>
-          <h2>{`Here is the offer you just submitted: `}</h2>
-          <div>
-            <OfferItem offer={targetOffer}/>
-          </div>
+          <h2>{targetHeader}</h2>
+          {targetOffers.map((targetOffer) => {
+            return <OfferItem key={targetOffer.offerId} offer={targetOffer} />;
+          })}
         </div>
       )}
-      {targetOffer && <h2>Previous Offers</h2>}
-      {offers.map((offer) => {
-        return (
-          <OfferItem key={offer.offerId} offer={offer}/>
-        );
-      })}
+      {offers.length > 0 && (
+        <div>
+          <h2>{offersHeader}</h2>
+          {offers.map((offer) => {
+            return <OfferItem key={offer.offerId} offer={offer} />;
+          })}
+        </div>
+      )}
+      {!targetOffers && offers.length === 0 && <p>There are currently no offers to display.</p>}
     </div>
   );
 };

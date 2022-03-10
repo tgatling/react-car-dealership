@@ -3,10 +3,13 @@ import { Offer } from '../models/offer';
 import offerService from '../services/offer.service';
 import { useLocation } from 'react-router-dom';
 import OfferDisplay from '../components/system/offers/OfferDisplay';
+import {useSelector, RootStateOrAny} from 'react-redux';
 
 const OfferHistory = () => {
-  const [targetOffer, setTargetOffer] = useState<Offer | null>(null);
+  const [targetOffer, setTargetOffer] = useState<Offer[]>([]);
   const [otherOffers, setOtherOffers] = useState<Offer[]>([]);
+  const currentUser = useSelector((state: RootStateOrAny)=> state.user.currentUser);
+  const userId = JSON.parse(currentUser).userId;
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -16,7 +19,9 @@ const OfferHistory = () => {
   const offerId = param?.substring(param.indexOf('-') + 1);
 
   let action = '';
-  let heading = '';
+  let mainHeader = '';
+  let targetHeader = 'Here is the offer you just submitted: ';
+  let offerHeader = 'Previous Offers';
 
   if (type) {
     if (type[0] === 'add') {
@@ -24,9 +29,9 @@ const OfferHistory = () => {
     } else if (type[0] === 'update') {
       action = 'updated';
     }
-    heading = `Your offer has been successfully ${action}!`;
+    mainHeader = `Your offer has been successfully ${action}!`;
   } else {
-    heading = 'Offer History';
+    mainHeader = 'Offer History';
   }
 
   useEffect(() => {
@@ -47,26 +52,30 @@ const OfferHistory = () => {
           currentOffer.numberOfPayments = response[key].numberOfPayments;
 
           if (response[key].offerId === `-${offerId}`) {
-            setTargetOffer(currentOffer);
-          } else {
+            let targetArray: Offer[] = []
+            targetArray.push(currentOffer)
+            setTargetOffer(targetArray);
+          } else if( response[key].userId === userId) {
             loadedOffers.push(currentOffer);
           }
         }
         setOtherOffers(loadedOffers);
       })
       .catch((error) => error);
-  }, [offerId]);
+  }, [offerId, userId]);
 
   return (
     <div>
       {targetOffer && (
         <OfferDisplay
-          heading={heading}
-          targetOffer={targetOffer}
+          mainHeader={mainHeader}
+          targetHeader={targetHeader}
+          offersHeader={offerHeader}
+          targetOffers={targetOffer}
           offers={otherOffers}
         />
       )}
-      {!targetOffer && <OfferDisplay heading={heading} offers={otherOffers} />}
+      {!targetOffer && <OfferDisplay mainHeader={mainHeader} offers={otherOffers} />}
     </div>
   );
 };
