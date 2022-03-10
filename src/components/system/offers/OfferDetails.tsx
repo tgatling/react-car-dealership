@@ -8,16 +8,18 @@ import { Offer } from '../../../models/offer';
 import { MAKING_AN_OFFER_INSTRUCTIONS } from '../../../models/constants';
 import styles from './OfferForm.module.css';
 import PaymentInfo from '../payments/PaymentInfo';
+import offerService from '../../../services/offer.service';
 
 interface offerFormProps {
   carTotal: number;
-  showHeading: (showHeading: boolean)=>void;
+  showHeading: (showHeading: boolean) => void;
 }
 
 const OfferDetails = ({ carTotal, showHeading }: offerFormProps) => {
   const [previewMode, setPreviewMode] = useState(false);
   const [downPayment, setDownPayment] = useState<number | string>('');
   const [numberOfPayments, setNumberOfPayments] = useState<number | string>('');
+  const [httpError, setHttpError] = useState(null);
   const params = useParams<{ carId: string }>();
   let customerOffer = new Offer();
   const currentUser = useSelector(
@@ -25,9 +27,8 @@ const OfferDetails = ({ carTotal, showHeading }: offerFormProps) => {
   );
   let user = JSON.parse(currentUser);
 
-  customerOffer.userId = user.userId;
   customerOffer.carId = params.carId;
-  customerOffer.offerId = `${user.userId}${params.carId}`;
+  customerOffer.userId = user.userId;
   customerOffer.carTotal = carTotal;
   customerOffer.downPayment = +downPayment;
   customerOffer.numberOfPayments = +numberOfPayments;
@@ -39,18 +40,40 @@ const OfferDetails = ({ carTotal, showHeading }: offerFormProps) => {
     showHeading(false);
   };
 
+  const submitOfferHandler = () => {
+    console.log(`
+    ${JSON.stringify(customerOffer)}
+    `);
+
+    offerService
+      .addOffer(customerOffer)
+      .then((response) => {
+        customerOffer.offerId = response.name;
+        offerService
+          .updateOffer(customerOffer, response.name)
+          .then((result) => {
+            console.log(result);
+          })
+          .catch((error) => setHttpError(error));
+          
+      })
+      .catch((error) => setHttpError(error));
+  };
+
   return (
     <div>
       {!previewMode && (
         <div className={styles.formContainer}>
           <p>{MAKING_AN_OFFER_INSTRUCTIONS}</p>
           <OfferForm
+            error={httpError}
             customerOffer={customerOffer}
             downPayment={downPayment}
             numberOfPayments={numberOfPayments}
             onPreview={previewHandler}
             onDownPaymentChange={setDownPayment}
             onNumPaymentChange={setNumberOfPayments}
+            onSubmitOffer={submitOfferHandler}
           />
         </div>
       )}

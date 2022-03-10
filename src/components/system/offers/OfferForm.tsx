@@ -4,21 +4,25 @@ import { Offer } from '../../../models/offer';
 import styles from './OfferForm.module.css';
 
 interface offerFormProps {
+  error: string | null;
   customerOffer: Offer;
   downPayment: number | string;
   numberOfPayments: number | string;
   onPreview: (event: React.FormEvent<HTMLFormElement>) => void;
   onDownPaymentChange: (downPayment: number | string) => void;
   onNumPaymentChange: (numberOfPayments: number | string) => void;
+  onSubmitOffer: () => void;
 }
 
 const OfferForm = ({
+  error,
   customerOffer,
   downPayment,
   numberOfPayments,
   onPreview,
   onDownPaymentChange,
   onNumPaymentChange,
+  onSubmitOffer,
 }: offerFormProps) => {
   return (
     <form className={styles.form} onSubmit={onPreview}>
@@ -53,9 +57,23 @@ const OfferForm = ({
           max={120}
           value={numberOfPayments}
           onChange={(e) => onNumPaymentChange(e.target.value)}
+          className={styles.numberPaymentsInput}
         />
       </div>
-      <button>Preview</button>
+      <div className={styles.lowerContainer}>
+        <div className={styles.buttonContainer}>
+          <button>Preview</button>
+          <button type='button' onClick={onSubmitOffer}>
+            Submit
+          </button>
+        </div>
+      </div>
+      {error && <div>
+        <p className={styles.errorText}>
+          An error occurred when processing your offer.
+        </p>
+        <p className={styles.errorDirections}>Please try submitting your request again. </p>
+      </div>}
     </form>
   );
 };

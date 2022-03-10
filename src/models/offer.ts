@@ -7,7 +7,7 @@ export const REJECTED_STATUS = 'REJECTED'
 export class Offer {
     offerId: string = '';
     offerDate: Date = new Date();
-    status?: string = PENDING_STATUS;
+    status: string = PENDING_STATUS;
     carId: string = '';
     userId: string = '';
     empUserId: string = '';

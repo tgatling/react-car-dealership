@@ -4,7 +4,6 @@ import { Car } from '../models/car';
 class CarService {
     private URI: string;
     constructor() {
-        // URL of the express server
         this.URI = `${process.env.REACT_APP_SERVER_URI}`;
     }
 

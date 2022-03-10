@@ -13,12 +13,15 @@
 }
 
 .summaryContainer button {
-    display: flex;
-    align-items: center;
-    margin-bottom: 25px;
-    background-color: #7fffd4;
-    border-radius: 15px;
-    font-size: 25px;
-    padding: 15px 32px;
-  }
-  
+  display: flex;
+  align-items: center;
+  margin-bottom: 25px;
+  background-color: #7fffd4;
+  border-radius: 15px;
+  font-size: 25px;
+  padding: 15px 32px;
+}
+
+.summaryContainer button:hover {
+  background-color: #d7fff2;
+}
