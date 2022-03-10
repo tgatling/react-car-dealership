@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CurrentOffers = () => {
+const History = () => {
     return (
         <div>
             
@@ -8,4 +8,4 @@ const CurrentOffers = () => {
     );
 };
 
-export default CurrentOffers;
+export default History;

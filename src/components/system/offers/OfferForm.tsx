@@ -39,7 +39,10 @@ const OfferForm = ({
       </div>
       <div>
         <label>Total Amount: </label>
-        <input disabled value={customerOffer.carTotal} />
+        <input
+          disabled
+          value={customerOffer.carTotal}
+        />
       </div>
       <div>
         <label>Down Payment: </label>
@@ -47,6 +50,7 @@ const OfferForm = ({
           required
           type='number'
           min={5000}
+          max={customerOffer.carTotal}
           value={downPayment}
           onChange={(e) => onDownPaymentChange(e.target.value)}
         />
@@ -69,12 +73,16 @@ const OfferForm = ({
           </button>
         </div>
       </div>
-      {error && <div>
-        <p className={styles.errorText}>
-          An error occurred when processing your offer.
-        </p>
-        <p className={styles.errorDirections}>Please try submitting your request again. </p>
-      </div>}
+      {error && (
+        <div>
+          <p className={styles.errorText}>
+            An error occurred when processing your offer.
+          </p>
+          <p className={styles.errorDirections}>
+            Please try submitting your request again.{' '}
+          </p>
+        </div>
+      )}
     </form>
   );
 };
