@@ -5,7 +5,10 @@ import { useHistory, useParams } from 'react-router-dom';
 import OfferForm from './OfferForm';
 import OfferTable from './OfferTable';
 import { Offer } from '../../../models/offer';
-import {MAKING_AN_OFFER_INSTRUCTIONS, CURRENT_OFFERS} from '../../../models/constants';
+import {
+  MAKING_AN_OFFER_INSTRUCTIONS,
+  CURRENT_OFFERS,
+} from '../../../models/constants';
 import styles from './OfferForm.module.css';
 import PaymentInfo from '../payments/PaymentInfo';
 import offerService from '../../../services/offer.service';
@@ -16,7 +19,6 @@ interface offerFormProps {
 }
 
 const OfferDetails = ({ carTotal, showHeading }: offerFormProps) => {
-  const [offerInSystem, setOfferInSystem] = useState(false);
   const [previewMode, setPreviewMode] = useState(false);
   const [downPayment, setDownPayment] = useState<number | string>('');
   const [numberOfPayments, setNumberOfPayments] = useState<number | string>('');
@@ -46,42 +48,51 @@ const OfferDetails = ({ carTotal, showHeading }: offerFormProps) => {
   };
 
   const submitOfferHandler = () => {
-    setOfferInSystem(false);
+    let previousOffer: { offerId: string } = { offerId: '' };
+
     if (!downPayment || !numberOfPayments) {
       return;
     }
+
     offerService
       .getAllOffers()
-      .then((response) => {
-        for (const key in response) {
+      .then((result) => {
+        //check to see if user has already placed offer on this car
+        for (const key in result) {
           if (
-            response[key].carId === customerOffer.carId &&
-            response[key].userId === customerOffer.userId
+            result[key].carId === customerOffer.carId &&
+            result[key].userId === customerOffer.userId
           ) {
-            setOfferInSystem(true);
+            customerOffer.offerId = result[key].offerId;
+            previousOffer.offerId = result[key].offerId;
           }
+        }
+
+        if (previousOffer.offerId) {
+          offerService
+            .updateOffer(customerOffer, previousOffer.offerId)
+            .then((response) => response)
+            .catch((error) => setHttpError(error));
+          history.push(`${CURRENT_OFFERS}?type=update${previousOffer.offerId}`);
+        } else {
+          offerService
+            .addOffer(customerOffer)
+            .then((response) => {
+              console.log(`Added`);
+              customerOffer.offerId = response.name;
+              offerService
+                .updateOffer(customerOffer, response.name)
+                .then((res) => {
+                  history.push(
+                    `${CURRENT_OFFERS}?type=add${customerOffer.offerId}`
+                  );
+                })
+                .catch((error) => setHttpError(error));
+            })
+            .catch((error) => setHttpError(error));
         }
       })
       .catch((error) => error);
-
-    console.log(offerInSystem);
-
-    if (!offerInSystem) {
-      offerService
-        .addOffer(customerOffer)
-        .then((response) => {
-          customerOffer.offerId = response.name;
-          offerService
-            .updateOffer(customerOffer, response.name)
-            .then((result) => {
-              console.log(result);
-            })
-            .catch((error) => setHttpError(error));
-        })
-        .catch((error) => setHttpError(error));
-
-        history.push(CURRENT_OFFERS);
-    }
   };
 
   return (
