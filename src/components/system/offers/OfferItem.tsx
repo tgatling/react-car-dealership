@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Car } from '../../../models/car';
 import { Offer } from '../../../models/offer';
 import carService from '../../../services/car.service';
+import { calculatePaymentsFromOffer } from '../Calculations';
+import PaymentSummary from '../payments/PaymentSummary';
 import styles from './OfferItem.module.css';
 
 interface itemProps {
@@ -10,6 +12,9 @@ interface itemProps {
 
 const OfferItem = ({ offer }: itemProps) => {
   const [car, setCar] = useState<Car | null>(null);
+  const [view, setView] = useState(false);
+  const [confirmAccept, setConfirmAccept] = useState(false);
+  const [confirmReject, setConfirmReject] = useState(false);
 
   useEffect(() => {
     carService.getCar(offer.carId).then((response) => {
@@ -17,30 +22,107 @@ const OfferItem = ({ offer }: itemProps) => {
     });
   }, [offer.carId]);
 
+  let date = '';
+  if (offer.offerDate) {
+    let offerDate = new Date(offer.offerDate);
+    date = `${
+      offerDate.getMonth() + 1
+    }/${offerDate.getDate()}/${offerDate.getFullYear()}`;
+  }
+
+  const toggleView = () => {
+    setView(!view);
+  };
+  const toggleAccept = () => {
+    if (confirmReject) {
+      setConfirmReject(false);
+    }
+    setConfirmAccept(!confirmAccept);
+  };
+  const toggleReject = () => {
+    if (confirmAccept) {
+      setConfirmAccept(false);
+    }
+    setConfirmReject(!confirmReject);
+  };
+
+  let { paymentCalculations } = calculatePaymentsFromOffer(
+    offer.carTotal,
+    offer.downPayment,
+    offer.numberOfPayments
+  );
+
+  let equalPayments: boolean;
+
+  if (paymentCalculations.length > 1) {
+    equalPayments =
+      paymentCalculations[0].amount === paymentCalculations[1].amount
+        ? true
+        : false;
+  } else {
+    equalPayments = true;
+  }
+
   return (
-    <div className={styles.itemContainer}>
-      <div>
-        <img src={car?.url} alt='' />
-      </div>
-      <div className={styles.infoContainer}>
-        <div className={styles.headerContainer}>
-          <div>
-            <h1>{`${car?.year} ${car?.make} ${car?.model} - $${car?.price}`}</h1>
+    <div>
+      <div className={styles.itemContainer}>
+        <div className={styles.leftContainer}>
+          <div className={styles.imageContainer}>
+            <img src={car?.url} alt='' />
+            <p>{`STATUS: ${offer.status}`}</p>
           </div>
-          <div>
-            <h1>{`STATUS: ${offer.status}`}</h1>
+          <div className={styles.infoContainer}>
+            <div className={styles.headerContainer}>
+              <div>
+                <h1>{`${car?.year} ${car?.make} ${car?.model} - $${car?.price}`}</h1>
+              </div>
+            </div>
+            <div className={styles.offerInfo}>
+              <div>
+                <p>{`Date Submitted: ${date}`}</p>
+              </div>
+              <div>
+                <p>{`Offer Id: ${offer.offerId}`}</p>
+                <p>{`Car Id: ${offer.carId}`}</p>
+              </div>
+              <div>
+                <p>{`Down Payment $${offer.downPayment.toFixed(2)}`}</p>
+                <p>{`Number of Payments: ${offer.numberOfPayments}`}</p>
+              </div>
+            </div>
           </div>
         </div>
-        <div>
-          <p>{offer.offerDate}</p>
-          <p>{offer.offerId}</p>
-          <p>{offer.carId}</p>
-          <p>{offer.carTotal}</p>
-          <p>{offer.downPayment}</p>
-          <p>{offer.status}</p>
-          <p>{offer.numberOfPayments}</p>
+        <div className={styles.rightContainer}>
+          <div className={styles.buttonContainer}>
+            <button className={styles.viewButton} onClick={toggleView}>
+              {!view ? 'View' : 'Hide'}
+            </button>
+            <button className={styles.acceptButton}>Accept</button>
+            <button className={styles.rejectButton}>Reject</button>
+          </div>
         </div>
       </div>
+      {view && (
+        <div className={styles.viewContainer}>
+          <PaymentSummary
+            equalPayments={equalPayments}
+            numberOfPayments={offer.numberOfPayments}
+            paymentCalculations={paymentCalculations}
+            header={true}
+          />
+        </div>
+      )}
+
+      {confirmAccept && (
+        <div className={styles.viewContainer} onClick={toggleAccept}>
+          Confirmation for Accepting
+        </div>
+      )}
+      {confirmReject && (
+        <div className={styles.viewContainer} onClick={toggleReject}>
+          Confirmation for Rejecting
+        </div>
+      )}
     </div>
   );
 };

@@ -65,7 +65,7 @@ const OfferHistory = () => {
   }, [offerId, userId]);
 
   return (
-    <div>
+    <div style={{display: 'flex', justifyContent: 'center'}}>
       {targetOffer && (
         <OfferDisplay
           mainHeader={mainHeader}

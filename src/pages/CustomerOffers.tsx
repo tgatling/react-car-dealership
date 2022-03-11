@@ -12,7 +12,7 @@ const CustomerOffers = () => {
       .getAllOffers()
       .then((response) => {
         let loadedPending: Offer[] = [];
-        let loadedProcessed: Offer[] = []
+        let loadedProcessed: Offer[] = [];
         for (const key in response) {
           let currentOffer = new Offer();
           currentOffer.offerId = response[key].offerId;
@@ -24,11 +24,11 @@ const CustomerOffers = () => {
           currentOffer.carTotal = response[key].carTotal;
           currentOffer.downPayment = response[key].downPayment;
           currentOffer.numberOfPayments = response[key].numberOfPayments;
-            console.log(response[key].status);
-          if(response[key].status === PENDING_STATUS){
-              loadedPending.push(currentOffer);
+          console.log(response[key].status);
+          if (response[key].status === PENDING_STATUS) {
+            loadedPending.push(currentOffer);
           } else {
-              loadedProcessed.push(currentOffer);
+            loadedProcessed.push(currentOffer);
           }
         }
         setPendingOffers(loadedPending);
@@ -39,8 +39,13 @@ const CustomerOffers = () => {
   console.log(pendingOffers);
 
   return (
-    <div>
-      <OfferDisplay targetHeader='Pending Offers' offersHeader='Processed Offers' targetOffers={pendingOffers} offers={processedOffers} />
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <OfferDisplay
+        targetHeader='Pending Offers'
+        offersHeader='Processed Offers'
+        targetOffers={pendingOffers}
+        offers={processedOffers}
+      />
     </div>
   );
 };

@@ -1,5 +1,8 @@
 .displayContainer {
-    margin: 35px;
+    display: flex;
+    flex-direction: column;
+    width: 1400px;
+    margin-bottom: 100px;
 }
 
 .displayContainer h1{

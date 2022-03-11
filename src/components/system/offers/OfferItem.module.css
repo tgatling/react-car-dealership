@@ -1,26 +1,121 @@
 .itemContainer {
-    display: flex;
-    flex-direction: row;
-    border-style: solid;
-    border-width: 2px;
-    border-radius: 15px;
-    background-color: #ffffff;
-    padding: 10px 25px 0 25px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 15px;
+  background-color: #ffffff;
+  padding: 10px 25px 10px 25px;
+  margin-top: 15px;
+}
+.viewContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 15px;
+  background-color: #7fffd4;
+  padding: 10px 25px 10px 25px;
+  margin-top: 15px;
+}
+.leftContainer {
+  display: flex;
+  flex-direction: row;
 }
 
-.itemContainer img {
-    width: 250px;
-    height: 140px;
-    display: block;
-    margin: 15px;
+.leftContainer img {
+  width: 250px;
+  height: 140px;
+  display: block;
+}
+
+.leftContainer p {
+  font-size: 30px;
+}
+
+.imageContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 15px;
+}
+
+.rightContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .infoContainer {
-    margin: -15px 0 0 15px;
+  margin: 0 0 0 30px;
+  border-left: solid;
+  border-width: 1px;
+  width: 750px;
 }
 
 .headerContainer {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: -15px 0 0 30px;
+}
+
+.offerInfo {
+  margin-left: 30px;
+}
+
+.offerInfo p {
+  font-size: 20px;
+  margin-right: 50px;
+}
+
+.offerInfo div {
+  display: flex;
+  flex-direction: row;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.buttonContainer button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 30px;
+  background-color: #dedede;
+  border-radius: 15px;
+  font-size: 25px;
+  padding: 15px 32px;
+  width: 150px;
+}
+
+.viewButton {
+  color: #000080;
+}
+
+.viewButton:hover {
+  background-color: #000080;
+  color: #ffffff;
+}
+
+.acceptButton {
+  color: #008000;
+}
+.acceptButton:hover {
+  background-color: #008000;
+  color: #ffffff;
+}
+
+.rejectButton {
+  color: #ff0000;
+}
+
+.rejectButton:hover {
+  background-color: #ff0000;
+  color: #ffffff;
 }

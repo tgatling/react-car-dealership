@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import PaymentItem from './PaymentItem';
 import { calculateRemainingPayments } from '../Calculations';
 import styles from './PaymentTable.module.css';
-import PaymentInfo from './PaymentInfo';
 import PaymentSummary from './PaymentSummary';
 
 interface paymentTableProps {
@@ -37,7 +36,7 @@ const PaymentTable = (payments: paymentTableProps) => {
     <div className={styles.card}>
       <PaymentSummary
         onToggle={toggleViewTable}
-        equalPayments={false}
+        equalPayments={equalPayments}
         numberOfPayments={payments.numberOfPayments}
         paymentCalculations={paymentCalculations}
         header={false}
