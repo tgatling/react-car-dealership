@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+
 import { Car } from '../../../models/car';
-import { Offer } from '../../../models/offer';
-import carService from '../../../services/car.service';
+import { ACCEPTED_STATUS, Offer, REJECTED_STATUS } from '../../../models/offer';
 import { calculatePaymentsFromOffer } from '../Calculations';
+import { CUSTOMER_OFFERS } from '../../../models/constants';
+import carService from '../../../services/car.service';
 import PaymentSummary from '../payments/PaymentSummary';
 import ConfirmOption from './ConfirmOption';
 import styles from './OfferItem.module.css';
-import { useLocation } from 'react-router-dom';
-import {CUSTOMER_OFFERS} from '../../../models/constants';
 
 interface itemProps {
   offer: Offer;
@@ -20,12 +21,11 @@ const OfferItem = ({ offer }: itemProps) => {
   const [confirmAccept, setConfirmAccept] = useState(false);
   const [confirmReject, setConfirmReject] = useState(false);
   const [customerOffers, setCustomerOffers] = useState(false);
-
-
+  const [decision, setDecision] = useState('none');
 
   useEffect(() => {
-    if(location.pathname === CUSTOMER_OFFERS){
-        setCustomerOffers(true);
+    if (location.pathname === CUSTOMER_OFFERS) {
+      setCustomerOffers(true);
     }
 
     carService.getCar(offer.carId).then((response) => {
@@ -59,11 +59,11 @@ const OfferItem = ({ offer }: itemProps) => {
     setConfirmReject(!confirmReject);
   };
 
-  const confirmOfferHandler = (accepted: boolean) => {
+  const confirmOfferHandler = async (accepted: boolean) => {
     if (accepted) {
-      console.log(`Offer Accepted`);
+      setDecision('ACCEPTED');
     } else {
-      console.log(`Offer Rejected`);
+      setDecision('REJECTED');
     }
   };
 
@@ -86,6 +86,7 @@ const OfferItem = ({ offer }: itemProps) => {
 
   return (
     <div>
+      <p>{decision}</p>
       <div className={styles.itemContainer}>
         <div className={styles.leftContainer}>
           <div className={styles.imageContainer}>
@@ -118,12 +119,16 @@ const OfferItem = ({ offer }: itemProps) => {
             <button className={styles.viewButton} onClick={toggleView}>
               {!view ? 'Summary' : 'Hide'}
             </button>
-            {customerOffers && <button className={styles.acceptButton} onClick={toggleAccept}>
-              Accept
-            </button>}
-            {customerOffers && <button className={styles.rejectButton} onClick={toggleReject}>
-              Reject
-            </button>}
+            {customerOffers && (
+              <button className={styles.acceptButton} onClick={toggleAccept}>
+                Accept
+              </button>
+            )}
+            {customerOffers && (
+              <button className={styles.rejectButton} onClick={toggleReject}>
+                Reject
+              </button>
+            )}
           </div>
         </div>
       </div>
