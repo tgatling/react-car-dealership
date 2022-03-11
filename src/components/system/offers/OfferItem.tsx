@@ -100,23 +100,36 @@ const OfferItem = ({ offer }: itemProps) => {
               </div>
             </div>
             <div className={styles.offerInfo}>
-              <div>
-                <p>{`Date Submitted: ${date}`}</p>
+              <div className={styles.offerInfoLeft}>
+                <div className={styles.infoRow}>
+                  <p className={styles.label}>{`Date Submitted:`}</p>
+                  <p>{date}</p>
+                </div>
+                <div className={styles.infoRow}>
+                  <p className={styles.label}>{`Offer Id:`}</p>
+                  <p>{offer.offerId}</p>
+                </div>
+                <div className={styles.infoRow}>
+                  <p className={styles.label}>{`Down Payment: `}</p>
+                  <p>{`$${offer.downPayment.toFixed(2)}`}</p>
+                </div>
               </div>
-              <div>
-                <p>{`Offer Id: ${offer.offerId}`}</p>
-                <p>{`Car Id: ${offer.carId}`}</p>
+            <div className={styles.offerInfoRight}>
+              <div className={styles.infoRow}>
+                <p className={styles.label}>{`Car Id: `}</p>
+                <p>{offer.carId}</p>
               </div>
-              <div>
-                <p>{`Down Payment $${offer.downPayment.toFixed(2)}`}</p>
-                <p>{`Number of Payments: ${offer.numberOfPayments}`}</p>
+              <div className={styles.infoRow}>
+                <p className={styles.label}>{`Number of Payments: `}</p>
+                <p>{offer.numberOfPayments}</p>
               </div>
+            </div>
             </div>
           </div>
         </div>
         <div className={styles.rightContainer}>
-          <div className={styles.buttonContainer}>
-            <button className={styles.viewButton} onClick={toggleView}>
+          <div className={customerOffers ? styles.buttonContainer : styles.onlyButton}>
+            <button className={styles.summaryButton} onClick={toggleView}>
               {!view ? 'Summary' : 'Hide'}
             </button>
             {customerOffers && (

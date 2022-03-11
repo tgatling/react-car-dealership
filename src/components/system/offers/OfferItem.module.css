@@ -62,17 +62,36 @@
 }
 
 .offerInfo {
+  display: flex;
+  flex-direction: row;
   margin-left: 30px;
 }
 
 .offerInfo p {
   font-size: 20px;
-  margin-right: 50px;
+  /* margin-right: 50px; */
 }
 
-.offerInfo div {
+.offerInfoLeft {
+  display: flex;
+  flex-direction: column;
+  margin-right: 30px;
+}
+
+.offerInfoRight {
+  display: flex;
+  flex-direction: column;
+  margin-top: 65px;
+}
+
+.infoRow {
   display: flex;
   flex-direction: row;
+}
+
+.label {
+  font-weight: bold;
+  margin-right: 10px;
 }
 
 .buttonContainer {
@@ -82,25 +101,11 @@
   align-items: flex-end;
 }
 
+.onlyButton {
+  display: inline;
+}
+
 .buttonContainer button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 30px;
-    background-color: #dedede;
-    border-radius: 15px;
-    font-size: 25px;
-    padding: 15px 32px;
-    width: 150px;
-}
-
-/* .narrowButtonContainer {
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-}
-
-.narrowButtonContainer button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -110,17 +115,29 @@
   font-size: 25px;
   padding: 15px 32px;
   width: 150px;
-} */
+}
+
+.onlyButton button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 30px;
+  background-color: #dedede;
+  border-radius: 15px;
+  font-size: 25px;
+  padding: 15px 32px;
+  width: 150px;
+}
 
 .viewContainer p {
-    font-size: 20px;
-  }
+  font-size: 20px;
+}
 
-.viewButton {
+.summaryButton {
   color: #000080;
 }
 
-.viewButton:hover {
+.summaryButton:hover {
   background-color: #000080;
   color: #ffffff;
 }
@@ -132,7 +149,6 @@
   background-color: #008000;
   color: #ffffff;
 }
-
 
 .rejectButton {
   color: #ff0000;
