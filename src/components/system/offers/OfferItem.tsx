@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { Car } from '../../../models/car';
-import { ACCEPTED_STATUS, Offer, REJECTED_STATUS } from '../../../models/offer';
+import { Offer } from '../../../models/offer';
 import { calculatePaymentsFromOffer } from '../Calculations';
 import { CUSTOMER_OFFERS } from '../../../models/constants';
 import carService from '../../../services/car.service';
@@ -12,16 +12,17 @@ import styles from './OfferItem.module.css';
 
 interface itemProps {
   offer: Offer;
+  submitHandler?: (accepted: boolean, offer: Offer) => void;
 }
 
-const OfferItem = ({ offer }: itemProps) => {
+const OfferItem = ({ offer, submitHandler }: itemProps) => {
   const location = useLocation();
   const [car, setCar] = useState<Car | null>(null);
   const [view, setView] = useState(false);
   const [confirmAccept, setConfirmAccept] = useState(false);
   const [confirmReject, setConfirmReject] = useState(false);
   const [customerOffers, setCustomerOffers] = useState(false);
-  const [decision, setDecision] = useState('none');
+  const [accepted, setDecision] = useState('');
 
   useEffect(() => {
     if (location.pathname === CUSTOMER_OFFERS) {
@@ -61,9 +62,13 @@ const OfferItem = ({ offer }: itemProps) => {
 
   const confirmOfferHandler = async (accepted: boolean) => {
     if (accepted) {
-      setDecision('ACCEPTED');
+      setConfirmAccept(false);
     } else {
-      setDecision('REJECTED');
+      setConfirmReject(false);
+    }
+
+    if (submitHandler) {
+      submitHandler(accepted, offer);
     }
   };
 
@@ -86,7 +91,6 @@ const OfferItem = ({ offer }: itemProps) => {
 
   return (
     <div>
-      <p>{decision}</p>
       <div className={styles.itemContainer}>
         <div className={styles.leftContainer}>
           <div className={styles.imageContainer}>
@@ -114,21 +118,25 @@ const OfferItem = ({ offer }: itemProps) => {
                   <p>{`$${offer.downPayment.toFixed(2)}`}</p>
                 </div>
               </div>
-            <div className={styles.offerInfoRight}>
-              <div className={styles.infoRow}>
-                <p className={styles.label}>{`Car Id: `}</p>
-                <p>{offer.carId}</p>
+              <div className={styles.offerInfoRight}>
+                <div className={styles.infoRow}>
+                  <p className={styles.label}>{`Car Id: `}</p>
+                  <p>{offer.carId}</p>
+                </div>
+                <div className={styles.infoRow}>
+                  <p className={styles.label}>{`Number of Payments: `}</p>
+                  <p>{offer.numberOfPayments}</p>
+                </div>
               </div>
-              <div className={styles.infoRow}>
-                <p className={styles.label}>{`Number of Payments: `}</p>
-                <p>{offer.numberOfPayments}</p>
-              </div>
-            </div>
             </div>
           </div>
         </div>
         <div className={styles.rightContainer}>
-          <div className={customerOffers ? styles.buttonContainer : styles.onlyButton}>
+          <div
+            className={
+              customerOffers ? styles.buttonContainer : styles.onlyButton
+            }
+          >
             <button className={styles.summaryButton} onClick={toggleView}>
               {!view ? 'Summary' : 'Hide'}
             </button>

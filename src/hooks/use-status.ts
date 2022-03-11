@@ -1,33 +1,35 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Offer } from '../models/offer';
 import offerService from '../services/offer.service';
 
-const useStatus =(offer: Offer, status: string, empUserId: string)=>{
-    const [response, setResponse] = useState({});
+const useStatus = (offer: Offer, status: string, empUserId: string) => {
+  const [response, setResponse] = useState({});
+  let newOffer = useMemo(()=> new Offer(), []);
 
-    if(empUserId === offer.userId){
-        return {success: false, updatedOffer: null, error: 'Employee and User Id Match'}
-    }
+  newOffer.offerId = offer.offerId;
+  newOffer.offerDate = offer.offerDate;
+  newOffer.status = status;
+  newOffer.empUserId = empUserId;
+  newOffer.userId = offer.userId;
+  newOffer.carId = offer.carId;
+  newOffer.carTotal = offer.carTotal;
+  newOffer.downPayment = offer.downPayment;
+  newOffer.numberOfPayments = offer.numberOfPayments;
 
-    let newOffer = new Offer();
+  useEffect(() => {
 
-    newOffer.offerId = offer.offerId;
-    newOffer.offerDate = offer.offerDate;
-    newOffer.status = status;
-    newOffer.empUserId = empUserId;
-    newOffer.userId = offer.userId;
-    newOffer.carId = offer.carId;
-    newOffer.carTotal = offer.carTotal;
-    newOffer.downPayment = offer.downPayment;
-    newOffer.numberOfPayments = offer.numberOfPayments;
+      offerService
+        .updateOffer(newOffer, offer.offerId)
+        .then((response) => {
+          setResponse({ success: true, response, error: null });
+        })
+        .catch((error) => {
+          setResponse({ success: false, response: null, error });
+        });
 
-    offerService.updateOffer(newOffer, offer.offerId).then(response =>{
-        setResponse({success: true, response, error: null});
-    }).catch(error => {
-        setResponse({success: false, response: null, error});
-    })
+  }, [newOffer, offer.offerId]);
 
-    return response;
-}
+  return response;
+};
 
 export default useStatus;
