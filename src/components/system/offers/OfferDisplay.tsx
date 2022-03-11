@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Offer } from '../../../models/offer';
 import OfferItem from './OfferItem';
 import styles from './OfferDisplay.module.css';
@@ -22,6 +22,11 @@ const OfferDisplay = ({
 }: displayProps) => {
   const [decision, setDecision] = useState('');
   const [offer, setOffer] = useState<Offer>(new Offer());
+
+  useEffect(()=>{
+    // check to see if component re-renders after offer status is changed
+
+  }, [offer.status]);
 
   const submittedHandler = (accepted: boolean, offer: Offer) => {
     console.log(`submit handler`);
