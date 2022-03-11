@@ -2,7 +2,6 @@ import React from 'react';
 import { useSelector, RootStateOrAny } from 'react-redux';
 
 import useStatus from '../../../hooks/use-status';
-import useReject from '../../../hooks/use-reject';
 import { REJECTED_STATUS } from '../../../models/offer';
 import { Offer } from '../../../models/offer';
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Offer } from '../../../models/offer';
 import OfferItem from './OfferItem';
 import styles from './OfferDisplay.module.css';

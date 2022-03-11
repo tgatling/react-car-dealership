@@ -22,7 +22,6 @@ const OfferItem = ({ offer, submitHandler }: itemProps) => {
   const [confirmAccept, setConfirmAccept] = useState(false);
   const [confirmReject, setConfirmReject] = useState(false);
   const [customerOffers, setCustomerOffers] = useState(false);
-  const [accepted, setDecision] = useState('');
 
   useEffect(() => {
     if (location.pathname === CUSTOMER_OFFERS) {

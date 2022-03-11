@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Offer } from '../models/offer';
 import offerService from '../services/offer.service';
 
