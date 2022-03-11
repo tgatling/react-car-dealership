@@ -1,0 +1,26 @@
+.itemContainer {
+    display: flex;
+    flex-direction: row;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 15px;
+    background-color: #ffffff;
+    padding: 10px 25px 0 25px;
+}
+
+.itemContainer img {
+    width: 250px;
+    height: 140px;
+    display: block;
+    margin: 15px;
+}
+
+.infoContainer {
+    margin: -15px 0 0 15px;
+}
+
+.headerContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

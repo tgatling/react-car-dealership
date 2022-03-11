@@ -1,6 +1,7 @@
 import React from 'react';
 import { Offer } from '../../../models/offer';
 import OfferItem from './OfferItem';
+import styles from './OfferDisplay.module.css';
 
 interface displayProps {
   mainHeader?: string;
@@ -18,9 +19,9 @@ const OfferDisplay = ({
   offers,
 }: displayProps) => {
   return (
-    <div>
+    <div className={styles.displayContainer}>
       <h1>{mainHeader}</h1>
-      {targetOffers && (
+      {targetOffers && targetOffers.length > 0 && (
         <div>
           <h2>{targetHeader}</h2>
           {targetOffers.map((targetOffer) => {
