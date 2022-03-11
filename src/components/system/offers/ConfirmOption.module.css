@@ -1,0 +1,61 @@
+.viewContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 15px;
+    background-color: #f89292;
+    padding: 10px 25px 10px 25px;
+    margin-top: 15px;
+    font-weight: bold;
+  }
+
+.narrowButtonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.narrowButtonContainer button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 30px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  font-size: 25px;
+  padding: 15px 32px;
+  width: 150px;
+}
+
+.viewContainer p {
+    font-size: 20px;
+  }
+
+.viewButton {
+  color: #000080;
+}
+
+.viewButton:hover {
+  background-color: #000080;
+  color: #ffffff;
+}
+
+.acceptButton {
+  color: #008000;
+}
+.acceptButton:hover {
+  background-color: #008000;
+  color: #ffffff;
+}
+
+
+.rejectButton {
+  color: #ff0000;
+}
+
+.rejectButton:hover {
+  background-color: #ff0000;
+  color: #ffffff;
+}

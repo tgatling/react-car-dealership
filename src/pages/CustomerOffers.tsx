@@ -24,7 +24,6 @@ const CustomerOffers = () => {
           currentOffer.carTotal = response[key].carTotal;
           currentOffer.downPayment = response[key].downPayment;
           currentOffer.numberOfPayments = response[key].numberOfPayments;
-          console.log(response[key].status);
           if (response[key].status === PENDING_STATUS) {
             loadedPending.push(currentOffer);
           } else {
@@ -36,7 +35,6 @@ const CustomerOffers = () => {
       })
       .catch((error) => error);
   }, []);
-  console.log(pendingOffers);
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center' }}>

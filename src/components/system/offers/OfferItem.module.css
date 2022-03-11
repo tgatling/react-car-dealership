@@ -83,6 +83,24 @@
 }
 
 .buttonContainer button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 30px;
+    background-color: #dedede;
+    border-radius: 15px;
+    font-size: 25px;
+    padding: 15px 32px;
+    width: 150px;
+}
+
+/* .narrowButtonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.narrowButtonContainer button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -92,7 +110,11 @@
   font-size: 25px;
   padding: 15px 32px;
   width: 150px;
-}
+} */
+
+.viewContainer p {
+    font-size: 20px;
+  }
 
 .viewButton {
   color: #000080;
@@ -110,6 +132,7 @@
   background-color: #008000;
   color: #ffffff;
 }
+
 
 .rejectButton {
   color: #ff0000;

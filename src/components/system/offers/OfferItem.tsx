@@ -4,23 +4,34 @@ import { Offer } from '../../../models/offer';
 import carService from '../../../services/car.service';
 import { calculatePaymentsFromOffer } from '../Calculations';
 import PaymentSummary from '../payments/PaymentSummary';
+import ConfirmOption from './ConfirmOption';
 import styles from './OfferItem.module.css';
+import { useLocation } from 'react-router-dom';
+import {CUSTOMER_OFFERS} from '../../../models/constants';
 
 interface itemProps {
   offer: Offer;
 }
 
 const OfferItem = ({ offer }: itemProps) => {
+  const location = useLocation();
   const [car, setCar] = useState<Car | null>(null);
   const [view, setView] = useState(false);
   const [confirmAccept, setConfirmAccept] = useState(false);
   const [confirmReject, setConfirmReject] = useState(false);
+  const [customerOffers, setCustomerOffers] = useState(false);
+
+
 
   useEffect(() => {
+    if(location.pathname === CUSTOMER_OFFERS){
+        setCustomerOffers(true);
+    }
+
     carService.getCar(offer.carId).then((response) => {
       setCar(response);
     });
-  }, [offer.carId]);
+  }, [offer.carId, location.pathname]);
 
   let date = '';
   if (offer.offerDate) {
@@ -33,17 +44,27 @@ const OfferItem = ({ offer }: itemProps) => {
   const toggleView = () => {
     setView(!view);
   };
+
   const toggleAccept = () => {
     if (confirmReject) {
       setConfirmReject(false);
     }
     setConfirmAccept(!confirmAccept);
   };
+
   const toggleReject = () => {
     if (confirmAccept) {
       setConfirmAccept(false);
     }
     setConfirmReject(!confirmReject);
+  };
+
+  const confirmOfferHandler = (accepted: boolean) => {
+    if (accepted) {
+      console.log(`Offer Accepted`);
+    } else {
+      console.log(`Offer Rejected`);
+    }
   };
 
   let { paymentCalculations } = calculatePaymentsFromOffer(
@@ -95,10 +116,14 @@ const OfferItem = ({ offer }: itemProps) => {
         <div className={styles.rightContainer}>
           <div className={styles.buttonContainer}>
             <button className={styles.viewButton} onClick={toggleView}>
-              {!view ? 'View' : 'Hide'}
+              {!view ? 'Summary' : 'Hide'}
             </button>
-            <button className={styles.acceptButton}>Accept</button>
-            <button className={styles.rejectButton}>Reject</button>
+            {customerOffers && <button className={styles.acceptButton} onClick={toggleAccept}>
+              Accept
+            </button>}
+            {customerOffers && <button className={styles.rejectButton} onClick={toggleReject}>
+              Reject
+            </button>}
           </div>
         </div>
       </div>
@@ -114,14 +139,20 @@ const OfferItem = ({ offer }: itemProps) => {
       )}
 
       {confirmAccept && (
-        <div className={styles.viewContainer} onClick={toggleAccept}>
-          Confirmation for Accepting
-        </div>
+        <ConfirmOption
+          accepted={true}
+          buttonText='Accept'
+          onConfirm={confirmOfferHandler}
+          onCancel={toggleAccept}
+        />
       )}
       {confirmReject && (
-        <div className={styles.viewContainer} onClick={toggleReject}>
-          Confirmation for Rejecting
-        </div>
+        <ConfirmOption
+          accepted={false}
+          buttonText='Reject'
+          onConfirm={confirmOfferHandler}
+          onCancel={toggleReject}
+        />
       )}
     </div>
   );
