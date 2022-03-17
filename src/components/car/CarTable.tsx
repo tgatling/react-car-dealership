@@ -20,6 +20,9 @@ const CarTable = ({ editMode, cars, owner }: tableProps) => {
   // filter cars to display dealer or customer's cars
   if (cars) {
     filteredCars = cars.filter((car) => car.owner === owner);
+    filteredCars = filteredCars.sort((a, b) =>
+      a.dateAdded > b.dateAdded ? -1 : a.dateAdded < b.dateAdded ? 1 : 0
+    );
   }
 
   // dealer can add car in edit mode

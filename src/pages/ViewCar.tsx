@@ -17,6 +17,7 @@ const ViewCar = () => {
         model: '',
         price: 0,
         url: '',
+        dateAdded: new Date().toISOString(),
     });
 
     useEffect(() => {
@@ -30,6 +31,7 @@ const ViewCar = () => {
                 model: result.model,
                 price: result.price,
                 url: result.url,
+                dateAdded: result.dateAdded
             });
 
             // set role to determine what the page will display - make an offer or payment page

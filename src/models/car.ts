@@ -8,4 +8,5 @@ export class Car {
     model: string = '';
     url?: string = '';
     price: number = 0;
+    dateAdded: string = new Date().toISOString();
 }

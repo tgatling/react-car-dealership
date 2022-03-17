@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import {useDispatch} from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { Car } from '../../models/car';
 
@@ -24,6 +24,7 @@ const CarForm = ({ addCarForm }: carFormProps) => {
   const [url, setURL] = useState('');
   const [price, setPrice] = useState<number | string>('');
   const [carId, setCarId] = useState('');
+  const todaysDate = new Date().toISOString();
 
   // details for resetting form
   const [originalDetails, setOriginalDetails] = useState<Car>({
@@ -34,6 +35,7 @@ const CarForm = ({ addCarForm }: carFormProps) => {
     model: '',
     price: 0,
     url: '',
+    dateAdded: todaysDate
   });
 
   const history = useHistory();
@@ -55,6 +57,7 @@ const CarForm = ({ addCarForm }: carFormProps) => {
             model: result.model,
             price: result.price,
             url: result.url,
+            dateAdded: result.dateAdded,
           });
 
           // set values to populate form
@@ -96,6 +99,7 @@ const CarForm = ({ addCarForm }: carFormProps) => {
           url,
           price: +price,
           carId: '',
+          dateAdded: todaysDate,
         })
         .then((response) => {
           // add car to redux car state
@@ -109,6 +113,7 @@ const CarForm = ({ addCarForm }: carFormProps) => {
                 url,
                 price: +price,
                 carId: response.name,
+                dateAdded: todaysDate,
               },
             })
           );
@@ -130,10 +135,13 @@ const CarForm = ({ addCarForm }: carFormProps) => {
             url,
             price: +price,
             carId,
+            dateAdded: originalDetails.dateAdded,
           },
           carId
         )
         .then((response) => {
+          console.log(response);
+          dispatch(carActions.editCar({id: carId, car: response}));
           setCarAdded(true);
         })
         .catch((error) => setHttpError(error));

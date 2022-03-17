@@ -27,6 +27,7 @@ function App() {
             model: result[key].model,
             price: result[key].price,
             url: result[key].url,
+            dateAdded: result[key].dateAdded
           });
         }
 
