@@ -30,6 +30,15 @@ const CustomerOffers = () => {
             loadedProcessed.push(currentOffer);
           }
         }
+
+        loadedPending.sort((a, b) =>
+          a.carId < b.carId ? -1 : a.carId > b.carId ? 1 : 0
+        );
+        
+        loadedProcessed.sort((a, b) =>
+          a.carId < b.carId ? -1 : a.carId > b.carId ? 1 : 0
+        );
+
         setPendingOffers(loadedPending);
         setProcessedOffers(loadedProcessed);
       })
