@@ -1,6 +1,6 @@
 [
   {
-    "carId": "",
+    "carId": "-MyKkyjzrE_3aJqvZmTK",
     "make": "Chevrolet",
     "model": "Cruze LTZ",
     "owner": "DEALER",
@@ -9,7 +9,7 @@
     "year": 2014
   },
   {
-    "carId": "",
+    "carId": "-MyKeYJu7lewGJpsJdsH",
     "make": "Chevrolet",
     "model": "Spark LS",
     "owner": "DEALER",
@@ -18,12 +18,93 @@
     "year": 2022
   },
   {
-    "carId": "",
+    "carId": "-MyKkmrh-4uMvptMCntN",
     "make": "Mitsubishi",
-    "model":"Mirage ES",
-    "owner":"DEALER",
-    "price":16990,
-    "url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZaLwo-KlkyGvnunh8yA6N9j2Tgt4bIWeAFQ&usqp=CAU",
-    "year":2022
+    "model": "Mirage ES",
+    "owner": "DEALER",
+    "price": 16990,
+    "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZaLwo-KlkyGvnunh8yA6N9j2Tgt4bIWeAFQ&usqp=CAU",
+    "year": 2022
+  },
+  {
+    "carId": "",
+    "make": "Kia",
+    "model": "Rio LX",
+    "owner": "DEALER",
+    "price": 17275,
+    "url": "",
+    "year": 2022
+  },
+  {
+      "carId":"",
+      "make":"",
+      "model":"",
+      "owner":"DEALER",
+      "price":0,
+      "url":"https://images.cars.com/cldstatic/wp-content/uploads/nissan-versa-2022-black-exterior-front-angle-sedan-scaled.jpg",
+      "year":2022
+  },
+  {
+      "carId":"",
+      "make":"Hyundai",
+      "model":"",
+      "owner":"DEALER",
+      "price":0,
+      "url":"https://images.cars.com/cldstatic/wp-content/uploads/hyundai-accent-2022-dynamic-exterior-front-angle-red-sedan-scaled.jpg",
+      "year":2022
+  },
+  {
+      "carId":"",
+      "make":"",
+      "model":"",
+      "owner":"DEALER",
+      "price":0,
+      "url":"https://images.cars.com/cldstatic/wp-content/uploads/kia-forte-2022-17930-dynamic-exterior-front-angle-sedan-silver-scaled.jpg",
+      "year":2022
+  },
+  {
+      "carId":"",
+      "make":"",
+      "model":"",
+      "owner":"DEALER",
+      "price":0,
+      "url":"",
+      "year":2022
+  },
+  {
+      "carId":"",
+      "make":"",
+      "model":"",
+      "owner":"DEALER",
+      "price":0,
+      "url":"https://images.cars.com/cldstatic/wp-content/uploads/kia-soul-2022-compact-dynamic-exterior-front-angle-red-scaled.jpg",
+      "year":2022
+  },
+  {
+      "carId":"",
+      "make":"",
+      "model":"",
+      "owner":"DEALER",
+      "price":0,
+      "url":"https://images.cars.com/cldstatic/wp-content/uploads/nissan-sentra-2022-blue-exterior-front-angle-sedan-scaled.jpg",
+      "year":2022
+  },
+  {
+      "carId":"",
+      "make":"",
+      "model":"",
+      "owner":"DEALER",
+      "price":0,
+      "url":"https://images.cars.com/cldstatic/wp-content/uploads/hyundai-elantra-2022-exterior-front-angle-sedan-silver-scaled.jpg ",
+      "year":2022
+  },
+  {
+      "carId":"",
+      "make":"",
+      "model":"",
+      "owner":"DEALER",
+      "price":0,
+      "url":"",
+      "year":2022
   }
 ]

@@ -16,7 +16,7 @@ class CarService {
     async addCar(car: Car): Promise<{name: string}> {
         return await axios.post(`${this.URI}cars.json`, car).then(result => result.data);
     }
-    async updateCar(car: Car, id: string): Promise<{}> {
+    async updateCar(car: Car, id: string) {
         return await axios.put(`${this.URI}cars/${id}.json`, car).then(result => result.data);
     }
 
