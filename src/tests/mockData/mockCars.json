@@ -1,0 +1,29 @@
+[
+  {
+    "carId": "",
+    "make": "Chevrolet",
+    "model": "Cruze LTZ",
+    "owner": "DEALER",
+    "price": 12500,
+    "url": "https://www.mcgrathautoblog.com/wp-content/uploads/2011/08/2011-chevy-cruze.jpg",
+    "year": 2014
+  },
+  {
+    "carId": "",
+    "make": "Chevrolet",
+    "model": "Spark LS",
+    "owner": "DEALER",
+    "price": 15695,
+    "url": "https://images.cars.com/cldstatic/wp-content/uploads/chevrolet-spark-2021-exterior-front-three-quarter-oem.jpg",
+    "year": 2022
+  },
+  {
+    "carId": "",
+    "make": "Mitsubishi",
+    "model":"Mirage ES",
+    "owner":"DEALER",
+    "price":16990,
+    "url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZaLwo-KlkyGvnunh8yA6N9j2Tgt4bIWeAFQ&usqp=CAU",
+    "year":2022
+  }
+]
