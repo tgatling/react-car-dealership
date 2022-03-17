@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+
+import { offerActions } from '../store/offer-slice';
 import { Offer, PENDING_STATUS } from '../models/offer';
 import offerService from '../services/offer.service';
 import OfferDisplay from '../components/system/offers/OfferDisplay';
 
 const CustomerOffers = () => {
-  const [pendingOffers, setPendingOffers] = useState<Offer[]>([]);
-  const [processedOffers, setProcessedOffers] = useState<Offer[]>([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     offerService
@@ -24,6 +26,7 @@ const CustomerOffers = () => {
           currentOffer.carTotal = response[key].carTotal;
           currentOffer.downPayment = response[key].downPayment;
           currentOffer.numberOfPayments = response[key].numberOfPayments;
+          
           if (response[key].status === PENDING_STATUS) {
             loadedPending.push(currentOffer);
           } else {
@@ -34,24 +37,22 @@ const CustomerOffers = () => {
         loadedPending.sort((a, b) =>
           a.carId < b.carId ? -1 : a.carId > b.carId ? 1 : 0
         );
-        
+
         loadedProcessed.sort((a, b) =>
           a.carId < b.carId ? -1 : a.carId > b.carId ? 1 : 0
         );
 
-        setPendingOffers(loadedPending);
-        setProcessedOffers(loadedProcessed);
+        dispatch(offerActions.setPendingOffers({ pendingOffers: loadedPending }));
+        dispatch(offerActions.setProcessedOffers({ processedOffers: loadedProcessed }));
       })
       .catch((error) => error);
-  }, []);
+  }, [dispatch]);
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center' }}>
       <OfferDisplay
         targetHeader='Pending Offers'
         offersHeader='Processed Offers'
-        targetOffers={pendingOffers}
-        offers={processedOffers}
       />
     </div>
   );

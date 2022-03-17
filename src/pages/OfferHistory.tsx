@@ -1,16 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { Offer } from '../models/offer';
-import offerService from '../services/offer.service';
+import React, { useEffect } from 'react';
+import { useSelector, RootStateOrAny, useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
+import { Offer } from '../models/offer';
+import { offerActions } from '../store/offer-slice';
+import offerService from '../services/offer.service';
 import OfferDisplay from '../components/system/offers/OfferDisplay';
-import {useSelector, RootStateOrAny} from 'react-redux';
 
 const OfferHistory = () => {
-  const [targetOffer, setTargetOffer] = useState<Offer[]>([]);
-  const [otherOffers, setOtherOffers] = useState<Offer[]>([]);
-  const currentUser = useSelector((state: RootStateOrAny)=> state.user.currentUser);
+  const currentUser = useSelector(
+    (state: RootStateOrAny) => state.user.currentUser
+  );
+  const { submittedOffer } = useSelector(
+    (state: RootStateOrAny) => state.offer
+  );
   const userId = JSON.parse(currentUser).userId;
 
+  const dispatch = useDispatch();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
 
@@ -52,30 +57,32 @@ const OfferHistory = () => {
           currentOffer.numberOfPayments = response[key].numberOfPayments;
 
           if (response[key].offerId === `-${offerId}`) {
-            let targetArray: Offer[] = []
-            targetArray.push(currentOffer)
-            setTargetOffer(targetArray);
-          } else if( response[key].userId === userId) {
+            dispatch(
+              offerActions.setSubmittedOffer({ submittedOffer: currentOffer })
+            );
+            // setTargetOffer(targetArray);
+          } else if (response[key].userId === userId) {
             loadedOffers.push(currentOffer);
           }
         }
-        setOtherOffers(loadedOffers);
+        dispatch(
+          offerActions.setPreviousOffers({ previousOffers: loadedOffers })
+        );
+        // setOtherOffers(loadedOffers);
       })
       .catch((error) => error);
-  }, [offerId, userId]);
+  }, [offerId, userId, dispatch]);
 
   return (
-    <div style={{display: 'flex', justifyContent: 'center'}}>
-      {targetOffer && (
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
+      {submittedOffer && (
         <OfferDisplay
           mainHeader={mainHeader}
           targetHeader={targetHeader}
           offersHeader={offerHeader}
-          targetOffers={targetOffer}
-          offers={otherOffers}
         />
       )}
-      {!targetOffer && <OfferDisplay mainHeader={mainHeader} offers={otherOffers} />}
+      {!submittedOffer && <OfferDisplay mainHeader={mainHeader} />}
     </div>
   );
 };

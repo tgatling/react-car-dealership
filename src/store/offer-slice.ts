@@ -4,16 +4,24 @@ import { Offer } from '../models/offer';
 const offerSlice = createSlice({
     name: 'offer',
     initialState: {
-        targetOffers: [] as Offer[],
-        offers: [] as Offer[],
+        submittedOffer: {} as Offer,
+        previousOffers: [] as Offer[],
+        pendingOffers: [] as Offer[],
+        processedOffers: [] as Offer[],
     },
     reducers: {
-        setTargetOffers(state, action: PayloadAction<{targetOffers: Offer[]}>){
-            state.targetOffers = action.payload.targetOffers;
+        setSubmittedOffer(state, action: PayloadAction<{submittedOffer: Offer}>){
+            state.submittedOffer = action.payload.submittedOffer;
         },
-        setOffers(state, action: PayloadAction<{offers: Offer[]}>){
-            state.offers = action.payload.offers;
-        }
+        setPreviousOffers(state, action: PayloadAction<{previousOffers: Offer[]}>){
+            state.previousOffers = action.payload.previousOffers;
+        },
+        setPendingOffers(state, action: PayloadAction<{pendingOffers: Offer[]}>){
+            state.pendingOffers = action.payload.pendingOffers;
+        },
+        setProcessedOffers(state, action: PayloadAction<{processedOffers: Offer[]}>){
+            state.processedOffers = action.payload.processedOffers;
+        },
     }
 });
 
