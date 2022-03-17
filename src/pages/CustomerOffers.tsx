@@ -12,27 +12,32 @@ const CustomerOffers = () => {
   useEffect(() => {
     offerService
       .getAllOffers()
-      .then((response) => {
+      .then((result) => {
+        let loadedOffers: Offer[] = [];
+        for (const key in result) {
+          loadedOffers.push({
+            offerId: result[key].offerId,
+            offerDate: result[key].offerDate,
+            status: result[key].status,
+            carId: result[key].carId,
+            userId: result[key].userId,
+            empUserId: result[key].empUserId,
+            carTotal: result[key].carTotal,
+            downPayment: result[key].downPayment,
+            numberOfPayments: result[key].numberOfPayments,
+          });
+        }
+
         let loadedPending: Offer[] = [];
         let loadedProcessed: Offer[] = [];
-        for (const key in response) {
-          let currentOffer = new Offer();
-          currentOffer.offerId = response[key].offerId;
-          currentOffer.offerDate = response[key].offerDate;
-          currentOffer.status = response[key].status;
-          currentOffer.carId = response[key].carId;
-          currentOffer.userId = response[key].userId;
-          currentOffer.empUserId = response[key].empUserId;
-          currentOffer.carTotal = response[key].carTotal;
-          currentOffer.downPayment = response[key].downPayment;
-          currentOffer.numberOfPayments = response[key].numberOfPayments;
-          
-          if (response[key].status === PENDING_STATUS) {
-            loadedPending.push(currentOffer);
+
+        loadedOffers.forEach((offer) => {
+          if (offer.status === PENDING_STATUS) {
+            loadedPending.push(offer);
           } else {
-            loadedProcessed.push(currentOffer);
+            loadedProcessed.push(offer);
           }
-        }
+        });
 
         loadedPending.sort((a, b) =>
           a.carId < b.carId ? -1 : a.carId > b.carId ? 1 : 0
@@ -42,8 +47,12 @@ const CustomerOffers = () => {
           a.carId < b.carId ? -1 : a.carId > b.carId ? 1 : 0
         );
 
-        dispatch(offerActions.setPendingOffers({ pendingOffers: loadedPending }));
-        dispatch(offerActions.setProcessedOffers({ processedOffers: loadedProcessed }));
+        dispatch(
+          offerActions.setPendingOffers({ pendingOffers: loadedPending })
+        );
+        dispatch(
+          offerActions.setProcessedOffers({ processedOffers: loadedProcessed })
+        );
       })
       .catch((error) => error);
   }, [dispatch]);
