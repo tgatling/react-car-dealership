@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { useSelector, RootStateOrAny } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 import OfferForm from './OfferForm';
 import OfferTable from './OfferTable';
 import { Offer } from '../../../models/offer';
-import { MAKING_AN_OFFER_INSTRUCTIONS } from '../../../models/constants';
+import {
+  MAKING_AN_OFFER_INSTRUCTIONS,
+  CURRENT_OFFERS,
+} from '../../../models/constants';
 import styles from './OfferForm.module.css';
 import PaymentInfo from '../payments/PaymentInfo';
 import offerService from '../../../services/offer.service';
@@ -20,8 +23,12 @@ const OfferDetails = ({ carTotal, showHeading }: offerFormProps) => {
   const [downPayment, setDownPayment] = useState<number | string>('');
   const [numberOfPayments, setNumberOfPayments] = useState<number | string>('');
   const [httpError, setHttpError] = useState(null);
+
   const params = useParams<{ carId: string }>();
+  const history = useHistory();
+
   let customerOffer = new Offer();
+
   const currentUser = useSelector(
     (state: RootStateOrAny) => state.user.currentUser
   );
@@ -41,23 +48,51 @@ const OfferDetails = ({ carTotal, showHeading }: offerFormProps) => {
   };
 
   const submitOfferHandler = () => {
-    console.log(`
-    ${JSON.stringify(customerOffer)}
-    `);
+    let previousOffer: { offerId: string } = { offerId: '' };
+
+    if (!downPayment || !numberOfPayments) {
+      return;
+    }
 
     offerService
-      .addOffer(customerOffer)
-      .then((response) => {
-        customerOffer.offerId = response.name;
-        offerService
-          .updateOffer(customerOffer, response.name)
-          .then((result) => {
-            console.log(result);
-          })
-          .catch((error) => setHttpError(error));
-          
+      .getAllOffers()
+      .then((result) => {
+        //check to see if user has already placed offer on this car
+        for (const key in result) {
+          if (
+            result[key].carId === customerOffer.carId &&
+            result[key].userId === customerOffer.userId
+          ) {
+            customerOffer.offerId = result[key].offerId;
+            previousOffer.offerId = result[key].offerId;
+          }
+        }
+
+        if (previousOffer.offerId) {
+          offerService
+            .updateOffer(customerOffer, previousOffer.offerId)
+            .then((response) => response)
+            .catch((error) => setHttpError(error));
+          history.push(`${CURRENT_OFFERS}?type=update${previousOffer.offerId}`);
+        } else {
+          offerService
+            .addOffer(customerOffer)
+            .then((response) => {
+              console.log(`Added`);
+              customerOffer.offerId = response.name;
+              offerService
+                .updateOffer(customerOffer, response.name)
+                .then((res) => {
+                  history.push(
+                    `${CURRENT_OFFERS}?type=add${customerOffer.offerId}`
+                  );
+                })
+                .catch((error) => setHttpError(error));
+            })
+            .catch((error) => setHttpError(error));
+        }
       })
-      .catch((error) => setHttpError(error));
+      .catch((error) => error);
   };
 
   return (

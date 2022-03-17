@@ -17,7 +17,13 @@ import {
   LOGIN_REGISTER,
   EDIT_SPECIFIC_CAR,
   VIEW_SPECIFIC_CAR,
+  CURRENT_OFFERS,
+  PAYMENT_HISTORY,
+  CUSTOMER_OFFERS,
 } from '../../models/constants';
+import OfferHistory from '../../pages/OfferHistory';
+import PaymentHistory from '../../pages/PaymentHistory';
+import CustomerOffers from '../../pages/CustomerOffers';
 
 const Routing = () => {
   const loggedIn: boolean = useSelector(
@@ -49,6 +55,21 @@ const Routing = () => {
       {loggedIn && (
         <Route path={ADD_DEALER_CAR}>
           <AddCar />
+        </Route>
+      )}
+      {loggedIn && (
+        <Route path={CURRENT_OFFERS}>
+          <OfferHistory />
+        </Route>
+      )}
+      {loggedIn && (
+        <Route path={CUSTOMER_OFFERS}>
+          <CustomerOffers />
+        </Route>
+      )}
+      {loggedIn && (
+        <Route path={PAYMENT_HISTORY}>
+          <PaymentHistory />
         </Route>
       )}
       {!loggedIn && (

@@ -1,0 +1,11 @@
+.displayContainer {
+    display: flex;
+    flex-direction: column;
+    width: 1400px;
+    margin-bottom: 100px;
+}
+
+.displayContainer h1{
+    display: flex;
+    justify-content: center;
+}

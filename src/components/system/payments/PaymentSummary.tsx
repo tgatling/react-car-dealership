@@ -3,7 +3,7 @@ import React from 'react';
 import styles from './PaymentSummary.module.css';
 
 interface summaryProps {
-  onToggle: () => void;
+  onToggle?: () => void;
   equalPayments: boolean;
   numberOfPayments: number;
   paymentCalculations: { payment: number; amount: number; status: string }[];
@@ -36,7 +36,7 @@ const PaymentSummary = ({
         </div>
       )}
       <div className={styles.buttonContainer}>
-        <button onClick={onToggle}>View Full Payment Table</button>
+        {onToggle && <button onClick={onToggle}>View Full Payment Table</button>}
       </div>
     </div>
   );

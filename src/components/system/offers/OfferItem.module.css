@@ -1,0 +1,160 @@
+.itemContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 15px;
+  background-color: #ffffff;
+  padding: 10px 25px 10px 25px;
+  margin-top: 15px;
+}
+.viewContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 15px;
+  background-color: #7fffd4;
+  padding: 10px 25px 10px 25px;
+  margin-top: 15px;
+}
+.leftContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.leftContainer img {
+  width: 250px;
+  height: 140px;
+  display: block;
+}
+
+.leftContainer p {
+  font-size: 30px;
+}
+
+.imageContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 15px;
+}
+
+.rightContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.infoContainer {
+  margin: 0 0 0 30px;
+  border-left: solid;
+  border-width: 1px;
+  width: 750px;
+}
+
+.headerContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: -15px 0 0 30px;
+}
+
+.offerInfo {
+  display: flex;
+  flex-direction: row;
+  margin-left: 30px;
+}
+
+.offerInfo p {
+  font-size: 20px;
+  /* margin-right: 50px; */
+}
+
+.offerInfoLeft {
+  display: flex;
+  flex-direction: column;
+  margin-right: 30px;
+}
+
+.offerInfoRight {
+  display: flex;
+  flex-direction: column;
+  margin-top: 65px;
+}
+
+.infoRow {
+  display: flex;
+  flex-direction: row;
+}
+
+.label {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.onlyButton {
+  display: inline;
+}
+
+.buttonContainer button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 30px;
+  background-color: #dedede;
+  border-radius: 15px;
+  font-size: 25px;
+  padding: 15px 32px;
+  width: 150px;
+}
+
+.onlyButton button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 30px;
+  background-color: #dedede;
+  border-radius: 15px;
+  font-size: 25px;
+  padding: 15px 32px;
+  width: 150px;
+}
+
+.viewContainer p {
+  font-size: 20px;
+}
+
+.summaryButton {
+  color: #000080;
+}
+
+.summaryButton:hover {
+  background-color: #000080;
+  color: #ffffff;
+}
+
+.acceptButton {
+  color: #008000;
+}
+.acceptButton:hover {
+  background-color: #008000;
+  color: #ffffff;
+}
+
+.rejectButton {
+  color: #ff0000;
+}
+
+.rejectButton:hover {
+  background-color: #ff0000;
+  color: #ffffff;
+}

@@ -1,10 +1,4 @@
-import { Offer } from '../../models/offer';
 import { Payments } from '../../models/payments';
-
-// OFFERS
-export const acceptOffer = (offer: Offer) => {};
-
-export const rejectAllOtherOffers = (carId: string, offerId: string) => {};
 
 // PAYMENTS
 

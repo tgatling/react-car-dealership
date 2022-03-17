@@ -62,7 +62,7 @@ const CarForm = ({ addCarForm }: carFormProps) => {
           setMake(result.make);
           setModel(result.model);
           setPrice(result.price);
-          setCarId(result.carId);
+          setCarId(params.carId);
           if (result.url) {
             setURL(result.url);
           }
