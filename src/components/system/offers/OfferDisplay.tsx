@@ -5,8 +5,9 @@ import styles from './OfferDisplay.module.css';
 import AcceptanceConfirmation from './AcceptanceConfirmation';
 import RejectionConfirmation from './RejectionConfirmation';
 import { useSelector, RootStateOrAny } from 'react-redux';
-import {useLocation} from 'react-router-dom';
-import {CUSTOMER_OFFERS} from '../../../models/constants';
+import { useLocation } from 'react-router-dom';
+import { CUSTOMER_OFFERS } from '../../../models/constants';
+import logo from '../../../images/family-car.png';
 
 interface displayProps {
   mainHeader?: string;
@@ -19,51 +20,44 @@ const OfferDisplay = ({
   targetHeader,
   offersHeader,
 }: displayProps) => {
-  const [decision, setDecision] = useState('');
   const [offer, setOffer] = useState<Offer>(new Offer());
-  const location = useLocation()
+  const location = useLocation();
 
-  const { pendingOffers, processedOffers, submittedOffer, previousOffers } = useSelector(
-    (state: RootStateOrAny) => state.offer
-  );
+  const {
+    decision,
+    pendingOffers,
+    processedOffers,
+    submittedOffer,
+    previousOffers,
+  } = useSelector((state: RootStateOrAny) => state.offer);
 
   let targetOffers: Offer[] = [];
   let otherOffers: Offer[] = [];
 
-  if(location.pathname === CUSTOMER_OFFERS){
+  if (location.pathname === CUSTOMER_OFFERS) {
     targetOffers = pendingOffers;
     otherOffers = processedOffers;
   } else {
-    targetOffers.push(submittedOffer);
+    targetOffers = submittedOffer;
     otherOffers = previousOffers;
   }
 
+  useEffect(() => {}, [offer.status]);
 
-  useEffect(() => {
-    // check to see if component re-renders after offer status is changed
-  }, [offer.status]);
-
-  const submittedHandler = (accepted: boolean, offer: Offer) => {
-    console.log(`submit handler`);
-    console.log(`accepted: ${accepted}`);
-    console.log(offer);
-    if (accepted) {
-      setDecision('ACCEPTED');
-    } else {
-      setDecision('REJECTED');
-    }
-    console.log(decision);
+  const submittedHandler = (offer: Offer) => {
     setOffer(offer);
   };
 
   return (
     <div className={styles.displayContainer}>
-      <h1>{mainHeader}</h1>
+      {targetOffers.length !== 0 && otherOffers.length !== 0 && (
+        <h1>{mainHeader}</h1>
+      )}
 
       {decision === 'ACCEPTED' && <AcceptanceConfirmation offer={offer} />}
       {decision === 'REJECTED' && <RejectionConfirmation offer={offer} />}
 
-      {targetOffers && targetOffers.length > 0 && (
+      {targetOffers.length !== 0 && (
         <div>
           <h2>{targetHeader}</h2>
           {targetOffers.map((targetOffer: Offer) => {
@@ -77,7 +71,7 @@ const OfferDisplay = ({
           })}
         </div>
       )}
-      {otherOffers.length > 0 && (
+      {otherOffers.length !== 0 && (
         <div>
           <h2>{offersHeader}</h2>
           {otherOffers.map((offer: Offer) => {
@@ -91,8 +85,11 @@ const OfferDisplay = ({
           })}
         </div>
       )}
-      {!targetOffers && otherOffers.length === 0 && (
-        <p>There are currently no offers to display.</p>
+      {targetOffers.length === 0 && otherOffers.length === 0 && (
+        <div className={styles.message}>
+          <img src={logo} alt='' />
+          <p>There are currently no offers to display.</p>
+        </div>
       )}
     </div>
   );

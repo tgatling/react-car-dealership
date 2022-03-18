@@ -1,28 +1,32 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Offer } from '../models/offer';
 
 const offerSlice = createSlice({
-    name: 'offer',
-    initialState: {
-        submittedOffer: {} as Offer,
-        previousOffers: [] as Offer[],
-        pendingOffers: [] as Offer[],
-        processedOffers: [] as Offer[],
+  name: 'offer',
+  initialState: {
+    decision: '',
+    submittedOffer: [] as Offer[],
+    previousOffers: [] as Offer[],
+    pendingOffers: [] as Offer[],
+    processedOffers: [] as Offer[],
+  },
+  reducers: {
+    setDecision(state, action: PayloadAction<string>) {
+      state.decision = action.payload;
     },
-    reducers: {
-        setSubmittedOffer(state, action: PayloadAction<{submittedOffer: Offer}>){
-            state.submittedOffer = action.payload.submittedOffer;
-        },
-        setPreviousOffers(state, action: PayloadAction<{previousOffers: Offer[]}>){
-            state.previousOffers = action.payload.previousOffers;
-        },
-        setPendingOffers(state, action: PayloadAction<{pendingOffers: Offer[]}>){
-            state.pendingOffers = action.payload.pendingOffers;
-        },
-        setProcessedOffers(state, action: PayloadAction<{processedOffers: Offer[]}>){
-            state.processedOffers = action.payload.processedOffers;
-        },
-    }
+    setSubmittedOffer(state, action: PayloadAction<Offer[]>) {
+      state.submittedOffer = action.payload;
+    },
+    setPreviousOffers(state, action: PayloadAction<Offer[]>) {
+      state.previousOffers = action.payload;
+    },
+    setPendingOffers(state, action: PayloadAction<Offer[]>) {
+      state.pendingOffers = action.payload;
+    },
+    setProcessedOffers(state, action: PayloadAction<Offer[]>) {
+      state.processedOffers = action.payload;
+    },
+  },
 });
 
 export const offerActions = offerSlice.actions;

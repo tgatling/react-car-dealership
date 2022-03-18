@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import {useDispatch, useSelector, RootStateOrAny} from 'react-redux';
 
 import { offerActions } from '../store/offer-slice';
 import { Offer, PENDING_STATUS } from '../models/offer';
@@ -8,6 +8,7 @@ import OfferDisplay from '../components/system/offers/OfferDisplay';
 
 const CustomerOffers = () => {
   const dispatch = useDispatch();
+  const { decision } = useSelector((state: RootStateOrAny) => state.offer);
 
   useEffect(() => {
     offerService
@@ -48,14 +49,14 @@ const CustomerOffers = () => {
         );
 
         dispatch(
-          offerActions.setPendingOffers({ pendingOffers: loadedPending })
+          offerActions.setPendingOffers(loadedPending)
         );
         dispatch(
-          offerActions.setProcessedOffers({ processedOffers: loadedProcessed })
+          offerActions.setProcessedOffers(loadedProcessed)
         );
       })
       .catch((error) => error);
-  }, [dispatch]);
+  }, [dispatch, decision]);
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center' }}>
