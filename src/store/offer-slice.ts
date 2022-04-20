@@ -4,20 +4,12 @@ import { Offer } from '../models/offer';
 const offerSlice = createSlice({
   name: 'offer',
   initialState: {
-    // decision: '',
-    // decisionCount: 0,
     submittedOffer: [] as Offer[],
     previousOffers: [] as Offer[],
     pendingOffers: [] as Offer[],
     processedOffers: [] as Offer[],
   },
   reducers: {
-    // setDecision(state, action: PayloadAction<string>) {
-    //   state.decision = action.payload;
-    // },
-    // incrementDecisionCount(state){
-    //     state.decisionCount++;
-    // },
     setSubmittedOffer(state, action: PayloadAction<Offer[]>) {
       state.submittedOffer = action.payload;
     },

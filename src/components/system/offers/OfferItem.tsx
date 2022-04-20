@@ -29,7 +29,7 @@ const OfferItem = ({ offer, onResponse }: itemProps) => {
   );
   const empUserId = JSON.parse(currentUser).userId;
   const [car, setCar] = useState<Car | null>(null);
-  const [view, setView] = useState(false);
+  const [viewPaymentSummary, setViewPaymentSummary] = useState(false);
   const [confirmAccept, setConfirmAccept] = useState(false);
   const [confirmReject, setConfirmReject] = useState(false);
   const [customerOffers, setCustomerOffers] = useState(false);
@@ -52,10 +52,12 @@ const OfferItem = ({ offer, onResponse }: itemProps) => {
     }/${offerDate.getDate()}/${offerDate.getFullYear()}`;
   }
 
+  // Payment summary display
   const toggleView = () => {
-    setView(!view);
+    setViewPaymentSummary(!viewPaymentSummary);
   };
 
+  // Decision selection before confirmation
   const toggleAccept = () => {
     if (confirmReject) {
       setConfirmReject(false);
@@ -71,6 +73,7 @@ const OfferItem = ({ offer, onResponse }: itemProps) => {
   };
 
   const confirmOfferHandler = async (accepted: boolean) => {
+    // update offer information in the database and return response
     let newOffer = new Offer();
 
     newOffer.offerId = offer.offerId;
@@ -83,11 +86,9 @@ const OfferItem = ({ offer, onResponse }: itemProps) => {
     newOffer.numberOfPayments = offer.numberOfPayments;
 
     if (accepted) {
-      console.log('Accepted');
       newOffer.status = ACCEPTED_STATUS;
       setConfirmAccept(false);
     } else {
-      console.log('Rejected');
       newOffer.status = REJECTED_STATUS;
       setConfirmReject(false);
     }
@@ -103,12 +104,14 @@ const OfferItem = ({ offer, onResponse }: itemProps) => {
 
   };
 
+  // Get summary information to display
   let { paymentCalculations } = calculatePaymentsFromOffer(
     offer.carTotal,
     offer.downPayment,
     offer.numberOfPayments
   );
 
+  // Determine if first payment is equal to all other payments
   let equalPayments: boolean;
 
   if (paymentCalculations.length > 1) {
@@ -124,11 +127,15 @@ const OfferItem = ({ offer, onResponse }: itemProps) => {
     <div>
       <div className={styles.itemContainer}>
         <div className={styles.leftContainer}>
+          
+          {/* Car and Offer Status */}
           <div className={styles.imageContainer}>
             <img src={car?.url} alt='' />
             <p>{`STATUS: ${offer.status}`}</p>
           </div>
           <div className={styles.infoContainer}>
+
+            {/* Offer Information */}
             <div className={styles.headerContainer}>
               <div>
                 <h1>{`${car?.year} ${car?.make} ${car?.model} - $${car?.price}`}</h1>
@@ -162,6 +169,8 @@ const OfferItem = ({ offer, onResponse }: itemProps) => {
             </div>
           </div>
         </div>
+
+        {/* Offer Buttons: Summary, Accept, and Reject */}
         <div className={styles.rightContainer}>
           <div
             className={
@@ -169,7 +178,7 @@ const OfferItem = ({ offer, onResponse }: itemProps) => {
             }
           >
             <button className={styles.summaryButton} onClick={toggleView}>
-              {!view ? 'Summary' : 'Hide'}
+              {!viewPaymentSummary ? 'Summary' : 'Hide'}
             </button>
             {customerOffers && offer.status === PENDING_STATUS && (
               <button className={styles.acceptButton} onClick={toggleAccept}>
@@ -184,7 +193,9 @@ const OfferItem = ({ offer, onResponse }: itemProps) => {
           </div>
         </div>
       </div>
-      {view && (
+
+      {/* Display payment summary information */}
+      {viewPaymentSummary && (
         <div className={styles.viewContainer}>
           <PaymentSummary
             equalPayments={equalPayments}
@@ -195,6 +206,7 @@ const OfferItem = ({ offer, onResponse }: itemProps) => {
         </div>
       )}
 
+        {/* Prompt for confirmation for offer decision */}
       {confirmAccept && (
         <ConfirmOption
           accepted={true}

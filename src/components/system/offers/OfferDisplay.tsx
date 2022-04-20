@@ -6,12 +6,13 @@ import { useSelector, RootStateOrAny } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { CUSTOMER_OFFERS } from '../../../models/constants';
 import logo from '../../../images/family-car.png';
+import {randomBytes} from 'crypto';
 
 interface displayProps {
   mainHeader?: string;
   targetHeader?: string;
   offersHeader?: string;
-  onResponse: (response: string | Offer) => void;
+  onResponse?: (response: string | Offer) => void;
 }
 
 const OfferDisplay = ({
@@ -22,8 +23,8 @@ const OfferDisplay = ({
 }: displayProps) => {
   const location = useLocation();
 
+  // Offer groupings to display depending on page: Customer Offers or Current Offers
   const {
-    // decision,
     pendingOffers,
     processedOffers,
     submittedOffer,
@@ -33,6 +34,7 @@ const OfferDisplay = ({
   let targetOffers: Offer[] = [];
   let otherOffers: Offer[] = [];
 
+  // determine the page and what content to display
   if (location.pathname === CUSTOMER_OFFERS) {
     targetOffers = pendingOffers;
     otherOffers = processedOffers;
@@ -42,16 +44,17 @@ const OfferDisplay = ({
   }
 
   const submittedHandler = (response: string | Offer) => {
-    onResponse(response);
-    console.log(response);
+    if (onResponse) onResponse(response); //Send back response from updating the offer
   };
 
   return (
     <div className={styles.displayContainer}>
+      {/* Main Header - only displayed when there are offers */}
       {targetOffers.length !== 0 && otherOffers.length !== 0 && (
         <h1>{mainHeader}</h1>
       )}
 
+        {/* Submitted or Pending offers depending on page */}
       {targetOffers.length !== 0 && (
         <div>
           <h2>{targetHeader}</h2>
@@ -66,6 +69,8 @@ const OfferDisplay = ({
           })}
         </div>
       )}
+
+      {/* Processed or Previous offers depending on page */}
       {otherOffers.length !== 0 && (
         <div>
           <h2>{offersHeader}</h2>
@@ -80,6 +85,8 @@ const OfferDisplay = ({
           })}
         </div>
       )}
+
+      {/* Message when there are no offers to display */}
       {targetOffers.length === 0 && otherOffers.length === 0 && (
         <div className={styles.message}>
           <img src={logo} alt='' />

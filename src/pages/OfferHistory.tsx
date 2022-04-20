@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, RootStateOrAny, useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { Offer } from '../models/offer';
@@ -7,7 +7,6 @@ import offerService from '../services/offer.service';
 import OfferDisplay from '../components/system/offers/OfferDisplay';
 
 const OfferHistory = () => {
-  const [response, setResponse] = useState<string | Offer>('');
 
   const currentUser = useSelector(
     (state: RootStateOrAny) => state.user.currentUser
@@ -21,6 +20,7 @@ const OfferHistory = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
 
+  // Get confirmation type and offer from query parameters
   const param = queryParams.get('type');
   const type = param?.split('-', 1);
   const offerId = param?.substring(param.indexOf('-') + 1);
@@ -30,6 +30,7 @@ const OfferHistory = () => {
   let targetHeader = 'Here is the offer you just submitted: ';
   let offerHeader = 'Previous Offers';
 
+  // Confirmation header after adding or updating an offer
   if (type) {
     if (type[0] === 'add') {
       action = 'added';
@@ -38,6 +39,7 @@ const OfferHistory = () => {
     }
     mainHeader = `Your offer has been successfully ${action}!`;
   } else {
+    // No confirmation; Display regular headere for offer history
     mainHeader = 'Offer History';
   }
 
@@ -65,8 +67,10 @@ const OfferHistory = () => {
 
         loadedOffers.forEach((offer) => {
           if (offer.offerId === `-${offerId}`) {
+            // Recently submitted offer for confirmation
             loadedSubmitted.push(offer);
           } else if (offer.userId === userId) {
+           // All of the other offers submitted by the current user
             loadedPrevious.push(offer);
           }
         });
@@ -75,7 +79,7 @@ const OfferHistory = () => {
         dispatch(offerActions.setPreviousOffers(loadedPrevious));
       })
       .catch((error) => error);
-  }, [offerId, userId, dispatch, response]);
+  }, [offerId, userId, dispatch]);
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -84,10 +88,9 @@ const OfferHistory = () => {
           mainHeader={mainHeader}
           targetHeader={targetHeader}
           offersHeader={offerHeader}
-          onResponse={setResponse}
         />
       )}
-      {!submittedOffer && <OfferDisplay mainHeader={mainHeader} onResponse={setResponse}/>}
+      {!submittedOffer && <OfferDisplay mainHeader={mainHeader} />}
     </div>
   );
 };

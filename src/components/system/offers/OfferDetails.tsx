@@ -78,7 +78,6 @@ const OfferDetails = ({ carTotal, showHeading }: offerFormProps) => {
           offerService
             .addOffer(customerOffer)
             .then((response) => {
-              console.log(`Added`);
               customerOffer.offerId = response.name;
               offerService
                 .updateOffer(customerOffer, response.name)

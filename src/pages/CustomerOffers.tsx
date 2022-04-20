@@ -8,6 +8,8 @@ import OfferDisplay from '../components/system/offers/OfferDisplay';
 
 const CustomerOffers = () => {
   const dispatch = useDispatch();
+
+  // response from updating offer status
   const [response, setResponse] = useState<string | Offer>('');
 
   useEffect(() => {
@@ -40,6 +42,8 @@ const CustomerOffers = () => {
           }
         });
 
+
+        // sort cars based on id so offers on the same car appear together
         loadedPending.sort((a, b) =>
           a.carId < b.carId ? -1 : a.carId > b.carId ? 1 : 0
         );
