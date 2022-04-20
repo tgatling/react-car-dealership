@@ -1,16 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { Offer } from '../models/offer';
-import offerService from '../services/offer.service';
+import React, { useEffect } from 'react';
+import { useSelector, RootStateOrAny, useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
+import { Offer } from '../models/offer';
+import { offerActions } from '../store/offer-slice';
+import offerService from '../services/offer.service';
 import OfferDisplay from '../components/system/offers/OfferDisplay';
-import {useSelector, RootStateOrAny} from 'react-redux';
 
 const OfferHistory = () => {
-  const [targetOffer, setTargetOffer] = useState<Offer[]>([]);
-  const [otherOffers, setOtherOffers] = useState<Offer[]>([]);
-  const currentUser = useSelector((state: RootStateOrAny)=> state.user.currentUser);
+  const currentUser = useSelector(
+    (state: RootStateOrAny) => state.user.currentUser
+  );
+  const { submittedOffer } = useSelector(
+    (state: RootStateOrAny) => state.offer
+  );
   const userId = JSON.parse(currentUser).userId;
 
+  const dispatch = useDispatch();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
 
@@ -37,45 +42,49 @@ const OfferHistory = () => {
   useEffect(() => {
     offerService
       .getAllOffers()
-      .then((response) => {
+      .then((result) => {
         let loadedOffers: Offer[] = [];
-        for (const key in response) {
-          let currentOffer = new Offer();
-          currentOffer.offerId = response[key].offerId;
-          currentOffer.offerDate = response[key].offerDate;
-          currentOffer.status = response[key].status;
-          currentOffer.carId = response[key].carId;
-          currentOffer.userId = response[key].userId;
-          currentOffer.empUserId = response[key].empUserId;
-          currentOffer.carTotal = response[key].carTotal;
-          currentOffer.downPayment = response[key].downPayment;
-          currentOffer.numberOfPayments = response[key].numberOfPayments;
-
-          if (response[key].offerId === `-${offerId}`) {
-            let targetArray: Offer[] = []
-            targetArray.push(currentOffer)
-            setTargetOffer(targetArray);
-          } else if( response[key].userId === userId) {
-            loadedOffers.push(currentOffer);
-          }
+        for (const key in result) {
+          loadedOffers.push({
+            offerId: result[key].offerId,
+            offerDate: result[key].offerDate,
+            status: result[key].status,
+            carId: result[key].carId,
+            userId: result[key].userId,
+            empUserId: result[key].empUserId,
+            carTotal: result[key].carTotal,
+            downPayment: result[key].downPayment,
+            numberOfPayments: result[key].numberOfPayments,
+          });
         }
-        setOtherOffers(loadedOffers);
+
+        let loadedSubmitted: Offer[] = [];
+        let loadedPrevious: Offer[] = [];
+
+        loadedOffers.forEach((offer) => {
+          if (offer.offerId === `-${offerId}`) {
+            loadedSubmitted.push(offer);
+          } else if (offer.userId === userId) {
+            loadedPrevious.push(offer);
+          }
+        });
+
+        dispatch(offerActions.setSubmittedOffer(loadedSubmitted));
+        dispatch(offerActions.setPreviousOffers(loadedPrevious));
       })
       .catch((error) => error);
-  }, [offerId, userId]);
+  }, [offerId, userId, dispatch]);
 
   return (
-    <div style={{display: 'flex', justifyContent: 'center'}}>
-      {targetOffer && (
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
+      {submittedOffer && (
         <OfferDisplay
           mainHeader={mainHeader}
           targetHeader={targetHeader}
           offersHeader={offerHeader}
-          targetOffers={targetOffer}
-          offers={otherOffers}
         />
       )}
-      {!targetOffer && <OfferDisplay mainHeader={mainHeader} offers={otherOffers} />}
+      {!submittedOffer && <OfferDisplay mainHeader={mainHeader} />}
     </div>
   );
 };

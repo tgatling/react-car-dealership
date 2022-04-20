@@ -1,57 +1,68 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import {useDispatch, useSelector, RootStateOrAny} from 'react-redux';
+
+import { offerActions } from '../store/offer-slice';
 import { Offer, PENDING_STATUS } from '../models/offer';
 import offerService from '../services/offer.service';
 import OfferDisplay from '../components/system/offers/OfferDisplay';
 
 const CustomerOffers = () => {
-  const [pendingOffers, setPendingOffers] = useState<Offer[]>([]);
-  const [processedOffers, setProcessedOffers] = useState<Offer[]>([]);
+  const dispatch = useDispatch();
+  const { decision } = useSelector((state: RootStateOrAny) => state.offer);
 
   useEffect(() => {
     offerService
       .getAllOffers()
-      .then((response) => {
+      .then((result) => {
+        let loadedOffers: Offer[] = [];
+        for (const key in result) {
+          loadedOffers.push({
+            offerId: result[key].offerId,
+            offerDate: result[key].offerDate,
+            status: result[key].status,
+            carId: result[key].carId,
+            userId: result[key].userId,
+            empUserId: result[key].empUserId,
+            carTotal: result[key].carTotal,
+            downPayment: result[key].downPayment,
+            numberOfPayments: result[key].numberOfPayments,
+          });
+        }
+
         let loadedPending: Offer[] = [];
         let loadedProcessed: Offer[] = [];
-        for (const key in response) {
-          let currentOffer = new Offer();
-          currentOffer.offerId = response[key].offerId;
-          currentOffer.offerDate = response[key].offerDate;
-          currentOffer.status = response[key].status;
-          currentOffer.carId = response[key].carId;
-          currentOffer.userId = response[key].userId;
-          currentOffer.empUserId = response[key].empUserId;
-          currentOffer.carTotal = response[key].carTotal;
-          currentOffer.downPayment = response[key].downPayment;
-          currentOffer.numberOfPayments = response[key].numberOfPayments;
-          if (response[key].status === PENDING_STATUS) {
-            loadedPending.push(currentOffer);
+
+        loadedOffers.forEach((offer) => {
+          if (offer.status === PENDING_STATUS) {
+            loadedPending.push(offer);
           } else {
-            loadedProcessed.push(currentOffer);
+            loadedProcessed.push(offer);
           }
-        }
+        });
 
         loadedPending.sort((a, b) =>
           a.carId < b.carId ? -1 : a.carId > b.carId ? 1 : 0
         );
-        
+
         loadedProcessed.sort((a, b) =>
           a.carId < b.carId ? -1 : a.carId > b.carId ? 1 : 0
         );
 
-        setPendingOffers(loadedPending);
-        setProcessedOffers(loadedProcessed);
+        dispatch(
+          offerActions.setPendingOffers(loadedPending)
+        );
+        dispatch(
+          offerActions.setProcessedOffers(loadedProcessed)
+        );
       })
       .catch((error) => error);
-  }, []);
+  }, [dispatch, decision]);
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center' }}>
       <OfferDisplay
         targetHeader='Pending Offers'
         offersHeader='Processed Offers'
-        targetOffers={pendingOffers}
-        offers={processedOffers}
       />
     </div>
   );

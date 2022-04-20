@@ -1,4 +1,4 @@
-import { Offer, REJECTED_STATUS } from '../../models/offer';
+import { Offer } from '../../models/offer';
 import offerService from '../../services/offer.service';
 
 // OFFERS

@@ -2,21 +2,24 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { Car } from '../../../models/car';
-import { Offer } from '../../../models/offer';
+import { Offer, PENDING_STATUS } from '../../../models/offer';
 import { calculatePaymentsFromOffer } from '../Calculations';
 import { CUSTOMER_OFFERS } from '../../../models/constants';
 import carService from '../../../services/car.service';
 import PaymentSummary from '../payments/PaymentSummary';
 import ConfirmOption from './ConfirmOption';
 import styles from './OfferItem.module.css';
+import { useDispatch } from 'react-redux';
+import { offerActions } from '../../../store/offer-slice';
 
 interface itemProps {
   offer: Offer;
-  submitHandler?: (accepted: boolean, offer: Offer) => void;
+  submitHandler?: (offer: Offer) => void;
 }
 
 const OfferItem = ({ offer, submitHandler }: itemProps) => {
   const location = useLocation();
+  const dispatch = useDispatch();
   const [car, setCar] = useState<Car | null>(null);
   const [view, setView] = useState(false);
   const [confirmAccept, setConfirmAccept] = useState(false);
@@ -60,14 +63,19 @@ const OfferItem = ({ offer, submitHandler }: itemProps) => {
   };
 
   const confirmOfferHandler = async (accepted: boolean) => {
+    let decision: string;
+
     if (accepted) {
+      decision = 'ACCEPTED';
       setConfirmAccept(false);
     } else {
+      decision = 'REJECTED';
       setConfirmReject(false);
     }
 
     if (submitHandler) {
-      submitHandler(accepted, offer);
+      submitHandler(offer);
+      dispatch(offerActions.setDecision(decision));
     }
   };
 
@@ -139,12 +147,12 @@ const OfferItem = ({ offer, submitHandler }: itemProps) => {
             <button className={styles.summaryButton} onClick={toggleView}>
               {!view ? 'Summary' : 'Hide'}
             </button>
-            {customerOffers && (
+            {customerOffers && offer.status === PENDING_STATUS && (
               <button className={styles.acceptButton} onClick={toggleAccept}>
                 Accept
               </button>
             )}
-            {customerOffers && (
+            {customerOffers && offer.status === PENDING_STATUS && (
               <button className={styles.rejectButton} onClick={toggleReject}>
                 Reject
               </button>
