@@ -6,7 +6,6 @@ import { useSelector, RootStateOrAny } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { CUSTOMER_OFFERS } from '../../../models/constants';
 import logo from '../../../images/family-car.png';
-import {randomBytes} from 'crypto';
 
 interface displayProps {
   mainHeader?: string;
