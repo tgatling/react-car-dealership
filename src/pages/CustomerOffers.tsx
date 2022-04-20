@@ -8,7 +8,7 @@ import OfferDisplay from '../components/system/offers/OfferDisplay';
 
 const CustomerOffers = () => {
   const dispatch = useDispatch();
-  const { decision } = useSelector((state: RootStateOrAny) => state.offer);
+  const { decisionCount } = useSelector((state: RootStateOrAny) => state.offer);
 
   useEffect(() => {
     offerService
@@ -56,7 +56,7 @@ const CustomerOffers = () => {
         );
       })
       .catch((error) => error);
-  }, [dispatch, decision]);
+  }, [dispatch, decisionCount]);
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center' }}>

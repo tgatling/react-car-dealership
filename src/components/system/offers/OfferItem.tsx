@@ -9,7 +9,7 @@ import carService from '../../../services/car.service';
 import PaymentSummary from '../payments/PaymentSummary';
 import ConfirmOption from './ConfirmOption';
 import styles from './OfferItem.module.css';
-import { useDispatch } from 'react-redux';
+import {useDispatch, useSelector, RootStateOrAny} from 'react-redux';
 import { offerActions } from '../../../store/offer-slice';
 
 interface itemProps {
@@ -20,6 +20,7 @@ interface itemProps {
 const OfferItem = ({ offer, submitHandler }: itemProps) => {
   const location = useLocation();
   const dispatch = useDispatch();
+  const {decisionCount} = useSelector((state: RootStateOrAny) => state.offer)
   const [car, setCar] = useState<Car | null>(null);
   const [view, setView] = useState(false);
   const [confirmAccept, setConfirmAccept] = useState(false);
@@ -34,7 +35,7 @@ const OfferItem = ({ offer, submitHandler }: itemProps) => {
     carService.getCar(offer.carId).then((response) => {
       setCar(response);
     });
-  }, [offer.carId, location.pathname]);
+  }, [offer.carId, location.pathname, decisionCount]);
 
   let date = '';
   if (offer.offerDate) {
@@ -76,6 +77,7 @@ const OfferItem = ({ offer, submitHandler }: itemProps) => {
     if (submitHandler) {
       submitHandler(offer);
       dispatch(offerActions.setDecision(decision));
+      dispatch(offerActions.incrementDecisionCount());
     }
   };
 
