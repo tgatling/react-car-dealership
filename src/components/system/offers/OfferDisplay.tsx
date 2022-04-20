@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Offer } from '../../../models/offer';
 import OfferItem from './OfferItem';
 import styles from './OfferDisplay.module.css';
-import AcceptanceConfirmation from './AcceptanceConfirmation';
-import RejectionConfirmation from './RejectionConfirmation';
 import { useSelector, RootStateOrAny } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { CUSTOMER_OFFERS } from '../../../models/constants';
@@ -13,18 +11,19 @@ interface displayProps {
   mainHeader?: string;
   targetHeader?: string;
   offersHeader?: string;
+  onResponse?: (response: string | Offer) => void;
 }
 
 const OfferDisplay = ({
   mainHeader,
   targetHeader,
   offersHeader,
+  onResponse,
 }: displayProps) => {
-  const [offer, setOffer] = useState<Offer>(new Offer());
   const location = useLocation();
 
+  // Offer groupings to display depending on page: Customer Offers or Current Offers
   const {
-    decision,
     pendingOffers,
     processedOffers,
     submittedOffer,
@@ -34,6 +33,7 @@ const OfferDisplay = ({
   let targetOffers: Offer[] = [];
   let otherOffers: Offer[] = [];
 
+  // determine the page and what content to display
   if (location.pathname === CUSTOMER_OFFERS) {
     targetOffers = pendingOffers;
     otherOffers = processedOffers;
@@ -42,21 +42,18 @@ const OfferDisplay = ({
     otherOffers = previousOffers;
   }
 
-  useEffect(() => {}, [offer.status]);
-
-  const submittedHandler = (offer: Offer) => {
-    setOffer(offer);
+  const submittedHandler = (response: string | Offer) => {
+    if (onResponse) onResponse(response); //Send back response from updating the offer
   };
 
   return (
     <div className={styles.displayContainer}>
+      {/* Main Header - only displayed when there are offers */}
       {targetOffers.length !== 0 && otherOffers.length !== 0 && (
         <h1>{mainHeader}</h1>
       )}
 
-      {decision === 'ACCEPTED' && <AcceptanceConfirmation offer={offer} />}
-      {decision === 'REJECTED' && <RejectionConfirmation offer={offer} />}
-
+        {/* Submitted or Pending offers depending on page */}
       {targetOffers.length !== 0 && (
         <div>
           <h2>{targetHeader}</h2>
@@ -65,12 +62,14 @@ const OfferDisplay = ({
               <OfferItem
                 key={targetOffer.offerId}
                 offer={targetOffer}
-                submitHandler={submittedHandler}
+                onResponse={submittedHandler}
               />
             );
           })}
         </div>
       )}
+
+      {/* Processed or Previous offers depending on page */}
       {otherOffers.length !== 0 && (
         <div>
           <h2>{offersHeader}</h2>
@@ -79,12 +78,14 @@ const OfferDisplay = ({
               <OfferItem
                 key={offer.offerId}
                 offer={offer}
-                submitHandler={submittedHandler}
+                onResponse={submittedHandler}
               />
             );
           })}
         </div>
       )}
+
+      {/* Message when there are no offers to display */}
       {targetOffers.length === 0 && otherOffers.length === 0 && (
         <div className={styles.message}>
           <img src={logo} alt='' />

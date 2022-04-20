@@ -2,27 +2,34 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { Car } from '../../../models/car';
-import { Offer, PENDING_STATUS } from '../../../models/offer';
+import {
+  Offer,
+  PENDING_STATUS,
+  ACCEPTED_STATUS,
+  REJECTED_STATUS,
+} from '../../../models/offer';
 import { calculatePaymentsFromOffer } from '../Calculations';
 import { CUSTOMER_OFFERS } from '../../../models/constants';
 import carService from '../../../services/car.service';
 import PaymentSummary from '../payments/PaymentSummary';
 import ConfirmOption from './ConfirmOption';
 import styles from './OfferItem.module.css';
-import {useDispatch, useSelector, RootStateOrAny} from 'react-redux';
-import { offerActions } from '../../../store/offer-slice';
+import { useSelector, RootStateOrAny } from 'react-redux';
+import offerService from '../../../services/offer.service';
 
 interface itemProps {
   offer: Offer;
-  submitHandler?: (offer: Offer) => void;
+  onResponse: (offer: Offer) => void;
 }
 
-const OfferItem = ({ offer, submitHandler }: itemProps) => {
+const OfferItem = ({ offer, onResponse }: itemProps) => {
   const location = useLocation();
-  const dispatch = useDispatch();
-  const {decisionCount} = useSelector((state: RootStateOrAny) => state.offer)
+  const currentUser = useSelector(
+    (state: RootStateOrAny) => state.user.currentUser
+  );
+  const empUserId = JSON.parse(currentUser).userId;
   const [car, setCar] = useState<Car | null>(null);
-  const [view, setView] = useState(false);
+  const [viewPaymentSummary, setViewPaymentSummary] = useState(false);
   const [confirmAccept, setConfirmAccept] = useState(false);
   const [confirmReject, setConfirmReject] = useState(false);
   const [customerOffers, setCustomerOffers] = useState(false);
@@ -35,7 +42,7 @@ const OfferItem = ({ offer, submitHandler }: itemProps) => {
     carService.getCar(offer.carId).then((response) => {
       setCar(response);
     });
-  }, [offer.carId, location.pathname, decisionCount]);
+  }, [offer.carId, location.pathname]);
 
   let date = '';
   if (offer.offerDate) {
@@ -45,10 +52,12 @@ const OfferItem = ({ offer, submitHandler }: itemProps) => {
     }/${offerDate.getDate()}/${offerDate.getFullYear()}`;
   }
 
+  // Payment summary display
   const toggleView = () => {
-    setView(!view);
+    setViewPaymentSummary(!viewPaymentSummary);
   };
 
+  // Decision selection before confirmation
   const toggleAccept = () => {
     if (confirmReject) {
       setConfirmReject(false);
@@ -64,29 +73,45 @@ const OfferItem = ({ offer, submitHandler }: itemProps) => {
   };
 
   const confirmOfferHandler = async (accepted: boolean) => {
-    let decision: string;
+    // update offer information in the database and return response
+    let newOffer = new Offer();
+
+    newOffer.offerId = offer.offerId;
+    newOffer.offerDate = offer.offerDate;
+    newOffer.empUserId = empUserId;
+    newOffer.userId = offer.userId;
+    newOffer.carId = offer.carId;
+    newOffer.carTotal = offer.carTotal;
+    newOffer.downPayment = offer.downPayment;
+    newOffer.numberOfPayments = offer.numberOfPayments;
 
     if (accepted) {
-      decision = 'ACCEPTED';
+      newOffer.status = ACCEPTED_STATUS;
       setConfirmAccept(false);
     } else {
-      decision = 'REJECTED';
+      newOffer.status = REJECTED_STATUS;
       setConfirmReject(false);
     }
 
-    if (submitHandler) {
-      submitHandler(offer);
-      dispatch(offerActions.setDecision(decision));
-      dispatch(offerActions.incrementDecisionCount());
-    }
+    offerService
+      .updateOffer(newOffer, offer.offerId)
+      .then((response) => {
+        onResponse(response);
+      })
+      .catch((error) => {
+        onResponse(error);
+      });
+
   };
 
+  // Get summary information to display
   let { paymentCalculations } = calculatePaymentsFromOffer(
     offer.carTotal,
     offer.downPayment,
     offer.numberOfPayments
   );
 
+  // Determine if first payment is equal to all other payments
   let equalPayments: boolean;
 
   if (paymentCalculations.length > 1) {
@@ -102,11 +127,15 @@ const OfferItem = ({ offer, submitHandler }: itemProps) => {
     <div>
       <div className={styles.itemContainer}>
         <div className={styles.leftContainer}>
+          
+          {/* Car and Offer Status */}
           <div className={styles.imageContainer}>
             <img src={car?.url} alt='' />
             <p>{`STATUS: ${offer.status}`}</p>
           </div>
           <div className={styles.infoContainer}>
+
+            {/* Offer Information */}
             <div className={styles.headerContainer}>
               <div>
                 <h1>{`${car?.year} ${car?.make} ${car?.model} - $${car?.price}`}</h1>
@@ -140,6 +169,8 @@ const OfferItem = ({ offer, submitHandler }: itemProps) => {
             </div>
           </div>
         </div>
+
+        {/* Offer Buttons: Summary, Accept, and Reject */}
         <div className={styles.rightContainer}>
           <div
             className={
@@ -147,7 +178,7 @@ const OfferItem = ({ offer, submitHandler }: itemProps) => {
             }
           >
             <button className={styles.summaryButton} onClick={toggleView}>
-              {!view ? 'Summary' : 'Hide'}
+              {!viewPaymentSummary ? 'Summary' : 'Hide'}
             </button>
             {customerOffers && offer.status === PENDING_STATUS && (
               <button className={styles.acceptButton} onClick={toggleAccept}>
@@ -162,7 +193,9 @@ const OfferItem = ({ offer, submitHandler }: itemProps) => {
           </div>
         </div>
       </div>
-      {view && (
+
+      {/* Display payment summary information */}
+      {viewPaymentSummary && (
         <div className={styles.viewContainer}>
           <PaymentSummary
             equalPayments={equalPayments}
@@ -173,6 +206,7 @@ const OfferItem = ({ offer, submitHandler }: itemProps) => {
         </div>
       )}
 
+        {/* Prompt for confirmation for offer decision */}
       {confirmAccept && (
         <ConfirmOption
           accepted={true}

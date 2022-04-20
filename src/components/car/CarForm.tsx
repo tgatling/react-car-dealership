@@ -140,7 +140,6 @@ const CarForm = ({ addCarForm }: carFormProps) => {
           carId
         )
         .then((response) => {
-          console.log(response);
           dispatch(carActions.editCar({id: carId, car: response}));
           setCarAdded(true);
         })

@@ -7,6 +7,7 @@ import offerService from '../services/offer.service';
 import OfferDisplay from '../components/system/offers/OfferDisplay';
 
 const OfferHistory = () => {
+
   const currentUser = useSelector(
     (state: RootStateOrAny) => state.user.currentUser
   );
@@ -19,6 +20,7 @@ const OfferHistory = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
 
+  // Get confirmation type and offer from query parameters
   const param = queryParams.get('type');
   const type = param?.split('-', 1);
   const offerId = param?.substring(param.indexOf('-') + 1);
@@ -28,6 +30,7 @@ const OfferHistory = () => {
   let targetHeader = 'Here is the offer you just submitted: ';
   let offerHeader = 'Previous Offers';
 
+  // Confirmation header after adding or updating an offer
   if (type) {
     if (type[0] === 'add') {
       action = 'added';
@@ -36,6 +39,7 @@ const OfferHistory = () => {
     }
     mainHeader = `Your offer has been successfully ${action}!`;
   } else {
+    // No confirmation; Display regular headere for offer history
     mainHeader = 'Offer History';
   }
 
@@ -63,8 +67,10 @@ const OfferHistory = () => {
 
         loadedOffers.forEach((offer) => {
           if (offer.offerId === `-${offerId}`) {
+            // Recently submitted offer for confirmation
             loadedSubmitted.push(offer);
           } else if (offer.userId === userId) {
+           // All of the other offers submitted by the current user
             loadedPrevious.push(offer);
           }
         });

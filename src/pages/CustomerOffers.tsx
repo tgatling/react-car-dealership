@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import {useDispatch, useSelector, RootStateOrAny} from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import {useDispatch} from 'react-redux';
 
 import { offerActions } from '../store/offer-slice';
 import { Offer, PENDING_STATUS } from '../models/offer';
@@ -8,7 +8,9 @@ import OfferDisplay from '../components/system/offers/OfferDisplay';
 
 const CustomerOffers = () => {
   const dispatch = useDispatch();
-  const { decisionCount } = useSelector((state: RootStateOrAny) => state.offer);
+
+  // response from updating offer status
+  const [response, setResponse] = useState<string | Offer>('');
 
   useEffect(() => {
     offerService
@@ -40,6 +42,8 @@ const CustomerOffers = () => {
           }
         });
 
+
+        // sort cars based on id so offers on the same car appear together
         loadedPending.sort((a, b) =>
           a.carId < b.carId ? -1 : a.carId > b.carId ? 1 : 0
         );
@@ -56,13 +60,14 @@ const CustomerOffers = () => {
         );
       })
       .catch((error) => error);
-  }, [dispatch, decisionCount]);
+  }, [dispatch, response]);
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center' }}>
       <OfferDisplay
         targetHeader='Pending Offers'
         offersHeader='Processed Offers'
+        onResponse={setResponse}
       />
     </div>
   );
