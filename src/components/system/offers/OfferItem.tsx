@@ -2,25 +2,32 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { Car } from '../../../models/car';
-import { Offer, PENDING_STATUS } from '../../../models/offer';
+import {
+  Offer,
+  PENDING_STATUS,
+  ACCEPTED_STATUS,
+  REJECTED_STATUS,
+} from '../../../models/offer';
 import { calculatePaymentsFromOffer } from '../Calculations';
 import { CUSTOMER_OFFERS } from '../../../models/constants';
 import carService from '../../../services/car.service';
 import PaymentSummary from '../payments/PaymentSummary';
 import ConfirmOption from './ConfirmOption';
 import styles from './OfferItem.module.css';
-import {useDispatch, useSelector, RootStateOrAny} from 'react-redux';
-import { offerActions } from '../../../store/offer-slice';
+import { useSelector, RootStateOrAny } from 'react-redux';
+import offerService from '../../../services/offer.service';
 
 interface itemProps {
   offer: Offer;
-  submitHandler?: (offer: Offer) => void;
+  onResponse: (offer: Offer) => void;
 }
 
-const OfferItem = ({ offer, submitHandler }: itemProps) => {
+const OfferItem = ({ offer, onResponse }: itemProps) => {
   const location = useLocation();
-  const dispatch = useDispatch();
-  const {decisionCount} = useSelector((state: RootStateOrAny) => state.offer)
+  const currentUser = useSelector(
+    (state: RootStateOrAny) => state.user.currentUser
+  );
+  const empUserId = JSON.parse(currentUser).userId;
   const [car, setCar] = useState<Car | null>(null);
   const [view, setView] = useState(false);
   const [confirmAccept, setConfirmAccept] = useState(false);
@@ -35,7 +42,7 @@ const OfferItem = ({ offer, submitHandler }: itemProps) => {
     carService.getCar(offer.carId).then((response) => {
       setCar(response);
     });
-  }, [offer.carId, location.pathname, decisionCount]);
+  }, [offer.carId, location.pathname]);
 
   let date = '';
   if (offer.offerDate) {
@@ -64,21 +71,36 @@ const OfferItem = ({ offer, submitHandler }: itemProps) => {
   };
 
   const confirmOfferHandler = async (accepted: boolean) => {
-    let decision: string;
+    let newOffer = new Offer();
+
+    newOffer.offerId = offer.offerId;
+    newOffer.offerDate = offer.offerDate;
+    newOffer.empUserId = empUserId;
+    newOffer.userId = offer.userId;
+    newOffer.carId = offer.carId;
+    newOffer.carTotal = offer.carTotal;
+    newOffer.downPayment = offer.downPayment;
+    newOffer.numberOfPayments = offer.numberOfPayments;
 
     if (accepted) {
-      decision = 'ACCEPTED';
+      console.log('Accepted');
+      newOffer.status = ACCEPTED_STATUS;
       setConfirmAccept(false);
     } else {
-      decision = 'REJECTED';
+      console.log('Rejected');
+      newOffer.status = REJECTED_STATUS;
       setConfirmReject(false);
     }
 
-    if (submitHandler) {
-      submitHandler(offer);
-      dispatch(offerActions.setDecision(decision));
-      dispatch(offerActions.incrementDecisionCount());
-    }
+    offerService
+      .updateOffer(newOffer, offer.offerId)
+      .then((response) => {
+        onResponse(response);
+      })
+      .catch((error) => {
+        onResponse(error);
+      });
+
   };
 
   let { paymentCalculations } = calculatePaymentsFromOffer(

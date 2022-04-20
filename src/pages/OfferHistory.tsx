@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, RootStateOrAny, useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { Offer } from '../models/offer';
@@ -7,6 +7,8 @@ import offerService from '../services/offer.service';
 import OfferDisplay from '../components/system/offers/OfferDisplay';
 
 const OfferHistory = () => {
+  const [response, setResponse] = useState<string | Offer>('');
+
   const currentUser = useSelector(
     (state: RootStateOrAny) => state.user.currentUser
   );
@@ -73,7 +75,7 @@ const OfferHistory = () => {
         dispatch(offerActions.setPreviousOffers(loadedPrevious));
       })
       .catch((error) => error);
-  }, [offerId, userId, dispatch]);
+  }, [offerId, userId, dispatch, response]);
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -82,9 +84,10 @@ const OfferHistory = () => {
           mainHeader={mainHeader}
           targetHeader={targetHeader}
           offersHeader={offerHeader}
+          onResponse={setResponse}
         />
       )}
-      {!submittedOffer && <OfferDisplay mainHeader={mainHeader} />}
+      {!submittedOffer && <OfferDisplay mainHeader={mainHeader} onResponse={setResponse}/>}
     </div>
   );
 };

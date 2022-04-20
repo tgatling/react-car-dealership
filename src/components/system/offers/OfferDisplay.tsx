@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Offer } from '../../../models/offer';
 import OfferItem from './OfferItem';
 import styles from './OfferDisplay.module.css';
-import AcceptanceConfirmation from './AcceptanceConfirmation';
-import RejectionConfirmation from './RejectionConfirmation';
 import { useSelector, RootStateOrAny } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { CUSTOMER_OFFERS } from '../../../models/constants';
@@ -13,18 +11,19 @@ interface displayProps {
   mainHeader?: string;
   targetHeader?: string;
   offersHeader?: string;
+  onResponse: (response: string | Offer) => void;
 }
 
 const OfferDisplay = ({
   mainHeader,
   targetHeader,
   offersHeader,
+  onResponse,
 }: displayProps) => {
-  const [offer, setOffer] = useState<Offer>(new Offer());
   const location = useLocation();
 
   const {
-    decision,
+    // decision,
     pendingOffers,
     processedOffers,
     submittedOffer,
@@ -42,10 +41,9 @@ const OfferDisplay = ({
     otherOffers = previousOffers;
   }
 
-  useEffect(() => {}, [offer.status]);
-
-  const submittedHandler = (offer: Offer) => {
-    setOffer(offer);
+  const submittedHandler = (response: string | Offer) => {
+    onResponse(response);
+    console.log(response);
   };
 
   return (
@@ -53,9 +51,6 @@ const OfferDisplay = ({
       {targetOffers.length !== 0 && otherOffers.length !== 0 && (
         <h1>{mainHeader}</h1>
       )}
-
-      {decision === 'ACCEPTED' && <AcceptanceConfirmation offer={offer} />}
-      {decision === 'REJECTED' && <RejectionConfirmation offer={offer} />}
 
       {targetOffers.length !== 0 && (
         <div>
@@ -65,7 +60,7 @@ const OfferDisplay = ({
               <OfferItem
                 key={targetOffer.offerId}
                 offer={targetOffer}
-                submitHandler={submittedHandler}
+                onResponse={submittedHandler}
               />
             );
           })}
@@ -79,7 +74,7 @@ const OfferDisplay = ({
               <OfferItem
                 key={offer.offerId}
                 offer={offer}
-                submitHandler={submittedHandler}
+                onResponse={submittedHandler}
               />
             );
           })}

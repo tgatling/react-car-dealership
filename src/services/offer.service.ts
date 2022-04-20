@@ -15,7 +15,7 @@ class OfferService {
         return await axios.post(`${this.URI}offers.json`, offer).then(result => result.data);
     }
 
-    async updateOffer(offer: Offer, id: string): Promise<{}> {
+    async updateOffer(offer: Offer, id: string): Promise<Offer> {
         return await axios.put(`${this.URI}offers/${id}.json`, offer).then(result => result.data);
     }
 
