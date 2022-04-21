@@ -15,6 +15,7 @@ export const LOGIN_REGISTER = '/login';
 export const VIEW_YOUR_CARS = '/my-cars';
 export const PAYMENT_HISTORY = '/payment-history';
 export const CURRENT_OFFERS = '/current-offers';
+export const MESSAGES = '/messages';
 
 // Other Routing
 export const EDIT_SPECIFIC_CAR = `${EDIT_OUR_LOT}/:carId`;
