@@ -8,6 +8,7 @@ import {useSelector, RootStateOrAny} from 'react-redux';
 const Header = () => {
   const userState = useSelector((state: RootStateOrAny)=> state.user);
   const [username, setUsername] = useState('to our site');
+  const [userId, setUserId] = useState('');
 
   useEffect(()=>  {
     if(userState.currentUser){
@@ -16,6 +17,10 @@ const Header = () => {
       if(currentUser.username){
         setUsername(currentUser.username);
       }
+
+      if(currentUser.userId){
+        setUserId(currentUser.userId);
+      }
     }    
   }, [userState.currentUser, username]);
 
@@ -23,7 +28,7 @@ const Header = () => {
         <div>
       <InfoBar />
       <NavigationBar />
-      {userState.isLoggedIn && <UserBar username={username} />}
+      {userState.isLoggedIn && <UserBar username={username} userId={userId}/>}
         </div>
     );
 };
