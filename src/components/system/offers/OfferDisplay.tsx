@@ -4,15 +4,18 @@ import OfferItem from './OfferItem';
 import styles from './OfferDisplay.module.css';
 import { useSelector, RootStateOrAny } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import {CUSTOMER_OFFERS, ALERT_TYPES} from '../../../models/constants';
+import { CUSTOMER_OFFERS } from '../../../models/constants';
 import logo from '../../../images/family-car.png';
-// import AlertDisplay from '../../UI/AlertDisplay';
 
 interface displayProps {
   mainHeader?: string;
   targetHeader?: string;
   offersHeader?: string;
-  onResponse?: (response: string | Offer) => void;
+  onResponse?: (response: {
+    type: string;
+    data?: Offer;
+    error?: string;
+  }) => void;
 }
 
 const OfferDisplay = ({
@@ -24,12 +27,8 @@ const OfferDisplay = ({
   const location = useLocation();
 
   // Offer groupings to display depending on page: Customer Offers or Current Offers
-  const {
-    pendingOffers,
-    processedOffers,
-    submittedOffer,
-    previousOffers,
-  } = useSelector((state: RootStateOrAny) => state.offer);
+  const { pendingOffers, processedOffers, submittedOffer, previousOffers } =
+    useSelector((state: RootStateOrAny) => state.offer);
 
   let targetOffers: Offer[] = [];
   let otherOffers: Offer[] = [];
@@ -43,31 +42,22 @@ const OfferDisplay = ({
     otherOffers = previousOffers;
   }
 
-  const submittedHandler = (response: string | Offer) => {
+  const submittedHandler = (response: {
+    type: string;
+    data?: Offer;
+    error?: string;
+  }) => {
     if (onResponse) onResponse(response); //Send back response from updating the offer
   };
 
-  // const exitAlert = () => {
-  //   console.log('button clicked');
-  // };
-
   return (
     <div className={styles.displayContainer}>
-      {/*Alert */}
-      {/* <AlertDisplay
-        type={ALERT_TYPES.INFO}
-        heading='This is the Heading'
-        message='Display message here for the alert.'
-        onExit={exitAlert}
-        onClick={exitAlert}
-      /> */}
-
       {/* Main Header - only displayed when there are offers */}
       {targetOffers.length !== 0 && otherOffers.length !== 0 && (
         <h1>{mainHeader}</h1>
       )}
 
-        {/* Submitted or Pending offers depending on page */}
+      {/* Submitted or Pending offers depending on page */}
       {targetOffers.length !== 0 && (
         <div>
           <h2>{targetHeader}</h2>

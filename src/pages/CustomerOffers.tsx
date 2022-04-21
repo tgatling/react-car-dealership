@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import { offerActions } from '../store/offer-slice';
 import { Offer, PENDING_STATUS } from '../models/offer';
-import { ALERT_TYPES } from '../models/constants';
+import { ALERT_TYPE } from '../models/constants';
 import offerService from '../services/offer.service';
 import AlertDisplay from '../components/UI/AlertDisplay';
 import OfferDisplay from '../components/system/offers/OfferDisplay';
@@ -12,7 +12,11 @@ const CustomerOffers = () => {
   const dispatch = useDispatch();
 
   // Response from updating offer status
-  const [response, setResponse] = useState<string | Offer>('');
+  const [response, setResponse] = useState<{
+    type: string;
+    data?: Offer;
+    error?: string;
+  } | null>(null);
 
   useEffect(() => {
     offerService
@@ -60,7 +64,7 @@ const CustomerOffers = () => {
   }, [dispatch, response]);
 
   const exitAlert = () => {
-    console.log('button clicked');
+    setResponse(null);
   };
 
   return (
@@ -71,14 +75,32 @@ const CustomerOffers = () => {
         justifyContent: 'center',
       }}
     >
-      <AlertDisplay
-        type={ALERT_TYPES.INFO}
-        heading='This is the Heading'
-        message='Display message here for the alert.'
-        onExit={exitAlert}
-        onClick={exitAlert}
-      />
-      <div style={{display: 'flex', justifyContent: 'center'}}>
+      {response && (
+        <div>
+          {
+            response.type === ALERT_TYPE.SUCCESS ? (
+              <AlertDisplay
+                type={ALERT_TYPE.SUCCESS}
+                heading={`YOUR OFFER DECISION HAS BEEN SUBMITTED`}
+                message={`Offer ${response.data?.offerId} status has been changed to ${response.data?.status}`}
+                onExit={exitAlert}
+                onClick={exitAlert}
+              />
+
+            ):(
+              <AlertDisplay
+              type={ALERT_TYPE.ERROR}
+              heading='AN ERROR HAS OCCURRED'
+              message='Please try submitting your decision again.'
+              onExit={exitAlert}
+              onClick={exitAlert}
+            />
+            )
+          }
+        </div>
+      )}
+
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
         <OfferDisplay
           targetHeader='Pending Offers'
           offersHeader='Processed Offers'

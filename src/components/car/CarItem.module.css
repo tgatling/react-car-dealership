@@ -5,10 +5,12 @@
   justify-content: space-evenly;
   margin: 40px;
   padding: 20px;
-  border-style: groove;
+  border-style: outset;
   position: relative;
   width: 250px;
   height: 400px;
+  box-shadow: 0 4px 4px 0 rgb(60 64 67 / 30%),
+    0 8px 12px 6px rgb(60 64 67 / 15%);
 }
 
 .imageContainer {
@@ -28,7 +30,6 @@
   font-size: 25px;
   inline-size: 240px;
   text-shadow: 2px 2px lightgray;
-
 }
 
 .infoBox {
@@ -73,7 +74,6 @@
   margin: -395px -10px 0 0;
 }
 
-.deleteButton:hover{
+.deleteButton:hover {
   background-color: #f89292;
-
 }

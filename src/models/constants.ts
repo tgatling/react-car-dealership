@@ -29,7 +29,7 @@ export const SERVICE_NUMBER = '555-555-5555';
 export const PARTS_NUMBER = '555-555-6666';
 
 // ALERTS
-export const ALERT_TYPES = {
+export const ALERT_TYPE = {
     INFO: 'INFO',
     WARNING: 'WARNING',
     ERROR: 'ERROR',
