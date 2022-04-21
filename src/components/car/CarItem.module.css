@@ -27,6 +27,8 @@
   justify-content: center;
   font-size: 25px;
   inline-size: 240px;
+  text-shadow: 2px 2px lightgray;
+
 }
 
 .infoBox {

@@ -28,6 +28,15 @@ export const SALES_NUMBER = '555-555-4444';
 export const SERVICE_NUMBER = '555-555-5555';
 export const PARTS_NUMBER = '555-555-6666';
 
+// ALERTS
+export const ALERT_TYPES = {
+    INFO: 'INFO',
+    WARNING: 'WARNING',
+    ERROR: 'ERROR',
+    SUCCESS: 'SUCCESS',
+    OTHER: 'OTHER'
+}
+
 // WORDING
 
 // Offers
