@@ -11,7 +11,11 @@ interface displayProps {
   mainHeader?: string;
   targetHeader?: string;
   offersHeader?: string;
-  onResponse?: (response: string | Offer) => void;
+  onResponse?: (response: {
+    type: string;
+    data?: Offer;
+    error?: string;
+  }) => void;
 }
 
 const OfferDisplay = ({
@@ -23,12 +27,8 @@ const OfferDisplay = ({
   const location = useLocation();
 
   // Offer groupings to display depending on page: Customer Offers or Current Offers
-  const {
-    pendingOffers,
-    processedOffers,
-    submittedOffer,
-    previousOffers,
-  } = useSelector((state: RootStateOrAny) => state.offer);
+  const { pendingOffers, processedOffers, submittedOffer, previousOffers } =
+    useSelector((state: RootStateOrAny) => state.offer);
 
   let targetOffers: Offer[] = [];
   let otherOffers: Offer[] = [];
@@ -42,7 +42,11 @@ const OfferDisplay = ({
     otherOffers = previousOffers;
   }
 
-  const submittedHandler = (response: string | Offer) => {
+  const submittedHandler = (response: {
+    type: string;
+    data?: Offer;
+    error?: string;
+  }) => {
     if (onResponse) onResponse(response); //Send back response from updating the offer
   };
 
@@ -53,7 +57,7 @@ const OfferDisplay = ({
         <h1>{mainHeader}</h1>
       )}
 
-        {/* Submitted or Pending offers depending on page */}
+      {/* Submitted or Pending offers depending on page */}
       {targetOffers.length !== 0 && (
         <div>
           <h2>{targetHeader}</h2>

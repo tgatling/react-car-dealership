@@ -51,3 +51,15 @@
   font-size: 16px;
   padding: 10px 20px;
 }
+
+.email img {
+  display: flex;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+}
+
+.email:hover {
+  width: 22px;
+  height: 22px;
+}

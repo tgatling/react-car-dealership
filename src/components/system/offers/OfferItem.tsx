@@ -9,7 +9,7 @@ import {
   REJECTED_STATUS,
 } from '../../../models/offer';
 import { calculatePaymentsFromOffer } from '../Calculations';
-import { CUSTOMER_OFFERS } from '../../../models/constants';
+import { CUSTOMER_OFFERS, ALERT_TYPE } from '../../../models/constants';
 import carService from '../../../services/car.service';
 import PaymentSummary from '../payments/PaymentSummary';
 import ConfirmOption from './ConfirmOption';
@@ -19,7 +19,11 @@ import offerService from '../../../services/offer.service';
 
 interface itemProps {
   offer: Offer;
-  onResponse: (offer: Offer) => void;
+  onResponse: (response: {
+    type: string;
+    data?: Offer;
+    error?: string;
+  }) => void;
 }
 
 const OfferItem = ({ offer, onResponse }: itemProps) => {
@@ -96,12 +100,11 @@ const OfferItem = ({ offer, onResponse }: itemProps) => {
     offerService
       .updateOffer(newOffer, offer.offerId)
       .then((response) => {
-        onResponse(response);
+        onResponse({ type: ALERT_TYPE.SUCCESS, data: response });
       })
       .catch((error) => {
-        onResponse(error);
+        onResponse({ type: ALERT_TYPE.ERROR, data: error });
       });
-
   };
 
   // Get summary information to display
@@ -127,14 +130,12 @@ const OfferItem = ({ offer, onResponse }: itemProps) => {
     <div>
       <div className={styles.itemContainer}>
         <div className={styles.leftContainer}>
-          
           {/* Car and Offer Status */}
           <div className={styles.imageContainer}>
             <img src={car?.url} alt='' />
             <p>{`STATUS: ${offer.status}`}</p>
           </div>
           <div className={styles.infoContainer}>
-
             {/* Offer Information */}
             <div className={styles.headerContainer}>
               <div>
@@ -206,7 +207,7 @@ const OfferItem = ({ offer, onResponse }: itemProps) => {
         </div>
       )}
 
-        {/* Prompt for confirmation for offer decision */}
+      {/* Prompt for confirmation for offer decision */}
       {confirmAccept && (
         <ConfirmOption
           accepted={true}

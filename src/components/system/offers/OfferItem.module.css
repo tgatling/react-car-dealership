@@ -8,6 +8,8 @@
   background-color: #ffffff;
   padding: 10px 25px 10px 25px;
   margin-top: 15px;
+  box-shadow: 0 4px 4px 0 rgb(60 64 67 / 30%),
+    0 8px 12px 6px rgb(60 64 67 / 15%);
 }
 .viewContainer {
   display: flex;
@@ -59,6 +61,8 @@
   flex-direction: row;
   justify-content: space-between;
   margin: -15px 0 0 30px;
+  text-shadow: 2px 2px lightgray;
+
 }
 
 .offerInfo {

@@ -15,6 +15,7 @@ export const LOGIN_REGISTER = '/login';
 export const VIEW_YOUR_CARS = '/my-cars';
 export const PAYMENT_HISTORY = '/payment-history';
 export const CURRENT_OFFERS = '/current-offers';
+export const MESSAGES = '/messages';
 
 // Other Routing
 export const EDIT_SPECIFIC_CAR = `${EDIT_OUR_LOT}/:carId`;
@@ -27,6 +28,15 @@ export const ADDRESS = '2300 Generational Ave, Raleigh, NC 27613';
 export const SALES_NUMBER = '555-555-4444';
 export const SERVICE_NUMBER = '555-555-5555';
 export const PARTS_NUMBER = '555-555-6666';
+
+// ALERTS
+export const ALERT_TYPE = {
+    INFO: 'INFO',
+    WARNING: 'WARNING',
+    ERROR: 'ERROR',
+    SUCCESS: 'SUCCESS',
+    OTHER: 'OTHER'
+}
 
 // WORDING
 
