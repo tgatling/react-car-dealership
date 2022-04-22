@@ -88,9 +88,12 @@ const OfferHistory = () => {
     history.push(CURRENT_OFFERS);
   };
 
+  console.log(mainHeader);
+
   return (
     <div style={{ display: 'flex', justifyContent: 'center' }}>
-      {submittedOffer && (
+      {!param && <OfferDisplay mainHeader={mainHeader} />}
+      {param && (
         <div>
           <AlertDisplay
             type={ALERT.SUCCESS.TYPE}
@@ -98,13 +101,11 @@ const OfferHistory = () => {
             onExit={exitAlert}
           />
           <OfferDisplay
-            // mainHeader={mainHeader}
             targetHeader={targetHeader}
             offersHeader={offerHeader}
           />
         </div>
       )}
-      {!submittedOffer && <OfferDisplay mainHeader={mainHeader} />}
     </div>
   );
 };

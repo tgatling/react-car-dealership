@@ -24,6 +24,7 @@ const OfferDisplay = ({
   offersHeader,
   onResponse,
 }: displayProps) => {
+  console.log(`offer display header: ${mainHeader}`);
   const location = useLocation();
 
   // Offer groupings to display depending on page: Customer Offers or Current Offers
@@ -40,6 +41,7 @@ const OfferDisplay = ({
   } else {
     targetOffers = submittedOffer;
     otherOffers = previousOffers;
+    console.log(`${targetOffers.length}, ${otherOffers.length}`);
   }
 
   const submittedHandler = (response: {
@@ -50,12 +52,13 @@ const OfferDisplay = ({
     if (onResponse) onResponse(response); //Send back response from updating the offer
   };
 
+  const displayMainHeader =
+    targetOffers.length !== 0 || otherOffers.length !== 0 ? true : false;
+
   return (
     <div className={styles.displayContainer}>
       {/* Main Header - only displayed when there are offers */}
-      {targetOffers.length !== 0 && otherOffers.length !== 0 && (
-        <h1>{mainHeader}</h1>
-      )}
+      {displayMainHeader && <h1>{mainHeader}</h1>}
 
       {/* Submitted or Pending offers depending on page */}
       {targetOffers.length !== 0 && (
