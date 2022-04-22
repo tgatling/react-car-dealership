@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import { carActions } from '../../store/car-slice';
 import ConfirmDelete from '../UI/ConfirmDelete';
 import { EDIT_OUR_LOT } from '../../models/constants';
+import offerService from '../../services/offer.service';
 
 interface carProps {
   carId: string;
@@ -45,12 +46,29 @@ const CarItem = ({
     setShowConfirmation(!showConfirmation);
   };
 
-  const deleteCarHandler = () => {
+  const deleteCarHandler = async () => {
     // delete vehicle
     carService
       .deleteCar(carId)
-      .then((response) => {})
+      .then((response) => response)
       .catch((error) => error);
+
+    // delete all offer that belong to that vehicle
+    let offerIds: string[] = [];
+    await offerService.getAllOffers().then((response) => {
+      console.log(response);
+      for (const key in response) {
+        if (response[key].carId === carId) offerIds.push(key);
+      }
+    });
+
+    offerIds.forEach((id: string) => {
+      console.log(`For Each: ${id}`);
+      offerService
+        .deleteOffer(id)
+        .then((response) => console.log(response))
+        .catch((error) => console.log('Error', error));
+    });
 
     dispatch(carActions.removeCarFromDealership({ carId }));
   };

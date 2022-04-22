@@ -24,6 +24,13 @@ class OfferService {
       .put(`${this.URI}offers/${id}.json`, offer)
       .then((result) => result.data);
   }
+
+  
+  async deleteOffer(id: string): Promise<null> {
+    return await axios
+      .delete(`${this.URI}offers/${id}.json`)
+      .then((result) => result.data);
+  }
 }
 
 export default new OfferService();
