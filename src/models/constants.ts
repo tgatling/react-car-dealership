@@ -29,30 +29,6 @@ export const SALES_NUMBER = '555-555-4444';
 export const SERVICE_NUMBER = '555-555-5555';
 export const PARTS_NUMBER = '555-555-6666';
 
-// ALERTS
-export const ALERT = {
-    INFO: {
-        TYPE: 'INFO',
-        COLOR: '#198cff'
-    },
-    WARNING: {
-        TYPE: 'WARNING',
-        COLOR: '#e4f784'
-    },
-    ERROR:{
-        TYPE: 'ERROR',
-        COLOR: '#f89292'
-    },
-    SUCCESS: {
-        TYPE: 'SUCCESS',
-        COLOR: '#98d55c'
-    },
-    OTHER: {
-        TYPE: 'OTHER',
-        COLOR: '#7fffd4'
-    },
-}
-
 // WORDING
 
 // Offers

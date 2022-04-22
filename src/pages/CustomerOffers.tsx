@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import { offerActions } from '../store/offer-slice';
 import { Offer, PENDING_STATUS } from '../models/offer';
-import { ALERT } from '../models/constants';
+import { ALERT } from '../models/design';
 import offerService from '../services/offer.service';
 import AlertDisplay from '../components/UI/AlertDisplay';
 import OfferDisplay from '../components/system/offers/OfferDisplay';
