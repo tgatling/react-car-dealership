@@ -24,6 +24,8 @@ const OfferForm = ({
   onNumPaymentChange,
   onSubmitOffer,
 }: offerFormProps) => {
+  const offerDate = new Date(customerOffer.offerDate);
+
   return (
     <form className={styles.form} onSubmit={onPreview}>
       <div>
@@ -31,18 +33,15 @@ const OfferForm = ({
         <input
           disabled
           placeholder={`${
-            customerOffer.offerDate.getMonth() + 1
-          }/${customerOffer.offerDate.getDate()}/${customerOffer.offerDate.getFullYear()}`}
+            offerDate.getMonth() + 1
+          }/${offerDate.getDate()}/${offerDate.getFullYear()}`}
         />
         <label>Car Id: </label>
         <input disabled value={customerOffer.carId} />
       </div>
       <div>
         <label>Total Amount: </label>
-        <input
-          disabled
-          value={customerOffer.carTotal}
-        />
+        <input disabled value={customerOffer.carTotal} />
       </div>
       <div>
         <label>Down Payment: </label>

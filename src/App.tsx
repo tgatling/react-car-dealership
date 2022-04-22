@@ -5,12 +5,26 @@ import Footer from './components/layout/Footer';
 import Routing from './components/layout/Routing';
 import { Car } from './models/car';
 import carService from './services/car.service';
-import {useDispatch, useSelector, RootStateOrAny} from 'react-redux';
-import {carActions} from './store/car-slice';
+import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
+import { carActions } from './store/car-slice';
+import messageService from './services/message.service';
+import { messageActions } from './store/message-slice';
+import { Message } from './models/message';
 
 function App() {
   let dispatch = useDispatch();
-  let carState = useSelector((state: RootStateOrAny)=> state.cars)
+  let carState = useSelector((state: RootStateOrAny) => state.cars);
+
+  let currentUser = useSelector(
+    (state: RootStateOrAny) => state.user.currentUser
+  );
+  let user = JSON.parse(currentUser);
+  let userId = '';
+
+  // save id if user is logged in
+  if (user) {
+    userId = user.userId;
+  }
 
   useEffect(() => {
     carService
@@ -27,14 +41,43 @@ function App() {
             model: result[key].model,
             price: result[key].price,
             url: result[key].url,
+            dateAdded: result[key].dateAdded,
           });
         }
 
         // store all cars in redux car state
-        dispatch(carActions.setCars({cars: loadedCars}));
+        dispatch(carActions.setCars({ cars: loadedCars }));
+
+        messageService.getAllMessages().then((result) => {
+          let loadedMessages: Message[] = [];
+          for (const key in result) {
+            loadedMessages.push({
+              msgId: key,
+              date: result[key].date,
+              senderId: result[key].senderId,
+              recipientId: result[key].recipientId,
+              subject: result[key].subject,
+              body: result[key].body,
+              important: result[key].important,
+              starred: result[key].starred,
+              trash: result[key].trash,
+              read: result[key].read,
+            });
+          }
+
+          // check to see if there is a use logged in
+          if (user) {
+            dispatch(
+              messageActions.setMessages({
+                messages: loadedMessages,
+                currentUser: userId,
+              })
+            );
+          }
+        });
       })
       .catch((error) => error);
-  }, [dispatch, carState]);
+  }, [dispatch, carState, userId, user]);
 
   return (
     <Fragment>

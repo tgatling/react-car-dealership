@@ -1,79 +1,101 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Offer } from '../../../models/offer';
 import OfferItem from './OfferItem';
 import styles from './OfferDisplay.module.css';
-import AcceptanceConfirmation from './AcceptanceConfirmation';
-import RejectionConfirmation from './RejectionConfirmation';
+import { useSelector, RootStateOrAny } from 'react-redux';
+import { useLocation } from 'react-router-dom';
+import { CUSTOMER_OFFERS } from '../../../models/constants';
+import logo from '../../../images/family-car.png';
 
 interface displayProps {
   mainHeader?: string;
   targetHeader?: string;
   offersHeader?: string;
-  targetOffers?: Offer[];
-  offers: Offer[];
+  onResponse?: (response: {
+    type: string;
+    data?: Offer;
+    error?: string;
+  }) => void;
 }
 
 const OfferDisplay = ({
   mainHeader,
   targetHeader,
   offersHeader,
-  targetOffers,
-  offers,
+  onResponse,
 }: displayProps) => {
-  const [decision, setDecision] = useState('');
-  const [offer, setOffer] = useState<Offer>(new Offer());
+  const location = useLocation();
 
-  useEffect(()=>{
-    // check to see if component re-renders after offer status is changed
+  // Offer groupings to display depending on page: Customer Offers or Current Offers
+  const { pendingOffers, processedOffers, submittedOffer, previousOffers } =
+    useSelector((state: RootStateOrAny) => state.offer);
 
-  }, [offer.status]);
+  let targetOffers: Offer[] = [];
+  let otherOffers: Offer[] = [];
 
-  const submittedHandler = (accepted: boolean, offer: Offer) => {
-    console.log(`submit handler`);
-    console.log(`accepted: ${accepted}`);
-    console.log(offer);
-    if(accepted){
-      setDecision('ACCEPTED')
-    } else {
-      setDecision('REJECTED')
-    }
-    console.log(decision);
-    setOffer(offer);
+  // determine the page and what content to display
+  if (location.pathname === CUSTOMER_OFFERS) {
+    targetOffers = pendingOffers;
+    otherOffers = processedOffers;
+  } else {
+    targetOffers = submittedOffer;
+    otherOffers = previousOffers;
+  }
+
+  const submittedHandler = (response: {
+    type: string;
+    data?: Offer;
+    error?: string;
+  }) => {
+    if (onResponse) onResponse(response); //Send back response from updating the offer
   };
+
+  const displayMainHeader =
+    targetOffers.length !== 0 || otherOffers.length !== 0 ? true : false;
 
   return (
     <div className={styles.displayContainer}>
-      <h1>{mainHeader}</h1>
+      {/* Main Header - only displayed when there are offers */}
+      {displayMainHeader && <h1>{mainHeader}</h1>}
 
-      {decision === 'ACCEPTED' && <AcceptanceConfirmation offer={offer}/>}
-      {decision === 'REJECTED' && (
-        <RejectionConfirmation offer={offer}/>
-      )}
-
-      {targetOffers && targetOffers.length > 0 && (
+      {/* Submitted or Pending offers depending on page */}
+      {targetOffers.length !== 0 && (
         <div>
           <h2>{targetHeader}</h2>
-          {targetOffers.map((targetOffer) => {
+          {targetOffers.map((targetOffer: Offer) => {
             return (
               <OfferItem
                 key={targetOffer.offerId}
                 offer={targetOffer}
-                submitHandler={submittedHandler}
+                onResponse={submittedHandler}
               />
             );
           })}
         </div>
       )}
-      {offers.length > 0 && (
+
+      {/* Processed or Previous offers depending on page */}
+      {otherOffers.length !== 0 && (
         <div>
           <h2>{offersHeader}</h2>
-          {offers.map((offer) => {
-            return <OfferItem key={offer.offerId} offer={offer} submitHandler={submittedHandler}/>;
+          {otherOffers.map((offer: Offer) => {
+            return (
+              <OfferItem
+                key={offer.offerId}
+                offer={offer}
+                onResponse={submittedHandler}
+              />
+            );
           })}
         </div>
       )}
-      {!targetOffers && offers.length === 0 && (
-        <p>There are currently no offers to display.</p>
+
+      {/* Message when there are no offers to display */}
+      {targetOffers.length === 0 && otherOffers.length === 0 && (
+        <div className={styles.message}>
+          <img src={logo} alt='' />
+          <p>There are currently no offers to display.</p>
+        </div>
       )}
     </div>
   );

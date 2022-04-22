@@ -7,7 +7,7 @@ import styles from './CarItem.module.css';
 import { useDispatch } from 'react-redux';
 import { carActions } from '../../store/car-slice';
 import ConfirmDelete from '../UI/ConfirmDelete';
-import {EDIT_OUR_LOT} from '../../models/constants';
+import { EDIT_OUR_LOT } from '../../models/constants';
 
 interface carProps {
   carId: string;
@@ -49,10 +49,8 @@ const CarItem = ({
     // delete vehicle
     carService
       .deleteCar(carId)
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => console.log(error));
+      .then((response) => {})
+      .catch((error) => error);
 
     dispatch(carActions.removeCarFromDealership({ carId }));
   };

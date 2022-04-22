@@ -60,8 +60,7 @@ class UserService {
       .then((result) => result.data);
   }
 
-
- async changeEmail(token: string, email: string) {
+  async changeEmail(token: string, email: string) {
     return await axios
       .post(
         `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${process.env.REACT_APP_API_KEY}`,
@@ -99,7 +98,7 @@ class UserService {
       .then((result) => result);
   }
 
- async deleteUser(username: string): Promise<null> {
+  async deleteUser(username: string): Promise<null> {
     return await axios
       .post(
         `https://identitytoolkit.googleapis.com/v1/accounts:delete?key=${process.env.REACT_APP_API_KEY}`,

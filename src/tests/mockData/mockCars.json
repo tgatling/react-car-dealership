@@ -9,7 +9,7 @@
     "year": 2014
   },
   {
-    "carId": "",
+    "carId": "-MyMx1taO7iWz0lpBNXR",
     "make": "Jeep",
     "model": "Wrangler Rubicon",
     "owner": "DEALER",
@@ -51,15 +51,6 @@
     "owner": "DEALER",
     "price": 17625,
     "url": "https://images.cars.com/cldstatic/wp-content/uploads/nissan-versa-2022-black-exterior-front-angle-sedan-scaled.jpg",
-    "year": 2022
-  },
-  {
-    "carId": "-MyKqhe-joS5zFkOXHOM",
-    "make": "Hyundai",
-    "model": "Accent SE",
-    "owner": "DEALER",
-    "price": 17670,
-    "url": "https://images.cars.com/cldstatic/wp-content/uploads/hyundai-accent-2022-dynamic-exterior-front-angle-red-sedan-scaled.jpg",
     "year": 2022
   },
   {

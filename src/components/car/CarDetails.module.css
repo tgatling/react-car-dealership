@@ -1,8 +1,8 @@
 .section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 .section img {
   display: flex;
@@ -34,4 +34,6 @@
   border-width: 1px;
   padding: 25px;
   width: 1000px;
+  box-shadow: 0 4px 4px 0 rgb(60 64 67 / 30%),
+    0 8px 12px 6px rgb(60 64 67 / 15%);
 }

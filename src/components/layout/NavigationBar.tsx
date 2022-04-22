@@ -47,21 +47,29 @@ const NavigationBar = () => {
       <nav className={styles.nav}>
         <ul>
           <li>
-            <NavLink to={HOME_PAGE} activeClassName={styles.active} exact>Our Cars</NavLink>
+            <NavLink to={HOME_PAGE} activeClassName={styles.active} exact>
+              Our Cars
+            </NavLink>
           </li>
           {userState.isLoggedIn && userRole === DEALER_ROLE && (
             <li>
-              <NavLink to={EDIT_OUR_LOT} activeClassName={styles.active}>Edit Our Lot</NavLink>
+              <NavLink to={EDIT_OUR_LOT} activeClassName={styles.active}>
+                Edit Our Lot
+              </NavLink>
             </li>
           )}
           {userState.isLoggedIn && userRole === DEALER_ROLE && (
             <li>
-              <NavLink to={CUSTOMER_OFFERS} activeClassName={styles.active}>Customer Offers</NavLink>
+              <NavLink to={CUSTOMER_OFFERS} activeClassName={styles.active}>
+                Customer Offers
+              </NavLink>
             </li>
           )}
           {userState.isLoggedIn && userRole === DEALER_ROLE && (
             <li>
-              <NavLink to={CUSTOMER_PAYMENTS} activeClassName={styles.active}>Customer Payments</NavLink>
+              <NavLink to={CUSTOMER_PAYMENTS} activeClassName={styles.active}>
+                Customer Payments
+              </NavLink>
             </li>
           )}
           {!userState.isLoggedIn && (
