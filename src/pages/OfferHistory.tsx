@@ -1,12 +1,15 @@
 import React, { useEffect } from 'react';
 import { useSelector, RootStateOrAny, useDispatch } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { Offer } from '../models/offer';
 import { offerActions } from '../store/offer-slice';
 import offerService from '../services/offer.service';
 import OfferDisplay from '../components/system/offers/OfferDisplay';
+import AlertDisplay from '../components/UI/AlertDisplay';
+import { ALERT, CURRENT_OFFERS } from '../models/constants';
 
 const OfferHistory = () => {
+  const history = useHistory();
   const currentUser = useSelector(
     (state: RootStateOrAny) => state.user.currentUser
   );
@@ -80,14 +83,26 @@ const OfferHistory = () => {
       .catch((error) => error);
   }, [offerId, userId, dispatch]);
 
+  const exitAlert = () => {
+    dispatch(offerActions.setSubmittedOffer([]));
+    history.push(CURRENT_OFFERS);
+  };
+
   return (
     <div style={{ display: 'flex', justifyContent: 'center' }}>
       {submittedOffer && (
-        <OfferDisplay
-          mainHeader={mainHeader}
-          targetHeader={targetHeader}
-          offersHeader={offerHeader}
-        />
+        <div>
+          <AlertDisplay
+            type={ALERT.SUCCESS.TYPE}
+            heading={mainHeader}
+            onExit={exitAlert}
+          />
+          <OfferDisplay
+            // mainHeader={mainHeader}
+            targetHeader={targetHeader}
+            offersHeader={offerHeader}
+          />
+        </div>
       )}
       {!submittedOffer && <OfferDisplay mainHeader={mainHeader} />}
     </div>
