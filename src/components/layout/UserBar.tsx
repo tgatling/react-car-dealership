@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { RootStateOrAny, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
 import {
@@ -11,9 +11,6 @@ import {
 import email from '../../images/email.png';
 import tealEmail from '../../images/teal-email.png';
 import styles from './UserBar.module.css';
-import messageService from '../../services/message.service';
-import { Message } from '../../models/message';
-import { messageActions } from '../../store/message-slice';
 
 interface userProps {
   username: string;
