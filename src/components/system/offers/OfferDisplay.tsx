@@ -24,7 +24,6 @@ const OfferDisplay = ({
   offersHeader,
   onResponse,
 }: displayProps) => {
-  console.log(`offer display header: ${mainHeader}`);
   const location = useLocation();
 
   // Offer groupings to display depending on page: Customer Offers or Current Offers
@@ -41,7 +40,6 @@ const OfferDisplay = ({
   } else {
     targetOffers = submittedOffer;
     otherOffers = previousOffers;
-    console.log(`${targetOffers.length}, ${otherOffers.length}`);
   }
 
   const submittedHandler = (response: {

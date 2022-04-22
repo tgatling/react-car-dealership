@@ -13,9 +13,7 @@ const OfferHistory = () => {
   const currentUser = useSelector(
     (state: RootStateOrAny) => state.user.currentUser
   );
-  const { submittedOffer } = useSelector(
-    (state: RootStateOrAny) => state.offer
-  );
+
   const userId = JSON.parse(currentUser).userId;
 
   const dispatch = useDispatch();
@@ -87,8 +85,6 @@ const OfferHistory = () => {
     dispatch(offerActions.setSubmittedOffer([]));
     history.push(CURRENT_OFFERS);
   };
-
-  console.log(mainHeader);
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center' }}>
