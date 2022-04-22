@@ -7,6 +7,7 @@ import PaymentSummary from './PaymentSummary';
 
 interface paymentTableProps {
   carId: string;
+  userId: string;
   totalAmount: number;
   downPayment: number;
   numberOfPayments: number;
