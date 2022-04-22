@@ -25,7 +25,6 @@ class OfferService {
       .then((result) => result.data);
   }
 
-  
   async deleteOffer(id: string): Promise<null> {
     return await axios
       .delete(`${this.URI}offers/${id}.json`)
