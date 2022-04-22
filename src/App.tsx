@@ -5,17 +5,19 @@ import Footer from './components/layout/Footer';
 import Routing from './components/layout/Routing';
 import { Car } from './models/car';
 import carService from './services/car.service';
-import {useDispatch, useSelector, RootStateOrAny} from 'react-redux';
-import {carActions} from './store/car-slice';
+import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
+import { carActions } from './store/car-slice';
 import messageService from './services/message.service';
-import {messageActions} from './store/message-slice';
-import {Message} from './models/message';
+import { messageActions } from './store/message-slice';
+import { Message } from './models/message';
 
 function App() {
   let dispatch = useDispatch();
-  let carState = useSelector((state: RootStateOrAny)=> state.cars);
+  let carState = useSelector((state: RootStateOrAny) => state.cars);
 
-  let currentUser = useSelector((state: RootStateOrAny)=> state.user.currentUser);
+  let currentUser = useSelector(
+    (state: RootStateOrAny) => state.user.currentUser
+  );
   let userId = JSON.parse(currentUser).id;
 
   useEffect(() => {
@@ -33,12 +35,12 @@ function App() {
             model: result[key].model,
             price: result[key].price,
             url: result[key].url,
-            dateAdded: result[key].dateAdded
+            dateAdded: result[key].dateAdded,
           });
         }
 
         // store all cars in redux car state
-        dispatch(carActions.setCars({cars: loadedCars}));
+        dispatch(carActions.setCars({ cars: loadedCars }));
 
         messageService.getAllMessages().then((result) => {
           console.log('get messages');
@@ -57,9 +59,9 @@ function App() {
               read: result[key].read,
             });
           }
-    
+
           console.log(loadedMessages);
-    
+
           dispatch(
             messageActions.setMessages({
               messages: loadedMessages,
@@ -69,9 +71,6 @@ function App() {
         });
       })
       .catch((error) => error);
-
-     
-
   }, [dispatch, carState, userId]);
 
   return (

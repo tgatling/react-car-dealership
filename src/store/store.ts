@@ -5,12 +5,12 @@ import offerReducer from './offer-slice';
 import messageReducer from './message-slice';
 
 const store = configureStore({
-    reducer: {
-        user: userReducer,
-        car: carReducer,
-        offer: offerReducer,
-        message: messageReducer,
-    },
+  reducer: {
+    user: userReducer,
+    car: carReducer,
+    offer: offerReducer,
+    message: messageReducer,
+  },
 });
 
 export default store;

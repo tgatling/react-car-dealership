@@ -7,7 +7,6 @@ import offerService from '../services/offer.service';
 import OfferDisplay from '../components/system/offers/OfferDisplay';
 
 const OfferHistory = () => {
-
   const currentUser = useSelector(
     (state: RootStateOrAny) => state.user.currentUser
   );
@@ -70,7 +69,7 @@ const OfferHistory = () => {
             // Recently submitted offer for confirmation
             loadedSubmitted.push(offer);
           } else if (offer.userId === userId) {
-           // All of the other offers submitted by the current user
+            // All of the other offers submitted by the current user
             loadedPrevious.push(offer);
           }
         });

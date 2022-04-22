@@ -77,26 +77,23 @@ const CustomerOffers = () => {
     >
       {response && (
         <div>
-          {
-            response.type === ALERT.SUCCESS.TYPE ? (
-              <AlertDisplay
-                type={ALERT.SUCCESS.TYPE}
-                heading={`YOUR OFFER DECISION HAS BEEN SUBMITTED`}
-                message={`Offer ${response.data?.offerId} status has been changed to ${response.data?.status}`}
-                onExit={exitAlert}
-                onClick={exitAlert}
-              />
-
-            ):(
-              <AlertDisplay
+          {response.type === ALERT.SUCCESS.TYPE ? (
+            <AlertDisplay
+              type={ALERT.SUCCESS.TYPE}
+              heading={`YOUR OFFER DECISION HAS BEEN SUBMITTED`}
+              message={`Offer ${response.data?.offerId} status has been changed to ${response.data?.status}`}
+              onExit={exitAlert}
+              onClick={exitAlert}
+            />
+          ) : (
+            <AlertDisplay
               type={ALERT.ERROR.TYPE}
               heading='AN ERROR HAS OCCURRED'
               message='Please try submitting your decision again.'
               onExit={exitAlert}
               onClick={exitAlert}
             />
-            )
-          }
+          )}
         </div>
       )}
 
