@@ -6,14 +6,16 @@ import { Car } from '../../models/car';
 import { DEALER_ROLE, EDIT_OUR_LOT } from '../../models/constants';
 import carService from '../../services/car.service';
 import { carActions } from '../../store/car-slice';
+// import AlertDisplay from '../UI/AlertDisplay';
 import styles from './CarForm.module.css';
 import CarItem from './CarItem';
 
 interface carFormProps {
   addCarForm: boolean;
+  pendingOffer?: boolean;
 }
 
-const CarForm = ({ addCarForm }: carFormProps) => {
+const CarForm = ({ addCarForm, pendingOffer }: carFormProps) => {
   const [carAdded, setCarAdded] = useState(false);
   const [httpError, setHttpError] = useState(null);
 
@@ -151,8 +153,18 @@ const CarForm = ({ addCarForm }: carFormProps) => {
     history.push(EDIT_OUR_LOT);
   };
 
+  // const onExitAlert = () => {
+
+  // }
+
   return (
     <section className={styles.section}>
+        {/* <AlertDisplay
+          type={ALERT.INFO.TYPE}
+          heading={`THERE IS A PENDING OFFER ON THIS ${make.toUpperCase()} ${model.toUpperCase()}`}
+          message='You will be unable to edit the price on this car because of the pending offer.'
+          onExit={onExitAlert}
+        /> */}
       <div className={styles.card}>
         {!carAdded ? (
           <div>
@@ -199,6 +211,7 @@ const CarForm = ({ addCarForm }: carFormProps) => {
                 />
                 <label>Price:</label>
                 <input
+                  disabled={pendingOffer ? pendingOffer : false}
                   required
                   type='number'
                   id='price'
