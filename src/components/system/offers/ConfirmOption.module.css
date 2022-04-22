@@ -1,20 +1,20 @@
 .viewContainer {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    border-style: solid;
-    border-width: 2px;
-    border-radius: 15px;
-    background-color: #f89292;
-    padding: 10px 25px 10px 25px;
-    margin-top: 15px;
-    font-weight: bold;
-  }
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 15px;
+  background-color: #f89292;
+  padding: 10px 25px 10px 25px;
+  margin-top: 15px;
+  font-weight: bold;
+}
 
 .narrowButtonContainer {
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
 }
 
 .narrowButtonContainer button {
@@ -30,8 +30,8 @@
 }
 
 .viewContainer p {
-    font-size: 20px;
-  }
+  font-size: 20px;
+}
 
 .viewButton {
   color: #000080;
@@ -49,7 +49,6 @@
   background-color: #008000;
   color: #ffffff;
 }
-
 
 .rejectButton {
   color: #ff0000;

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 import PaymentTable from '../system/payments/PaymentTable';
 import { Car } from '../../models/car';

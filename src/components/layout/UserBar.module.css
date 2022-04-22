@@ -52,7 +52,7 @@
   padding: 10px 20px;
 }
 
-.email{
+.email {
   display: flex;
   flex-direction: column;
   font-size: 10px;

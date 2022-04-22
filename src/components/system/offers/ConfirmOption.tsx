@@ -19,10 +19,9 @@ const ConfirmOption = ({
   onConfirm,
   onCancel,
 }: optionProps) => {
-
-    const sendResponse = () => {
-        onConfirm(accepted);
-    }
+  const sendResponse = () => {
+    onConfirm(accepted);
+  };
 
   return (
     <div className={styles.viewContainer}>

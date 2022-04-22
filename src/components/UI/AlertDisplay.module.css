@@ -1,9 +1,9 @@
 .alertContainer {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
-.alertContent{
+.alertContent {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -19,8 +19,8 @@
 
 .icon {
   justify-content: center;
-    width: 50px;
-    height: 50px;
+  width: 50px;
+  height: 50px;
 }
 
 .alertText {

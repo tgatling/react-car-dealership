@@ -36,7 +36,9 @@ const PaymentSummary = ({
         </div>
       )}
       <div className={styles.buttonContainer}>
-        {onToggle && <button onClick={onToggle}>View Full Payment Table</button>}
+        {onToggle && (
+          <button onClick={onToggle}>View Full Payment Table</button>
+        )}
       </div>
     </div>
   );

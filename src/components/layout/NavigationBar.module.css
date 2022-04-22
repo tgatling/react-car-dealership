@@ -14,8 +14,7 @@
   font-size: 50px;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
     'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    text-shadow: 2px 2px rgba(0, 0, 0, 0.276);
-
+  text-shadow: 2px 2px rgba(0, 0, 0, 0.276);
 }
 
 .logo a {
@@ -50,7 +49,6 @@
 .nav a:hover {
   text-shadow: 2px 2px rgba(0, 0, 0, 0.276);
   font-size: 21px;
-
 }
 
 .nav a.active {

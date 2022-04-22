@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { Car } from '../../models/car';
 
@@ -35,7 +35,7 @@ const CarForm = ({ addCarForm }: carFormProps) => {
     model: '',
     price: 0,
     url: '',
-    dateAdded: todaysDate
+    dateAdded: todaysDate,
   });
 
   const history = useHistory();
@@ -140,7 +140,7 @@ const CarForm = ({ addCarForm }: carFormProps) => {
           carId
         )
         .then((response) => {
-          dispatch(carActions.editCar({id: carId, car: response}));
+          dispatch(carActions.editCar({ id: carId, car: response }));
           setCarAdded(true);
         })
         .catch((error) => setHttpError(error));

@@ -7,7 +7,7 @@ interface infoProps {
   downPayment: number;
   numberOfPayments: number;
   previewMode?: (previewMode: boolean) => void;
-  showHeading?: (showingHeading: boolean)=> void;
+  showHeading?: (showingHeading: boolean) => void;
 }
 
 const PaymentInfo = ({
@@ -25,8 +25,8 @@ const PaymentInfo = ({
     if (previewMode) {
       previewMode(false);
     }
-    if(showHeading){
-        showHeading(true);
+    if (showHeading) {
+      showHeading(true);
     }
   };
 

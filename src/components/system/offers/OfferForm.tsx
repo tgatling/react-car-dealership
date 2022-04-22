@@ -24,7 +24,6 @@ const OfferForm = ({
   onNumPaymentChange,
   onSubmitOffer,
 }: offerFormProps) => {
-
   const offerDate = new Date(customerOffer.offerDate);
 
   return (
@@ -42,10 +41,7 @@ const OfferForm = ({
       </div>
       <div>
         <label>Total Amount: </label>
-        <input
-          disabled
-          value={customerOffer.carTotal}
-        />
+        <input disabled value={customerOffer.carTotal} />
       </div>
       <div>
         <label>Down Payment: </label>

@@ -41,27 +41,35 @@ const calculateIndividualPayments = (
   };
 };
 
-export const calculatePaymentsFromOffer = (totalAmount: number, downPayment: number, numberOfPayments: number) => {
+export const calculatePaymentsFromOffer = (
+  totalAmount: number,
+  downPayment: number,
+  numberOfPayments: number
+) => {
   let paymentCalculations = [];
 
   let { numberOfEqualPayments, unequalPaymentAmount, paymentAmount } =
-    calculateIndividualPayments(
-      totalAmount,
-      downPayment,
-      numberOfPayments
-    );
+    calculateIndividualPayments(totalAmount, downPayment, numberOfPayments);
 
   let startingPoint = 0;
   let stoppingPoint = numberOfEqualPayments;
 
   if (unequalPaymentAmount !== 0) {
-    paymentCalculations.push({ payment: 1, amount: unequalPaymentAmount, status: '' });
+    paymentCalculations.push({
+      payment: 1,
+      amount: unequalPaymentAmount,
+      status: '',
+    });
     startingPoint = 1;
     stoppingPoint++;
   }
 
   for (let i = startingPoint; i < stoppingPoint; i++) {
-    paymentCalculations.push({ payment: i + 1, amount: paymentAmount, status: '' });
+    paymentCalculations.push({
+      payment: i + 1,
+      amount: paymentAmount,
+      status: '',
+    });
   }
 
   return {

@@ -41,18 +41,20 @@ const PaymentTable = (payments: paymentTableProps) => {
         paymentCalculations={paymentCalculations}
         header={false}
       />
-      {viewFullTable && <div>
-        {paymentCalculations.map((payment) => {
-          return (
-            <PaymentItem
-              key={`payment-${payment.payment}`}
-              payment={payment.payment}
-              amount={payment.amount}
-              status={payment.status}
-            />
-          );
-        })}
-      </div>}
+      {viewFullTable && (
+        <div>
+          {paymentCalculations.map((payment) => {
+            return (
+              <PaymentItem
+                key={`payment-${payment.payment}`}
+                payment={payment.payment}
+                amount={payment.amount}
+                status={payment.status}
+              />
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };
