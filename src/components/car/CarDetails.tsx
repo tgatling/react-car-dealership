@@ -15,6 +15,7 @@ interface detailsProp {
 // TODO: REMOVE HARDCODED PAYMENT INFORMATION
 
 const DUMMY_PAYMENTS: Payments = {
+  userId: 'dummy-user-id',
   carId: '-MwlR-FOe4z_HTtcCI2e',
   totalAmount: 11300,
   downPayment: 3300,
@@ -34,6 +35,7 @@ const CarDetails = ({ car, ownerRole }: detailsProp) => {
           <div>
             <h1>{`MAKE A PAYMENT ON YOUR ${carName}`}</h1>
             <PaymentTable
+              userId={DUMMY_PAYMENTS.userId}
               carId={DUMMY_PAYMENTS.carId}
               totalAmount={DUMMY_PAYMENTS.totalAmount}
               downPayment={DUMMY_PAYMENTS.downPayment}
