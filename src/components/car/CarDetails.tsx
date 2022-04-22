@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 
 import PaymentTable from '../system/payments/PaymentTable';
 import { Car } from '../../models/car';
-import { CUSTOMER_ROLE } from '../../models/constants/constants';
+import { CUSTOMER_ROLE } from '../../models/constants';
 import styles from './CarDetails.module.css';
 import { Payments } from '../../models/payments';
 import OfferDetails from '../system/offers/OfferDetails';

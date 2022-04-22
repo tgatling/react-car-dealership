@@ -9,8 +9,8 @@ import {
   REJECTED_STATUS,
 } from '../../../models/offer';
 import { calculatePaymentsFromOffer } from '../Calculations';
-import { CUSTOMER_OFFERS} from '../../../models/constants/constants';
-import { ALERT } from '../../../models/constants/design';
+import { CUSTOMER_OFFERS} from '../../../models/constants';
+import { ALERT } from '../../../models/constants';
 import carService from '../../../services/car.service';
 import PaymentSummary from '../payments/PaymentSummary';
 import ConfirmOption from './ConfirmOption';

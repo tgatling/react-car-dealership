@@ -3,7 +3,7 @@ import {useDispatch} from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { Car } from '../../models/car';
 
-import { DEALER_ROLE, EDIT_OUR_LOT } from '../../models/constants/constants';
+import { DEALER_ROLE, EDIT_OUR_LOT } from '../../models/constants';
 import carService from '../../services/car.service';
 import { carActions } from '../../store/car-slice';
 import styles from './CarForm.module.css';

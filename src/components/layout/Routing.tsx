@@ -20,7 +20,7 @@ import {
   CURRENT_OFFERS,
   PAYMENT_HISTORY,
   CUSTOMER_OFFERS,
-} from '../../models/constants/constants';
+} from '../../models/constants';
 import OfferHistory from '../../pages/OfferHistory';
 import PaymentHistory from '../../pages/PaymentHistory';
 import CustomerOffers from '../../pages/CustomerOffers';

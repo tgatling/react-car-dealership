@@ -36,3 +36,27 @@ export const MAKING_AN_OFFER_INSTRUCTIONS = `Making an offer is as simple as sub
 export const CONFIRM_OFFER_ACCEPTANCE = `By clicking accept, you are saying that you would like to choose this offer.  All other offers on this vehicle will therefore be rejected.  Are you sure you would like to accept this offer?`;
 export const CONFIRM_OFFER_REJECTION = `Are you sure you would like to reject this offer?  After submitting this action cannot be undone.`;
 export const DECISION_SUBMITTED_MESSAGE = 'Your decision has been submitted.  Updated offers can be found below under "Processed Offers"'
+
+// ALERTS
+export const ALERT = {
+    INFO: {
+        TYPE: 'INFO',
+        COLOR: '#198cff'
+    },
+    WARNING: {
+        TYPE: 'WARNING',
+        COLOR: '#e4f784'
+    },
+    ERROR:{
+        TYPE: 'ERROR',
+        COLOR: '#f89292'
+    },
+    SUCCESS: {
+        TYPE: 'SUCCESS',
+        COLOR: '#98d55c'
+    },
+    OTHER: {
+        TYPE: 'OTHER',
+        COLOR: '#7fffd4'
+    },
+}

@@ -6,7 +6,7 @@ import {
   SALES_NUMBER,
   SERVICE_NUMBER,
   PARTS_NUMBER,
-} from '../../models/constants/constants';
+} from '../../models/constants';
 import styles from './InfoBar.module.css';
 
 const InfoBar = () => {

@@ -8,7 +8,7 @@ import { Offer } from '../../../models/offer';
 import {
   MAKING_AN_OFFER_INSTRUCTIONS,
   CURRENT_OFFERS,
-} from '../../../models/constants/constants';
+} from '../../../models/constants';
 import styles from './OfferForm.module.css';
 import PaymentInfo from '../payments/PaymentInfo';
 import offerService from '../../../services/offer.service';
