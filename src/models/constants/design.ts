@@ -1,13 +1,3 @@
-// SITE COLORS
-export const AQUA = '';
-export const NAVY = '';
-
-// SITE DESIGN
-export const NAVIGATION_COLOR = '';
-
-
-// BUTTONS
-
 // ALERTS
 export const ALERT = {
     INFO: {

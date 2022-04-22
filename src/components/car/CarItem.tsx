@@ -7,7 +7,7 @@ import styles from './CarItem.module.css';
 import { useDispatch } from 'react-redux';
 import { carActions } from '../../store/car-slice';
 import ConfirmDelete from '../UI/ConfirmDelete';
-import { EDIT_OUR_LOT } from '../../models/constants';
+import { EDIT_OUR_LOT } from '../../models/constants/constants';
 
 interface carProps {
   carId: string;

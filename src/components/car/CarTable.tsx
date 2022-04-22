@@ -5,7 +5,7 @@ import { Car } from '../../models/car';
 import CarItem from './CarItem';
 import logo from '../../images/family-car.png';
 import styles from './CarTable.module.css';
-import { ADD_DEALER_CAR, DEALER_ROLE } from '../../models/constants';
+import { ADD_DEALER_CAR, DEALER_ROLE } from '../../models/constants/constants';
 
 interface tableProps {
   editMode: boolean;

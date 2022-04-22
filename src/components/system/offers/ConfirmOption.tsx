@@ -3,7 +3,7 @@ import React from 'react';
 import {
   CONFIRM_OFFER_ACCEPTANCE,
   CONFIRM_OFFER_REJECTION,
-} from '../../../models/constants';
+} from '../../../models/constants/constants';
 import styles from './ConfirmOption.module.css';
 
 interface optionProps {

@@ -4,7 +4,7 @@ import {useParams} from 'react-router-dom';
 import { Car } from '../models/car';
 import CarDetails from '../components/car/CarDetails';
 import carService from '../services/car.service';
-import {DEALER_ROLE, CUSTOMER_ROLE} from '../models/constants';
+import {DEALER_ROLE, CUSTOMER_ROLE} from '../models/constants/constants';
 
 const ViewCar = () => {
     const params = useParams<{ carId: string }>();

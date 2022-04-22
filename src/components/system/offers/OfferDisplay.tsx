@@ -4,7 +4,7 @@ import OfferItem from './OfferItem';
 import styles from './OfferDisplay.module.css';
 import { useSelector, RootStateOrAny } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { CUSTOMER_OFFERS } from '../../../models/constants';
+import { CUSTOMER_OFFERS } from '../../../models/constants/constants';
 import logo from '../../../images/family-car.png';
 
 interface displayProps {

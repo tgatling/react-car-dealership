@@ -7,7 +7,7 @@ import {
   PAYMENT_HISTORY,
   VIEW_YOUR_CARS,
   MESSAGES,
-} from '../../models/constants';
+} from '../../models/constants/constants';
 import email from '../../images/email.png';
 import tealEmail from '../../images/teal-email.png';
 import styles from './UserBar.module.css';

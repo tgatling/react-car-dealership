@@ -11,7 +11,7 @@ import {
   CUSTOMER_OFFERS,
   CUSTOMER_PAYMENTS,
   LOGIN_REGISTER,
-} from '../../models/constants';
+} from '../../models/constants/constants';
 import familyCar from '../../images/family-car.png';
 import styles from './NavigationBar.module.css';
 

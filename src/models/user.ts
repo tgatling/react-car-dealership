@@ -1,4 +1,4 @@
-import { CUSTOMER_ROLE } from './constants';
+import { CUSTOMER_ROLE } from './constants/constants';
 
 export class User {
     userId?: string = '';

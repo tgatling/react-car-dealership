@@ -1,4 +1,4 @@
-import { DEALER_ROLE } from './constants';
+import { DEALER_ROLE } from './constants/constants';
 
 export class Car {
     carId: string = '';

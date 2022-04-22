@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {ALERT } from '../../models/design';
+import {ALERT } from '../../models/constants/design';
 import styles from './AlertDisplay.module.css';
 
 // Alert Icons
