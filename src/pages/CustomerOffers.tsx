@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import { offerActions } from '../store/offer-slice';
 import { Offer, PENDING_STATUS } from '../models/offer';
-import { ALERT_TYPE } from '../models/constants';
+import { ALERT } from '../models/constants';
 import offerService from '../services/offer.service';
 import AlertDisplay from '../components/UI/AlertDisplay';
 import OfferDisplay from '../components/system/offers/OfferDisplay';
@@ -78,9 +78,9 @@ const CustomerOffers = () => {
       {response && (
         <div>
           {
-            response.type === ALERT_TYPE.SUCCESS ? (
+            response.type === ALERT.SUCCESS.TYPE ? (
               <AlertDisplay
-                type={ALERT_TYPE.SUCCESS}
+                type={ALERT.SUCCESS.TYPE}
                 heading={`YOUR OFFER DECISION HAS BEEN SUBMITTED`}
                 message={`Offer ${response.data?.offerId} status has been changed to ${response.data?.status}`}
                 onExit={exitAlert}
@@ -89,7 +89,7 @@ const CustomerOffers = () => {
 
             ):(
               <AlertDisplay
-              type={ALERT_TYPE.ERROR}
+              type={ALERT.ERROR.TYPE}
               heading='AN ERROR HAS OCCURRED'
               message='Please try submitting your decision again.'
               onExit={exitAlert}

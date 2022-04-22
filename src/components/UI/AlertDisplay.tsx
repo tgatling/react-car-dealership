@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ALERT_TYPE } from '../../models/constants';
+import {ALERT } from '../../models/constants';
 import styles from './AlertDisplay.module.css';
 
 // Alert Icons
@@ -34,25 +34,25 @@ const AlertDisplay = ({
 
   // Determing type and display content
   switch (type) {
-    case ALERT_TYPE.INFO:
+    case ALERT.INFO.TYPE:
       alertImage = infoIcon;
-      backgroundColor = color ? color : '#198cff';
+      backgroundColor = color ? color : ALERT.INFO.COLOR;
       break;
-    case ALERT_TYPE.ERROR:
+    case ALERT.ERROR.TYPE:
       alertImage = errorIcon;
-      backgroundColor = color ? color : '#f89292';
+      backgroundColor = color ? color : ALERT.ERROR.COLOR;
       break;
-    case ALERT_TYPE.SUCCESS:
+    case ALERT.SUCCESS.TYPE:
       alertImage = successIcon;
-      backgroundColor = color ? color : '#98d55c';
+      backgroundColor = color ? color : ALERT.SUCCESS.COLOR;
       break;
-    case ALERT_TYPE.WARNING:
+    case ALERT.WARNING.TYPE:
       alertImage = warningIcon;
-      backgroundColor = color ? color : '#e4f784';
+      backgroundColor = color ? color : ALERT.WARNING.COLOR;
       break;
     default:
       alertImage = image ? image : logo;
-      backgroundColor = color ? color : '#7fffd4';
+      backgroundColor = color ? color : ALERT.OTHER.COLOR;
   }
 
   return (
