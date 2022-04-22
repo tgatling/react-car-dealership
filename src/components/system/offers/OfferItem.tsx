@@ -32,6 +32,11 @@ const OfferItem = ({ offer, onResponse }: itemProps) => {
   const currentUser = useSelector(
     (state: RootStateOrAny) => state.user.currentUser
   );
+
+  const pendingOffers = useSelector(
+    (state: RootStateOrAny) => state.offer.pendingOffers
+  );
+
   const empUserId = JSON.parse(currentUser).userId;
   const [car, setCar] = useState<Car | null>(null);
   const [viewPaymentSummary, setViewPaymentSummary] = useState(false);
@@ -80,6 +85,7 @@ const OfferItem = ({ offer, onResponse }: itemProps) => {
   const confirmOfferHandler = async (accepted: boolean) => {
     // update offer information in the database and return response
     let newOffer = new Offer();
+    let otherOffers: Offer[] = [];
 
     newOffer.offerId = offer.offerId;
     newOffer.offerDate = offer.offerDate;
@@ -93,6 +99,30 @@ const OfferItem = ({ offer, onResponse }: itemProps) => {
     if (accepted) {
       newOffer.status = ACCEPTED_STATUS;
       setConfirmAccept(false);
+
+      otherOffers = pendingOffers.filter(
+        (offer: Offer) =>
+          offer.offerId !== newOffer.offerId && offer.carId === newOffer.carId
+      );
+
+      otherOffers.forEach((offer: Offer) => {
+        let rejectedOffer = new Offer();
+
+        rejectedOffer.offerId = offer.offerId;
+        rejectedOffer.offerDate = offer.offerDate;
+        rejectedOffer.empUserId = empUserId;
+        rejectedOffer.userId = offer.userId;
+        rejectedOffer.carId = offer.carId;
+        rejectedOffer.carTotal = offer.carTotal;
+        rejectedOffer.downPayment = offer.downPayment;
+        rejectedOffer.numberOfPayments = offer.numberOfPayments;
+        rejectedOffer.status = REJECTED_STATUS;
+
+        offerService
+          .updateOffer(rejectedOffer, rejectedOffer.offerId)
+          .then((response) => response)
+          .catch((error) => error);
+      });
     } else {
       newOffer.status = REJECTED_STATUS;
       setConfirmReject(false);
