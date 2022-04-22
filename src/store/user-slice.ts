@@ -13,7 +13,7 @@ const userSlice = createSlice({
       state.token = '';
       state.isLoggedIn = false;
       state.expirationTime = '';
-      state.currentUser = '';
+      state.currentUser = '{}';
       localStorage.clear();
     },
     login(state, action) {

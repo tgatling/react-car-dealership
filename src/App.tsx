@@ -18,7 +18,13 @@ function App() {
   let currentUser = useSelector(
     (state: RootStateOrAny) => state.user.currentUser
   );
-  let userId = JSON.parse(currentUser).id;
+  let user = JSON.parse(currentUser);
+  let userId = '';
+
+  // save id if user is logged in
+  if (user) {
+    userId = user.userId;
+  }
 
   useEffect(() => {
     carService
@@ -43,7 +49,6 @@ function App() {
         dispatch(carActions.setCars({ cars: loadedCars }));
 
         messageService.getAllMessages().then((result) => {
-          console.log('get messages');
           let loadedMessages: Message[] = [];
           for (const key in result) {
             loadedMessages.push({
@@ -60,18 +65,19 @@ function App() {
             });
           }
 
-          console.log(loadedMessages);
-
-          dispatch(
-            messageActions.setMessages({
-              messages: loadedMessages,
-              currentUser: userId,
-            })
-          );
+          // check to see if there is a use logged in
+          if (user) {
+            dispatch(
+              messageActions.setMessages({
+                messages: loadedMessages,
+                currentUser: userId,
+              })
+            );
+          }
         });
       })
       .catch((error) => error);
-  }, [dispatch, carState, userId]);
+  }, [dispatch, carState, userId, user]);
 
   return (
     <Fragment>
