@@ -1,20 +1,28 @@
 import React from 'react';
+import { RootStateOrAny, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
-import email from '../../images/email.png';
 import {
   CURRENT_OFFERS,
   PAYMENT_HISTORY,
   VIEW_YOUR_CARS,
-  MESSAGES
+  MESSAGES,
 } from '../../models/constants';
+import email from '../../images/email.png';
+import tealEmail from '../../images/teal-email.png';
 import styles from './UserBar.module.css';
 
 interface userProps {
   username: string;
+  userId: string;
 }
 
-const UserBar = ({ username }: userProps) => {
+const UserBar = ({ username, userId }: userProps) => {
+  const unreadCount = useSelector(
+    (state: RootStateOrAny) => state.message.unread
+  );
+
+  // determine how many are unread
   return (
     <header className={styles.header}>
       <div className={styles.welcome}>{`Welcome ${username}`}</div>
@@ -37,7 +45,12 @@ const UserBar = ({ username }: userProps) => {
           </li>
           <li className={styles.email}>
             <NavLink to={MESSAGES}>
-              <img src={email} alt='' />
+              {unreadCount > 0 ? (
+                <img src={tealEmail} alt='' />
+              ) : (
+                <img src={email} alt='' />
+              )}
+              {/* <p>{unreadCount}</p> */}
             </NavLink>
           </li>
         </ul>

@@ -7,10 +7,16 @@ import { Car } from './models/car';
 import carService from './services/car.service';
 import {useDispatch, useSelector, RootStateOrAny} from 'react-redux';
 import {carActions} from './store/car-slice';
+import messageService from './services/message.service';
+import {messageActions} from './store/message-slice';
+import {Message} from './models/message';
 
 function App() {
   let dispatch = useDispatch();
-  let carState = useSelector((state: RootStateOrAny)=> state.cars)
+  let carState = useSelector((state: RootStateOrAny)=> state.cars);
+
+  let currentUser = useSelector((state: RootStateOrAny)=> state.user.currentUser);
+  let userId = JSON.parse(currentUser).id;
 
   useEffect(() => {
     carService
@@ -33,9 +39,40 @@ function App() {
 
         // store all cars in redux car state
         dispatch(carActions.setCars({cars: loadedCars}));
+
+        messageService.getAllMessages().then((result) => {
+          console.log('get messages');
+          let loadedMessages: Message[] = [];
+          for (const key in result) {
+            loadedMessages.push({
+              msgId: key,
+              date: result[key].date,
+              senderId: result[key].senderId,
+              recipientId: result[key].recipientId,
+              subject: result[key].subject,
+              body: result[key].body,
+              important: result[key].important,
+              starred: result[key].starred,
+              trash: result[key].trash,
+              read: result[key].read,
+            });
+          }
+    
+          console.log(loadedMessages);
+    
+          dispatch(
+            messageActions.setMessages({
+              messages: loadedMessages,
+              currentUser: userId,
+            })
+          );
+        });
       })
       .catch((error) => error);
-  }, [dispatch, carState]);
+
+     
+
+  }, [dispatch, carState, userId]);
 
   return (
     <Fragment>

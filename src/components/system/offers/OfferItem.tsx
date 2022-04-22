@@ -9,7 +9,8 @@ import {
   REJECTED_STATUS,
 } from '../../../models/offer';
 import { calculatePaymentsFromOffer } from '../Calculations';
-import { CUSTOMER_OFFERS, ALERT_TYPE } from '../../../models/constants';
+import { CUSTOMER_OFFERS} from '../../../models/constants';
+import { ALERT } from '../../../models/constants';
 import carService from '../../../services/car.service';
 import PaymentSummary from '../payments/PaymentSummary';
 import ConfirmOption from './ConfirmOption';
@@ -100,10 +101,10 @@ const OfferItem = ({ offer, onResponse }: itemProps) => {
     offerService
       .updateOffer(newOffer, offer.offerId)
       .then((response) => {
-        onResponse({ type: ALERT_TYPE.SUCCESS, data: response });
+        onResponse({ type: ALERT.SUCCESS.TYPE, data: response });
       })
       .catch((error) => {
-        onResponse({ type: ALERT_TYPE.ERROR, data: error });
+        onResponse({ type: ALERT.ERROR.TYPE, data: error });
       });
   };
 

@@ -4,21 +4,36 @@ import { Message } from '../models/message';
 const messageSlice = createSlice({
   name: 'message',
   initialState: {
+    unread: 0,
     inbox: [] as Message[],
     outbox: [] as Message[],
     trash: [] as Message[],
     other: [] as Message[],
   },
   reducers: {
-    setMessage(
+    setMessages(
       state,
       action: PayloadAction<{ messages: Message[]; currentUser: string }>
     ) {
+      state.unread = 0;
+
       action.payload.messages.forEach((message) => {
-        // Trash
-        // Inbox
-        // Outbox
-        // Other
+        if (message.read === false) {
+          state.unread++;
+        }
+        if (message.trash === true) {
+          state.trash.push(message);
+          //   newTrash.push(message);
+        } else if (message.recipientId === action.payload.currentUser) {
+          state.inbox.push(message);
+          //   newInbox.push(message);
+        } else if (message.senderId === action.payload.currentUser) {
+          state.outbox.push(message);
+          //   newOutbox.push(message);
+        } else {
+          state.other.push(message);
+          //   newOther.push(message);
+        }
       });
     },
     addToOutbox(state, action: PayloadAction<{ message: Message }>) {
@@ -27,9 +42,17 @@ const messageSlice = createSlice({
     addToInbox(state, action: PayloadAction<{ message: Message }>) {
       state.outbox.push(action.payload.message);
     },
-    trashMessage() {
+    trashMessage(state, action: PayloadAction<{ message: Message }>) {
+      let id = action.payload.message.msgId;
       // remove from inbox or outbox
-      // change trash to true
+      let newInbox = state.inbox.filter((message) => message.msgId !== id);
+      state.inbox = newInbox;
+
+      let newOutbox = state.outbox.filter((message) => message.msgId !== id);
+      state.outbox = newOutbox;
+
+      // add to trash
+      state.trash.push(action.payload.message);
     },
     deleteMessage(state, action: PayloadAction<{ id: string }>) {
       const newMessages = state.trash.filter(
