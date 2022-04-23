@@ -40,20 +40,6 @@ export const changeOfferStatus = (
   return result;
 };
 
-export const rejectAllOtherOffers = (carId: string, offerId: string) => {
-  let response;
-  offerService
-    .getAllOffers()
-    .then((response) => {
-      response = { success: true, error: null };
-    })
-    .catch((error) => {
-      response = { success: false, error };
-    });
-
-  return response;
-};
-
 export const checkDealerOffers = (empUserId: string) => {
   let response;
   let dealerOffers: { carId: string; status: string }[] = [];

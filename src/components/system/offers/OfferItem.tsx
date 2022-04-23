@@ -17,6 +17,7 @@ import ConfirmOption from './ConfirmOption';
 import styles from './OfferItem.module.css';
 import { useSelector, RootStateOrAny } from 'react-redux';
 import offerService from '../../../services/offer.service';
+import OfferInfo from './OfferInfo';
 
 interface itemProps {
   offer: Offer;
@@ -53,14 +54,6 @@ const OfferItem = ({ offer, onResponse }: itemProps) => {
       setCar(response);
     });
   }, [offer.carId, location.pathname]);
-
-  let date = '';
-  if (offer.offerDate) {
-    let offerDate = new Date(offer.offerDate);
-    date = `${
-      offerDate.getMonth() + 1
-    }/${offerDate.getDate()}/${offerDate.getFullYear()}`;
-  }
 
   // Payment summary display
   const toggleView = () => {
@@ -162,44 +155,7 @@ const OfferItem = ({ offer, onResponse }: itemProps) => {
       <div className={styles.itemContainer}>
         <div className={styles.leftContainer}>
           {/* Car and Offer Status */}
-          <div className={styles.imageContainer}>
-            <img src={car?.url} alt='' />
-            <p>{`STATUS: ${offer.status}`}</p>
-          </div>
-          <div className={styles.infoContainer}>
-            {/* Offer Information */}
-            <div className={styles.headerContainer}>
-              <div>
-                <h1>{`${car?.year} ${car?.make} ${car?.model} - $${car?.price}`}</h1>
-              </div>
-            </div>
-            <div className={styles.offerInfo}>
-              <div className={styles.offerInfoLeft}>
-                <div className={styles.infoRow}>
-                  <p className={styles.label}>{`Date Submitted:`}</p>
-                  <p>{date}</p>
-                </div>
-                <div className={styles.infoRow}>
-                  <p className={styles.label}>{`Offer Id:`}</p>
-                  <p>{offer.offerId}</p>
-                </div>
-                <div className={styles.infoRow}>
-                  <p className={styles.label}>{`Down Payment: `}</p>
-                  <p>{`$${offer.downPayment.toFixed(2)}`}</p>
-                </div>
-              </div>
-              <div className={styles.offerInfoRight}>
-                <div className={styles.infoRow}>
-                  <p className={styles.label}>{`Car Id: `}</p>
-                  <p>{offer.carId}</p>
-                </div>
-                <div className={styles.infoRow}>
-                  <p className={styles.label}>{`Number of Payments: `}</p>
-                  <p>{offer.numberOfPayments}</p>
-                </div>
-              </div>
-            </div>
-          </div>
+          <OfferInfo offer={offer} car={car} />
         </div>
 
         {/* Offer Buttons: Summary, Accept, and Reject */}
