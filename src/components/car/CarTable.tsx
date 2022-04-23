@@ -55,7 +55,7 @@ const CarTable = ({ editMode, cars, owner }: tableProps) => {
           <div className={styles.table}>
             {filteredCars.map((car) => {
               return (
-                <div className={styles.itemContainer} key={car.carId}>
+                <div key={car.carId}>
                   <CarItem
                     key={car.carId}
                     carId={car.carId}

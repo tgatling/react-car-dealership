@@ -6,9 +6,9 @@ import { Car } from '../../models/car';
 import { DEALER_ROLE, EDIT_OUR_LOT } from '../../models/constants';
 import carService from '../../services/car.service';
 import { carActions } from '../../store/car-slice';
+import AddConfirmation from './AddConfirmation';
 // import AlertDisplay from '../UI/AlertDisplay';
 import styles from './CarForm.module.css';
-import CarItem from './CarItem';
 
 interface carFormProps {
   addCarForm: boolean;
@@ -18,6 +18,7 @@ interface carFormProps {
 const CarForm = ({ addCarForm, pendingOffer }: carFormProps) => {
   const [carAdded, setCarAdded] = useState(false);
   const [httpError, setHttpError] = useState(null);
+  const history = useHistory();
 
   // store user inputs
   const [year, setYear] = useState<number | string>('');
@@ -40,7 +41,6 @@ const CarForm = ({ addCarForm, pendingOffer }: carFormProps) => {
     dateAdded: todaysDate,
   });
 
-  const history = useHistory();
   const dispatch = useDispatch();
   const params = useParams<{ carId: string }>();
 
@@ -159,7 +159,7 @@ const CarForm = ({ addCarForm, pendingOffer }: carFormProps) => {
 
   return (
     <section className={styles.section}>
-        {/* <AlertDisplay
+      {/* <AlertDisplay
           type={ALERT.INFO.TYPE}
           heading={`THERE IS A PENDING OFFER ON THIS ${make.toUpperCase()} ${model.toUpperCase()}`}
           message='You will be unable to edit the price on this car because of the pending offer.'
@@ -262,42 +262,15 @@ const CarForm = ({ addCarForm, pendingOffer }: carFormProps) => {
             </div>
           </div>
         ) : (
-          <div>
-            <button className={styles.closeResults} onClick={returnToEdit}>
-              x
-            </button>
-            <div className={styles.resultCard}>
-              <div className={styles.resultContainer}>
-                <CarItem
-                  carId={carId}
-                  year={+year}
-                  make={make}
-                  model={model}
-                  url={url}
-                  price={+price}
-                  editMode={false}
-                />
-              </div>
-              <div className={styles.message}>
-                {addCarForm ? (
-                  <div>
-                    <h1>Car Successfully Added to the Lot!</h1>
-                    <p>{`You have now added the ${make} ${model} to our inventory under the id of ${carId}.`}</p>
-                  </div>
-                ) : (
-                  <div>
-                    <h1>This Car is Now Updated!</h1>
-                    <p>{`You have successfully updated the ${make} ${model} under the id of ${carId}.`}</p>
-                  </div>
-                )}
-                <p>
-                  Click the 'x' in the top right corner to return to the "Edit
-                  Our Lot" page. Click on the view button to see other vehicle
-                  options.
-                </p>
-              </div>
-            </div>
-          </div>
+          <AddConfirmation
+            carId={carId}
+            year={+year}
+            make={make}
+            model={model}
+            url={url}
+            price={+price}
+            addCarForm={addCarForm}
+          />
         )}
       </div>
     </section>
