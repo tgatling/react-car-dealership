@@ -10,6 +10,7 @@ export class Payment {
   paymentId: string = '';
   paymentDueDate: string | Date = new Date().toISOString();
   amountDue: number = 0;
+  completed: boolean = false;
   transactions: Transaction[] = [] 
 }
 
@@ -26,10 +27,8 @@ export class Payments {
 
 // BREAKDOWN
 
-/*
-* Transaction
-* Transaction Id: offerId_transactionNumber
-*/
+// paymentId: offerId_[ payment table index ]
+// transactionId: paymentId_[ transaction index ]
 
 /*
 * Payment Table
