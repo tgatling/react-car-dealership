@@ -133,7 +133,7 @@ const AuthForm = () => {
           <div id='form-container'>
             {httpError && (
               <p className={styles.errorText}>
-                Login unsuccessful. Please try again.
+                {`Your ${isLoginForm ? 'login' : 'registration'} was unsuccesful. Please try again.`}
               </p>
             )}
 
