@@ -4,17 +4,19 @@ import PaymentItem from './PaymentItem';
 import { calculateRemainingPayments } from '../Calculations';
 import styles from './PaymentTable.module.css';
 import PaymentSummary from './PaymentSummary';
+import {Payments} from '../../../models/payments';
 
 interface paymentTableProps {
-  carId: string;
-  userId: string;
-  totalAmount: number;
-  downPayment: number;
-  numberOfPayments: number;
-  paymentsMade: number;
+  payments: Payments;
+  // carId: string;
+  // userId: string;
+  // totalAmount: number;
+  // downPayment: number;
+  // numberOfPayments: number;
+  // paymentsMade: number;
 }
 
-const PaymentTable = (payments: paymentTableProps) => {
+const PaymentTable = ({payments}: paymentTableProps) => {
   const [viewFullTable, setViewFullTable] = useState(false);
   let { paymentCalculations } = calculateRemainingPayments(payments);
 

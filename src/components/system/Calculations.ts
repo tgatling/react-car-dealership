@@ -82,8 +82,8 @@ export const calculateRemainingPayments = (payments: Payments) => {
 
   let { numberOfEqualPayments, unequalPaymentAmount, paymentAmount } =
     calculateIndividualPayments(
-      payments.totalAmount,
-      payments.downPayment,
+      payments.carTotal,
+      payments.paymentTable[0].transactions[0].paymentAmount,
       payments.numberOfPayments
     );
 
@@ -92,7 +92,7 @@ export const calculateRemainingPayments = (payments: Payments) => {
 
   // handling unequal payment status
   if (unequalPaymentAmount !== 0) {
-    if (payments.paymentsMade === 0) {
+    if (payments.paymentTable.length + 1 === 1) {
       paymentCalculations.push({
         payment: 1,
         amount: unequalPaymentAmount,
@@ -110,8 +110,9 @@ export const calculateRemainingPayments = (payments: Payments) => {
   }
 
   // handling equal payment statuses
+  // TODO: CHECK FIRST IF STATEMENT
   for (let i = startingPoint; i < stoppingPoint; i++) {
-    if (i < payments.paymentsMade) {
+    if (i < payments.paymentTable.length + 1) {
       paymentCalculations.push({
         payment: i + 1,
         amount: paymentAmount,

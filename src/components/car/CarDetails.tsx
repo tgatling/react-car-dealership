@@ -4,8 +4,8 @@ import PaymentTable from '../system/payments/PaymentTable';
 import { Car } from '../../models/car';
 import { CUSTOMER_ROLE } from '../../models/constants';
 import styles from './CarDetails.module.css';
-import { Payments } from '../../models/payments';
 import OfferDetails from '../system/offers/OfferDetails';
+import {MOCK_PAYMENTS} from '../../tests/mockData/mockPayment';
 
 interface detailsProp {
   car: Car;
@@ -14,14 +14,8 @@ interface detailsProp {
 
 // TODO: REMOVE HARDCODED PAYMENT INFORMATION
 
-const DUMMY_PAYMENTS: Payments = {
-  userId: 'dummy-user-id',
-  carId: '-MwlR-FOe4z_HTtcCI2e',
-  totalAmount: 11300,
-  downPayment: 3300,
-  numberOfPayments: 15,
-  paymentsMade: 3,
-};
+
+
 
 const CarDetails = ({ car, ownerRole }: detailsProp) => {
   const [showHeading, setShowHeading] = useState(true);
@@ -35,12 +29,13 @@ const CarDetails = ({ car, ownerRole }: detailsProp) => {
           <div>
             <h1>{`MAKE A PAYMENT ON YOUR ${carName}`}</h1>
             <PaymentTable
-              userId={DUMMY_PAYMENTS.userId}
-              carId={DUMMY_PAYMENTS.carId}
-              totalAmount={DUMMY_PAYMENTS.totalAmount}
-              downPayment={DUMMY_PAYMENTS.downPayment}
-              numberOfPayments={DUMMY_PAYMENTS.numberOfPayments}
-              paymentsMade={DUMMY_PAYMENTS.paymentsMade}
+              payments={MOCK_PAYMENTS}
+              // userId={MOCK_PAYMENTS.userId}
+              // carId={MOCK_PAYMENTS.carId}
+              // totalAmount={MOCK_PAYMENTS.carTotal}
+              // downPayment={MOCK_PAYMENTS.paymentTable[0].transactions[0].paymentAmount}
+              // numberOfPayments={MOCK_PAYMENTS.numberOfPayments}
+              // paymentsMade={MOCK_PAYMENTS.paymentTable.length + 1}
             />
           </div>
         ) : (
