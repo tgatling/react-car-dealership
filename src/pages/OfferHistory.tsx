@@ -6,7 +6,7 @@ import { offerActions } from '../store/offer-slice';
 import offerService from '../services/offer.service';
 import OfferDisplay from '../components/system/offers/OfferDisplay';
 import AlertDisplay from '../components/UI/AlertDisplay';
-import { ALERT, CURRENT_OFFERS } from '../models/constants';
+import { ALERT, OFFER_HISTORY } from '../models/constants';
 
 const OfferHistory = () => {
   const history = useHistory();
@@ -83,7 +83,7 @@ const OfferHistory = () => {
 
   const exitAlert = () => {
     dispatch(offerActions.setSubmittedOffer([]));
-    history.push(CURRENT_OFFERS);
+    history.push(OFFER_HISTORY);
   };
 
   return (

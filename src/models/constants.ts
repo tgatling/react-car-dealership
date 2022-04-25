@@ -14,7 +14,7 @@ export const LOGIN_REGISTER = '/login';
 // User Navigation Bar
 export const VIEW_YOUR_CARS = '/my-cars';
 export const PAYMENT_HISTORY = '/payment-history';
-export const CURRENT_OFFERS = '/current-offers';
+export const OFFER_HISTORY = '/offer-history';
 export const MESSAGES = '/messages';
 
 // Other Routing
