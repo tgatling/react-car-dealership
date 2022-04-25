@@ -46,14 +46,20 @@ const UserBar = ({ username, userId }: userProps) => {
             </NavLink>
           </li>
           <li className={styles.icon}>
-            <NavLink to={MESSAGES}>
-              {unreadCount > 0 ? (
-                <img src={tealEmail} alt='' />
-              ) : (
-                <img src={email} alt='' />
-              )}
-              {/* <p>{unreadCount}</p> */}
-            </NavLink>
+            <div className={styles.indicatorBase}>
+              <NavLink to={MESSAGES}>
+                {unreadCount > 0 ? (
+                  <div>
+                    <img src={tealEmail} alt='' />
+                    <div className={styles.indicator}>
+                      <div className={styles.msgCount}>{unreadCount}</div>
+                    </div>
+                  </div>
+                ) : (
+                  <img src={email} alt='' />
+                )}
+              </NavLink>
+            </div>
           </li>
           <li className={styles.icon}>
             <NavLink to={SETTINGS}>

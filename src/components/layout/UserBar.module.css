@@ -61,11 +61,38 @@
 .icon img {
   display: flex;
   justify-content: center;
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
 }
 
 .icon:hover {
   width: 22px;
   height: 22px;
+}
+
+.indicatorBase {
+  border: 1px solid transparent;
+  position: relative;
+}
+
+.indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 22px;
+  width: 22px;
+  position: absolute;
+  border-radius: 50%;
+  top: -10px;
+  left: 15px;
+  bottom: 10px;
+  background-color: #ffffff;
+  align-content: center;
+}
+
+.msgCount {
+  display: flex;
+  font-size: 12px;
+  color: #000080;
+  font-weight: bold;
 }
