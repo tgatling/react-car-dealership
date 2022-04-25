@@ -13,6 +13,12 @@ class OfferService {
       .then((result) => result.data);
   }
 
+  async getOffer(id: string): Promise<Offer> {
+    return await axios
+      .get(`${this.URI}offers/${id}.json`)
+      .then((result) => result.data);
+  }
+
   async addOffer(offer: Offer) {
     return await axios
       .post(`${this.URI}offers.json`, offer)
