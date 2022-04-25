@@ -17,9 +17,9 @@ import {
   LOGIN_REGISTER,
   EDIT_SPECIFIC_CAR,
   VIEW_SPECIFIC_CAR,
-  CURRENT_OFFERS,
   PAYMENT_HISTORY,
   CUSTOMER_OFFERS,
+  OFFER_HISTORY,
 } from '../../models/constants';
 import OfferHistory from '../../pages/OfferHistory';
 import PaymentHistory from '../../pages/PaymentHistory';
@@ -58,7 +58,7 @@ const Routing = () => {
         </Route>
       )}
       {loggedIn && (
-        <Route path={CURRENT_OFFERS}>
+        <Route path={OFFER_HISTORY}>
           <OfferHistory />
         </Route>
       )}

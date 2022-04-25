@@ -3,7 +3,7 @@ import { RootStateOrAny, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
 import {
-  CURRENT_OFFERS,
+  OFFER_HISTORY,
   PAYMENT_HISTORY,
   VIEW_YOUR_CARS,
   MESSAGES,
@@ -39,8 +39,8 @@ const UserBar = ({ username, userId }: userProps) => {
             </NavLink>
           </li>
           <li>
-            <NavLink to={CURRENT_OFFERS} activeClassName={styles.active}>
-              Current Offers
+            <NavLink to={OFFER_HISTORY} activeClassName={styles.active}>
+              Offer History
             </NavLink>
           </li>
           <li className={styles.email}>

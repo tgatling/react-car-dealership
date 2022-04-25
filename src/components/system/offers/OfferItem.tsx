@@ -15,9 +15,10 @@ import carService from '../../../services/car.service';
 import PaymentSummary from '../payments/PaymentSummary';
 import ConfirmOption from './ConfirmOption';
 import styles from './OfferItem.module.css';
-import { useSelector, RootStateOrAny } from 'react-redux';
+import { useSelector, RootStateOrAny, useDispatch } from 'react-redux';
 import offerService from '../../../services/offer.service';
 import OfferInfo from './OfferInfo';
+import { carActions } from '../../../store/car-slice';
 
 interface itemProps {
   offer: Offer;
@@ -29,6 +30,7 @@ interface itemProps {
 }
 
 const OfferItem = ({ offer, onResponse }: itemProps) => {
+  const dispatch = useDispatch();
   const location = useLocation();
   const currentUser = useSelector(
     (state: RootStateOrAny) => state.user.currentUser
@@ -90,9 +92,29 @@ const OfferItem = ({ offer, onResponse }: itemProps) => {
     newOffer.numberOfPayments = offer.numberOfPayments;
 
     if (accepted) {
+      // Change status of accepted offer
       newOffer.status = ACCEPTED_STATUS;
       setConfirmAccept(false);
 
+      // Update the car to owned status
+      carService
+        .getCar(newOffer.carId)
+        .then((response) => {
+          let newCarInfo: Car = response;
+          newCarInfo.owner = newOffer.userId;
+
+          carService
+            .updateCar(newCarInfo, newOffer.carId)
+            .then((result) => {
+              dispatch(
+                carActions.editCar({ car: result, id: result.carId })
+              );
+            })
+            .catch((error) => error);
+        })
+        .catch((error) => error);
+
+      // reject all other offers on the vehicle
       otherOffers = pendingOffers.filter(
         (offer: Offer) =>
           offer.offerId !== newOffer.offerId && offer.carId === newOffer.carId
@@ -117,10 +139,12 @@ const OfferItem = ({ offer, onResponse }: itemProps) => {
           .catch((error) => error);
       });
     } else {
+      // Change status of rejected offer
       newOffer.status = REJECTED_STATUS;
       setConfirmReject(false);
     }
 
+    // Update the accepted/rejected offer
     offerService
       .updateOffer(newOffer, offer.offerId)
       .then((response) => {

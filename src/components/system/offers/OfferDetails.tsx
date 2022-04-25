@@ -7,7 +7,7 @@ import OfferTable from './OfferTable';
 import { Offer } from '../../../models/offer';
 import {
   MAKING_AN_OFFER_INSTRUCTIONS,
-  CURRENT_OFFERS,
+  OFFER_HISTORY,
 } from '../../../models/constants';
 import styles from './OfferForm.module.css';
 import PaymentInfo from '../payments/PaymentInfo';
@@ -73,7 +73,7 @@ const OfferDetails = ({ carTotal, showHeading }: offerFormProps) => {
             .updateOffer(customerOffer, previousOffer.offerId)
             .then((response) => response)
             .catch((error) => setHttpError(error));
-          history.push(`${CURRENT_OFFERS}?type=update${previousOffer.offerId}`);
+          history.push(`${OFFER_HISTORY}?type=update${previousOffer.offerId}`);
         } else {
           offerService
             .addOffer(customerOffer)
@@ -83,7 +83,7 @@ const OfferDetails = ({ carTotal, showHeading }: offerFormProps) => {
                 .updateOffer(customerOffer, response.name)
                 .then((res) => {
                   history.push(
-                    `${CURRENT_OFFERS}?type=add${customerOffer.offerId}`
+                    `${OFFER_HISTORY}?type=add${customerOffer.offerId}`
                   );
                 })
                 .catch((error) => setHttpError(error));
