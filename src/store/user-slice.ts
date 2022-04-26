@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import {User} from '../models/user';
 
 const userSlice = createSlice({
   name: 'user',
@@ -7,6 +8,7 @@ const userSlice = createSlice({
     isLoggedIn: localStorage.getItem('isLoggedIn') ? true : false,
     expirationTime: localStorage.getItem('expirationTime'),
     currentUser: localStorage.getItem('user'),
+    searchedUser: localStorage.getItem('user'),
   },
   reducers: {
     logout(state) {
@@ -33,6 +35,9 @@ const userSlice = createSlice({
 
       localStorage.setItem('user', state.currentUser);
     },
+    searchUser(state, action){
+      state.searchedUser = action.payload;
+    }
   },
 });
 

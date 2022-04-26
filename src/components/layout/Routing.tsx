@@ -24,6 +24,8 @@ import {
 import OfferHistory from '../../pages/OfferHistory';
 import PaymentHistory from '../../pages/PaymentHistory';
 import CustomerOffers from '../../pages/CustomerOffers';
+import { SETTINGS } from '../../models/constants';
+import Settings from '../../pages/Settings';
 
 const Routing = () => {
   const loggedIn: boolean = useSelector(
@@ -75,6 +77,11 @@ const Routing = () => {
       {!loggedIn && (
         <Route path={LOGIN_REGISTER}>
           <Auth />
+        </Route>
+      )}
+      {loggedIn && (
+        <Route path={SETTINGS}>
+          <Settings />
         </Route>
       )}
       <Route path='*'>
