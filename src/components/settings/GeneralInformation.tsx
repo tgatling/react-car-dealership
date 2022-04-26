@@ -13,9 +13,9 @@ const GeneralInformation = ({ user }: infoProp) => {
       <h2>General Information</h2>
       <div className={styles.inputRow}>
         <label>First Name</label>
-        <input />
+        <input value={user.firstName} />
         <label>Last Name</label>
-        <input />
+        <input value={user.lastName} />
       </div>
       <div className={styles.inputRow}>
         <label>Username</label>
