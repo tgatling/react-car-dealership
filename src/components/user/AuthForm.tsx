@@ -54,10 +54,17 @@ const AuthForm = () => {
               let loadedUsers: User[] = [];
               for (const key in response) {
                 loadedUsers.push({
-                  email: response[key].email,
                   userId: response[key].userId,
-                  userRole: response[key].userRole,
                   username: response[key].username,
+                  firstName: response[key]?.firstName,
+                  lastName: response[key].lastName,
+                  email: response[key].email,
+                  phoneNumber: response[key].phoneNumber,
+                  address: response[key].address,
+                  city: response[key].city,
+                  state: response[key].state,
+                  zip: response[key].zip,
+                  userRole: response[key].userRole,
                 });
               }
               let loadedUser = loadedUsers.find(
@@ -71,9 +78,16 @@ const AuthForm = () => {
                   expirationTime: result.expiresIn,
                   currentUser: {
                     userId: result.localId,
-                    email: result.email,
-                    userRole: loadedUser?.userRole,
                     username: loadedUser?.username,
+                    firstName: loadedUser?.firstName,
+                    lastName: loadedUser?.lastName,
+                    email: result.email,
+                    phoneNumber: loadedUser?.phoneNumber,
+                    address: loadedUser?.address,
+                    city: loadedUser?.city,
+                    state: loadedUser?.state,
+                    zip: loadedUser?.zip,
+                    userRole: loadedUser?.userRole,
                   },
                 })
               );
@@ -133,7 +147,9 @@ const AuthForm = () => {
           <div id='form-container'>
             {httpError && (
               <p className={styles.errorText}>
-                {`Your ${isLoginForm ? 'login' : 'registration'} was unsuccesful. Please try again.`}
+                {`Your ${
+                  isLoginForm ? 'login' : 'registration'
+                } was unsuccesful. Please try again.`}
               </p>
             )}
 

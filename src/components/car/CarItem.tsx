@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import image from '../../images/no-car-photo.png';
+import noCarImage from '../../images/no-car-photo.png';
+import deleteIcon from '../../images/delete.png';
 import carService from '../../services/car.service';
 import styles from './CarItem.module.css';
 import { useDispatch } from 'react-redux';
@@ -75,7 +76,7 @@ const CarItem = ({
 
   let deleteTitle = 'PLEASE CONFIRM';
   let deleteBody = `By clicking "DELETE" you are confirming that you have chosen to delete the ${heading} ${model.toUpperCase()}`;
-  let displayImage = url ? url : image;
+  let displayImage = url ? url : noCarImage;
   return (
     <div>
       {showConfirmation && (
@@ -90,12 +91,10 @@ const CarItem = ({
       {!showConfirmation && (
         <div className={styles.itemContainer}>
           {editMode && (
-            <button
-              className={styles.deleteButton}
-              onClick={toggleDeleteConfirmation}
-            >
-              x
-            </button>
+
+            <div className={styles.deleteIcon}>
+              <img src={deleteIcon} alt='' onClick={toggleDeleteConfirmation} />
+            </div>
           )}
           <h1>{heading}</h1>
           <div className={styles.imageContainer}>

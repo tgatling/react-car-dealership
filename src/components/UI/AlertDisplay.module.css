@@ -1,6 +1,9 @@
 .alertContainer {
   display: flex;
   justify-content: center;
+  position: absolute;
+  top: 20%;
+  left: 25%;
 }
 
 .alertContent {

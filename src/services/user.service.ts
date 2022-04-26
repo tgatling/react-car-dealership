@@ -60,6 +60,10 @@ class UserService {
       .then((result) => result.data);
   }
 
+  async getUser(id: string): Promise<User>{
+    return await axios.get(`${this.URI}/users/${id}.json`).then((result)=> result.data)
+  }
+
   async changeEmail(token: string, email: string) {
     return await axios
       .post(

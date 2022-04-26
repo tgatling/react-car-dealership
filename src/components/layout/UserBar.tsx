@@ -7,9 +7,11 @@ import {
   PAYMENT_HISTORY,
   VIEW_YOUR_CARS,
   MESSAGES,
+  SETTINGS,
 } from '../../models/constants';
 import email from '../../images/email.png';
 import tealEmail from '../../images/teal-email.png';
+import settings from '../../images/settings.png';
 import styles from './UserBar.module.css';
 
 interface userProps {
@@ -43,14 +45,25 @@ const UserBar = ({ username, userId }: userProps) => {
               Offer History
             </NavLink>
           </li>
-          <li className={styles.email}>
-            <NavLink to={MESSAGES}>
-              {unreadCount > 0 ? (
-                <img src={tealEmail} alt='' />
-              ) : (
-                <img src={email} alt='' />
-              )}
-              {/* <p>{unreadCount}</p> */}
+          <li className={styles.icon}>
+            <div className={styles.indicatorBase}>
+              <NavLink to={MESSAGES}>
+                {unreadCount > 0 ? (
+                  <div>
+                    <img src={tealEmail} alt='' />
+                    <div className={styles.indicator}>
+                      <div className={styles.msgCount}>{unreadCount}</div>
+                    </div>
+                  </div>
+                ) : (
+                  <img src={email} alt='' />
+                )}
+              </NavLink>
+            </div>
+          </li>
+          <li className={styles.icon}>
+            <NavLink to={SETTINGS}>
+              <img src={settings} alt='' />
             </NavLink>
           </li>
         </ul>
