@@ -3,25 +3,12 @@ import { useSelector, RootStateOrAny } from 'react-redux';
 import Profile from '../components/settings/Profile';
 import AlertDisplay from '../components/UI/AlertDisplay';
 import { ALERT } from '../models/constants';
-import { User } from '../models/user';
-import userService from '../services/user.service';
+import {User} from '../models/user';
 
 const Settings = () => {
-  const user = useSelector((state: RootStateOrAny) => state.user.currentUser);
-  const currentUser = JSON.parse(user);
-
-  const [userProfile, setUserProfile] = useState<User>(currentUser);
+  const userState = useSelector((state: RootStateOrAny) => state.user);
+  const currentUser: User = JSON.parse(userState.currentUser);
   const [httpError, setHttpError] = useState('');
-
-  const changeUser = (userId: string) => {
-    userService
-      .getUser(userId)
-      .then((response) => {
-        setUserProfile(response);
-      })
-      .catch((error) => setHttpError(error));
-    console.log(`Change user: ${userId}`);
-  };
 
   const exitAlert = () => {
     setHttpError('');
@@ -38,7 +25,7 @@ const Settings = () => {
         />
       )}
       <h1>Account Settings</h1>
-      <Profile user={userProfile} submitUserId={changeUser} />
+      {currentUser.userRole && <Profile user={currentUser} currentUserRole={currentUser.userRole} />}
     </div>
   );
 };
