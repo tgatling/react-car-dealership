@@ -4,12 +4,14 @@ import styles from './ChangeUser.module.css';
 
 interface userProp {
   userId: string;
+  submitUserId: (id: string) => void;
 }
 
-const ChangeUser = ({ userId }: userProp) => {
+const ChangeUser = ({ userId, submitUserId }: userProp) => {
   const [newUserId, setNewUserId] = useState(userId);
-  const submitHandler = () => {
+  const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     console.log('Change User Form Submitted');
+    submitUserId(newUserId);
   };
 
   return (
