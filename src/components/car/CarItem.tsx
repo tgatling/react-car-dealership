@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import noCarImage from '../../images/no-car-photo.png';
-import deleteIcon from '../../images/delete.png';
+import deleteIcon from '../../images/icons/delete-icon.png';
 import carService from '../../services/car.service';
 import styles from './CarItem.module.css';
 import { useDispatch } from 'react-redux';

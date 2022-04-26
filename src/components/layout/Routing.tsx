@@ -20,12 +20,14 @@ import {
   PAYMENT_HISTORY,
   CUSTOMER_OFFERS,
   OFFER_HISTORY,
+  CUSTOMER_PAYMENTS,
 } from '../../models/constants';
 import OfferHistory from '../../pages/OfferHistory';
 import PaymentHistory from '../../pages/PaymentHistory';
 import CustomerOffers from '../../pages/CustomerOffers';
 import { SETTINGS } from '../../models/constants';
 import Settings from '../../pages/Settings';
+import CustomerPayments from '../../pages/CustomerPayments';
 
 const Routing = () => {
   const loggedIn: boolean = useSelector(
@@ -67,6 +69,11 @@ const Routing = () => {
       {loggedIn && (
         <Route path={CUSTOMER_OFFERS}>
           <CustomerOffers />
+        </Route>
+      )}
+      {loggedIn && (
+        <Route path={CUSTOMER_PAYMENTS}>
+          <CustomerPayments />
         </Route>
       )}
       {loggedIn && (

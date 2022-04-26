@@ -4,10 +4,10 @@ import { ALERT } from '../../models/constants';
 import styles from './AlertDisplay.module.css';
 
 // Alert Icons
-import errorIcon from '../../images/error-icon.png';
-import infoIcon from '../../images/info-icon.png';
-import successIcon from '../../images/success-icon.png';
-import warningIcon from '../../images/warning-icon.png';
+import errorIcon from '../../images/icons/error-icon.png';
+import infoIcon from '../../images/icons/info-icon.png';
+import successIcon from '../../images/icons/success-icon.png';
+import warningIcon from '../../images/icons/warning-icon.png';
 import logo from '../../images/family-car.png';
 
 interface alertProp {

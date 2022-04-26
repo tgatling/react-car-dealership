@@ -9,9 +9,9 @@ import {
   MESSAGES,
   SETTINGS,
 } from '../../models/constants';
-import email from '../../images/email.png';
-import tealEmail from '../../images/teal-email.png';
-import settings from '../../images/settings.png';
+import email from '../../images/icons/email-icon.png';
+import tealEmail from '../../images/icons/teal-email-icon.png';
+import settings from '../../images/icons/settings-icon.png';
 import styles from './UserBar.module.css';
 
 interface userProps {
