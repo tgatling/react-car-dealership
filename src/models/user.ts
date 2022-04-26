@@ -7,8 +7,7 @@ export class User {
   lastName?: string = '';
   email: string = '';
   phoneNumber?: string = '000-000-0000';
-  addressLineOne?: string = '';
-  addressLineTwo?: string = '';
+  address?: string = '';
   city?: string = '';
   state?: string = '';
   zip?: number = 0;

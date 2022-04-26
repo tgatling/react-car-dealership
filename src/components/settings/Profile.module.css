@@ -1,5 +1,5 @@
 .profileContainer {
-  margin-top: 40px;
+  margin: 40px 0 80px 0;
   padding: 25px;
   background-color: #ffffff;
   border-style: solid;
@@ -21,7 +21,7 @@
 .pictureContainer {
   display: flex;
   flex-direction: column;
-  margin: 10px;
+  margin: 0 25px 40px;
 }
 
 .pictureContainer img {
@@ -32,6 +32,7 @@
 .infoContainer {
   display: flex;
   flex-direction: column;
+  margin: 0px 25px 40px;
 }
 
 .infoContainer label {
@@ -40,10 +41,38 @@
   font-weight: bold;
 }
 
-.infoContainer input {
+.miniInput {
   margin: 10px;
   padding: 10px;
-  width: 400px;
+  width: 100px;
+  font-size: 20px;
+}
+
+.shortInput {
+  margin: 10px;
+  padding: 10px;
+  width: 250px;
+  font-size: 20px;
+}
+
+.regInput {
+  margin: 10px;
+  padding: 10px;
+  width: 500px;
+  font-size: 20px;
+}
+
+.longInput {
+  margin: 10px;
+  padding: 10px;
+  width: 1000px;
+  font-size: 20px;
+}
+
+.extraLongInput {
+  margin: 10px;
+  padding: 10px;
+  width: 1250px;
   font-size: 20px;
 }
 
