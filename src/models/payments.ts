@@ -1,38 +1,41 @@
-export class Transaction {
-  transactionId: string = '';
+export class Payment {
+  paymentId: string = '';
+  billId: string = '';
+  carId: string = '';
+  paymentNumber: number = 1;
   confirmationNumber: number = 0;
   paymentDate: string | Date = new Date().toISOString();
   paymentAmount: number = 0;
-  transactionSplit: boolean = false;
+  prepaymentOfNextBill: boolean = false;
 }
 
-export class Payment {
-  paymentId: string = '';
+export class Bill {
+  billId: string = '';
+  paymentHistoryId: string = '';
+  billNumber: number = 0;
   paymentDueDate: string | Date = new Date().toISOString();
   amountDue: number = 0;
-  completed: boolean = false;
-  transactions: Transaction[] = [] 
+  paymentCompleted: boolean = false;
 }
 
-export class Payments {
-  paymentId?: string;
+export class PaymentHistory {
+  paymentHistoryId: string = '';
   userId: string = '';
   carId: string = '';
-  carTotal: number = 0;
+  totalCarPrice: number = 0;
   totalPaid: number = 0;
-  numberOfPayments: number = 0;
-  paymentTable: Payment[] = []
-
+  downPayment: number = 0;
+  numberOfMonthlyPayments: number = 0;
 }
 
 // BREAKDOWN
 
-// paymentId: offerId_[ payment table index ]
-// transactionId: paymentId_[ transaction index ]
+// paymentHistoryId: offerId
+// paymentId: paymentHistoryId_billId
 
 /*
 * Payment Table
-* - Index 0: Down Payment
-* - Index 1: Payment One
-* - Index 2: Payment Two
+* - bill 0: Down Payment
+* - bill 1: Payment One
+* - bill 2: Payment Two
 */

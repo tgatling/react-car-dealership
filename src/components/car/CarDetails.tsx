@@ -5,7 +5,7 @@ import { Car } from '../../models/car';
 import { CUSTOMER_ROLE } from '../../models/constants';
 import styles from './CarDetails.module.css';
 import OfferDetails from '../system/offers/OfferDetails';
-import {MOCK_PAYMENTS} from '../../tests/mockData/mockPayment';
+import {mockPaymentHistory} from '../../tests/mockData/mockPaymentHistory';
 
 interface detailsProp {
   car: Car;
@@ -29,7 +29,7 @@ const CarDetails = ({ car, ownerRole }: detailsProp) => {
           <div>
             <h1>{`MAKE A PAYMENT ON YOUR ${carName}`}</h1>
             <PaymentTable
-              payments={MOCK_PAYMENTS}
+              payments={mockPaymentHistory}
               // userId={MOCK_PAYMENTS.userId}
               // carId={MOCK_PAYMENTS.carId}
               // totalAmount={MOCK_PAYMENTS.carTotal}

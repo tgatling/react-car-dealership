@@ -13,7 +13,7 @@ interface listProp {
 const CustomerList = ({ displayMaster = false }: listProp) => {
   const [users, setUsers] = useState<User[]>([]);
   const [search, setSearch] = useState('');
-//   const [filteredUser, setFilteredUser] = useState([]);
+  //   const [filteredUser, setFilteredUser] = useState([]);
 
   useEffect(() => {
     userService
@@ -49,13 +49,20 @@ const CustomerList = ({ displayMaster = false }: listProp) => {
 
   const searchUser = () => {
     console.log(search);
-  }
+  };
 
   return (
     <div className={styles.list}>
-      <div className={styles.searchBar}>
-        <input placeholder='Search User' onChange={(e)=>{setSearch(e.target.value)}} />
-        <img src={searchUserIcon} alt='' onClick={searchUser}/>
+      <div className={styles.searchBase}>
+        <div className={styles.searchBar}>
+          <input
+            placeholder='Search User'
+            onChange={(e) => {
+              setSearch(e.target.value);
+            }}
+          />
+          <img src={searchUserIcon} alt='' onClick={searchUser} />
+        </div>
       </div>
       {users.map((user) => {
         return (
