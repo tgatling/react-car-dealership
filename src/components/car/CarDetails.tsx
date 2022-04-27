@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import PaymentTable from '../system/payments/PaymentTable';
 import { Car } from '../../models/car';
 import { CUSTOMER_ROLE } from '../../models/constants';
 import styles from './CarDetails.module.css';
 import OfferDetails from '../system/offers/OfferDetails';
-import { mockPaymentHistory } from '../../tests/mockData/mockPaymentHistory';
+import offerService from '../../services/offer.service';
+import { Offer } from '../../models/offer';
 
 interface detailsProp {
   car: Car;
@@ -14,7 +15,10 @@ interface detailsProp {
 
 const CarDetails = ({ car, ownerRole }: detailsProp) => {
   const [showHeading, setShowHeading] = useState(true);
+  const [offer, setOffer] = useState<Offer | null>(null);
   let carName = `${car.year} ${car.make} ${car.model}`.toUpperCase();
+
+  useEffect(() => {}, []);
 
   return (
     <div className={styles.section}>
@@ -23,7 +27,7 @@ const CarDetails = ({ car, ownerRole }: detailsProp) => {
         {ownerRole === CUSTOMER_ROLE ? (
           <div>
             <h1>{`MAKE A PAYMENT ON YOUR ${carName}`}</h1>
-            <PaymentTable payments={mockPaymentHistory} />
+            {offer && <PaymentTable offer={offer} />}
           </div>
         ) : (
           <div>

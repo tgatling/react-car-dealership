@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector, RootStateOrAny } from 'react-redux';
+import { useSelector, RootStateOrAny, useDispatch } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import CarTable from '../components/car/CarTable';
+import { VIEW_YOUR_CARS } from '../models/constants';
+import offerService from '../services/offer.service';
+import { offerActions } from '../store/offer-slice';
 
 const UserCars = () => {
   const carState = useSelector((state: RootStateOrAny) => state.car);
@@ -8,13 +12,33 @@ const UserCars = () => {
     (state: RootStateOrAny) => state.user.currentUser
   );
   const [userId, setUserId] = useState('');
+  const location = useLocation();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (currentUser) {
       let user = JSON.parse(currentUser);
       setUserId(user.userId);
     }
-  }, [carState, currentUser]);
+
+    if (location.pathname === VIEW_YOUR_CARS) {
+      let carOffers: { carId: string; offerId: string; status: string }[] = [];
+      offerService
+        .getAllOffers()
+        .then((response) => {
+          for (const key in response) {
+            carOffers.push({
+              carId: response[key].carId,
+              offerId: response[key].offerId,
+              status: response[key].status,
+            });
+          }
+          console.log(carOffers);
+          dispatch(offerActions.setCarOffers(carOffers));
+        })
+        .catch((error) => error);
+    }
+  }, [carState, currentUser, location.pathname, dispatch]);
 
   return (
     <div>

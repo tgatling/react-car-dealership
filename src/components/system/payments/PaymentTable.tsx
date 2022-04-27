@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { calculatePaymentsFromOffer } from '../Calculations';
 import styles from './PaymentTable.module.css';
 import PaymentSummary from './PaymentSummary';
-import { PaymentHistory } from '../../../models/payments';
+import { Bill } from '../../../models/payments';
 import {
   downPayment,
   firstBill,
@@ -11,21 +11,26 @@ import {
   thirdBill,
 } from '../../../tests/mockData/mockPaymentHistory';
 import PaymentItem from './PaymentItem';
+import { Offer } from '../../../models/offer';
 
 const MONTHLY_BILLS = [downPayment, firstBill, secondBill, thirdBill];
 
 interface paymentTableProps {
-  payments: PaymentHistory;
+  offer: Offer;
 }
 
-const PaymentTable = ({ payments }: paymentTableProps) => {
+const PaymentTable = ({ offer }: paymentTableProps) => {
   const [viewFullTable, setViewFullTable] = useState(false);
-  const { totalCarPrice, downPayment, numberOfMonthlyPayments } = payments;
+  const { carTotal, downPayment, numberOfPayments } = offer;
+
+  useEffect(() => {
+    // Get all bill related to this offer
+  }, []);
 
   let { paymentCalculations } = calculatePaymentsFromOffer(
-    totalCarPrice,
+    carTotal,
     downPayment,
-    numberOfMonthlyPayments
+    numberOfPayments
   );
 
   let equalPayments: boolean;
@@ -50,7 +55,7 @@ const PaymentTable = ({ payments }: paymentTableProps) => {
       <PaymentSummary
         onToggle={toggleViewTable}
         equalPayments={equalPayments}
-        numberOfPayments={payments.numberOfMonthlyPayments}
+        numberOfPayments={offer.numberOfPayments}
         paymentCalculations={paymentCalculations}
         header={false}
       />

@@ -1,4 +1,4 @@
-import { PaymentHistory } from '../../models/payments';
+import { Bill } from '../../models/payments';
 
 // PAYMENTS
 
@@ -77,57 +77,7 @@ export const calculatePaymentsFromOffer = (
   };
 };
 
-export const calculateRemainingPayments = (payments: PaymentHistory) => {
-  // let paymentCalculations = [];
-
-  // let { numberOfEqualPayments, unequalPaymentAmount, paymentAmount } =
-  //   calculateIndividualPayments(
-  //     payments.totalCarPrice,
-  //     payments.bills[0].payments[0].paymentAmount,
-  //     payments.numberOfPayments
-  //   );
-
-  // let startingPoint = 0;
-  // let stoppingPoint = numberOfEqualPayments;
-
-  // // handling unequal payment status
-  // if (unequalPaymentAmount !== 0) {
-  //   if (payments.bills.length + 1 === 1) {
-  //     paymentCalculations.push({
-  //       payment: 1,
-  //       amount: unequalPaymentAmount,
-  //       status: 'UNPAID',
-  //     });
-  //   } else {
-  //     paymentCalculations.push({
-  //       payment: 1,
-  //       amount: unequalPaymentAmount,
-  //       status: 'PAID',
-  //     });
-  //   }
-  //   startingPoint = 1;
-  //   stoppingPoint++;
-  // }
-
-  // // handling equal payment statuses
-  // // TODO: CHECK FIRST IF STATEMENT
-  // for (let i = startingPoint; i < stoppingPoint; i++) {
-  //   if (i < payments.bills.length + 1) {
-  //     paymentCalculations.push({
-  //       payment: i + 1,
-  //       amount: paymentAmount,
-  //       status: 'PAID',
-  //     });
-  //   } else {
-  //     paymentCalculations.push({
-  //       payment: i + 1,
-  //       amount: paymentAmount,
-  //       status: 'UNPAID',
-  //     });
-  //   }
-  // }
-
-  // return {
-  //   paymentCalculations,
-  // // };
-};
+export const calculateRemainingPayment = (
+  bill: Bill,
+  paymentAmount: number
+) => {};
