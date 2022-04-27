@@ -11,9 +11,10 @@ interface paymentProps {
 const PaymentItem = ({ payment, amount, status }: paymentProps) => {
   return (
     <div className={styles.card}>
-      <div>{`Payment Number: ${payment}`}</div>
+      {payment === 0 && <div>{`Down Payment: `}</div>}
+      {payment > 0 && <div>{`Payment ${payment}`}</div>}
       <div>${amount.toFixed(2)}</div>
-      {status && <div>{status}</div>}
+      {status && <div className={styles.status}>{status}</div>}
     </div>
   );
 };

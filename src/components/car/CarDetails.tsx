@@ -5,17 +5,12 @@ import { Car } from '../../models/car';
 import { CUSTOMER_ROLE } from '../../models/constants';
 import styles from './CarDetails.module.css';
 import OfferDetails from '../system/offers/OfferDetails';
-import {mockPaymentHistory} from '../../tests/mockData/mockPaymentHistory';
+import { mockPaymentHistory } from '../../tests/mockData/mockPaymentHistory';
 
 interface detailsProp {
   car: Car;
   ownerRole: string;
 }
-
-// TODO: REMOVE HARDCODED PAYMENT INFORMATION
-
-
-
 
 const CarDetails = ({ car, ownerRole }: detailsProp) => {
   const [showHeading, setShowHeading] = useState(true);
@@ -28,15 +23,7 @@ const CarDetails = ({ car, ownerRole }: detailsProp) => {
         {ownerRole === CUSTOMER_ROLE ? (
           <div>
             <h1>{`MAKE A PAYMENT ON YOUR ${carName}`}</h1>
-            <PaymentTable
-              payments={mockPaymentHistory}
-              // userId={MOCK_PAYMENTS.userId}
-              // carId={MOCK_PAYMENTS.carId}
-              // totalAmount={MOCK_PAYMENTS.carTotal}
-              // downPayment={MOCK_PAYMENTS.paymentTable[0].transactions[0].paymentAmount}
-              // numberOfPayments={MOCK_PAYMENTS.numberOfPayments}
-              // paymentsMade={MOCK_PAYMENTS.paymentTable.length + 1}
-            />
+            <PaymentTable payments={mockPaymentHistory} />
           </div>
         ) : (
           <div>

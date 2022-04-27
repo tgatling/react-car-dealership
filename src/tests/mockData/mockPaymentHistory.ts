@@ -2,7 +2,7 @@ import { PaymentHistory, Bill } from '../../models/payments';
 import { paymentOne } from './mockPayments';
 
 export const downPayment: Bill = {
-  billId: '',
+  billId: '-N0XivMV90xhoOmyfmzi_0',
   paymentHistoryId: '-N0XivMV90xhoOmyfmzi',
   billNumber: 0,
   paymentDueDate: '2022-04-01T00:00:00.000Z',
@@ -11,8 +11,8 @@ export const downPayment: Bill = {
   // payments: [paymentOne]
 };
 
-export const firstPayment: Bill = {
-  billId: '',
+export const firstBill: Bill = {
+  billId: '-N0XivMV90xhoOmyfmzi_1',
   paymentHistoryId: '-N0XivMV90xhoOmyfmzi',
   billNumber: 1,
   paymentDueDate: '2022-05-01T00:00:00.000Z',
@@ -21,8 +21,8 @@ export const firstPayment: Bill = {
   // payments: [paymentTwo, paymentThree]
 };
 
-export const secondPayment: Bill = {
-  billId: '',
+export const secondBill: Bill = {
+  billId: '-N0XivMV90xhoOmyfmzi_2',
   paymentHistoryId: '-N0XivMV90xhoOmyfmzi',
   billNumber: 2,
   paymentDueDate: '2022-06-01T00:00:00.000Z',
@@ -31,8 +31,8 @@ export const secondPayment: Bill = {
   // payments: [paymentFour, paymentFive]
 };
 
-export const thirdPayment: Bill = {
-  billId: '',
+export const thirdBill: Bill = {
+  billId: '-N0XivMV90xhoOmyfmzi_3',
   paymentHistoryId: '-N0XivMV90xhoOmyfmzi',
   billNumber: 3,
   paymentDueDate: '2022-07-01T00:00:00.000Z',

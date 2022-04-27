@@ -1,42 +1,49 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import PaymentItem from './PaymentItem';
-import { calculateRemainingPayments } from '../Calculations';
+import { calculatePaymentsFromOffer } from '../Calculations';
 import styles from './PaymentTable.module.css';
 import PaymentSummary from './PaymentSummary';
-import {PaymentHistory} from '../../../models/payments';
+import { PaymentHistory } from '../../../models/payments';
+import {
+  downPayment,
+  firstBill,
+  secondBill,
+  thirdBill,
+} from '../../../tests/mockData/mockPaymentHistory';
+import PaymentItem from './PaymentItem';
+
+const MONTHLY_BILLS = [downPayment, firstBill, secondBill, thirdBill];
 
 interface paymentTableProps {
   payments: PaymentHistory;
-  // carId: string;
-  // userId: string;
-  // totalAmount: number;
-  // downPayment: number;
-  // numberOfPayments: number;
-  // paymentsMade: number;
 }
 
-const PaymentTable = ({payments}: paymentTableProps) => {
+const PaymentTable = ({ payments }: paymentTableProps) => {
   const [viewFullTable, setViewFullTable] = useState(false);
-  // let { paymentCalculations } = calculateRemainingPayments(payments);
+  const { totalCarPrice, downPayment, numberOfMonthlyPayments } = payments;
 
-  // let equalPayments: boolean;
+  let { paymentCalculations } = calculatePaymentsFromOffer(
+    totalCarPrice,
+    downPayment,
+    numberOfMonthlyPayments
+  );
 
-  // if (paymentCalculations.length > 1) {
-  //   equalPayments =
-  //     paymentCalculations[0].amount === paymentCalculations[1].amount
-  //       ? true
-  //       : false;
-  // } else {
-  //   equalPayments = true;
-  // }
+  let equalPayments: boolean;
 
-  let equalPayments = false;
-  let paymentCalculations = [{ payment: 0, amount: 0, status: 'PENDING' }];
+  if (paymentCalculations.length > 1) {
+    equalPayments =
+      paymentCalculations[0].amount === paymentCalculations[1].amount
+        ? true
+        : false;
+  } else {
+    equalPayments = true;
+  }
 
   const toggleViewTable = () => {
     setViewFullTable(!viewFullTable);
   };
+
+  let billStatus;
 
   return (
     <div className={styles.card}>
@@ -49,16 +56,17 @@ const PaymentTable = ({payments}: paymentTableProps) => {
       />
       {viewFullTable && (
         <div>
-          {/* {paymentCalculations.map((payment) => {
+          {MONTHLY_BILLS.map((bill) => {
+            billStatus = bill.paymentCompleted ? 'PAID' : 'PENDING';
             return (
               <PaymentItem
-                key={`payment-${payment.payment}`}
-                payment={payment.payment}
-                amount={payment.amount}
-                status={payment.status}
+                key={`payment-${bill.billId}`}
+                payment={bill.billNumber}
+                amount={bill.amountDue}
+                status={billStatus}
               />
             );
-          })} */}
+          })}
         </div>
       )}
     </div>

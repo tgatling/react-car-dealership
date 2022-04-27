@@ -35,10 +35,11 @@ const PaymentSummary = ({
           } payments of $${paymentCalculations[1].amount.toFixed(2)}`}</p>
         </div>
       )}
-      <div className={styles.buttonContainer}>
-        {onToggle && (
-          <button onClick={onToggle}>View Full Payment Table</button>
-        )}
+      <div className={styles.rightEnd}>
+        <div className={styles.buttonContainer}>
+          <button>Make a Payment</button>
+          {onToggle && <button onClick={onToggle}>View Monthly Bills</button>}
+        </div>
       </div>
     </div>
   );
