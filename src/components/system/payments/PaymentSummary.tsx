@@ -1,9 +1,11 @@
 import React from 'react';
 
 import styles from './PaymentSummary.module.css';
+import {downPayment} from '../../../tests/mockData/mockPaymentHistory';
 
 interface summaryProps {
   onToggle?: () => void;
+  downPayment: number;
   equalPayments: boolean;
   numberOfPayments: number;
   paymentCalculations: { payment: number; amount: number; status: string }[];
@@ -12,6 +14,7 @@ interface summaryProps {
 
 const PaymentSummary = ({
   onToggle,
+  downPayment,
   equalPayments,
   numberOfPayments,
   paymentCalculations,
@@ -20,6 +23,7 @@ const PaymentSummary = ({
   return (
     <div className={styles.summaryContainer}>
       {header && <h3>Payment Summary</h3>}
+      <p>{`Down Payment: $${downPayment}`}</p>
       {equalPayments && (
         <div>
           <p>{`${numberOfPayments} payments of $${paymentCalculations[0].amount.toFixed(

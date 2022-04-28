@@ -58,6 +58,7 @@ const OfferHistory = () => {
             empUserId: result[key].empUserId,
             carTotal: result[key].carTotal,
             downPayment: result[key].downPayment,
+            totalPaid: result[key].totalPaid,
             numberOfPayments: result[key].numberOfPayments,
           });
         }

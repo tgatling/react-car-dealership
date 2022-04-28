@@ -43,6 +43,7 @@ const OfferTable = ({
     <div className={styles.card}>
       <PaymentSummary
         onToggle={toggleViewTable}
+        downPayment={downPayment}
         equalPayments={equalPayments}
         numberOfPayments={numberOfPayments}
         paymentCalculations={paymentCalculations}

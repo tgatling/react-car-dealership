@@ -13,5 +13,6 @@ export class Offer {
   empUserId: string = '';
   carTotal: number = 0;
   downPayment: number = 0;
+  totalPaid: number = 0;
   numberOfPayments: number = 1;
 }

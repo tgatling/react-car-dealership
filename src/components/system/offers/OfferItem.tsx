@@ -210,6 +210,7 @@ const OfferItem = ({ offer, onResponse }: itemProps) => {
       {viewPaymentSummary && (
         <div className={styles.viewContainer}>
           <PaymentSummary
+            downPayment={offer.downPayment}
             equalPayments={equalPayments}
             numberOfPayments={offer.numberOfPayments}
             paymentCalculations={paymentCalculations}

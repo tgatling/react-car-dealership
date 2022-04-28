@@ -11,6 +11,7 @@ export const mockOffer: Offer = {
   empUserId: '0bVRB4BBHNRMGVH929mvyTNqFlc2',
   carTotal: 12500,
   downPayment: 5000,
+  totalPaid: 6041.12,
   numberOfPayments: 17,
 };
 

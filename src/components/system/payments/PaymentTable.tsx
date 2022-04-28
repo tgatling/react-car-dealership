@@ -4,13 +4,13 @@ import { calculatePaymentsFromOffer } from '../Calculations';
 import styles from './PaymentTable.module.css';
 import PaymentSummary from './PaymentSummary';
 import {
-  downPayment,
   firstBill,
   secondBill,
   thirdBill,
 } from '../../../tests/mockData/mockPaymentHistory';
 import PaymentItem from './PaymentItem';
 import { Offer } from '../../../models/offer';
+import {downPayment} from '../../../tests/mockData/mockPaymentHistory';
 
 const MONTHLY_BILLS = [downPayment, firstBill, secondBill, thirdBill];
 
@@ -53,6 +53,7 @@ const PaymentTable = ({ offer }: paymentTableProps) => {
     <div className={styles.card}>
       <PaymentSummary
         onToggle={toggleViewTable}
+        downPayment={offer.downPayment}
         equalPayments={equalPayments}
         numberOfPayments={offer.numberOfPayments}
         paymentCalculations={paymentCalculations}
