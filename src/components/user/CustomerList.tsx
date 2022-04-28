@@ -5,7 +5,8 @@ import CustomerItem from './CustomerItem';
 import userService from '../../services/user.service';
 import styles from './Customers.module.css';
 
-import { MASTER_ACCOUNT } from '../../models/constants';
+import { MASTER_ACCOUNT, VIEW_PAYMENTS } from '../../models/constants';
+import {useHistory} from 'react-router-dom';
 import { User } from '../../models/user';
 
 interface listProp {
@@ -16,6 +17,8 @@ const CustomerList = ({ displayMaster = false }: listProp) => {
   const [users, setUsers] = useState<User[]>([]);
   const [search, setSearch] = useState('');
   //   const [filteredUser, setFilteredUser] = useState([]);
+
+  const history = useHistory();
 
   useEffect(() => {
     userService
@@ -53,6 +56,10 @@ const CustomerList = ({ displayMaster = false }: listProp) => {
     console.log(search);
   };
 
+  const viewCustomerPayments = (userId: string) => {
+    history.push(`${VIEW_PAYMENTS}/${userId}`);
+  }
+
   return (
     <div className={styles.list}>
       <div className={styles.searchBase}>
@@ -69,7 +76,7 @@ const CustomerList = ({ displayMaster = false }: listProp) => {
       {users.map((user) => {
         return (
           <div key={user.userId}>
-            <CustomerItem user={user} />
+            <CustomerItem user={user} selectName={viewCustomerPayments}/>
           </div>
         );
       })}

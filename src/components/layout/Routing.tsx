@@ -11,7 +11,7 @@ import NotFound from '../../pages/NotFound';
 import Settings from '../../pages/Settings';
 import EditCar from '../../pages/EditCar';
 import ViewCar from '../../pages/ViewCar';
-import AddCar from '../../pages/AddCar';
+import AddCar from '../car/AddCar';
 import Auth from '../../pages/Auth';
 import Home from '../../pages/Home';
 
@@ -75,11 +75,6 @@ const Routing = () => {
         </Route>
       )}
       {loggedIn && (
-        <Route path={CUSTOMER_PAYMENTS}>
-          <CustomerPayments />
-        </Route>
-      )}
-      {loggedIn && (
         <Route path={PAYMENT_HISTORY}>
           <PaymentHistory />
         </Route>
@@ -90,8 +85,13 @@ const Routing = () => {
         </Route>
       )}
       {loggedIn && (
+        <Route path={CUSTOMER_PAYMENTS}>
+          <CustomerPayments />
+        </Route>
+      )}
+      {loggedIn && (
         <Route path={USER_PAYMENTS}>
-          <PaymentHistory />
+          <CustomerPayments />
         </Route>
       )}
       {!loggedIn && (

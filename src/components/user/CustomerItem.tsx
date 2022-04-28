@@ -6,12 +6,26 @@ import { User } from '../../models/user';
 
 interface itemProp {
   user: User;
+  selectName?: (userId: string) => void;
 }
 
-const CustomerItem = ({ user }: itemProp) => {
+const CustomerItem = ({ user, selectName }: itemProp) => {
+  const selectUsersName = () => {
+    if (user.userId && selectName) {
+      selectName(user.userId);
+    }
+  };
   return (
-    <div className={styles.item}>
-      <p className={styles.boldText}>{user.username}</p>
+    <div>
+      {selectName ? (
+        <div className={styles.clickableItem} onClick={selectUsersName}>
+          <p className={styles.boldText}>{user.username}</p>
+        </div>
+      ) : (
+        <div className={styles.item} onClick={selectName}>
+          <p className={styles.boldText}>{user.username}</p>
+        </div>
+      )}
     </div>
   );
 };

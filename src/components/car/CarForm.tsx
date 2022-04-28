@@ -14,11 +14,17 @@ import { DEALER_ROLE, EDIT_OUR_LOT } from '../../models/constants';
 interface carFormProps {
   addCarForm: boolean;
   pendingOffer?: boolean;
+  addCarToLot?: (
+    car: Car,
+    setError: (error: string) => void,
+    setCarId: (id: string) => void,
+    setCarAdded: (added: boolean) => void
+  ) => void;
 }
 
-const CarForm = ({ addCarForm, pendingOffer }: carFormProps) => {
+const CarForm = ({ addCarForm, pendingOffer, addCarToLot }: carFormProps) => {
   const [carAdded, setCarAdded] = useState(false);
-  const [httpError, setHttpError] = useState(null);
+  const [httpError, setHttpError] = useState<string | null>(null);
   const history = useHistory();
 
   // store user inputs
@@ -91,10 +97,10 @@ const CarForm = ({ addCarForm, pendingOffer }: carFormProps) => {
     event.preventDefault();
     setHttpError(null);
 
-    if (addCarForm) {
+    if (addCarForm && addCarToLot) {
       // add car to firebase realtime database
-      carService
-        .addCar({
+      addCarToLot(
+        {
           owner: DEALER_ROLE,
           year: +year,
           make,
@@ -103,29 +109,11 @@ const CarForm = ({ addCarForm, pendingOffer }: carFormProps) => {
           price: +price,
           carId: '',
           dateAdded: todaysDate,
-        })
-        .then((response) => {
-          // add car to redux car state
-          dispatch(
-            carActions.addCarToDealership({
-              car: {
-                owner: DEALER_ROLE,
-                year: +year,
-                make,
-                model,
-                url,
-                price: +price,
-                carId: response.name,
-                dateAdded: todaysDate,
-              },
-            })
-          );
-
-          // display confirmation after adding car
-          setCarId(response.name);
-          setCarAdded(true);
-        })
-        .catch((error) => setHttpError(error));
+        },
+        setHttpError,
+        setCarId,
+        setCarAdded
+      );
     } else {
       // update existing car information
       carService
@@ -164,6 +152,12 @@ const CarForm = ({ addCarForm, pendingOffer }: carFormProps) => {
           type={ALERT.INFO.TYPE}
           heading={`THERE IS A PENDING OFFER ON THIS ${make.toUpperCase()} ${model.toUpperCase()}`}
           message='You will be unable to edit the price on this car because of the pending offer.'
+          onExit={onExitAlert}
+        /> */}
+      {/* <AlertDisplay
+          type={ALERT.ERROR.TYPE}
+          heading={`FORM SUBMISSION UNSUCCESSFUL`}
+          message='something went wrong. Please try again.'
           onExit={onExitAlert}
         /> */}
       <div className={styles.card}>

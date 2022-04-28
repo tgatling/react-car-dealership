@@ -6,7 +6,7 @@ import styles from '../components/user/Customers.module.css';
 const CustomerPayments = () => {
   return (
     <div className={styles.page}>
-      <CustomerList />
+      <CustomerList/>
     </div>
   );
 };
