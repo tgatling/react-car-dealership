@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { calculatePaymentsFromOffer } from '../Calculations';
 import styles from './PaymentTable.module.css';
 import PaymentSummary from './PaymentSummary';
-import { Bill } from '../../../models/payments';
 import {
   downPayment,
   firstBill,

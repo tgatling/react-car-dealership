@@ -6,7 +6,8 @@ import { CUSTOMER_ROLE } from '../../models/constants';
 import styles from './CarDetails.module.css';
 import OfferDetails from '../system/offers/OfferDetails';
 import offerService from '../../services/offer.service';
-import { Offer } from '../../models/offer';
+import { ACCEPTED_STATUS, Offer } from '../../models/offer';
+import { useSelector, RootStateOrAny, useDispatch } from 'react-redux';
 
 interface detailsProp {
   car: Car;
@@ -17,8 +18,24 @@ const CarDetails = ({ car, ownerRole }: detailsProp) => {
   const [showHeading, setShowHeading] = useState(true);
   const [offer, setOffer] = useState<Offer | null>(null);
   let carName = `${car.year} ${car.make} ${car.model}`.toUpperCase();
+  const dispatch = useDispatch();
+  const carOffers = useSelector(
+    (state: RootStateOrAny) => state.offer.carOffers
+  );
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    offerService.getAllOffers().then((response) => {
+      console.log(response);
+      for (const key in response) {
+        if (
+          response[key].carId === car.carId &&
+          response[key].status === ACCEPTED_STATUS
+        ) {
+          setOffer(response[key]);
+        }
+      }
+    });
+  }, [car.carId, carOffers, dispatch]);
 
   return (
     <div className={styles.section}>

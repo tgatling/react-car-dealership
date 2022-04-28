@@ -5,7 +5,7 @@ import noCarImage from '../../images/no-car-photo.png';
 import deleteIcon from '../../images/icons/delete-icon.png';
 import carService from '../../services/car.service';
 import styles from './CarItem.module.css';
-import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { carActions } from '../../store/car-slice';
 import ConfirmDelete from '../UI/ConfirmDelete';
 import { EDIT_OUR_LOT } from '../../models/constants';
@@ -34,7 +34,6 @@ const CarItem = ({
   let heading = `${year} ${make.toUpperCase()}`;
   let history = useHistory();
   let dispatch = useDispatch();
-  let carOffers = useSelector((state: RootStateOrAny) => state.offer.carOffers);
 
   const viewCarHandler = () => {
     history.push(`./car/${carId}`);
@@ -57,11 +56,12 @@ const CarItem = ({
 
     // delete all offer that belong to that vehicle
     let offerIds: string[] = [];
-    for (const index in carOffers) {
-      if (carOffers[index].carId === carId) {
-        offerIds.push(carOffers[index].offerId);
+    await offerService.getAllOffers().then((response) => {
+      console.log(response);
+      for (const key in response) {
+        if (response[key].carId === carId) offerIds.push(key);
       }
-    }
+    });
 
     offerIds.forEach((id: string) => {
       console.log(`For Each: ${id}`);
