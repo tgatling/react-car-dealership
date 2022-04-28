@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 
-import { calculatePaymentsFromOffer } from '../Calculations';
-import styles from './PaymentTable.module.css';
-import PaymentSummary from './PaymentSummary';
+import { calculatePaymentsFromOffer } from '../../Calculations';
+import { Offer } from '../../../../models/offer';
 import {
+  downPayment,
   firstBill,
   secondBill,
   thirdBill,
-} from '../../../tests/mockData/mockPaymentHistory';
+} from '../../../../tests/mockData/mockPaymentHistory';
 import PaymentItem from './PaymentItem';
-import { Offer } from '../../../models/offer';
-import {downPayment} from '../../../tests/mockData/mockPaymentHistory';
+import PaymentSummary from './PaymentSummary';
+import styles from './PaymentTable.module.css';
 
 const MONTHLY_BILLS = [downPayment, firstBill, secondBill, thirdBill];
 

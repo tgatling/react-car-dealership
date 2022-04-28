@@ -10,7 +10,7 @@ import {
   OFFER_HISTORY,
 } from '../../../models/constants';
 import styles from './OfferForm.module.css';
-import PaymentInfo from '../payments/PaymentInfo';
+import PaymentInfo from '../payments/summary/PaymentInfo';
 import offerService from '../../../services/offer.service';
 
 interface offerFormProps {

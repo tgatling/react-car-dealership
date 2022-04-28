@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
-import PaymentItem from '../payments/PaymentItem';
+import PaymentItem from '../payments/summary/PaymentItem';
 import { calculatePaymentsFromOffer } from '../Calculations';
-import styles from '../payments/PaymentTable.module.css';
-import PaymentSummary from '../payments/PaymentSummary';
+import styles from '../payments/summary/PaymentTable.module.css';
+import PaymentSummary from '../payments/summary/PaymentSummary';
 
 interface paymentTableProps {
   totalAmount: number;

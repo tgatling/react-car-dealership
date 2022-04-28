@@ -1,7 +1,6 @@
 import React from 'react';
 
 import styles from './PaymentSummary.module.css';
-import {downPayment} from '../../../tests/mockData/mockPaymentHistory';
 
 interface summaryProps {
   onToggle?: () => void;

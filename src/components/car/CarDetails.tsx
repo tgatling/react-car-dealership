@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
-import PaymentTable from '../system/payments/PaymentTable';
-import { Car } from '../../models/car';
-import { CUSTOMER_ROLE } from '../../models/constants';
-import styles from './CarDetails.module.css';
+import PaymentTable from '../system/payments/summary/PaymentTable';
 import OfferDetails from '../system/offers/OfferDetails';
 import offerService from '../../services/offer.service';
+import styles from './CarDetails.module.css';
+
+import { Car } from '../../models/car';
+import { CUSTOMER_ROLE } from '../../models/constants';
 import { ACCEPTED_STATUS, Offer } from '../../models/offer';
 import { useSelector, RootStateOrAny, useDispatch } from 'react-redux';
 

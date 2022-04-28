@@ -12,7 +12,7 @@ import { calculatePaymentsFromOffer } from '../Calculations';
 import { CUSTOMER_OFFERS } from '../../../models/constants';
 import { ALERT } from '../../../models/constants';
 import carService from '../../../services/car.service';
-import PaymentSummary from '../payments/PaymentSummary';
+import PaymentSummary from '../payments/summary/PaymentSummary';
 import ConfirmOption from './ConfirmOption';
 import styles from './OfferItem.module.css';
 import { useSelector, RootStateOrAny, useDispatch } from 'react-redux';
@@ -106,9 +106,7 @@ const OfferItem = ({ offer, onResponse }: itemProps) => {
           carService
             .updateCar(newCarInfo, newOffer.carId)
             .then((result) => {
-              dispatch(
-                carActions.editCar({ car: result, id: result.carId })
-              );
+              dispatch(carActions.editCar({ car: result, id: result.carId }));
             })
             .catch((error) => error);
         })

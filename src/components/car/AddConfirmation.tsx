@@ -1,8 +1,8 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 import CarItem from './CarItem';
 import styles from './CarForm.module.css';
-import { useHistory } from 'react-router-dom';
 import { EDIT_OUR_LOT } from '../../models/constants';
 
 interface confirmationProp {
