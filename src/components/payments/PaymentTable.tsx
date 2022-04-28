@@ -4,14 +4,14 @@ import PaymentItem from './PaymentItem';
 import PaymentSummary from './PaymentSummary';
 import styles from './PaymentTable.module.css';
 
-import { calculatePaymentsFromOffer } from '../../Calculations';
-import { Offer } from '../../../../models/offer';
+import { calculatePaymentsFromOffer } from '../system/Calculations';
+import { Offer } from '../../models/offer';
 import {
   downPayment,
   firstBill,
   secondBill,
   thirdBill,
-} from '../../../../tests/mockData/mockPaymentHistory';
+} from '../../tests/mockData/mockPaymentHistory';
 
 const MONTHLY_BILLS = [downPayment, firstBill, secondBill, thirdBill];
 

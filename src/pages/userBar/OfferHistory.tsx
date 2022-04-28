@@ -4,7 +4,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 
 import offerService from '../../services/offer.service';
 import OfferDisplay from '../../components/offers/OfferDisplay';
-import AlertDisplay from '../../components/UI/AlertDisplay';
+import AlertDisplay from '../../components/layout/UI/AlertDisplay';
 
 import { ALERT, OFFER_HISTORY } from '../../models/constants';
 import { offerActions } from '../../store/offer-slice';

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import ConfirmDelete from '../UI/ConfirmDelete';
+import ConfirmDelete from '../layout/UI/ConfirmDelete';
 import offerService from '../../services/offer.service';
 import noCarImage from '../../images/no-car-photo.png';
 import deleteIcon from '../../images/icons/delete-icon.png';

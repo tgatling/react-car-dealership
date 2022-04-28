@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, RootStateOrAny, useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 
-import PaymentSummary from '../system/payments/summary/PaymentSummary';
+import PaymentSummary from '../payments/PaymentSummary';
 import ConfirmOption from './ConfirmOption';
 import offerService from '../../services/offer.service';
 import carService from '../../services/car.service';

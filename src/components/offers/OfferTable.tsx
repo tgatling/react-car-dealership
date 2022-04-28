@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-import PaymentSummary from '../system/payments/summary/PaymentSummary';
-import PaymentItem from '../system/payments/summary/PaymentItem';
-import styles from '../system/payments/summary/PaymentTable.module.css';
+import PaymentSummary from '../payments/PaymentSummary';
+import PaymentItem from '../payments/PaymentItem';
+import styles from '../payments/PaymentTable.module.css';
 
 import { calculatePaymentsFromOffer } from '../system/Calculations';
 

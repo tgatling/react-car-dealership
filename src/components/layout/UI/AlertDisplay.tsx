@@ -1,13 +1,14 @@
 import React from 'react';
 
-import warningIcon from '../../images/icons/warning-icon.png';
-import successIcon from '../../images/icons/success-icon.png';
-import errorIcon from '../../images/icons/error-icon.png';
-import infoIcon from '../../images/icons/info-icon.png';
-import styles from './AlertDisplay.module.css';
-import logo from '../../images/family-car.png';
 
-import { ALERT } from '../../models/constants';
+import warningIcon from '../../../images/icons/warning-icon.png';
+import successIcon from '../../../images/icons/success-icon.png';
+import errorIcon from '../../../images/icons/error-icon.png';
+import infoIcon from '../../../images/icons/info-icon.png';
+import styles from './AlertDisplay.module.css';
+import logo from '../../../images/family-car.png';
+
+import { ALERT } from '../../../models/constants';
 
 interface alertProp {
   type: string;

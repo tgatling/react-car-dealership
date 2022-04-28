@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import offerService from '../../services/offer.service';
-import AlertDisplay from '../../components/UI/AlertDisplay';
+import AlertDisplay from '../../components/layout/UI/AlertDisplay';
 import OfferDisplay from '../../components/offers/OfferDisplay';
 
 import { Offer, PENDING_STATUS } from '../../models/offer';

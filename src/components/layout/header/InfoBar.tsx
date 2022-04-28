@@ -8,7 +8,7 @@ import {
   SALES_NUMBER,
   SERVICE_NUMBER,
   PARTS_NUMBER,
-} from '../../models/constants';
+} from '../../../models/constants';
 
 const InfoBar = () => {
   return (

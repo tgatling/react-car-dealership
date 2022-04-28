@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, RootStateOrAny, useDispatch } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
 
-import { userActions } from '../../store/user-slice';
+import { userActions } from '../../../store/user-slice';
 import {
   CUSTOMER_ROLE,
   DEALER_ROLE,
@@ -11,8 +11,8 @@ import {
   CUSTOMER_OFFERS,
   CUSTOMER_PAYMENTS,
   LOGIN_REGISTER,
-} from '../../models/constants';
-import familyCar from '../../images/family-car.png';
+} from '../../../models/constants';
+import familyCar from '../../../images/family-car.png';
 import styles from './NavigationBar.module.css';
 
 const NavigationBar = () => {
