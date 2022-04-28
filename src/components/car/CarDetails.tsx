@@ -25,7 +25,6 @@ const CarDetails = ({ car, ownerRole }: detailsProp) => {
 
   useEffect(() => {
     offerService.getAllOffers().then((response) => {
-      console.log(response);
       for (const key in response) {
         if (
           response[key].carId === car.carId &&

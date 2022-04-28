@@ -57,18 +57,16 @@ const CarItem = ({
     // delete all offer that belong to that vehicle
     let offerIds: string[] = [];
     await offerService.getAllOffers().then((response) => {
-      console.log(response);
       for (const key in response) {
         if (response[key].carId === carId) offerIds.push(key);
       }
     });
 
     offerIds.forEach((id: string) => {
-      console.log(`For Each: ${id}`);
       offerService
         .deleteOffer(id)
-        .then((response) => console.log(response))
-        .catch((error) => console.log('Error', error));
+        .then((response) => response)
+        .catch((error) => error);
     });
 
     dispatch(carActions.removeCarFromDealership({ carId }));

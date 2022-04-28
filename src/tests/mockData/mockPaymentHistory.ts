@@ -17,7 +17,7 @@ export const mockOffer: Offer = {
 
 // MOCK BILL
 export const downPayment: Bill = {
-  billId: '-N0XivMV90xhoOmyfmzi_0',
+  billId: '-N0kLKooXFJ_hXs3qyif',
   offerId: '-N0XivMV90xhoOmyfmzi',
   billNumber: 0,
   paymentDueDate: '2022-04-01T00:00:00.000Z',
@@ -26,7 +26,7 @@ export const downPayment: Bill = {
 };
 
 export const firstBill: Bill = {
-  billId: '-N0XivMV90xhoOmyfmzi_1',
+  billId: '-N0kX4ndOZu45ybv1iPz',
   offerId: '-N0XivMV90xhoOmyfmzi',
   billNumber: 1,
   paymentDueDate: '2022-05-01T00:00:00.000Z',
@@ -35,7 +35,7 @@ export const firstBill: Bill = {
 };
 
 export const secondBill: Bill = {
-  billId: '-N0XivMV90xhoOmyfmzi_2',
+  billId: '-N0kX4ndOZu45ybv1iPz',
   offerId: '-N0XivMV90xhoOmyfmzi',
   billNumber: 2,
   paymentDueDate: '2022-06-01T00:00:00.000Z',
@@ -44,7 +44,7 @@ export const secondBill: Bill = {
 };
 
 export const thirdBill: Bill = {
-  billId: '-N0XivMV90xhoOmyfmzi_3',
+  billId: '-N0kX5jdkzgJ89BIZb7',
   offerId: '-N0XivMV90xhoOmyfmzi',
   billNumber: 3,
   paymentDueDate: '2022-07-01T00:00:00.000Z',
@@ -55,8 +55,8 @@ export const thirdBill: Bill = {
 // MOCK PAYMENTS
 // Down Payment - Bill 0
 export const paymentOne: Payment = {
-  paymentId: '-N0XivMV90xhoOmyfm_0_0',
-  billId: '',
+  paymentId: '',
+  billId: '-N0kLKooXFJ_hXs3qyif',
   offerId: '-N0XivMV90xhoOmyfmzi',
   carId: '-MyKkyjzrE_3aJqvZmTK',
   userId: 'bWgrdZYBRtaoMLBAVAh8piA9jbi1',
@@ -69,8 +69,8 @@ export const paymentOne: Payment = {
 
 // Bill 1
 export const paymentTwo: Payment = {
-  paymentId: '-N0XivMV90xhoOmyfm_1_0',
-  billId: '',
+  paymentId: '-N0kdFacdXGkWRzqpmpG',
+  billId: '-N0kX4ndOZu45ybv1iPz',
   offerId: '-N0XivMV90xhoOmyfmzi',
   carId: '-MyKkyjzrE_3aJqvZmTK',
   userId: 'bWgrdZYBRtaoMLBAVAh8piA9jbi1',
@@ -82,8 +82,8 @@ export const paymentTwo: Payment = {
 };
 
 export const paymentThree: Payment = {
-  paymentId: '-N0XivMV90xhoOmyfm_1_1',
-  billId: '',
+  paymentId: '-N0kdM5b_T2eB0XRLKs0',
+  billId: '-N0kX4ndOZu45ybv1iPz',
   offerId: '-N0XivMV90xhoOmyfmzi',
   carId: '-MyKkyjzrE_3aJqvZmTK',
   userId: 'bWgrdZYBRtaoMLBAVAh8piA9jbi1',
@@ -96,8 +96,8 @@ export const paymentThree: Payment = {
 
 // Bill 2
 export const paymentFour: Payment = {
-  paymentId: '-N0XivMV90xhoOmyfm_2_0',
-  billId: '',
+  paymentId: '-N0kdSk0tP3u5pjZhFLA',
+  billId: '-N0kX5jdkzgJ89BIZb7',
   offerId: '-N0XivMV90xhoOmyfmzi',
   carId: '-MyKkyjzrE_3aJqvZmTK',
   userId: 'bWgrdZYBRtaoMLBAVAh8piA9jbi1',
@@ -108,8 +108,8 @@ export const paymentFour: Payment = {
   prepaymentOfNextBill: false,
 };
 export const paymentFive: Payment = {
-  paymentId: '-N0XivMV90xhoOmyfm_2_1',
-  billId: '',
+  paymentId: '-N0kdYJk-0Oxe6G5e4Zj',
+  billId: '-N0kX5jdkzgJ89BIZb7',
   offerId: '-N0XivMV90xhoOmyfmzi',
   carId: '-MyKkyjzrE_3aJqvZmTK',
   userId: 'bWgrdZYBRtaoMLBAVAh8piA9jbi1',
@@ -122,8 +122,8 @@ export const paymentFive: Payment = {
 
 // Bill 3
 export const paymentSix: Payment = {
-  paymentId: '-N0XivMV90xhoOmyfm_3_0',
-  billId: '',
+  paymentId: '-N0kdcVjXe4Wc2xB_sZq',
+  billId: '-N0kX5jdkzgJ89BIZb7',
   offerId: '-N0XivMV90xhoOmyfmzi',
   carId: '-MyKkyjzrE_3aJqvZmTK',
   userId: 'bWgrdZYBRtaoMLBAVAh8piA9jbi1',

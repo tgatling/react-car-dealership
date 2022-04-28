@@ -33,7 +33,6 @@ const UserCars = () => {
               status: response[key].status,
             });
           }
-          console.log(carOffers);
           dispatch(offerActions.setCarOffers(carOffers));
         })
         .catch((error) => error);

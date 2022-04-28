@@ -17,7 +17,6 @@ const offerSlice = createSlice({
         { carId: string; offerId: string; status: string }[]
       >
     ) {
-      console.log(action.payload);
       state.carOffers = action.payload;
     },
     setSubmittedOffer(state, action: PayloadAction<Offer[]>) {

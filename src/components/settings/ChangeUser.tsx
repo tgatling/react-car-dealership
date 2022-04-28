@@ -10,7 +10,6 @@ interface userProp {
 const ChangeUser = ({ userId, submitUserId }: userProp) => {
   const [newUserId, setNewUserId] = useState(userId);
   const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
-    console.log('Change User Form Submitted');
     submitUserId(newUserId);
   };
 

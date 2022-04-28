@@ -1,0 +1,34 @@
+{
+    "-N0kLKooXFJ_hXs3qyif": {
+        "amountDue": 5000,
+        "billId": "-N0kLKooXFJ_hXs3qyif",
+        "billNumber": 0,
+        "offerId": "-N0XivMV90xhoOmyfmzi",
+        "paymentCompleted": true,
+        "paymentDueDate": "2022-04-01T00:00:00.000Z"
+    },
+    "-N0kX4ndOZu45ybv1iPz": {
+        "amountDue": 441.12,
+        "billId": "-N0kX4ndOZu45ybv1iPz",
+        "billNumber": 1,
+        "offerId": "-N0XivMV90xhoOmyfmzi",
+        "paymentCompleted": true,
+        "paymentDueDate": "2022-05-01T00:00:00.000Z"
+    },
+    "-N0kX5jdkzgJ89BIZb7X": {
+        "amountDue": 441.18,
+        "billId": "-N0kX5jdkzgJ89BIZb7X",
+        "billNumber": 2,
+        "offerId": "-N0XivMV90xhoOmyfmzi",
+        "paymentCompleted": true,
+        "paymentDueDate": "2022-06-01T00:00:00.000Z"
+    },
+    "-N0kX6S8kjIxoT9oxqAj": {
+        "amountDue": 441.18,
+        "billId": "-N0kX6S8kjIxoT9oxqAj",
+        "billNumber": 3,
+        "offerId": "-N0XivMV90xhoOmyfmzi",
+        "paymentCompleted": false,
+        "paymentDueDate": "2022-07-01T00:00:00.000Z"
+    }
+}
