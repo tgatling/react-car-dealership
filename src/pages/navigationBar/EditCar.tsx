@@ -1,6 +1,6 @@
 import React from 'react';
 
-import CarForm from '../components/car/CarForm';
+import CarForm from '../../components/car/CarForm';
 
 const EditCar = () => {
   let pendingOffer = false;

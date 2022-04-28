@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, RootStateOrAny, useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 
-import offerService from '../services/offer.service';
-import CarTable from '../components/car/CarTable';
+import offerService from '../../services/offer.service';
+import CarTable from '../../components/car/CarTable';
 
-import { VIEW_YOUR_CARS } from '../models/constants';
-import { offerActions } from '../store/offer-slice';
+import { VIEW_YOUR_CARS } from '../../models/constants';
+import { offerActions } from '../../store/offer-slice';
 
 const UserCars = () => {
   const carState = useSelector((state: RootStateOrAny) => state.car);

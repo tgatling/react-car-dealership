@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
-import PaymentSummary from '../payments/summary/PaymentSummary';
-import PaymentItem from '../payments/summary/PaymentItem';
-import styles from '../payments/summary/PaymentTable.module.css';
+import PaymentSummary from '../system/payments/summary/PaymentSummary';
+import PaymentItem from '../system/payments/summary/PaymentItem';
+import styles from '../system/payments/summary/PaymentTable.module.css';
 
-import { calculatePaymentsFromOffer } from '../Calculations';
+import { calculatePaymentsFromOffer } from '../system/Calculations';
 
 interface paymentTableProps {
   totalAmount: number;

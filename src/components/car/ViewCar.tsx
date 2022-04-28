@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import CarDetails from '../components/car/CarDetails';
-import carService from '../services/car.service';
+import CarDetails from './CarDetails';
+import carService from '../../services/car.service';
 
-import { DEALER_ROLE, CUSTOMER_ROLE } from '../models/constants';
-import { Car } from '../models/car';
+import { DEALER_ROLE, CUSTOMER_ROLE } from '../../models/constants';
+import { Car } from '../../models/car';
 
 const ViewCar = () => {
   const params = useParams<{ carId: string }>();

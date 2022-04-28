@@ -5,7 +5,7 @@ import styles from './ConfirmOption.module.css';
 import {
   CONFIRM_OFFER_ACCEPTANCE,
   CONFIRM_OFFER_REJECTION,
-} from '../../../models/constants';
+} from '../../models/constants';
 
 interface optionProps {
   accepted: boolean;

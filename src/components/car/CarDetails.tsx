@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import PaymentTable from '../system/payments/summary/PaymentTable';
-import OfferDetails from '../system/offers/OfferDetails';
+import OfferDetails from '../offers/OfferDetails';
 import offerService from '../../services/offer.service';
 import styles from './CarDetails.module.css';
 

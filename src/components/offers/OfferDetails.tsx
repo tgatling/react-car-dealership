@@ -2,17 +2,17 @@ import React, { useState } from 'react';
 import { useSelector, RootStateOrAny } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 
-import offerService from '../../../services/offer.service';
-import PaymentInfo from '../payments/summary/PaymentInfo';
+import offerService from '../../services/offer.service';
+import PaymentInfo from '../system/payments/summary/PaymentInfo';
 import OfferTable from './OfferTable';
 import OfferForm from './OfferForm';
 import styles from './OfferForm.module.css';
 
-import { Offer } from '../../../models/offer';
+import { Offer } from '../../models/offer';
 import {
   MAKING_AN_OFFER_INSTRUCTIONS,
   OFFER_HISTORY,
-} from '../../../models/constants';
+} from '../../models/constants';
 
 interface offerFormProps {
   carTotal: number;

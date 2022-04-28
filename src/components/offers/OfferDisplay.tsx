@@ -2,12 +2,12 @@ import React from 'react';
 
 import OfferItem from './OfferItem';
 import styles from './OfferDisplay.module.css';
-import logo from '../../../images/family-car.png';
+import logo from '../../images/family-car.png';
 
 import { useSelector, RootStateOrAny } from 'react-redux';
-import { CUSTOMER_OFFERS } from '../../../models/constants';
+import { CUSTOMER_OFFERS } from '../../models/constants';
 import { useLocation } from 'react-router-dom';
-import { Offer } from '../../../models/offer';
+import { Offer } from '../../models/offer';
 
 interface displayProps {
   mainHeader?: string;

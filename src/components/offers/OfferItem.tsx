@@ -2,24 +2,24 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, RootStateOrAny, useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 
-import PaymentSummary from '../payments/summary/PaymentSummary';
+import PaymentSummary from '../system/payments/summary/PaymentSummary';
 import ConfirmOption from './ConfirmOption';
-import offerService from '../../../services/offer.service';
-import carService from '../../../services/car.service';
+import offerService from '../../services/offer.service';
+import carService from '../../services/car.service';
 import OfferInfo from './OfferInfo';
 import styles from './OfferItem.module.css';
 
-import { calculatePaymentsFromOffer } from '../Calculations';
-import { CUSTOMER_OFFERS } from '../../../models/constants';
-import { carActions } from '../../../store/car-slice';
-import { ALERT } from '../../../models/constants';
-import { Car } from '../../../models/car';
+import { calculatePaymentsFromOffer } from '../system/Calculations';
+import { CUSTOMER_OFFERS } from '../../models/constants';
+import { carActions } from '../../store/car-slice';
+import { ALERT } from '../../models/constants';
+import { Car } from '../../models/car';
 import {
   Offer,
   PENDING_STATUS,
   ACCEPTED_STATUS,
   REJECTED_STATUS,
-} from '../../../models/offer';
+} from '../../models/offer';
 
 interface itemProps {
   offer: Offer;

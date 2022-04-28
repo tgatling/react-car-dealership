@@ -2,8 +2,8 @@ import React from 'react';
 
 import styles from './OfferItem.module.css';
 
-import { Car } from '../../../models/car';
-import { Offer } from '../../../models/offer';
+import { Car } from '../../models/car';
+import { Offer } from '../../models/offer';
 
 interface infoProp {
   offer: Offer;

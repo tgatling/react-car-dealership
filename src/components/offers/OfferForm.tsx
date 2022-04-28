@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from './OfferForm.module.css';
 
-import { Offer } from '../../../models/offer';
+import { Offer } from '../../models/offer';
 
 interface offerFormProps {
   error: string | null;

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useSelector, RootStateOrAny } from 'react-redux';
 
-import AlertDisplay from '../components/UI/AlertDisplay';
-import Profile from '../components/settings/Profile';
+import AlertDisplay from '../../components/UI/AlertDisplay';
+import Profile from '../../components/settings/Profile';
 
-import { ALERT } from '../models/constants';
-import { User } from '../models/user';
+import { ALERT } from '../../models/constants';
+import { User } from '../../models/user';
 
 const Settings = () => {
   const userState = useSelector((state: RootStateOrAny) => state.user);

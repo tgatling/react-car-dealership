@@ -1,6 +1,6 @@
 import React from 'react';
 
-import errorIcon from '../images/404.png';
+import errorIcon from '../../images/404.png';
 
 const NotFound = () => {
   return (

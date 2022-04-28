@@ -2,18 +2,18 @@ import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { RootStateOrAny, useSelector } from 'react-redux';
 
-import CustomerPayments from '../../pages/CustomerPayments';
-import PaymentHistory from '../../pages/PaymentHistory';
-import CustomerOffers from '../../pages/CustomerOffers';
-import OfferHistory from '../../pages/OfferHistory';
-import UserCars from '../../pages/UserCars';
-import NotFound from '../../pages/NotFound';
-import Settings from '../../pages/Settings';
-import EditCar from '../../pages/EditCar';
-import ViewCar from '../../pages/ViewCar';
+import CustomerPayments from '../../pages/navigationBar/CustomerPayments';
+import PaymentHistory from '../../pages/userBar/PaymentHistory';
+import CustomerOffers from '../../pages/navigationBar/CustomerOffers';
+import OfferHistory from '../../pages/userBar/OfferHistory';
+import UserCars from '../../pages/userBar/UserCars';
+import NotFound from '../../pages/other/NotFound';
+import Settings from '../../pages/userBar/Settings';
+import EditCar from '../../pages/navigationBar/EditCar';
+import ViewCar from '../car/ViewCar';
 import AddCar from '../car/AddCar';
-import Auth from '../../pages/Auth';
-import Home from '../../pages/Home';
+import Auth from '../../pages/navigationBar/Auth';
+import Home from '../../pages/navigationBar/Home';
 
 import {
   ADD_DEALER_CAR,
