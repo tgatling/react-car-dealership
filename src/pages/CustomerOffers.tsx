@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { offerActions } from '../store/offer-slice';
-import { Offer, PENDING_STATUS } from '../models/offer';
-import { ALERT } from '../models/constants';
 import offerService from '../services/offer.service';
 import AlertDisplay from '../components/UI/AlertDisplay';
 import OfferDisplay from '../components/system/offers/OfferDisplay';
+
+import { Offer, PENDING_STATUS } from '../models/offer';
+import { offerActions } from '../store/offer-slice';
+import { ALERT } from '../models/constants';
 
 const CustomerOffers = () => {
   const dispatch = useDispatch();

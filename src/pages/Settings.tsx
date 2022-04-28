@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useSelector, RootStateOrAny } from 'react-redux';
-import Profile from '../components/settings/Profile';
+
 import AlertDisplay from '../components/UI/AlertDisplay';
+import Profile from '../components/settings/Profile';
+
 import { ALERT } from '../models/constants';
-import {User} from '../models/user';
+import { User } from '../models/user';
 
 const Settings = () => {
   const userState = useSelector((state: RootStateOrAny) => state.user);
@@ -25,7 +27,9 @@ const Settings = () => {
         />
       )}
       <h1>Account Settings</h1>
-      {currentUser.userRole && <Profile user={currentUser} currentUserRole={currentUser.userRole} />}
+      {currentUser.userRole && (
+        <Profile user={currentUser} currentUserRole={currentUser.userRole} />
+      )}
     </div>
   );
 };

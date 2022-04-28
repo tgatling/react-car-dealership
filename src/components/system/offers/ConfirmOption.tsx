@@ -1,10 +1,11 @@
 import React from 'react';
 
+import styles from './ConfirmOption.module.css';
+
 import {
   CONFIRM_OFFER_ACCEPTANCE,
   CONFIRM_OFFER_REJECTION,
 } from '../../../models/constants';
-import styles from './ConfirmOption.module.css';
 
 interface optionProps {
   accepted: boolean;

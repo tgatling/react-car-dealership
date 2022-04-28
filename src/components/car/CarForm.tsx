@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
-import { Car } from '../../models/car';
 
-import { DEALER_ROLE, EDIT_OUR_LOT } from '../../models/constants';
-import carService from '../../services/car.service';
-import { carActions } from '../../store/car-slice';
 import AddConfirmation from './AddConfirmation';
 // import AlertDisplay from '../UI/AlertDisplay';
+import carService from '../../services/car.service';
 import styles from './CarForm.module.css';
+
+import { Car } from '../../models/car';
+import { carActions } from '../../store/car-slice';
+import { DEALER_ROLE, EDIT_OUR_LOT } from '../../models/constants';
 
 interface carFormProps {
   addCarForm: boolean;

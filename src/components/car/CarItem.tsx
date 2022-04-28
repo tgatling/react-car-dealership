@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
+import ConfirmDelete from '../UI/ConfirmDelete';
+import offerService from '../../services/offer.service';
 import noCarImage from '../../images/no-car-photo.png';
 import deleteIcon from '../../images/icons/delete-icon.png';
 import carService from '../../services/car.service';
 import styles from './CarItem.module.css';
+
+import { EDIT_OUR_LOT } from '../../models/constants';
 import { useDispatch } from 'react-redux';
 import { carActions } from '../../store/car-slice';
-import ConfirmDelete from '../UI/ConfirmDelete';
-import { EDIT_OUR_LOT } from '../../models/constants';
-import offerService from '../../services/offer.service';
 
 interface carProps {
   carId: string;

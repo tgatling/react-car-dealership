@@ -1,5 +1,7 @@
 import React from 'react';
 
+import styles from './InfoBar.module.css';
+
 import {
   MOTTO,
   ADDRESS,
@@ -7,7 +9,6 @@ import {
   SERVICE_NUMBER,
   PARTS_NUMBER,
 } from '../../models/constants';
-import styles from './InfoBar.module.css';
 
 const InfoBar = () => {
   return (

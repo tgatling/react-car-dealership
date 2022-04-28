@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
+import { useSelector, RootStateOrAny } from 'react-redux';
 
 import CarTable from '../components/car/CarTable';
+
 import { DEALER_ROLE } from '../models/constants';
-import { useSelector, RootStateOrAny } from 'react-redux';
 
 interface homeProps {
   editMode: boolean;

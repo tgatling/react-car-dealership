@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-
-import InfoBar from './InfoBar';
-import NavigationBar from './NavigationBar';
-import UserBar from './UserBar';
 import { useSelector, RootStateOrAny } from 'react-redux';
+
+import NavigationBar from './NavigationBar';
+import InfoBar from './InfoBar';
+import UserBar from './UserBar';
 
 const Header = () => {
   const userState = useSelector((state: RootStateOrAny) => state.user);

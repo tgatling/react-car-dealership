@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { User } from '../../models/user';
-import userService from '../../services/user.service';
-import CustomerItem from './CustomerItem';
-import { MASTER_ACCOUNT } from '../../models/constants';
+
 import searchUserIcon from '../../images/icons/search-user-icon.png';
+import CustomerItem from './CustomerItem';
+import userService from '../../services/user.service';
 import styles from './Customers.module.css';
+
+import { MASTER_ACCOUNT } from '../../models/constants';
+import { User } from '../../models/user';
 
 interface listProp {
   displayMaster?: boolean;

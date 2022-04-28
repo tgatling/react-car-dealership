@@ -1,13 +1,13 @@
 import React from 'react';
 
-import defaultUser from '../../images/defaultUser.png';
-import { DEALER_ROLE } from '../../models/constants';
-import { User } from '../../models/user';
-import BackOffice from './BackOffice';
 import GeneralInformation from './GeneralInformation';
 import PasswordChange from './PasswordChange';
-
+import defaultUser from '../../images/defaultUser.png';
+import BackOffice from './BackOffice';
 import styles from './Profile.module.css';
+
+import { DEALER_ROLE } from '../../models/constants';
+import { User } from '../../models/user';
 
 interface profileProp {
   user: User;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector, RootStateOrAny, useDispatch } from 'react-redux';
+import { NavLink, useHistory } from 'react-router-dom';
 
 import { userActions } from '../../store/user-slice';
 import {

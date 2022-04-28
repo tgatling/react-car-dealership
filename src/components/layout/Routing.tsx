@@ -1,14 +1,20 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import Auth from '../../pages/Auth';
-
-import Home from '../../pages/Home';
-import UserCars from '../../pages/UserCars';
 import { RootStateOrAny, useSelector } from 'react-redux';
+
+import CustomerPayments from '../../pages/CustomerPayments';
+import PaymentHistory from '../../pages/PaymentHistory';
+import CustomerOffers from '../../pages/CustomerOffers';
+import OfferHistory from '../../pages/OfferHistory';
+import UserCars from '../../pages/UserCars';
 import NotFound from '../../pages/NotFound';
-import AddCar from '../../pages/AddCar';
+import Settings from '../../pages/Settings';
 import EditCar from '../../pages/EditCar';
 import ViewCar from '../../pages/ViewCar';
+import AddCar from '../../pages/AddCar';
+import Auth from '../../pages/Auth';
+import Home from '../../pages/Home';
+
 import {
   ADD_DEALER_CAR,
   EDIT_OUR_LOT,
@@ -21,13 +27,10 @@ import {
   CUSTOMER_OFFERS,
   OFFER_HISTORY,
   CUSTOMER_PAYMENTS,
+  SETTINGS,
+  USER_PAYMENTS,
+  VIEW_PAYMENTS,
 } from '../../models/constants';
-import OfferHistory from '../../pages/OfferHistory';
-import PaymentHistory from '../../pages/PaymentHistory';
-import CustomerOffers from '../../pages/CustomerOffers';
-import { SETTINGS } from '../../models/constants';
-import Settings from '../../pages/Settings';
-import CustomerPayments from '../../pages/CustomerPayments';
 
 const Routing = () => {
   const loggedIn: boolean = useSelector(
@@ -78,6 +81,16 @@ const Routing = () => {
       )}
       {loggedIn && (
         <Route path={PAYMENT_HISTORY}>
+          <PaymentHistory />
+        </Route>
+      )}
+      {loggedIn && (
+        <Route path={VIEW_PAYMENTS}>
+          <PaymentHistory />
+        </Route>
+      )}
+      {loggedIn && (
+        <Route path={USER_PAYMENTS}>
           <PaymentHistory />
         </Route>
       )}

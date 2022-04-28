@@ -1,7 +1,7 @@
 // ROLES
+export const MASTER_ACCOUNT = 'master@familydealership.com';
 export const CUSTOMER_ROLE = 'CUSTOMER';
 export const DEALER_ROLE = 'DEALER';
-export const MASTER_ACCOUNT = 'master@familydealership.com';
 
 // LINKS
 
@@ -23,8 +23,8 @@ export const SETTINGS = '/settings';
 export const EDIT_SPECIFIC_CAR = `${EDIT_OUR_LOT}/:carId`;
 export const ADD_DEALER_CAR = '/add-to-dealers-cars';
 export const VIEW_SPECIFIC_CAR = '/car/:carId';
-export const PAYMENTS = '/payments';
-export const USER_PAYMENTS = `${PAYMENTS}/:userId`;
+export const VIEW_PAYMENTS = '/payments';
+export const USER_PAYMENTS = `${VIEW_PAYMENTS}/:userId`;
 
 // DEALERSHIP INFORMATION
 export const MOTTO = 'GENERATIONS OF SERVING OUR COMMUNITY';

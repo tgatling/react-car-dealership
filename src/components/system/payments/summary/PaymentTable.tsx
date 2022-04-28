@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
+import PaymentItem from './PaymentItem';
+import PaymentSummary from './PaymentSummary';
+import styles from './PaymentTable.module.css';
+
 import { calculatePaymentsFromOffer } from '../../Calculations';
 import { Offer } from '../../../../models/offer';
 import {
@@ -8,9 +12,6 @@ import {
   secondBill,
   thirdBill,
 } from '../../../../tests/mockData/mockPaymentHistory';
-import PaymentItem from './PaymentItem';
-import PaymentSummary from './PaymentSummary';
-import styles from './PaymentTable.module.css';
 
 const MONTHLY_BILLS = [downPayment, firstBill, secondBill, thirdBill];
 

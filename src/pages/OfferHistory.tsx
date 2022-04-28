@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
 import { useSelector, RootStateOrAny, useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
-import { Offer } from '../models/offer';
-import { offerActions } from '../store/offer-slice';
+
 import offerService from '../services/offer.service';
 import OfferDisplay from '../components/system/offers/OfferDisplay';
 import AlertDisplay from '../components/UI/AlertDisplay';
+
 import { ALERT, OFFER_HISTORY } from '../models/constants';
+import { offerActions } from '../store/offer-slice';
+import { Offer } from '../models/offer';
 
 const OfferHistory = () => {
   const history = useHistory();

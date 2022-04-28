@@ -1,10 +1,11 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { Car } from '../../models/car';
 import CarItem from './CarItem';
-import logo from '../../images/family-car.png';
 import styles from './CarTable.module.css';
+import logo from '../../images/family-car.png';
+
+import { Car } from '../../models/car';
 import { ADD_DEALER_CAR, DEALER_ROLE } from '../../models/constants';
 
 interface tableProps {

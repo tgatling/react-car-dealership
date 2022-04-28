@@ -2,6 +2,11 @@ import React from 'react';
 import { RootStateOrAny, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
+import tealEmail from '../../images/icons/teal-email-icon.png';
+import settings from '../../images/icons/settings-icon.png';
+import styles from './UserBar.module.css';
+import email from '../../images/icons/email-icon.png';
+
 import {
   OFFER_HISTORY,
   PAYMENT_HISTORY,
@@ -9,10 +14,6 @@ import {
   MESSAGES,
   SETTINGS,
 } from '../../models/constants';
-import email from '../../images/icons/email-icon.png';
-import tealEmail from '../../images/icons/teal-email-icon.png';
-import settings from '../../images/icons/settings-icon.png';
-import styles from './UserBar.module.css';
 
 interface userProps {
   username: string;
