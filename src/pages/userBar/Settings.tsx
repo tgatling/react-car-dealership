@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, RootStateOrAny } from 'react-redux';
 
 import AlertDisplay from '../../components/layout/UI/AlertDisplay';
-import Profile from '../../components/settings/Profile';
+import Profile from '../../components/settings/userSettings/Profile';
 
 import { ALERT } from '../../models/constants';
 import { User } from '../../models/user';

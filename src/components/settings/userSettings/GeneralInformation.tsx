@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { User } from '../../models/user';
+import { User } from '../../../models/user';
 
 import styles from './Profile.module.css';
 

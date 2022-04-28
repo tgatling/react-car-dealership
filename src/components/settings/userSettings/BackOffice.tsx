@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { User } from '../../models/user';
 
 import styles from './Profile.module.css';
+
+import { User } from '../../../models/user';
 
 interface infoProp {
   user: User;
