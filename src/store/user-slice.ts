@@ -35,9 +35,9 @@ const userSlice = createSlice({
 
       localStorage.setItem('user', state.currentUser);
     },
-    searchUser(state, action){
+    searchUser(state, action) {
       state.searchedUser = action.payload;
-    }
+    },
   },
 });
 

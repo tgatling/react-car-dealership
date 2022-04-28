@@ -7,9 +7,15 @@ class OfferService {
     this.URI = `${process.env.REACT_APP_SERVER_URI}`;
   }
 
-  async getAllOffers() {
+  async getAllOffers(): Promise<Offer[]> {
     return await axios
       .get(`${this.URI}offers.json`)
+      .then((result) => result.data);
+  }
+
+  async getOffer(id: string): Promise<Offer> {
+    return await axios
+      .get(`${this.URI}offers/${id}.json`)
       .then((result) => result.data);
   }
 

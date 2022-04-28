@@ -1,0 +1,5 @@
+.section {
+    display: flex;
+    justify-content: center;
+    background-color: #ffffff;
+}

@@ -1,0 +1,75 @@
+[
+    {
+      "paymentId": "-N0kc8XMHh_neW_pJnU0",
+      "billId": "-N0kLKooXFJ_hXs3qyif",
+      "offerId": "-N0XivMV90xhoOmyfmzi",
+      "carId": "-MyKkyjzrE_3aJqvZmTK",
+      "userId": "bWgrdZYBRtaoMLBAVAh8piA9jbi1",
+      "paymentNumber": 1,
+      "confirmationNumber": 1493372275626410000,
+      "paymentDate": "2022-04-01T00:00:00.000Z",
+      "paymentAmount": 5000,
+      "prepaymentOfNextBill": false
+    },
+    {
+      "paymentId": "-N0kdFacdXGkWRzqpmpG",
+      "billId": "-N0kX4ndOZu45ybv1iPz",
+      "offerId": "-N0XivMV90xhoOmyfmzi",
+      "carId": "-MyKkyjzrE_3aJqvZmTK",
+      "userId": "bWgrdZYBRtaoMLBAVAh8piA9jbi1",
+      "paymentNumber": 2,
+      "confirmationNumber": 47286263816913720000,
+      "paymentDate": "2022-04-15T00:00:00.000Z",
+      "paymentAmount": 220.56,
+      "prepaymentOfNextBill": false
+    },
+    {
+      "paymentId": "-N0kdM5b_T2eB0XRLKs0",
+      "billId": "-N0kX4ndOZu45ybv1iPz",
+      "offerId": "-N0XivMV90xhoOmyfmzi",
+      "carId": "-MyKkyjzrE_3aJqvZmTK",
+      "userId": "bWgrdZYBRtaoMLBAVAh8piA9jbi1",
+      "paymentNumber": 3,
+      "confirmationNumber": 0,
+      "paymentDate": "2022-04-18T00:00:00.000Z",
+      "paymentAmount": 220.56,
+      "prepaymentOfNextBill": false
+    },
+    {
+      "paymentId": "-N0kdSk0tP3u5pjZhFLA",
+      "billId": "-N0kX5jdkzgJ89BIZb7",
+      "offerId": "-N0XivMV90xhoOmyfmzi",
+      "carId": "-MyKkyjzrE_3aJqvZmTK",
+      "userId": "bWgrdZYBRtaoMLBAVAh8piA9jbi1",
+      "paymentNumber": 4,
+      "confirmationNumber": 66202307581315090000,
+      "paymentDate": "2022-04-19T00:00:00.000",
+      "paymentAmount": 200,
+      "prepaymentOfNextBill": false
+    },
+    {
+      "paymentId": "-N0kdYJk-0Oxe6G5e4Zj",
+      "billId": "-N0kX5jdkzgJ89BIZb7",
+      "offerId": "-N0XivMV90xhoOmyfmzi",
+      "carId": "-MyKkyjzrE_3aJqvZmTK",
+      "userId": "bWgrdZYBRtaoMLBAVAh8piA9jbi1",
+      "paymentNumber": 5,
+      "confirmationNumber": 16879560207907730000,
+      "paymentDate": "2022-04-23T00:00:00.000Z",
+      "paymentAmount": 241.18,
+      "prepaymentOfNextBill": true
+    },
+    {
+      "paymentId": "-N0kdcVjXe4Wc2xB_sZq",
+      "billId": "-N0kX6S8kjIxoT9oxqAj",
+      "offerId": "-N0XivMV90xhoOmyfmzi",
+      "carId": "-MyKkyjzrE_3aJqvZmTK",
+      "userId": "bWgrdZYBRtaoMLBAVAh8piA9jbi1",
+      "paymentNumber": 6,
+      "confirmationNumber": 16879560207907730000,
+      "paymentDate": "2022-04-26T00:00:00.000Z",
+      "paymentAmount": 158.82,
+      "prepaymentOfNextBill": false
+    }
+  ]
+  
