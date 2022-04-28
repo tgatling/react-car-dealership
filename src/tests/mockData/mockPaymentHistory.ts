@@ -19,43 +19,79 @@ export const mockOffer: Offer = {
 export const downPayment: Bill = {
   billId: '-N0kLKooXFJ_hXs3qyif',
   offerId: '-N0XivMV90xhoOmyfmzi',
+  userId: 'bWgrdZYBRtaoMLBAVAh8piA9jbi1',
   billNumber: 0,
   paymentDueDate: '2022-04-01T00:00:00.000Z',
   amountDue: 5000,
   paymentCompleted: true,
+  paymentIds: [
+    {
+      paymentNumber: 1,
+      paymentId: '-N0kc8XMHh_neW_pJnU0',
+    },
+  ],
 };
 
 export const firstBill: Bill = {
   billId: '-N0kX4ndOZu45ybv1iPz',
   offerId: '-N0XivMV90xhoOmyfmzi',
+  userId: 'bWgrdZYBRtaoMLBAVAh8piA9jbi1',
   billNumber: 1,
   paymentDueDate: '2022-05-01T00:00:00.000Z',
   amountDue: 441.12,
   paymentCompleted: true,
+  paymentIds: [
+    {
+      paymentNumber: 2,
+      paymentId: '-N0kdFacdXGkWRzqpmpG',
+    },
+    {
+      paymentNumber: 3,
+      paymentId: '-N0kdM5b_T2eB0XRLKs0',
+    },
+  ],
 };
 
 export const secondBill: Bill = {
   billId: '-N0kX4ndOZu45ybv1iPz',
   offerId: '-N0XivMV90xhoOmyfmzi',
+  userId: 'bWgrdZYBRtaoMLBAVAh8piA9jbi1',
   billNumber: 2,
   paymentDueDate: '2022-06-01T00:00:00.000Z',
   amountDue: 441.18,
   paymentCompleted: true,
+  paymentIds: [
+    {
+      paymentNumber: 4,
+      paymentId: '-N0kdSk0tP3u5pjZhFLA',
+    },
+    {
+      paymentNumber: 5,
+      paymentId: '-N0kdYJk-0Oxe6G5e4Zj',
+    },
+  ],
 };
 
 export const thirdBill: Bill = {
   billId: '-N0kX5jdkzgJ89BIZb7',
   offerId: '-N0XivMV90xhoOmyfmzi',
+  userId: 'bWgrdZYBRtaoMLBAVAh8piA9jbi1',
   billNumber: 3,
   paymentDueDate: '2022-07-01T00:00:00.000Z',
   amountDue: 441.18,
   paymentCompleted: false,
+  paymentIds: [
+    {
+      paymentNumber: 6,
+      paymentId: '-N0kdcVjXe4Wc2xB_sZq',
+    },
+  ],
 };
 
 // MOCK PAYMENTS
 // Down Payment - Bill 0
 export const paymentOne: Payment = {
-  paymentId: '',
+  paymentId: '-N0kc8XMHh_neW_pJnU0',
   billId: '-N0kLKooXFJ_hXs3qyif',
   offerId: '-N0XivMV90xhoOmyfmzi',
   carId: '-MyKkyjzrE_3aJqvZmTK',

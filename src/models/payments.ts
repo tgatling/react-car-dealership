@@ -1,3 +1,14 @@
+export class Bill {
+  billId: string = '';
+  offerId: string = '';
+  userId: string = '';
+  billNumber: number = 0;
+  paymentDueDate: string | Date = new Date().toISOString();
+  amountDue: number = 0;
+  paymentCompleted: boolean = false;
+  paymentIds: { paymentNumber: number; paymentId: string }[] = [];
+}
+
 export class Payment {
   paymentId: string = '';
   billId: string = '';
@@ -9,13 +20,4 @@ export class Payment {
   paymentDate: string | Date = new Date().toISOString();
   paymentAmount: number = 0;
   prepaymentOfNextBill: boolean = false;
-}
-
-export class Bill {
-  billId: string = '';
-  offerId: string = '';
-  billNumber: number = 0;
-  paymentDueDate: string | Date = new Date().toISOString();
-  amountDue: number = 0;
-  paymentCompleted: boolean = false;
 }
