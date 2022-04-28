@@ -26,6 +26,7 @@ const OfferDetails = ({ carTotal, showHeading }: offerFormProps) => {
   const [httpError, setHttpError] = useState(null);
 
   const params = useParams<{ carId: string }>();
+  console.log(params);
   const history = useHistory();
 
   let customerOffer = new Offer();

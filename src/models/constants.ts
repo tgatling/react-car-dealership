@@ -24,7 +24,7 @@ export const EDIT_SPECIFIC_CAR = `${EDIT_OUR_LOT}/:carId`;
 export const ADD_DEALER_CAR = '/add-to-dealers-cars';
 export const VIEW_SPECIFIC_CAR = '/car/:carId';
 export const VIEW_PAYMENTS = '/payments';
-export const USER_PAYMENTS = `${VIEW_PAYMENTS}/:userId`;
+export const USER_PAYMENTS = `${CUSTOMER_PAYMENTS}/:userId`;
 
 // DEALERSHIP INFORMATION
 export const MOTTO = 'GENERATIONS OF SERVING OUR COMMUNITY';

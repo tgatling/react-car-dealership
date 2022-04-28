@@ -5,7 +5,7 @@ import CustomerItem from './CustomerItem';
 import userService from '../../services/user.service';
 import styles from './Customers.module.css';
 
-import { MASTER_ACCOUNT, VIEW_PAYMENTS } from '../../models/constants';
+import { CUSTOMER_PAYMENTS, MASTER_ACCOUNT } from '../../models/constants';
 import {useHistory} from 'react-router-dom';
 import { User } from '../../models/user';
 
@@ -57,7 +57,7 @@ const CustomerList = ({ displayMaster = false }: listProp) => {
   };
 
   const viewCustomerPayments = (userId: string) => {
-    history.push(`${VIEW_PAYMENTS}/${userId}`);
+    history.push(`${CUSTOMER_PAYMENTS}/${userId}`);
   }
 
   return (

@@ -14,6 +14,7 @@ import ViewCar from '../../car/ViewCar';
 import AddCar from '../../car/AddCar';
 import Auth from '../../../pages/navigationBar/Auth';
 import Home from '../../../pages/navigationBar/Home';
+import BillDisplay from '../../bills/BillDisplay';
 
 import {
   ADD_DEALER_CAR,
@@ -29,7 +30,6 @@ import {
   CUSTOMER_PAYMENTS,
   SETTINGS,
   USER_PAYMENTS,
-  VIEW_PAYMENTS,
 } from '../../../models/constants';
 
 const Routing = () => {
@@ -80,18 +80,13 @@ const Routing = () => {
         </Route>
       )}
       {loggedIn && (
-        <Route path={VIEW_PAYMENTS}>
-          <PaymentHistory />
-        </Route>
-      )}
-      {loggedIn && (
-        <Route path={CUSTOMER_PAYMENTS}>
+        <Route path={CUSTOMER_PAYMENTS} exact>
           <CustomerPayments />
         </Route>
       )}
       {loggedIn && (
         <Route path={USER_PAYMENTS}>
-          <CustomerPayments />
+          <BillDisplay />
         </Route>
       )}
       {!loggedIn && (
