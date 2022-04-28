@@ -1,31 +1,41 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import PaymentTable from '../system/payments/PaymentTable';
+import PaymentTable from '../payments/PaymentTable';
+import OfferDetails from '../offers/OfferDetails';
+import offerService from '../../services/offer.service';
+import styles from './CarDetails.module.css';
+
 import { Car } from '../../models/car';
 import { CUSTOMER_ROLE } from '../../models/constants';
-import styles from './CarDetails.module.css';
-import { Payments } from '../../models/payments';
-import OfferDetails from '../system/offers/OfferDetails';
+import { ACCEPTED_STATUS, Offer } from '../../models/offer';
+import { useSelector, RootStateOrAny, useDispatch } from 'react-redux';
 
 interface detailsProp {
   car: Car;
   ownerRole: string;
 }
 
-// TODO: REMOVE HARDCODED PAYMENT INFORMATION
-
-const DUMMY_PAYMENTS: Payments = {
-  userId: 'dummy-user-id',
-  carId: '-MwlR-FOe4z_HTtcCI2e',
-  totalAmount: 11300,
-  downPayment: 3300,
-  numberOfPayments: 15,
-  paymentsMade: 3,
-};
-
 const CarDetails = ({ car, ownerRole }: detailsProp) => {
   const [showHeading, setShowHeading] = useState(true);
+  const [offer, setOffer] = useState<Offer | null>(null);
   let carName = `${car.year} ${car.make} ${car.model}`.toUpperCase();
+  const dispatch = useDispatch();
+  const carOffers = useSelector(
+    (state: RootStateOrAny) => state.offer.carOffers
+  );
+
+  useEffect(() => {
+    offerService.getAllOffers().then((response) => {
+      for (const key in response) {
+        if (
+          response[key].carId === car.carId &&
+          response[key].status === ACCEPTED_STATUS
+        ) {
+          setOffer(response[key]);
+        }
+      }
+    });
+  }, [car.carId, carOffers, dispatch]);
 
   return (
     <div className={styles.section}>
@@ -34,14 +44,7 @@ const CarDetails = ({ car, ownerRole }: detailsProp) => {
         {ownerRole === CUSTOMER_ROLE ? (
           <div>
             <h1>{`MAKE A PAYMENT ON YOUR ${carName}`}</h1>
-            <PaymentTable
-              userId={DUMMY_PAYMENTS.userId}
-              carId={DUMMY_PAYMENTS.carId}
-              totalAmount={DUMMY_PAYMENTS.totalAmount}
-              downPayment={DUMMY_PAYMENTS.downPayment}
-              numberOfPayments={DUMMY_PAYMENTS.numberOfPayments}
-              paymentsMade={DUMMY_PAYMENTS.paymentsMade}
-            />
+            {offer && <PaymentTable offer={offer} />}
           </div>
         ) : (
           <div>

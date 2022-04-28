@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import { User } from '../../models/user';
-import { CUSTOMER_ROLE, HOME_PAGE } from '../../models/constants';
 import userService from '../../services/user.service';
-import { userActions } from '../../store/user-slice';
 import styles from './AuthForm.module.css';
+
+import { CUSTOMER_ROLE, HOME_PAGE } from '../../models/constants';
+import { userActions } from '../../store/user-slice';
+import { User } from '../../models/user';
 
 const AuthForm = () => {
   const [isLoginForm, setIsLoginForm] = useState(true);

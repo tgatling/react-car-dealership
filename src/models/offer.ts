@@ -1,6 +1,5 @@
-// status
+// statuses
 export const PENDING_STATUS = 'PENDING';
-export const SUBMITTED_STATUS = 'SUBMITTED';
 export const ACCEPTED_STATUS = 'ACCEPTED';
 export const REJECTED_STATUS = 'REJECTED';
 
@@ -13,5 +12,6 @@ export class Offer {
   empUserId: string = '';
   carTotal: number = 0;
   downPayment: number = 0;
+  totalPaid: number = 0;
   numberOfPayments: number = 1;
 }

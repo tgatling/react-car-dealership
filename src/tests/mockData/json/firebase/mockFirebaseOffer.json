@@ -1,0 +1,86 @@
+{
+  "-MxoKOiJ8vDNOVR-0gg0": {
+      "carId": "-MyMx1taO7iWz0lpBNXR",
+      "carTotal": 42808,
+      "downPayment": 7808,
+      "empUserId": "",
+      "numberOfPayments": 100,
+      "offerDate": "2022-03-10T14:57:19.343Z",
+      "offerId": "-MxoKOiJ8vDNOVR-0gg0",
+      "status": "PENDING",
+      "totalPaid": 0,
+      "userId": "bWgrdZYBRtaoMLBAVAh8piA9jbi1"
+  },
+  "-MxpJdo04OWUWF36BeO2": {
+      "carId": "-MyKqSFK0PRG1RiQV_qe",
+      "carTotal": 20535,
+      "downPayment": 5000,
+      "empUserId": "",
+      "numberOfPayments": 36,
+      "offerDate": "2022-03-10T19:37:12.107Z",
+      "offerId": "-MxpJdo04OWUWF36BeO2",
+      "status": "PENDING",
+      "totalPaid": 0,
+      "userId": "j45XD5bkjAdtluYyvBgtBHCTqbL2"
+  },
+  "-MxpKcVErv5MmiD6iN30": {
+      "carId": "-MyKkmrh-4uMvptMCntN",
+      "carTotal": 16999,
+      "downPayment": 9600,
+      "empUserId": "",
+      "numberOfPayments": 48,
+      "offerDate": "2022-03-10T19:37:56.857Z",
+      "offerId": "-MxpKcVErv5MmiD6iN30",
+      "status": "PENDING",
+      "totalPaid": 0,
+      "userId": "j45XD5bkjAdtluYyvBgtBHCTqbL2"
+  },
+  "-MxtghFPo9PqG3YKk7he": {
+      "carId": "-MyKqhe-joS5zFkOXHOM",
+      "carTotal": 17670,
+      "downPayment": 9600,
+      "empUserId": "",
+      "numberOfPayments": 36,
+      "offerDate": "2022-03-11T15:57:16.129Z",
+      "offerId": "-MxtghFPo9PqG3YKk7he",
+      "status": "PENDING",
+      "totalPaid": 0,
+      "userId": "vuGxl5wna4QuSKA6qZIlaO0r3n62"
+  },
+  "-MxuSuN5X4kYdxFjyzMM": {
+      "carId": "-MyKqSFK0PRG1RiQV_qe",
+      "carTotal": 20535,
+      "downPayment": 5535,
+      "empUserId": "",
+      "numberOfPayments": 52,
+      "offerDate": "2022-03-11T19:32:13.517Z",
+      "offerId": "-MxuSuN5X4kYdxFjyzMM",
+      "status": "PENDING",
+      "totalPaid": 0,
+      "userId": "vuGxl5wna4QuSKA6qZIlaO0r3n62"
+  },
+  "-MyN-3-HYSVzFCTAf-HG": {
+      "carId": "-MyKeYJu7lewGJpsJdsH",
+      "carTotal": 15965,
+      "downPayment": 15965,
+      "empUserId": "",
+      "numberOfPayments": 1,
+      "offerDate": "2022-03-17T13:10:26.733Z",
+      "offerId": "-MyN-3-HYSVzFCTAf-HG",
+      "status": "PENDING",
+      "totalPaid": 0,
+      "userId": "bWgrdZYBRtaoMLBAVAh8piA9jbi1"
+  },
+  "-N0XivMV90xhoOmyfmzi": {
+      "carId": "-MyKkyjzrE_3aJqvZmTK",
+      "carTotal": 12500,
+      "downPayment": 5000,
+      "empUserId": "0bVRB4BBHNRMGVH929mvyTNqFlc2",
+      "numberOfPayments": 17,
+      "offerDate": "2022-04-25T21:58:28.020Z",
+      "offerId": "-N0XivMV90xhoOmyfmzi",
+      "status": "ACCEPTED",
+      "totalPaid": 6041.12,
+      "userId": "bWgrdZYBRtaoMLBAVAh8piA9jbi1"
+  }
+}

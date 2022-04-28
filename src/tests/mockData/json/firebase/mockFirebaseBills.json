@@ -1,0 +1,70 @@
+{
+    "-N0kLKooXFJ_hXs3qyif": {
+        "amountDue": 5000,
+        "billId": "-N0kLKooXFJ_hXs3qyif",
+        "billNumber": 0,
+        "offerId": "-N0XivMV90xhoOmyfmzi",
+        "paymentCompleted": true,
+        "paymentDueDate": "2022-04-01T00:00:00.000Z",
+        "paymentIds": [
+            {
+                "paymentId": "-N0kc8XMHh_neW_pJnU0",
+                "paymentNumber": 1
+            }
+        ],
+        "userId": "bWgrdZYBRtaoMLBAVAh8piA9jbi1"
+    },
+    "-N0kX4ndOZu45ybv1iPz": {
+        "amountDue": 441.12,
+        "billId": "-N0kX4ndOZu45ybv1iPz",
+        "billNumber": 1,
+        "offerId": "-N0XivMV90xhoOmyfmzi",
+        "paymentCompleted": true,
+        "paymentDueDate": "2022-05-01T00:00:00.000Z",
+        "paymentIds": [
+            {
+                "paymentId": "-N0kdFacdXGkWRzqpmpG",
+                "paymentNumber": 2
+            },
+            {
+                "paymentId": "-N0kdM5b_T2eB0XRLKs0",
+                "paymentNumber": 3
+            }
+        ],
+        "userId": "bWgrdZYBRtaoMLBAVAh8piA9jbi1"
+    },
+    "-N0kX5jdkzgJ89BIZb7X": {
+        "amountDue": 441.18,
+        "billId": "-N0kX5jdkzgJ89BIZb7X",
+        "billNumber": 2,
+        "offerId": "-N0XivMV90xhoOmyfmzi",
+        "paymentCompleted": true,
+        "paymentDueDate": "2022-06-01T00:00:00.000Z",
+        "paymentIds": [
+            {
+                "paymentId": "-N0kdSk0tP3u5pjZhFLA",
+                "paymentNumber": 4
+            },
+            {
+                "paymentId": "-N0kdYJk-0Oxe6G5e4Zj",
+                "paymentNumber": 5
+            }
+        ],
+        "userId": "bWgrdZYBRtaoMLBAVAh8piA9jbi1"
+    },
+    "-N0kX6S8kjIxoT9oxqAj": {
+        "amountDue": 441.18,
+        "billId": "-N0kX6S8kjIxoT9oxqAj",
+        "billNumber": 3,
+        "offerId": "-N0XivMV90xhoOmyfmzi",
+        "paymentCompleted": false,
+        "paymentDueDate": "2022-07-01T00:00:00.000Z",
+        "paymentIds": [
+            {
+                "paymentId": "-N0kdcVjXe4Wc2xB_sZq",
+                "paymentNumber": 6
+            }
+        ],
+        "userId": "bWgrdZYBRtaoMLBAVAh8piA9jbi1"
+    }
+}

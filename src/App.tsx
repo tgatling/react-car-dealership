@@ -1,15 +1,16 @@
 import React, { Fragment, useEffect } from 'react';
-
-import Header from './components/layout/Header';
-import Footer from './components/layout/Footer';
-import Routing from './components/layout/Routing';
-import { Car } from './models/car';
-import carService from './services/car.service';
 import { useDispatch, useSelector, RootStateOrAny } from 'react-redux';
-import { carActions } from './store/car-slice';
+
 import messageService from './services/message.service';
+import carService from './services/car.service';
+import Routing from './components/layout/routing/Routing';
+import Header from './components/layout/header/Header';
+import Footer from './components/layout/footer/Footer';
+
 import { messageActions } from './store/message-slice';
+import { carActions } from './store/car-slice';
 import { Message } from './models/message';
+import { Car } from './models/car';
 
 function App() {
   let dispatch = useDispatch();

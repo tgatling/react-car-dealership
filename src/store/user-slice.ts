@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {User} from '../models/user';
 
 const userSlice = createSlice({
   name: 'user',
@@ -35,9 +34,9 @@ const userSlice = createSlice({
 
       localStorage.setItem('user', state.currentUser);
     },
-    searchUser(state, action){
+    searchUser(state, action) {
       state.searchedUser = action.payload;
-    }
+    },
   },
 });
 

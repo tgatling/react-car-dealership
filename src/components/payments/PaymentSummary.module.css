@@ -1,0 +1,33 @@
+.summaryContainer h3 {
+  text-decoration: underline;
+  font-size: 25px;
+}
+
+.summaryContainer p {
+  font-size: 23px;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+
+.summaryContainer button {
+  display: flex;
+  align-self: center;
+  margin-bottom: 25px;
+  background-color: #7fffd4;
+  border-radius: 15px;
+  font-size: 25px;
+  padding: 15px 32px;
+}
+
+.summaryContainer button:hover {
+  background-color: #d7fff2;
+}
+
+.rightEnd {
+  display: flex;
+  justify-content: flex-end;
+}

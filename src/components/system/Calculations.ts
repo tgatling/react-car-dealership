@@ -1,4 +1,4 @@
-import { Payments } from '../../models/payments';
+import { Bill } from '../../models/payments';
 
 // PAYMENTS
 
@@ -77,56 +77,7 @@ export const calculatePaymentsFromOffer = (
   };
 };
 
-export const calculateRemainingPayments = (payments: Payments) => {
-  let paymentCalculations = [];
-
-  let { numberOfEqualPayments, unequalPaymentAmount, paymentAmount } =
-    calculateIndividualPayments(
-      payments.totalAmount,
-      payments.downPayment,
-      payments.numberOfPayments
-    );
-
-  let startingPoint = 0;
-  let stoppingPoint = numberOfEqualPayments;
-
-  // handling unequal payment status
-  if (unequalPaymentAmount !== 0) {
-    if (payments.paymentsMade === 0) {
-      paymentCalculations.push({
-        payment: 1,
-        amount: unequalPaymentAmount,
-        status: 'UNPAID',
-      });
-    } else {
-      paymentCalculations.push({
-        payment: 1,
-        amount: unequalPaymentAmount,
-        status: 'PAID',
-      });
-    }
-    startingPoint = 1;
-    stoppingPoint++;
-  }
-
-  // handling equal payment statuses
-  for (let i = startingPoint; i < stoppingPoint; i++) {
-    if (i < payments.paymentsMade) {
-      paymentCalculations.push({
-        payment: i + 1,
-        amount: paymentAmount,
-        status: 'PAID',
-      });
-    } else {
-      paymentCalculations.push({
-        payment: i + 1,
-        amount: paymentAmount,
-        status: 'UNPAID',
-      });
-    }
-  }
-
-  return {
-    paymentCalculations,
-  };
-};
+export const calculateRemainingPayment = (
+  bill: Bill,
+  paymentAmount: number
+) => {};
