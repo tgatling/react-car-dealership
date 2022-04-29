@@ -1,5 +1,50 @@
 .section {
-    display: flex;
-    justify-content: center;
-    background-color: #ffffff;
+  display: flex;
+  margin: 30px;
+  justify-content: center;
+}
+
+.offerContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 15px;
+  padding: 30px;
+  border-style: outset;
+  border-width: 2px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 4px 0 rgb(60 64 67 / 30%),
+    0 8px 12px 6px rgb(60 64 67 / 15%);
+}
+
+.offerHeading {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.offerHeading h2 {
+  margin: 0px;
+  align-self: center;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.offerHeading h3 {
+  margin: 0px;
+  font-weight: normal;
+}
+
+.itemContainer {
+  display: flex;
+  margin: 15px 0 15px;
+  padding: 15px;
+  width: 1000px;
+  background-color: #000080;
+  color: #ffffff;
+  font-size: 20px;
+}
+
+.itemElement {
+  display: flex;
+  flex-direction: row;
 }
