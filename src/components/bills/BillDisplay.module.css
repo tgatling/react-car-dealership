@@ -1,12 +1,15 @@
+/* Entire Page */
 .section {
   display: flex;
   margin: 30px;
   justify-content: center;
 }
 
+/* Car Bill */
 .offerContainer {
   display: flex;
   flex-direction: column;
+  position: relative;
   margin: 15px;
   padding: 30px;
   border-style: outset;
@@ -16,24 +19,45 @@
     0 8px 12px 6px rgb(60 64 67 / 15%);
 }
 
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.rowElement {
+    display: flex;
+    width: 500px;
+}
+
+.icon {
+  position: absolute;
+  top: 15px;
+  right: 30px;
+}
+
+.icon img {
+  width: 80px;
+  height: 80px;
+}
+
 .offerHeading {
   display: flex;
   flex-direction: column;
   margin-bottom: 15px;
 }
 
-.offerHeading h2 {
+.offerHeading h1 {
   margin: 0px;
   align-self: center;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
     'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-.offerHeading h3 {
-  margin: 0px;
-  font-weight: normal;
+.offerHeading h2 {
+  margin: 20px 10px 0px;
 }
 
+/* Bill Item */
 .itemContainer {
   display: flex;
   margin: 15px 0 15px;
