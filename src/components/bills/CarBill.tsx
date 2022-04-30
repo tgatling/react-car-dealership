@@ -35,7 +35,7 @@ const CarBill = ({ userBills, offerId }: carBillProp) => {
 
   return (
     <div className={styles.offerContainer}>
-      <div className={styles.icon}>
+      <div className={styles.offerIcon}>
         <img src={statement} alt='statement' />
       </div>
       <div className={styles.offerHeading}>

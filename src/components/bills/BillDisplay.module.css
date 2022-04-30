@@ -20,22 +20,22 @@
 }
 
 .row {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 .rowElement {
-    display: flex;
-    width: 500px;
+  display: flex;
+  width: 500px;
 }
 
-.icon {
+.offerIcon {
   position: absolute;
   top: 15px;
   right: 30px;
 }
 
-.icon img {
+.offerIcon img {
   width: 80px;
   height: 80px;
 }
@@ -58,8 +58,9 @@
 }
 
 /* Bill Item */
-.itemContainer {
+.billContainer {
   display: flex;
+  flex-direction: column;
   margin: 15px 0 15px;
   padding: 15px;
   width: 1000px;
@@ -68,7 +69,91 @@
   font-size: 20px;
 }
 
-.itemElement {
+.billHeader {
+  position: relative;
+  width: 840px;
+  height: 40px;
+}
+
+.billHeader h2 {
+  display: flex;
+  /* justify-content: center; */
+  margin: 0px;
+}
+
+.billElement {
   display: flex;
   flex-direction: row;
+}
+
+.billIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px 10px;
+  width: 100px;
+  height: 100px;
+}
+
+.checkmark img {
+  width: 95px;
+  height: 95px;
+}
+
+.checkbox img {
+  margin-left: -20px;
+  width: 75px;
+  height: 75px;
+}
+
+.billDetails {
+  margin: 0px 40px 0px;
+  width: 840px;
+}
+
+.billRow {
+  display: flex;
+  flex-direction: row;
+}
+
+.billRow label {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.billRow p {
+}
+
+.billRowElements {
+  width: 420px;
+}
+
+.billStatus {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px;
+  height: 50px;
+  width: 100px;
+}
+
+.billStatus button {
+  width: 100px;
+  height: 50px;
+  border-color: #000080;
+  border-radius: 5px;
+  background-color: #7fffd4;
+  color: #000080;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.billStatus button:hover {
+  font-size: 16px;
+  border: solid;
+  border-color: #7fffd4;
+  box-shadow: 0 4px 4px 0 rgba(255, 255, 255, 0.3),
+    0 8px 12px 6px rgba(255, 255, 255, 0.15);
 }

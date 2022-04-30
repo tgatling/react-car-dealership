@@ -15,15 +15,44 @@ const BillItem = ({ bill }: billProp) => {
     bill;
 
   return (
-      <div className={styles.itemContainer}>
-        <div className={styles.billElement}>
-            <div>
-                {/* <img src={bill.paymentCompleted ? checkMark : checkbox}/> */}
+    <div className={styles.billContainer}>
+      <div className={styles.billElement}>
+          <div className={styles.billIcon}>
+            <div
+              className={
+                bill.paymentCompleted ? styles.checkmark : styles.checkbox
+              }
+            >
+              <img
+                src={bill.paymentCompleted ? checkMark : checkbox}
+                alt='bill'
+              />
             </div>
-          <label>{'Bill Id: '}</label>
-          <p>{bill.billId}</p>
+          </div>
+        <div className={styles.billHeader}>
+          <h2>Bill Title</h2>
         </div>
       </div>
+      <div className={styles.billElement}>
+        <div className={styles.billStatus}>
+          {paymentCompleted && <p>PAID</p>}
+          {!paymentCompleted && <button>PAY NOW</button>}
+        </div>
+        <div className={styles.billDetails}>
+          <div className={styles.billRow}>
+            <div className={styles.billRowElements}>
+              <div className={styles.row}>
+                <label>{'Bill Id: '}</label>
+                <p>{bill.billId}</p>
+              </div>
+            </div>
+            <div className={styles.billRowElements}>
+              <p>Text</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
