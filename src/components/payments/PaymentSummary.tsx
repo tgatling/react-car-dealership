@@ -1,4 +1,6 @@
 import React from 'react';
+import {useHistory} from 'react-router-dom';
+import {PAYMENT_HISTORY} from '../../models/constants';
 
 import styles from './PaymentSummary.module.css';
 
@@ -19,6 +21,11 @@ const PaymentSummary = ({
   paymentCalculations,
   header,
 }: summaryProps) => {
+  const history = useHistory();
+
+  const paymentHandler = () => {
+    history.push(PAYMENT_HISTORY);
+  }
   return (
     <div className={styles.summaryContainer}>
       {header && <h3>Payment Summary</h3>}
@@ -40,7 +47,7 @@ const PaymentSummary = ({
       )}
       <div className={styles.rightEnd}>
         <div className={styles.buttonContainer}>
-          <button>Make a Payment</button>
+          <button onClick={paymentHandler}>Make a Payment</button>
           {onToggle && <button onClick={onToggle}>View Monthly Bills</button>}
         </div>
       </div>

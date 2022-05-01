@@ -14,6 +14,7 @@ const BillItem = ({ bill }: billProp) => {
   const { billId, billNumber, paymentDueDate, amountDue, paymentCompleted } =
     bill;
 
+  let dueDate = new Date(bill.paymentDueDate);
   let billTitle =
     bill.billNumber === 0 ? 'DOWN PAYMENT' : `BILL NUMBER ${billNumber}`;
 
@@ -47,7 +48,9 @@ const BillItem = ({ bill }: billProp) => {
               <div className={styles.billRowElements}>
                 <div className={styles.row}>
                   <label>{'Due Date: '}</label>
-                  <p>{`00/00/0000`}</p>
+                  <p>{`${
+                    dueDate.getUTCMonth() + 1
+                  }/${dueDate.getUTCDate()}/${dueDate.getUTCFullYear()}`}</p>
                 </div>
               </div>
               <div className={styles.billRowElements}>

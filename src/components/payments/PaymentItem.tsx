@@ -13,7 +13,7 @@ const PaymentItem = ({ payment, amount, status }: paymentProps) => {
     <div className={styles.card}>
       <div className={styles.alignment}>
         {payment === 0 && <div>{`Down Payment: `}</div>}
-        {payment > 0 && <div>{`Payment ${payment}`}</div>}
+        {payment > 0 && <div>{`Bill Number ${payment}:`}</div>}
       </div>
       <div className={styles.alignment}>
         <div>${amount.toFixed(2)}</div>
