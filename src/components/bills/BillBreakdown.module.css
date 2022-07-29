@@ -1,0 +1,23 @@
+.table {
+  display: flex;
+  margin: 10px;
+  border: solid;
+  border-width: 1px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.columnHeader {
+  font-weight: bold;
+}
+
+.positionOdd {
+    background-color: #ffffff;
+}
+
+.positionEven {
+    background-color: #808080;
+}

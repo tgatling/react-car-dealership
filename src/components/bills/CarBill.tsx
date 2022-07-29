@@ -9,7 +9,7 @@ import styles from './BillDisplay.module.css';
 import { Bill } from '../../models/payments';
 import { Offer } from '../../models/offer';
 import { Car } from '../../models/car';
-import Table from '../payments/PaymentTable';
+import BillBreakdown from './BillBreakdown';
 
 interface carBillProp {
   userBills: Bill[];
@@ -78,7 +78,7 @@ const CarBill = ({ userBills, offerId }: carBillProp) => {
           </div>
         )}
       </div>
-      <Table />
+      <BillBreakdown />
       {/* <div>
         {filteredBills.map((bill) => {
           return (
