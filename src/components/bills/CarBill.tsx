@@ -14,6 +14,14 @@ interface carBillProp {
   userBills: Bill[];
   offerId: string;
 }
+
+/**
+ * Car Bill Component
+ * @param {Bill[]} userBills array of bills associated with specififed vehicle
+ * @param {string} offerId id given when offer was made on specified vehicle
+ * @returns List of each bill associated with specified vehicle
+ */
+
 const CarBill = ({ userBills, offerId }: carBillProp) => {
   const [filteredBills, setFilteredBills] = useState<Bill[]>([]);
   const [offer, setOffer] = useState<Offer | null>(null);
@@ -31,7 +39,7 @@ const CarBill = ({ userBills, offerId }: carBillProp) => {
     setFilteredBills(offerBills);
   }, [offerId, userBills]);
 
-    let remainingBalance = offer ? offer?.carTotal - offer?.totalPaid : ' ';
+  let remainingBalance = offer ? offer?.carTotal - offer?.totalPaid : ' ';
 
   return (
     <div className={styles.offerContainer}>

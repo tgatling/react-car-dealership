@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 import checkMark from '../../images/payments/check-mark.png';
 import checkbox from '../../images/payments/checkbox.png';
@@ -10,13 +11,35 @@ interface billProp {
   bill: Bill;
 }
 
-const BillItem = ({ bill }: billProp) => {
-  const { billId, billNumber, paymentDueDate, amountDue, paymentCompleted } =
-    bill;
+/**
+ * Bill Item Component
+ * @param {Bill} bill individual bill containing one month's payment information
+ * @returns Billing information and the option to view or make payments for that bill
+ */
 
-  let dueDate = new Date(bill.paymentDueDate);
+const BillItem = ({ bill }: billProp) => {
+  const history = useHistory();
+  const {
+    billId,
+    billNumber,
+    paymentDueDate,
+    amountDue,
+    paymentCompleted,
+    paymentIds,
+  } = bill;
+
+  let dueDate = new Date(paymentDueDate);
   let billTitle =
     bill.billNumber === 0 ? 'DOWN PAYMENT' : `BILL NUMBER ${billNumber}`;
+
+  const viewPaymentsHandler = () => {
+    console.log(`Clicked on View Payments for Bill Id: ${bill.billId}`);
+    history.push(`/payments/${billId}`);
+  };
+
+  const makePaymentHandler = () => {
+    console.log('Make Payment Handler');
+  };
 
   return (
     <div className={styles.billContainer}>
@@ -35,7 +58,9 @@ const BillItem = ({ bill }: billProp) => {
         </div>
         <div className={styles.billStatus}>
           {paymentCompleted && <p>PAID</p>}
-          {!paymentCompleted && <button>PAY NOW</button>}
+          {!paymentCompleted && (
+            <button onClick={makePaymentHandler}>PAY NOW</button>
+          )}
         </div>
       </div>
       <div className={styles.billRightContainer}>
@@ -56,7 +81,7 @@ const BillItem = ({ bill }: billProp) => {
               <div className={styles.billRowElements}>
                 <div className={styles.row}>
                   <label>{'Amount Due: '}</label>
-                  <p>{`$${bill.amountDue}`}</p>
+                  <p>{`$${amountDue}`}</p>
                 </div>
               </div>
             </div>
@@ -68,12 +93,12 @@ const BillItem = ({ bill }: billProp) => {
               <div className={styles.billRowElements}>
                 <div className={styles.row}>
                   <label>{'Number of Bill Payments Made: '}</label>
-                  <p>{bill.paymentIds.length}</p>
+                  <p>{paymentIds.length}</p>
                 </div>
               </div>
               <div className={styles.billRowElements}>
                 <div className={styles.viewPaymentsButton}>
-                  <button>VIEW PAYMENTS</button>
+                  <button onClick={viewPaymentsHandler}>VIEW PAYMENTS</button>
                 </div>
               </div>
             </div>

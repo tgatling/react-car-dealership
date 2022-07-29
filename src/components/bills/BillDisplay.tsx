@@ -9,15 +9,23 @@ import styles from './BillDisplay.module.css';
 import { PAYMENT_HISTORY } from '../../models/constants';
 import { Bill } from '../../models/payments';
 
+/**
+ * Bill Display Component
+ * @returns List of each vehicle owned by selected customer / user with billing information
+ */
+
 const BillDisplay = () => {
   const [userId, setUserId] = useState('');
   const [userBills, setUserBills] = useState<Bill[]>([]);
   const [userOffers, setUserOffers] = useState<string[]>([]);
 
+  // get the location to determine pathname
   const location = useLocation();
 
+  // get the user id for which the payment history will be displayed
   const params = useParams<{ userId: string }>();
 
+  // determine the user that is currently logged in
   const currentUser = useSelector(
     (state: RootStateOrAny) => state.user.currentUser
   );
@@ -25,8 +33,10 @@ const BillDisplay = () => {
 
   useEffect(() => {
     if (params.userId) {
+      // display the payment history of a specific user if id is given
       setUserId(params.userId);
     } else if (location.pathname === PAYMENT_HISTORY) {
+      // payment history page display the logged in users payment information
       setUserId(currentUserId);
     }
 
@@ -37,6 +47,7 @@ const BillDisplay = () => {
       .getAllBills()
       .then((response) => {
         for (const key in response) {
+          // store bills associated with the selected customer/user
           if (response[key].userId === userId) {
             loadedBills.push({
               billId: key,
@@ -49,6 +60,7 @@ const BillDisplay = () => {
               paymentIds: response[key].paymentIds,
             });
 
+            // store each offer id for the selected customer/user
             if (!loadedOfferIds.includes(response[key].offerId)) {
               loadedOfferIds.push(response[key].offerId);
             }

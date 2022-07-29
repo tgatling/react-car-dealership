@@ -30,7 +30,9 @@ import {
   CUSTOMER_PAYMENTS,
   SETTINGS,
   USER_PAYMENTS,
+  VIEW_PAYMENTS,
 } from '../../../models/constants';
+import ViewPayments from '../../payments/ViewPayments';
 
 const Routing = () => {
   const loggedIn: boolean = useSelector(
@@ -87,6 +89,11 @@ const Routing = () => {
       {loggedIn && (
         <Route path={USER_PAYMENTS}>
           <BillDisplay />
+        </Route>
+      )}
+      {loggedIn && (
+        <Route path={VIEW_PAYMENTS}>
+          <ViewPayments />
         </Route>
       )}
       {!loggedIn && (
