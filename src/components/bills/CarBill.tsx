@@ -44,9 +44,9 @@ const CarBill = ({ userBills, offerId }: carBillProp) => {
 
   return (
     <div className={styles.offerContainer}>
-      <div className={styles.offerIcon}>
+      {/* <div className={styles.offerIcon}>
         <img src={statement} alt='statement' />
-      </div>
+      </div> */}
       <div className={styles.offerHeading}>
         {car && <h1>{`${car.year} ${car.make} ${car.model}`}</h1>}
         {remainingBalance !== 0 ? (
@@ -68,6 +68,7 @@ const CarBill = ({ userBills, offerId }: carBillProp) => {
                 <h2>{`${remainingBalance}`}</h2>
               </div>
             </div>
+
           </div>
         ) : (
           <div>

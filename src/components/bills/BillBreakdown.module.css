@@ -1,13 +1,14 @@
 .table {
   display: flex;
+  flex-direction: column;
   margin: 10px;
   border: solid;
   border-width: 1px;
 }
 
-.column {
+.row {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 }
 
 .columnHeader {

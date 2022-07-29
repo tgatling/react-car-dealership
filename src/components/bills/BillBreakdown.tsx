@@ -5,7 +5,17 @@ import styles from './BillBreakdown.module.css'
 const BillBreakdown = () => {
     return (
         <div className={styles.table}>
-            Table
+            <div className={styles.row}>
+                <div>
+                    Bill
+                </div>
+                <div>
+                    Payment
+                </div>
+            </div>
+            <div>
+                Row 1
+            </div>
         </div>
     );
 };
