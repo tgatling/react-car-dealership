@@ -11,14 +11,20 @@
   flex-direction: row;
 }
 
+.columnBar {
+  display: flex;
+  align-content: space-evenly;
+}
+
 .columnHeader {
   font-weight: bold;
+  padding: 5px;
 }
 
 .positionOdd {
-    background-color: #ffffff;
+  background-color: #ffffff;
 }
 
 .positionEven {
-    background-color: #808080;
+  background-color: #808080;
 }
