@@ -9,6 +9,7 @@ import styles from './BillDisplay.module.css';
 import { Bill } from '../../models/payments';
 import { Offer } from '../../models/offer';
 import { Car } from '../../models/car';
+import Table from '../payments/PaymentTable';
 
 interface carBillProp {
   userBills: Bill[];
@@ -47,16 +48,25 @@ const CarBill = ({ userBills, offerId }: carBillProp) => {
         <img src={statement} alt='statement' />
       </div>
       <div className={styles.offerHeading}>
-        {car && (
-          <h1>{`${car.year} ${car.make} ${car.model} - $${car.price}`}</h1>
-        )}
+        {car && <h1>{`${car.year} ${car.make} ${car.model}`}</h1>}
         {remainingBalance !== 0 ? (
-          <div className={styles.row}>
+          <div>
             <div className={styles.rowElement}>
-              <h2>{`Paid Total: $${offer?.totalPaid}`}</h2>
-            </div>
-            <div className={styles.rowElement}>
-              <h2>{`Remaining Balance: $${remainingBalance}`}</h2>
+              <div>
+                <h2>{`Total Amount: `}</h2>
+                <h2>{`Total Paid: `}</h2>
+                <h2>{`Remaining Balance: `}</h2>
+              </div>
+              <div>
+                <h2>$</h2>
+                <h2>$</h2>
+                <h2>$</h2>
+              </div>
+              <div className={styles.leftAlign}>
+                <h2>{`${car?.price.toFixed(2)}`}</h2>
+                <h2>{`${offer?.totalPaid}`}</h2>{' '}
+                <h2>{`${remainingBalance}`}</h2>
+              </div>
             </div>
           </div>
         ) : (
@@ -68,7 +78,8 @@ const CarBill = ({ userBills, offerId }: carBillProp) => {
           </div>
         )}
       </div>
-      <div>
+      <Table />
+      {/* <div>
         {filteredBills.map((bill) => {
           return (
             <div key={bill.billId}>
@@ -76,7 +87,7 @@ const CarBill = ({ userBills, offerId }: carBillProp) => {
             </div>
           );
         })}
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -6,6 +6,8 @@ import CustomerPayments from '../../../pages/navigationBar/CustomerPayments';
 import PaymentHistory from '../../../pages/userBar/PaymentHistory';
 import CustomerOffers from '../../../pages/navigationBar/CustomerOffers';
 import OfferHistory from '../../../pages/userBar/OfferHistory';
+import MakePayment from '../../payments/MakePayment';
+import BillDisplay from '../../bills/BillDisplay';
 import UserCars from '../../../pages/userBar/UserCars';
 import NotFound from '../../../pages/other/NotFound';
 import Settings from '../../../pages/userBar/Settings';
@@ -14,7 +16,6 @@ import ViewCar from '../../car/ViewCar';
 import AddCar from '../../car/AddCar';
 import Auth from '../../../pages/navigationBar/Auth';
 import Home from '../../../pages/navigationBar/Home';
-import BillDisplay from '../../bills/BillDisplay';
 
 import {
   ADD_DEALER_CAR,
@@ -30,9 +31,8 @@ import {
   CUSTOMER_PAYMENTS,
   SETTINGS,
   USER_PAYMENTS,
-  VIEW_PAYMENTS,
+  MAKE_PAYMENTS,
 } from '../../../models/constants';
-import ViewPayments from '../../payments/ViewPayments';
 
 const Routing = () => {
   const loggedIn: boolean = useSelector(
@@ -92,8 +92,8 @@ const Routing = () => {
         </Route>
       )}
       {loggedIn && (
-        <Route path={VIEW_PAYMENTS}>
-          <ViewPayments />
+        <Route path={MAKE_PAYMENTS}>
+          <MakePayment />
         </Route>
       )}
       {!loggedIn && (

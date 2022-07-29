@@ -34,11 +34,10 @@ const BillItem = ({ bill }: billProp) => {
 
   const viewPaymentsHandler = () => {
     console.log(`Clicked on View Payments for Bill Id: ${bill.billId}`);
-    history.push(`/payments/${billId}`);
   };
-
+  
   const makePaymentHandler = () => {
-    console.log('Make Payment Handler');
+    history.push(`/make-payment/${billId}`);
   };
 
   return (

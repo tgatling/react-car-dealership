@@ -10,6 +10,8 @@
   display: flex;
   flex-direction: column;
   position: relative;
+  width: 1030px;
+
   margin: 15px;
   padding: 30px;
   border-style: outset;
@@ -27,6 +29,12 @@
 .rowElement {
   display: flex;
   width: 500px;
+}
+
+.leftAlign{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
 .offerIcon {
