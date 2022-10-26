@@ -28,13 +28,17 @@ const CarBill = ({ userBills, offerId }: carBillProp) => {
   const [offer, setOffer] = useState<Offer | null>(null);
   const [car, setCar] = useState<Car | null>(null);
 
+  
   useEffect(() => {
-    offerService.getOffer(offerId).then((offerResponse) => {
-      setOffer(offerResponse);
-      carService.getCar(offerResponse.carId).then((carResponse) => {
-        setCar(carResponse);
-      });
-    });
+    offerService
+      .getOffer(offerId)
+      .then((offerResponse) => {
+        setOffer(offerResponse);
+        carService.getCar(offerResponse.carId).then((carResponse) => {
+          setCar(carResponse);
+        });
+      })
+      .catch((error) => {});
 
     let offerBills = userBills.filter((bill) => bill.offerId === offerId);
     setFilteredBills(offerBills);
@@ -43,52 +47,56 @@ const CarBill = ({ userBills, offerId }: carBillProp) => {
   let remainingBalance = offer ? offer?.carTotal - offer?.totalPaid : ' ';
 
   return (
-    <div className={styles.offerContainer}>
-      {/* <div className={styles.offerIcon}>
+    <div>
+      {car && (
+        <div className={styles.offerContainer}>
+          {/* <div className={styles.offerIcon}>
         <img src={statement} alt='statement' />
       </div> */}
-      <div className={styles.offerHeading}>
-        {car && <h1>{`${car.year} ${car.make} ${car.model}`}</h1>}
-        {remainingBalance !== 0 ? (
-          <div>
-            <div className={styles.rowElement}>
+          <div className={styles.offerHeading}>
+            {car && <h1>{`${car.year} ${car.make} ${car.model}`}</h1>}
+            {remainingBalance !== 0 ? (
               <div>
-                <h2>{`Total Amount: `}</h2>
-                <h2>{`Total Paid: `}</h2>
-                <h2>{`Remaining Balance: `}</h2>
+                <div className={styles.rowElement}>
+                  <div>
+                    <h2>{`Total Amount: `}</h2>
+                    <h2>{`Total Paid: `}</h2>
+                    <h2>{`Remaining Balance: `}</h2>
+                  </div>
+                  <div>
+                    <h2>$</h2>
+                    <h2>$</h2>
+                    <h2>$</h2>
+                  </div>
+                  <div className={styles.leftAlign}>
+                    <h2>{`${car?.price.toFixed(2)}`}</h2>
+                    <h2>{`${offer?.totalPaid}`}</h2>{' '}
+                    <h2>{`${remainingBalance}`}</h2>
+                  </div>
+                </div>
               </div>
+            ) : (
               <div>
-                <h2>$</h2>
-                <h2>$</h2>
-                <h2>$</h2>
+                <h2>
+                  {' '}
+                  Congratulations! You have completed all payments on this
+                  vehicle!
+                </h2>
               </div>
-              <div className={styles.leftAlign}>
-                <h2>{`${car?.price.toFixed(2)}`}</h2>
-                <h2>{`${offer?.totalPaid}`}</h2>{' '}
-                <h2>{`${remainingBalance}`}</h2>
-              </div>
-            </div>
-
+            )}
           </div>
-        ) : (
-          <div>
-            <h2>
-              {' '}
-              Congratulations! You have completed all payments on this vehicle!
-            </h2>
-          </div>
-        )}
-      </div>
-      <BillBreakdown />
-      {/* <div>
+          <BillBreakdown bills={filteredBills} />
+          {/* <div>
         {filteredBills.map((bill) => {
           return (
             <div key={bill.billId}>
-              <BillItem bill={bill} />
+            <BillItem bill={bill} />
             </div>
-          );
-        })}
-      </div> */}
+            );
+          })}
+        </div> */}
+        </div>
+      )}
     </div>
   );
 };

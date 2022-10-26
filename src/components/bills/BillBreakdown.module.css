@@ -9,16 +9,15 @@
 .row {
   display: flex;
   flex-direction: row;
+  justify-content: space-evenly;
 }
 
-.columnBar {
-  display: flex;
-  align-content: space-evenly;
-}
 
 .columnHeader {
   font-weight: bold;
   padding: 5px;
+  width: 200px;
+
 }
 
 .positionOdd {
@@ -27,4 +26,10 @@
 
 .positionEven {
   background-color: #808080;
+}
+
+.paymentInfo{
+  display: flex;
+  padding: 5px;
+  width: 200px;
 }
