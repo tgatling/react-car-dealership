@@ -1,66 +1,49 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Bill, Payment } from '../../models/payments';
+import paymentService from '../../services/payment.service';
 import styles from './BillBreakdown.module.css';
 
 interface billBreakdownProp {
   bills: Bill[];
 }
 
-const DUMMY_DATA = [
-  {
-    paymentNumber: 1,
-    dueDate: '',
-    amountDue: 10000,
-    amountPaid: 10000,
-    paymentDate: '',
-    confirmationNumber: 9374726027439572536,
-  },
-  {
-    paymentNumber: 2,
-    dueDate: '',
-    amountDue: 10000,
-    amountPaid: 10000,
-    paymentDate: '',
-    confirmationNumber: 9374726027439572536,
-  },
-];
-
 const BillBreakdown = ({ bills }: billBreakdownProp) => {
-  // let paymentList: {
-  //   paymentNumber: number;
-  //   dueDate: Date;
-  //   amountDue: number;
-  //   amountPaid: number;
-  //   paymentDate: Date;
-  //   confirmationNumber: number;
-  // }[] = [];
-
-  console.log(bills);
+  let [paymentList, setPaymentList] = useState<Payment[] | []>([]);
 
   useEffect(() => {
-    // TODO: get payment and group data for display
-  }, []);
+    let loadedPayments: Payment[] = [];
+    bills.forEach((bill) => {
+      // let dueDate = bill.paymentDueDate;
+      bill.paymentIds.forEach((payment) => {
+        paymentService.getPayment(payment.paymentId).then((response) => {
+          let payment = response;
+          loadedPayments.push(payment);
+        });
+      });
+    });
+    setPaymentList(loadedPayments);
+  }, [bills]);
 
   return (
     <div className={styles.table}>
       <div className={styles.row}>
-        <div className={styles.columnHeader}>Payment No.</div>
         <div className={styles.columnHeader}>Due Date</div>
-        <div className={styles.columnHeader}>Amount Due</div>
-        <div className={styles.columnHeader}>Amount Paid</div>
         <div className={styles.columnHeader}>Payment Date</div>
+        <div className={styles.columnHeader}>Amount Paid</div>
         <div className={styles.columnHeader}>Confirmation No.</div>
       </div>
-      {DUMMY_DATA.map((paymentInfo) => {
+      {paymentList.map((paymentInfo) => {
         return (
           <div className={styles.row} key={paymentInfo.confirmationNumber}>
-            <div className={styles.paymentInfo}>{paymentInfo.paymentNumber}</div>
-            <div className={styles.paymentInfo}>00/00/0000</div>
-            <div className={styles.paymentInfo}>$ {paymentInfo.amountDue}</div>
-            <div className={styles.paymentInfo}>$ {paymentInfo.amountPaid}</div>
-            <div className={styles.paymentInfo}>00/00/0000</div>
-            <div className={styles.paymentInfo}>{paymentInfo.confirmationNumber}</div>
+            <div>{test}</div>
+            <div className={styles.paymentInfo}>{paymentInfo.paymentDate}</div>
+            <div className={styles.paymentInfo}>
+              $ {paymentInfo.paymentAmount}
+            </div>
+            <div className={styles.paymentInfo}>
+              {paymentInfo.confirmationNumber}
+            </div>
           </div>
         );
       })}
